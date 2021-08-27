@@ -9,6 +9,8 @@
 <body>
 	<p>
 		김현주 push
+		김현진 push
+		김유진 push
 		김현진++ push
 	</p>
 </body>
