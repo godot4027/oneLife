@@ -12,7 +12,7 @@
 		김현진 push
 		김유진 push
 		김현진 push
-		오한수 push
+		오한수 push1
 	</p>
 </body>
 </html>
