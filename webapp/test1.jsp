@@ -7,11 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-	<h1>깃허브 테스트 OLdd</h1>
-=======
-	<h1>깃허브 테스트 OL</h1>
-	<p>서정화 깃허브 테스트 입니다~~~</p>
->>>>>>> branch 'master' of https://github.com/godot4027/oneLife
+	<p>
+		김현주 push
+		김현진 push
+		김유진 push
+		오한수 push
+		서정화 push
+		4조!!!
+		test!!
+		test 한번더!
+		
+
+	</p>
 </body>
 </html>
