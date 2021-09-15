@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="loginMember">
+		select
+		r_no
+		, u_no
+		, u_id
+		, u_nickname
+		, u_pw
+		, u_phone
+		, reg_date
+		, mod_date
+		, u_status
+		, r_dong
+		, r_ho
+		, r_name
+		, r_email
+		, r_type
+		, r_status
+		, r_date
+		from member join info_resident using (R_NO)
+		where u_id = ?
+		and u_pw = ?
+		and u_status = 'Y'
+	</entry>
+</properties>
