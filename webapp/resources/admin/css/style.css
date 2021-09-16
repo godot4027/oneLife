@@ -4,7 +4,6 @@
 #nav{}
 #content{}
 
-
 /* header */
 .header{padding: 0 40px 0 30px; height: 100px; display: flex; align-items: center; justify-content: space-between; border-bottom:1px solid #e7e7e7; box-sizing: border-box;}
 .header h1{}
@@ -161,7 +160,8 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
 .paging_wrap a.btn_num.on{border-color:#4094F7; color:#4094F7;}
 
 /* 팝업 */
-.popup_wrap{display: flex; position: fixed; top:0; left:0; width: 100vw; height:100vh; background: rgba(0,0,0,0.3);    text-align: center; align-content: center; align-items: center; justify-content: center; }
+.popup_wrap{display: flex; position: fixed; top:0; left:0; z-index:1; width: 100vw; height:100vh; background: rgba(0,0,0,0.3);    text-align: center; align-content: center; align-items: center; justify-content: center; opacity : 0; transition:opacity .3s; visibility: hidden; }
+.popup_wrap.pop_on{opacity : 1; visibility: visible;}
 .popup_wrap .item{display: inline-block; padding: 40px; background:#fff; text-align: center; border-radius:5px; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);}
 .popup_wrap .item .tit{font-size: 18px; font-weight: bold; padding-bottom: 15px; }
 .popup_wrap .item .txt{font-size: 16px; }
@@ -269,11 +269,12 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
 .view_wrap .view_items.resident .items dd .res_input .res_box.res_mail .input{width: 150px;}
 
 /* 멀티코트장 팝업 */
-.multi_pop{padding: 40px 80px;}
+.multi_pop{padding: 40px;}
 .multi_pop .sub_tit{font-size: 30px; margin-bottom: 40px;}
 .view_wrap.multi_pop .view_items .items dd .input input.cal{width: 160px; background:url(../images/ico_cal.png) no-repeat right 10px center; padding-right: 35px;  cursor:pointer;}
 .court_items{padding: 10px 0; display: flex; justify-content: space-between;}
-.court_items .c_items{}
+.court_items .c_items{margin-left:20px;}
+.court_items .c_items:first-child{margin-left:0;}
 .court_items .c_items h4{font-size: 20px; margin-bottom: 10px; font-weight: bold;}
 .court_items .c_items .inner{position: relative;}
 .court_items .c_items .inner img{display: block;}
