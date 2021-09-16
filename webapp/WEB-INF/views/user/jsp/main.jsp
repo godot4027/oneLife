@@ -7,15 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
-
-     <!-- css -->
-     <link rel="stylesheet" href="/oneLife/resources/user/fonts/fonts.css">
-     <link rel="stylesheet" href="/oneLife/resources/user/css/reset.css">
-     <link rel="stylesheet" href="/oneLife/resources/user/css/jquery-ui.min.css">
-     <link rel="stylesheet" href="/oneLife/resources/user/css/style.css">
- 
-     <script src="/oneLife/resources/user/js/jquery-3.6.0.min.js"></script>
-     <script src="/oneLife/resources/user/js/jquery-ui.js"></script>
+	<%-- 공통 css/js --%>
+    <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 </head>
 <body class="main">
    <div id="wrap">
@@ -39,7 +32,7 @@
                     <h2>우리 아파트 이야기</h2>
                     <ul class="myApt">
                         <li><a href="javascript:;">투표</a></li>
-                        <li><a href="javascript:;">방문차량</a></li>
+                        <li><a href="${contextPath}/visitCar">방문차량</a></li>
                         <li><a href="javascript:;">아파트 민원</a></li>
                         <li><a href="javascript:;">도란도란</a></li>
                         <li><a href="javascript:;">부대시설 예약</a></li>

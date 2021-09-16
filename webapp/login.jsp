@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,16 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>로그인</title>
 
+<%-- 공통css/js --%>
+<jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 
-<!-- css -->
-<link rel="stylesheet" href="/oneLife/resources/user/fonts/fonts.css">
-<link rel="stylesheet" href="/oneLife/resources/user/css/reset.css">
-<link rel="stylesheet"
-	href="/oneLife/resources/user/css/jquery-ui.min.css">
-<link rel="stylesheet" href="/oneLife/resources/user/css/style.css">
-
-<script src="/oneLife/resources/user/js/jquery-3.6.0.min.js"></script>
-<script src="/oneLife/resources/user/js/jquery-ui.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -89,8 +83,8 @@
 			</div>
 		</div>
 	</div>
-	<script src="/oneLife/resources/js/cookie.js"></script>
-	<script src="/oneLife/resources/js/swiper-bundle.min.js"></script>
+	<script src="${contextPath}/resources/user/js/cookie.js"></script>
+	<script src="${contextPath}/resources/user/js/swiper-bundle.min.js"></script>
 	<script>
 		// 아이디저장하기 쿠키
 		// userId input 태그
@@ -185,7 +179,7 @@
 		});
 	</script>
 	<script>
-		<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
+
 		
 		function check() {
 			alert("와아~~~");
