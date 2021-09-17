@@ -42,7 +42,7 @@ public class mailVerificationServlet extends HttpServlet {
 		// mail server 설정
 		String host = "smtp.naver.com";
 		String user = "toptotopdesign@naver.com"; // 자신의 네이버 계정
-		String password = "akdrh0824!";// 자신의 네이버 패스워드
+		String password = "ehwjs2111!";// 자신의 네이버 패스워드
 
 		// 메일 받을 주소
 		String to_email = request.getParameter("email");
