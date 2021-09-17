@@ -18,6 +18,15 @@
 		.bottom_wrap1 > h1 {
 			top: 10px;
 		}
+		.row:after {
+			content: none;
+		}
+		.row:before {
+			content: none;
+		} 
+		.col1 {
+		  vertical-align: middle;
+		}
 	</style>
 </head>
 <body>
@@ -32,7 +41,8 @@
 	</div>
 		<div class="wrap">
 			<div class="notice_area">
-				<form method="POST">
+				<form method="post" action="${ contextPath }/notice/insert">
+				<input type="hidden" name="n_no" value="${ n_no }">
 				<div class="notice_content">
 					<div class="subject"></div>
 					<div id="table">
@@ -43,9 +53,9 @@
 						</span>
 						</div>
 						<div class="row">
-						<span class="cell col1" id="col_content"><p>내용</p></span>
+						<span class="cell col1" id="col_content">내용</span>
 						<span class="cell col2">
-							<textarea id="summernote" name="editordata" required></textarea>
+							<textarea id="summernote" name="content" required></textarea>
 						</span>
 						</div> 
 					</div>
@@ -64,10 +74,12 @@
 		<script>
 			function noticeCancel(){
 				if (confirm("작성중인 글쓰기를 종료하시겠습니까?")) {
-					javascript:history.back();
+					javascript:history.back(); 
 				}
 			}
 		</script>
+		
+		
 	
 </body>
 </html>

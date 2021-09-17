@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="user.member.model.vo.Member" import="admin.member.model.vo.Info_manager"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<% 
+	// session 객체에 담긴 loginUser 정보를 변수에 담아두기
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	Info_manager loginUser_man = (Info_manager)session.getAttribute("loginUser_man");
+%>  
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,6 +16,7 @@
 	<%-- 공통 css/js --%>
     <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 </head>
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
 <body class="main">
    <div id="wrap">
         <header id="header">
@@ -31,16 +38,16 @@
                 <div class="items">
                     <h2>우리 아파트 이야기</h2>
                     <ul class="myApt">
-                        <li><a href="javascript:;">투표</a></li>
+                        <li><a href="${contextPath}/vote/list">투표</a></li>
                         <li><a href="${contextPath}/visitCar">방문차량</a></li>
-                        <li><a href="javascript:;">아파트 민원</a></li>
-                        <li><a href="javascript:;">도란도란</a></li>
+                        <li><a href="${contextPath}/complaint/list">아파트 민원</a></li>
+                        <li><a href="${contextPath}/board/list">도란도란</a></li>
                         <li><a href="javascript:;">부대시설 예약</a></li>
                         <li><a href="${contextPath}/greeting">아파트 소개</a></li>
                     </ul>
                 </div>
                 <div class="items">
-                    <h2>공지사항</h2>
+                    <h2><a href="${contextPath}/notice/list">공지사항</a></h2>
                     <div class="main_notice_wrap">
                         <ul class="main_notice_list notice_header">
                             <li class="title">제목</li>

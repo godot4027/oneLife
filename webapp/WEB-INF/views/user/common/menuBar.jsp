@@ -1,9 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="user.member.model.vo.Member" import="admin.member.model.vo.Info_manager"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- contextPath --%>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
+<% 
+	// session 객체에 담긴 loginUser 정보를 변수에 담아두기
+	Member loginUser = (Member)session.getAttribute("loginUser");
+    Info_manager loginUser_man = (Info_manager)session.getAttribute("loginUser_man");
 
+%>
+<% if(session.getAttribute("msg") != null) { %>
+<script>
+	alert('<%= session.getAttribute("msg")%>');
+</script>
+<% 
+	session.removeAttribute("msg");
+	} 
+%> 
 <header id="header">
     <div class="header">
         <h1 class=logo>
@@ -29,9 +42,9 @@
                     <li><a href="javascript:;">아파트 소개</a></li>
                 </ul>
                 <ul class="inner_item">
-                    <li><a href="javascript:;">공지사항</a></li>
-                    <li><a href="javascript:;">도란도란</a></li>
-                    <li><a href="javascript:;">투표하기</a></li>
+                    <li><a href="${contextPath}/notice/list">공지사항</a></li>
+                    <li><a href="${contextPath}/board/list">도란도란</a></li>
+                    <li><a href="${contextPath}/vote/list">투표하기</a></li>
                     <li><a href="javascript:;">주요일정</a></li>
                 </ul>
                 <ul class="inner_item">
@@ -43,7 +56,7 @@
                     <li><a href="javascript:;">방문예약 목록</a></li>
                 </ul>
                 <ul class="inner_item">
-                    <li><a href="javascript:;">아파트 민원</a></li>
+                    <li><a href="${contextPath}/complaint/list">아파트 민원</a></li>
                 </ul>
             </div>
         </nav>

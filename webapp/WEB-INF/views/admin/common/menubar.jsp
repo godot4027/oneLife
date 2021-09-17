@@ -35,33 +35,33 @@
             <li>
                 <a href="javascript:;">게시판</a>
                 <ul class="inner">
-                    <li class="<c:if test="${fn:contains(menuUrl, '/admin/week/')}">on</c:if>" >
+                    <li class="<c:if test="${fn:contains(menuUrl, '/admin/week/')}">on</c:if>">
                         <a href="${contextPath}/admin/week/list">주요일정 관리</a>
                     </li>
-                    <li>
-                        <a href="javascript:;">신고내역 관리</a>
+                    <li class="<c:if test="${fn:contains(menuUrl, '/admin/report/')}">on</c:if>">
+                        <a href="${contextPath}/admin/report/bList">신고내역 관리</a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="javascript:;">차량관리</a>
                 <ul class="inner">
-                    <li>
-                        <a href="javascript:;">입주 차량 등록 현황</a>
+                    <li class="<c:if test="${fn:contains(menuUrl, '/admin/in/')}">on</c:if>">
+                        <a href="${contextPath}/admin/in/list">입주 차량 등록 현황</a>
                     </li>
-                    <li>
-                        <a href="javascript:;">방문 차량 등록 현황</a>
+                    <li class="<c:if test="${fn:contains(menuUrl, '/admin/visit/')}">on</c:if>">
+                        <a href="${contextPath}/admin/visit/list">방문 차량 등록 현황</a>
                     </li>
-                    <li>
-                        <a href="javascript:;">업체 차량 등록 현황</a>
+                    <li class="<c:if test="${fn:contains(menuUrl, '/admin/company/')}">on</c:if>">
+                        <a href="${contextPath}/admin/company/list">업체 차량 등록 현황</a>
                     </li>
                 </ul>
             </li>   
             <li>
                 <a href="javascript:;">관리자 정보</a>
                 <ul class="inner">
-                    <li>
-                        <a href="javascript:;">관리자 명부</a>
+                    <li class="<c:if test="${fn:contains(menuUrl, '/admin/manager/')}">on</c:if>">
+                        <a href="${contextPath}/admin/manager/list">관리자 명부</a>
                     </li>
                 </ul>
             </li>   

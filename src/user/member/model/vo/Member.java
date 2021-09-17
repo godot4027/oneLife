@@ -21,10 +21,37 @@ public class Member {
 	private int R_NO;
 	
 	public Member() {}
+	
+	
+	// 회원가입 객체
+	public Member(String u_ID, String u_NICKNAME, String u_PW, String u_PHONE, String r_NAME, String r_EMAIL) {
+		super();
+		U_ID = u_ID;
+		U_NICKNAME = u_NICKNAME;
+		U_PW = u_PW;
+		U_PHONE = u_PHONE;
+		R_NAME = r_NAME;
+		R_EMAIL = r_EMAIL;
+	}
+
+	
+
+	public Member(String u_ID, String u_NICKNAME, String u_PW, String u_PHONE, int r_NO) {
+		super();
+		U_ID = u_ID;
+		U_NICKNAME = u_NICKNAME;
+		U_PW = u_PW;
+		U_PHONE = u_PHONE;
+		R_NO = r_NO;
+	}
+
 
 	public int getU_NO() {
 		return U_NO;
 	}
+
+
+
 
 	public void setU_NO(int u_NO) {
 		U_NO = u_NO;
