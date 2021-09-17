@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import user.VisitCar.model.service.VisitCarService;
-import user.member.model.vo.Member;
 
 /**
- * Servlet implementation class VisitCarRegisterServlet
+ * Servlet implementation class VisitCarDeleteServlet
  */
-@WebServlet("/visitCarRegister")
-public class VisitCarRegisterServlet extends HttpServlet {
+@WebServlet("/visitCarDelete")
+public class VisitCarDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VisitCarRegisterServlet() {
+    public VisitCarDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,43 +30,27 @@ public class VisitCarRegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/user/jsp/VisitCar/VisitCarRegister.jsp").forward(request, response);
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String dateString = request.getParameter("date");
-		String carNo = request.getParameter("carNo");
-		String purpose = request.getParameter("purpose");
-		String phone = request.getParameter("phone");
+		int vid = Integer.parseInt(request.getParameter("vid"));
 		
-//		Date date = null;
-//		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		try {
-//			date = transFormat.parse(dateString);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
+		int result = new VisitCarService().deleteVisitCar(vid);
 		
-		Member m = (Member)request.getSession().getAttribute("loginUser");
-		int userNo = m.getU_NO();
-		int vid = new VisitCarService().insertVisitCar(dateString, carNo, purpose, phone, userNo);
-		
-		if (vid > 0) {
-			request.getSession().setAttribute("vid", vid);
-			request.getSession().setAttribute("msg", "등록이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/visitCarConfirm");
+		if (result > 0) {
+			request.getSession().setAttribute("msg", "예약 내역이 삭제되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/visitCarList");
 			
 		} else {
 //			request.setAttribute("msg", "게시글 등록에 실패하였습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
 			view.forward(request, response);
 		}
-		
 		
 	}
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="loginMember">
+<entry key="loginMember">
 		select
 		r_no
 		, u_no
@@ -23,5 +23,5 @@
 		where u_id = ?
 		and u_pw = ?
 		and u_status = 'Y'
-	</entry>
-</properties>
+		</entry>
+	</properties>

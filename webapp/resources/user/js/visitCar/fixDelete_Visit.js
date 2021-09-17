@@ -12,7 +12,18 @@ $(document).ready(function(){
     
     // When the user clicks on the button, open the modal
     fixBtn.onclick = function() {
-        fixModal.style.display = "block";
+    	let date = document.getElementById("date").value;
+    	let today = new Date();
+    	today.setHours(0);
+    	today.setSeconds(0);
+    	today.setMilliseconds(0);
+    	let visitDay = new Date(date);
+    	
+    	if (visitDay < today) {
+    		alert("지난 날짜는 등록할 수 없습니다.");
+    	} else {
+    		fixModal.style.display = "block";
+    	}
     }
     
     // When the user clicks on <span> (x), close the modal

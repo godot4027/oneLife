@@ -1,4 +1,4 @@
-package user.VisitCar.controller;
+package user.introduction;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class VisitCarServlet
+ * Servlet implementation class greetingServlet
  */
-@WebServlet("/visitCar")
-public class VisitCarServlet extends HttpServlet {
+@WebServlet("/greeting")
+public class greetingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VisitCarServlet() {
+    public greetingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,8 @@ public class VisitCarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/user/jsp/VisitCar/VisitCar.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/user/jsp/introduction/greeting.jsp").forward(request, response);
+		
 	}
 
 	/**
