@@ -43,7 +43,7 @@
                         <li><a href="${contextPath}/complaint/list">아파트 민원</a></li>
                         <li><a href="${contextPath}/board/list">도란도란</a></li>
                         <li><a href="javascript:;">부대시설 예약</a></li>
-                        <li><a href="javascript:;">아파트 소개</a></li>
+                        <li><a href="${contextPath}/greeting">아파트 소개</a></li>
                     </ul>
                 </div>
                 <div class="items">

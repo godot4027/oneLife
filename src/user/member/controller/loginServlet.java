@@ -48,8 +48,6 @@ public class loginServlet extends HttpServlet {
 	         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
 	         view.forward(request, response);
 	      }
-		
-		
 
 	}
 

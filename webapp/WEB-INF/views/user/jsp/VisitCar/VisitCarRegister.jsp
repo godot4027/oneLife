@@ -36,25 +36,25 @@
           </p>
         </div>
         <hr />
-        <form class="visit_form" action="" method="">
+        <form class="visit_form" action="${contextPath }/visitCarRegister" method="post">
           <div class="div_input">
             <label>방문일</label>
-            <input type="date" placeholder="방문일을 선택해주세요" />
+            <input id="date" type="date" name="date" placeholder="방문일을 선택해주세요" required/>
           </div>
           <div class="div_input">
             <label>차량번호</label>
-            <input
+            <input name="carNo"
               type="text"
-              placeholder="ex)35로5432 띄어쓰기 없이 입력해주세요"
+              placeholder="ex)35로5432 띄어쓰기 없이 입력해주세요" maxlength="11" required
             />
           </div>
           <div class="div_input">
             <label>방문목적</label>
-            <input type="text" placeholder="ex)에어컨 수리 업체 방문" />
+            <input maxlength="20" name="purpose" type="text" placeholder="ex)에어컨 수리 업체 방문" required/>
           </div>
           <div class="div_input">
             <label>비상연락처</label>
-            <input type="tel" placeholder="차주의 휴대폰 번호를 입력해주세요" />
+            <input name="phone" type="tel" placeholder="차주의 휴대폰 번호를 입력해주세요(숫자만)" maxlength="15" required/>
           </div>
           <hr />
           <div class="register_button">
@@ -88,14 +88,17 @@
         </form>
       </div>
     </div>
-    
-    <%-- 공통 footer --%>
-	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
-    
     <script type="text/javascript">
     	function cancleRegister() {
     		location.href = "${contextPath}/visitCar";
     	}
+    	
+    	
     </script>
+    
+    <%-- 공통 footer --%>
+	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
+    
+    
   </body>
 </html>
