@@ -70,15 +70,10 @@
 							<ul class="link">
 								<li><a href="javascript:;">아이디 찾기</a></li>
 								<li><a href="javascript:;">비밀번호 찾기</a></li>
-								<li><a href="javascript:;">회원가입</a></li>
+								<li><a href="<%=request.getContextPath()%>/userAgree">회원가입</a></li>
 							</ul>
 						</div>
 					</form>
-					<input id="emailAddress" name="email" type="email">
-					<button id="mailBtn">메일</button>
-					<input id="numberCheck" name="veriNum" type="text">
-					<button id="numberBtn">인증번호 확인</button>
-					<button id="joinBtn" onclick="check()" disabled>가입</button>
 				</div>
 			</div>
 		</div>

@@ -7,24 +7,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/userAgree")
-public class userAgreeServlet extends HttpServlet {
+/**
+ * Servlet implementation class userJoinSucceess
+ */
+@WebServlet("/userJoinSucceess")
+public class userJoinSucceess extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public userAgreeServlet() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public userJoinSucceess() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/user/jsp/member/userAgree.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/user/jsp/member/userJoinSuccess.jsp").forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	
-	
-	
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
