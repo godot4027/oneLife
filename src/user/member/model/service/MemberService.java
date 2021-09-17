@@ -7,17 +7,21 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
+import admin.member.model.dao.Info_managerDao;
+import admin.member.model.vo.Info_manager;
 import user.member.model.dao.MemberDao;
 import user.member.model.vo.Member;
 
 public class MemberService {
 
-	
+	private MemberDao md = new MemberDao();
+
 	// 1. 로그인 기능
 	public Member loginMember(String id, String pwd) {
+
 		Connection conn = getConnection();
 		
-		Member loginUser = new MemberDao().loginMember(conn, id, pwd);
+		Member loginUser = new MemberDao().loginMember(conn, userId, userPwd);
 
 		close(conn);
 		

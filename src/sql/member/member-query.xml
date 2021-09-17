@@ -25,6 +25,20 @@
 		and u_status = 'Y'
 	</entry>
 
+	<entry key="loginUser_man">
+		select
+			  M_NO
+			, M_ID
+			, M_PASSWORD
+			, M_NAME
+			, M_NICK
+			, M_PHONE
+			, M_JOBCODE
+		from INFO_MANAGER
+		where M_ID = ?
+		and M_PASSWORD = ?
+
+
 	<entry key="insertMember">
 	INSERT
 		INTO MEMBER
@@ -73,5 +87,6 @@
 			COUNT(*)
 		 FROM MEMBER
 	    WHERE U_NICKNAME = ?
+
 	</entry>
 </properties>
