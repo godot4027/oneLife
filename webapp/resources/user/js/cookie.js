@@ -1,3 +1,8 @@
+const userId = document.querySelector("#userId");
+
+
+
+
 /* 쿠키 저장 (쿠키 이름, 값, 유효 일자) */
 function setCookie(cookieName, value, exdays){	
 	

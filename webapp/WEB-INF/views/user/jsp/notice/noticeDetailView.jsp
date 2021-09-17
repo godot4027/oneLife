@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,26 +32,31 @@
 						<div id="table">
 							<div class="row">
 							<span class="cell col1">제목</span>
-							<span class="cell col2">공지사항 게시판입니다.</span>
+							<span class="cell col2">${ notice.n_title }</span>
 							</div>
 							<div class="row">
 							<span class="cell col1">글쓴이</span>
-							<span class="cell col2">관리자</span>
+							<span class="cell col2">${ notice.m_nick }</span>
 							</div>
 							<div class="row">
 							<span class="cell col1">날짜</span>
-							<span class="cell col2">2021-09-21</span>
+							<span class="cell col2">${ notice.modify_date }</span>
 							</div>
 				 		</div>
 						 <div class="detail_content">
-						<pre class="col3">내용	
+						<pre class="col3">${ notice.n_content }</pre>	
 						</div>
 					</div>
 					<div class="btn_area">
 						<button type="button" id="btn2" onclick="location.href='${ contextPath }/notice/list'">목록</button>
 						<!-- 관리자한테만 보임 -->
+						<c:if test="${ !empty loginUser_man }">
 						<button type="button" id="btn3" onclick="updateNoticeView()">수정하기</button>
 						<button type="button" id="btn3" onclick="noticeDelete()">삭제하기</button>
+						<form namr="noticeForm" method="post">
+							<input type="hidden" name="n_no" value="${ notice.n_no }">
+						</form>
+						</c:if> 
 					</div>
 				</form>
 			</div>
@@ -58,7 +64,7 @@
 
 		<%-- 공통 footer --%>
 		<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
-
+		<c:if test="${ !empty loginUser_man }">
 		<script>
 			function updateNoticeView(){
 				document.forms.noticeForm.action = "${contextPath}/notice/updateView";
@@ -72,5 +78,6 @@
 				}
 			}
 		</script>
+		</c:if>
 </body>
 </html>

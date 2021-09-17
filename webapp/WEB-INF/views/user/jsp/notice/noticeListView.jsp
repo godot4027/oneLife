@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="user.member.model.vo.Member" import="admin.member.model.vo.Info_manager"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +32,13 @@
 				<h1>KH PARK의 <b>공지 및<br>새로운 소식</b>을 전해 드립니다.</h1>
 			</div>
 			<div class="search_area">
-				<form method="get">
+				<form method="get" action="${ contextPath }/notice/list">
 					<span class="input_area"> 
-					<input type="search" name="searchValue" placeholder="검색">
+					<input type="search" name="searchValue" placeholder="검색" value="${ param.searchValue }">
 					<button type="submit" id="btn1"><img src="/oneLife/resources/user/images/Search.png"></button>
 					</span>
+					<%-- <input type="hidden" name="title" value="${ noticeList.n_title }">
+					<input type="hidden" name="content" value="${ noticeList.n_content }"> --%>
 				</form>
 			</div>
 			<div class="notice_list">
@@ -46,21 +49,25 @@
 					<li class="date">작성일</li>
 					<li class="count">조회</li>
 				</ul>
-				<ul class="notice_ul">
-					<li class="no">1</li>
-					<li class="title">공지사항 게시판 입니다</li>
-					<li class="nick">관리자</li>
-					<li class="date">2021-09-06</li>
-					<li class="count">1</li>
+				<c:forEach var="n" items="${ noticeList }">
+				<ul class="notice_ul" onclick="detailView(${ n.n_no })">
+					<li class="no">${ n.n_no }</li>
+					<li class="title">${ n.n_title }</li>
+					<li class="nick">${ n.m_nick }</li>
+					<li class="date">${ n.modify_date }</li>
+					<li class="count">${ n.n_count }</li>
 				</ul>
+				</c:forEach>
 			</div>
 			
 		</div>
 		<div class="search_area">
 			<form method="get">
-				<button type="button" id="btn2">목록</button>
+				<button type="button" id="btn2" onclick="location.href='${ contextPath }/notice/list'">목록</button>
 				<!-- 관리자만 버튼 보이게-->
+				<c:if test="${ !empty loginUser_man }">
 				<button type="button" id="btn3" onclick="location.href='${ contextPath }/notice/insert'">작성하기</button>
+				</c:if>  
 			</form>
 		</div>
 
@@ -100,6 +107,11 @@
 				event.target.parentNode.classList.remove('onmouseover');
 			
 		});
+		
+		function detailView(n_no){
+	 		// nno를 쿼리스트링에 데이터로 넘김
+	 		location.href='${contextPath}/notice/detail?n_no='+n_no;
+	 	}
 		
    </script>
 	

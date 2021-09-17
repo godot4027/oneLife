@@ -1593,6 +1593,9 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 	margin: 35px auto;
 }
 
+
+
+
 /* 서정화 css */
 
 .bottom_wrap2 {
@@ -3139,7 +3142,7 @@ h4 {
   border-left: 1px solid #eff1f7;
   border-right: 1px solid #eff1f7;
   color: #5f5f5f;
-  font-weight: 600;
+  /* font-weight: 600; */
   font-size: 15px;
   letter-spacing: -0.05px;
 }

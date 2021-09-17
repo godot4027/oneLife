@@ -41,21 +41,21 @@
 	</div>
 		<div class="wrap">
 			<div class="notice_area">
-				<form method="post" action="${ contextPath }/notice/insert">
-				<input type="hidden" name="n_no" value="${ n_no }">
+				<form method="post" action="${ contextPath }/notice/update">
+				<input type="hidden" name="nno" value="${ notice.n_no }">
 				<div class="notice_content">
 					<div class="subject"></div>
 					<div id="table">
 						<div class="row">
 						<span class="cell col1">제목</span>
 						<span class="cell col2">
-							<input size="60" type="text" name="title" placeholder="제목을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력해주세요'" required >
+							<input size="60" type="text" name="title" placeholder="제목을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력해주세요'" value="${ notice.n_title }" required >
 						</span>
 						</div>
 						<div class="row">
 						<span class="cell col1" id="col_content">내용</span>
 						<span class="cell col2">
-							<textarea id="summernote" name="content" required></textarea>
+							<textarea id="summernote" name="content" required>${ notice.n_content }</textarea>
 						</span>
 						</div> 
 					</div>
@@ -74,12 +74,11 @@
 		<script>
 			function noticeCancel(){
 				if (confirm("작성중인 글쓰기를 종료하시겠습니까?")) {
-					javascript:history.back(); 
+					javascript:history.back();
+				  
 				}
 			}
 		</script>
-		
-		
 	
 </body>
 </html>

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.member.model.service.Info_managerService;
+import admin.member.model.vo.Info_manager;
 import user.member.model.service.MemberService;
 import user.member.model.vo.Member;
 
@@ -26,19 +28,28 @@ public class loginServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
-
-		if(loginUser != null) {
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("loginUser", loginUser);
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/user/jsp/main.jsp");
-			view.forward(request, response);
+		Info_manager loginUser_man = new Info_managerService().loginUser_man(userId, userPwd);
 		
-		} else {
-			request.setAttribute("msg", "로그인에 실패하였습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/user/common/errorpage.jsp");
-			view.forward(request, response);
-		}
+       
+		if(loginUser != null) {
+	         HttpSession session = request.getSession();
+	         
+	         session.setAttribute("loginUser", loginUser);
+	         response.sendRedirect(request.getContextPath()+"/main");
+	      
+	      } else if(loginUser_man != null) {
+	    	  HttpSession session = request.getSession();
+		         
+		      session.setAttribute("loginUser_man", loginUser_man);
+		      response.sendRedirect(request.getContextPath()+"/main");
+	    	  
+	      } else {
+	         request.setAttribute("msg", "로그인에 실패하였습니다.");
+	         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
+	         view.forward(request, response);
+	      }
+		
+		
 
 	}
 
