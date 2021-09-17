@@ -59,7 +59,7 @@
  	
  	// 공통 팝업창 닫기
  	function popHide(tag){
- 		if(confirm("개인정보 변경을 취소하시겠습니까?")){
+ 		if(confirm("팝업창을 닫으시겠습니까?")){
  			document.querySelector('#' + tag).classList.remove('pop_on');
  		}
     }
