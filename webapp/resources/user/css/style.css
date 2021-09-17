@@ -1947,12 +1947,11 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 }
 
 .re {
-  margin-top: 3%;
   text-align: center;
 }
 #re_btn {
   width: 130px;
-  height: 35px;
+  height: 30px;
   border: 0px;
   color: white;
   background: #85c0e3;
@@ -2532,10 +2531,12 @@ input[type="checkbox"]:checked {
   color: #137af3;
 }
 
+
 .container img {
   height: 50px;
   margin-top: 5%;
 }
+
 
 .hidden {
   display: none;
@@ -3847,6 +3848,14 @@ button.reply_btn2{
   font-weight: normal;
 }
 
+.step2_input_text_emailNum{
+    font-size: 14px;
+    width: 250px;
+    height: 30px;
+    border: 1px solid grey;
+    padding-left: 10px;
+
+}
 
 
 

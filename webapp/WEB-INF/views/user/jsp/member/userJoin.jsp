@@ -10,6 +10,14 @@
 
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.container img {
+	height: auto;
+	margin-top: 0;
+}
+</style>
 
 </head>
 <body>
@@ -19,12 +27,14 @@
 	<div class="bottom_wrap1">
 		<p></p>
 		<span>> 회원가입 > 회원가입 약관동의 > 회원정보</span>
-		<h1>회원정보 입력</h1>
+		<h1>회원정보입력</h1>
 		<div class="bottom_wrap2"></div>
 	</div>
-	
+
 	<div class="container border_test2">
-		<form name="join_form" action="post">
+		<form name="join_form"
+			action="<%= request.getContextPath() %>/userJoin" method="post"
+			onsubmit="return validate();">
 			<div class="condition_list border_test2">
 				<div class="check step2_first_div border_test2">
 					<div class="step2_span_left">아이디</div>
@@ -41,7 +51,8 @@
 				<div class="check step2_first_div border_test2">
 					<div class="step2_span_left">이름</div>
 					<div class="step2_span_right">
-						<input type="text" id="name" class="step2_input_text" required>
+						<input type="text" id="name" name="name" class="step2_input_text"
+							required>
 					</div>
 				</div>
 				<div>
@@ -50,9 +61,10 @@
 				<div class="check step2_first_div border_test2">
 					<div class="step2_span_left">닉네임</div>
 					<div class="step2_span_right">
-						<input type="text" class="step2_input_text" id="nickname"
-							placeholder="한글 및 숫자 포함 2자 이상 입력" required> <span><a
-							href="javascript:;" class="ol_btn" role="button">중복확인</a> </span>
+						<input type="text" class="step2_input_text" name="nickName"
+							id="nickname" placeholder="한글 및 숫자 포함 2자 이상 입력" required>
+						<span><a href="javascript:;" id="nickCheck" class="ol_btn"
+							role="button">중복확인</a> </span>
 					</div>
 				</div>
 				<div>
@@ -61,9 +73,10 @@
 				<div class="input check step2_first_div border_test2">
 					<div class="step2_span_left">비밀번호</div>
 					<div class="step2_span_right">
-						<input type="password" id="pwd1" class="pwd1 step2_input_text "
-							placeholder="영문 및 숫자 포함 7자 이상 입력" required> <span
-							class="eyes"> <i class="fa fa-eye-slash fa-lg"></i>
+						<input type="password" id="pwd1" name="userPwd"
+							class="pwd1 step2_input_text " placeholder="영문 및 숫자 포함 7자 이상 입력"
+							required> <span class="eyes"> <i
+							class="fa fa-eye-slash fa-lg"></i>
 						</span> <span id="pwd_result"></span>
 					</div>
 				</div>
@@ -85,52 +98,60 @@
 				<div class="check step2_first_div border_test2">
 					<div class="step2_span_left">연락처</div>
 					<div class="step2_span_right">
-						<input type="text" id="phone" class="step2_input_text"
-							maxlength="11" required>
+						<input type="text" id="phone" name="phone"
+							class="step2_input_text" maxlength="11" required>
 					</div>
 				</div>
-				<div>
-					<hr>
-				</div>
+				<hr>
 				<div class="check step2_first_div border_test2">
 					<div class="step2_span_left">이메일</div>
 					<div class="step2_span_right">
-						<input type="text" id="email" class="step2_input_text"
-							placeholder="'@'필수 입력" required> <span
-							class="email_result">※관리사무소에 제출한 이메일을 적어주세요.</span>
+						<input id="emailAddress" name="email" type="email"
+							class="step2_input_text" placeholder="'@'필수 입력" required>
+						<span class="email_result">※관리사무소에 제출한 이메일을 적어주세요.</span> <span>
+							<button id="mailBtn" class="numberChkbtn" type="button">인증번호
+								전송</button>
+						</span>
 					</div>
 				</div>
 				<div>
 					<hr>
 				</div>
+
 				<div class="check step2_first_div border_test2">
-					<input type="text" class="step2_input_text_dong" id="dong"
-						maxlength="3" required>
-					<div class="step2_span_dongho">동</div>
-					<input type="text" class="step2_input_text_ho" id="ho"
-						maxlength="4" required>
-					<div class="step2_span_dongho">호</div>
+					<div class="step2_span_left">이메일 인증번호</div>
+					<div class="step2_span_right">
+						<input type="text" id="numberCheck"
+							class="step2_input_text_emailNum" placeholder="이메일 인증번호를 입력해주세요"
+							required> <span>
+							<button type="button" id="numberBtn" class="numberChkbtn">인증번호
+								확인</button>
+						</span> <span> <img src="/oneLife/resources/user/images/re.png"
+							alt="re" class="re"><a href="javascript:;" id="" class=""
+							role="button">다시보내기</a>
+						</span>
+					</div>
 				</div>
-				<div>
-					<hr>
-				</div>
+				<hr>
+
 			</div>
-			<!--체크박스 코멘트 끝-->
-			<div class="step01_btn_box border_test2"></div>
-			<div class="step01_btn_box border_test2">
-				<span><a href="javascript:;" id="cancelBtn" class="cancelBtn"
-					role="button">취소</a> </span> <span>
-					<button id="agreeBtn" class="agreeBtn" type="submit">다음</button>
-				</span>
-			</div>
-		</form>
+	</div>
+	<!--체크박스 코멘트 끝-->
+	<div class="step01_btn_box border_test2"></div>
+	<div class="step01_btn_box border_test2">
+		<span><a href="${ contextPath }" id="cancelBtn"
+			class="cancelBtn" role="button">취소</a> </span> <span>
+			<button id="agreeBtn" class="agreeBtn" type="submit" disabled>다음</button>
+		</span>
+	</div>
+	</form>
 	</div>
 
 	<%-- 공통 footer --%>
 	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
 
-<!-- 비밀번호 일치 불일치 -->
-<script>
+	<!-- 비밀번호 일치 불일치 -->
+	<script>
     pwd1.addEventListener('input',()=>{
         if(pwd1.value != pwd2.value) {// 일치안했다
             pwd1.classList.add('invalid');
@@ -156,7 +177,7 @@
     });
 </script>
 
-<script>
+	<script>
     document.forms.join_form.onsubmit = () => {
         // 1. 아이디 검사
         // 첫 글자는 반드시 영문 소문자로 시작하고
@@ -180,7 +201,7 @@
         return false;
         
         if($('#pwd1').val()!=$('#pwd2').val()){
-            alert('비번맞춰주세요');
+            alert('비밀번호가 일치하지 않습니다.');
             $('#pwd1').focus();
             return   false;
         }
@@ -225,12 +246,15 @@
         input.focus(); 
         return false;
     }
+    
+    var emailcheck = false;
+	var isUsable = false;
+    
      // 아이디 중복 
      $("#idCheck").click(function(){
 		 // input userId 변수
 		 var userId = $("[name=userId]");
 		 // 아이디 중복 시 false, 아이디 사용 가능 시 true
-		 var isUsable = false;
 		 
 		 if(!userId || userId.val().length < 4) {
 			 alert('아이디는 최소 4자리 이상이어야 합니다.');
@@ -260,7 +284,10 @@
 					 }
 					 // 아이디 중복 체크 후 중복이 아니며 사용하겠다고 선택한 경우에만
 					 // joinBtn disabled 제거
-					 if(isUsable) {
+					 console.log(isUsable);
+					 console.log(emailcheck);
+					 console.log(nickUsable);
+					 if(isUsable && emailcheck && nickUsable) {
 						 $("#agreeBtn").removeAttr("disabled"); // 사용하겠다고 선택한 경우 가입하기 버튼 활성화 !
 					 } else {
 						 $("#agreeBtn").attr("disabled", true); // 비활성화!
@@ -274,7 +301,61 @@
 		 }
 	 });
 </script>
-<script>
+	<script>
+var nickUsable = false;
+     // 닉네임 중복
+     $("#nickCheck").click(function(){
+		 // input nickName 변수
+		 var nickName = $("[name=nickName]");
+		 // 닉네임 중복 시 false, 닉네임 사용 가능 시 true
+		 nickUsable = false;
+		 
+		 if(!nickName || nickName.val().length < 2) {
+			 alert('닉네임는 최소 2자리 이상이어야 합니다.');
+			 nickName.focus();
+		 } else {
+			 // 2자리 이상의 nickName 값을 입력 했을 경우 중복 확인을 위해 ajax 통신 요청
+			 $.ajax({
+				 url : "${ contextPath }/nickCheck",
+				 type : "post",
+				 data : { nickName : nickName.val() },
+				 success : function(result) {
+					 console.log(result);
+					 if(result == "fail") {
+						 alert("사용할 수 없는 닉네임입니다.");
+						 nickName.focus();
+					 } else {
+						 if(confirm('사용 가능한 닉네임입니다. 사용하시겠습니까?')) {
+							 // 더 이상 nickname 입력 공간을 수정할 수 없도록 readonly 처리
+							 nickName.attr('readonly', true);
+							 nickUsable = true; // 사용 가능한 닉네임이라는 flag 값
+						 } else {
+							// confirm 창에서 취소를 누를 경우 (처음, 또는 반복해서) 다시 id 수정 가능하도록
+							nickName.attr('readonly', false);
+							nickName.focus();
+							nickUsable = false;	// 사용 불가능한 아이디라는 flag 값
+						 }
+					 }
+					 console.log(isUsable);
+					 console.log(emailcheck);
+					 console.log(nickUsable);
+					 if(isUsable && emailcheck && nickUsable) {
+						 $("#agreeBtn").removeAttr("disabled"); // 사용하겠다고 선택한 경우 가입하기 버튼 활성화 !
+					 } else {
+						 $("#agreeBtn").attr("disabled", true); // 비활성화!
+					 }
+					 
+						 
+				 },
+				 error : function(e) {
+					 console.log(e);
+				 }
+			 });
+		 }
+	 });
+</script>
+	<!-- 비밀번호 눈 표시  -->
+	<script>
 $(".eyes").on('click',function(){ 
          $('#pwd1').toggleClass('active'); 
          if( $('#pwd1').hasClass('active') == true ){ 
@@ -288,5 +369,62 @@ $(".eyes").on('click',function(){
                 } 
             });
 </script>
+
+<script>
+		$(function() {
+			$("#mailBtn").click(function() {
+				$.ajax({
+					url : "${contextPath}/mailVerification",
+					data : {
+						email : $("#emailAddress").val()
+					},
+					type : "post",
+					success : function(result) {
+						$('#emailAddress').attr('readonly', true);
+					},
+					error : function(e) { //에러 발생시 에러 매개변수 전달
+						console.log(e);
+					}
+				});
+			});
+			
+			$('#numberBtn').click(function(){
+				$.ajax({
+					url : "${contextPath}/numberCheck",
+					data : {
+						number : $("#numberCheck").val()
+					},
+					type : "post",
+					success : function(result) {
+						if (result == "success") {
+							emailcheck = true;
+			                alert("인증번호 확인이 완료되었습니다.");
+			              } else {
+			            	  alert("인증번호를 다시 확인하시기 바랍니다.");
+			              }
+						 console.log(isUsable);
+						 console.log(emailcheck);
+						 console.log(nickUsable);
+						 if(isUsable && emailcheck && nickUsable) {
+							 $("#agreeBtn").removeAttr("disabled"); // 사용하겠다고 선택한 경우 가입하기 버튼 활성화 !
+						 } else {
+							 $("#agreeBtn").attr("disabled", true); // 비활성화!
+						 }
+					},
+					error : function(e) { 
+						console.log(e);
+					}
+				});
+			})
+		});
+	</script>
+	
+	<script>
+          function goJoinSuccess(){
+             location.href = "${ contextPath }/userJoinSuccess";
+          };
+    </script>
+	
+	
 </body>
 </html>

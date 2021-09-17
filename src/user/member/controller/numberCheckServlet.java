@@ -32,8 +32,8 @@ public class numberCheckServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String number1 = request.getSession().getAttribute("AuthenticationKey").toString();
 		String number2 = request.getParameter("number");
-//		System.out.println(number1);
-//		System.out.println(number2);
+		System.out.println(number1);
+		System.out.println(number2);
 		
 		PrintWriter out = response.getWriter();
 

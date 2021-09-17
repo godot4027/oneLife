@@ -75,10 +75,10 @@
 			<!--                체크박스 코멘트 끝-->
 			<div class="step01_btn_box border_test"></div>
 			<div class="step01_btn_box border_test">
-				<span> <a href="javascript:;" id="" class="cancelBtn"
+				<span> <a href="${ contextPath }" id="" class="cancelBtn"
 					role="button">취소</a>
-				</span> <span> <a href="javascript:;" id="agreeBtn" class="agreeBtn"
-					role="button" onclick="agreeBtn()">확인</a>
+				</span> <span> <a href="${contextPath }/userJoin;" id="agreeBtn" class="agreeBtn"
+					role="button" onclick="return agreeBtn()">확인</a>
 				</span>
 			</div>
 		</form>
@@ -131,7 +131,7 @@
     });
 </script>
 
-<!-- 체크박스 개별선택 -->
+<!-- 약관 동의 체크박스 개별선택 -->
 <script>
     $(".check_list").on("click", ".normal", function() {
         var is_checked = true;
@@ -173,11 +173,14 @@
        if(!chk2){
        		alert("필수 약관에 동의해주세요.");
         	$('#check_button2').focus();
+        	return false;
        }else if(!chk3){
        		alert("필수 약관에 동의해주세요.");
        	 	$('#check_button3').focus();
+       	 	return false;
        }else{
        		alert("성공");
+       		return true;
        		chk_form.submit();
        }
             
