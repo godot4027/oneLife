@@ -1,4 +1,4 @@
-package admin.week.controller;
+package admin.report.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/week/list")
-public class WeekDayListServlet extends HttpServlet {
+@WebServlet("/admin/report/bList")
+public class ReportBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/admin/jsp/week/weekday_list.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/jsp/report/reportBoardList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

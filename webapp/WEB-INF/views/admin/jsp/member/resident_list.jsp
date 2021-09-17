@@ -115,7 +115,7 @@
                                                 <p class="tag type01">가입</p>
                                             </td>
                                             <td class="modify" rowspan="3">
-                                                <a href="javascript:;" class="tag">변경</a>
+                                                <a href="${contextPath}/admin/member/view" class="tag">변경</a>
                                              </td>
                                         </tr>
                                         <tr>
@@ -153,7 +153,7 @@
                                                 <p class="tag type01">가입</p>
                                             </td>
                                             <td rowspan="3" class="modify">
-                                                <a href="javascript:;" class="tag">변경</a>
+                                                <a href="${contextPath}/admin/member/view" class="tag">변경</a>
                                              </td>
                                         </tr>
                                     
@@ -191,7 +191,7 @@
                                                 <p class="tag type01">가입</p>
                                             </td>
                                             <td rowspan="3" class="modify">
-                                                <a href="javascript:;" class="tag">변경</a>
+                                               <a href="${contextPath}/admin/member/view" class="tag">변경</a>
                                              </td>
                                         </tr>
                                         <tr>
