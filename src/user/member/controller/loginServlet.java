@@ -38,6 +38,7 @@ public class loginServlet extends HttpServlet {
 	         HttpSession session = request.getSession();
 	         
 	         session.setAttribute("loginUser", loginUser);
+	         session.setAttribute("loginNickName", loginUser.getU_NICKNAME());
 	         response.sendRedirect(request.getContextPath()+"/main");
 	      
 	      } else if(loginManager != null && (loginManager.getmJobcode().equals("M_CODE1") || loginManager.getmJobcode().equals("M_CODE2"))) {

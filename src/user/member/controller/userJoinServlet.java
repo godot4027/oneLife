@@ -62,7 +62,7 @@ public class userJoinServlet extends HttpServlet {
 			int result2 = new MemberService().changeStatus(rno);
 			 // System.out.println(result2);
 			 // System.out.println(result1);
-			request.getRequestDispatcher("/WEB-INF/views/user/jsp/member/userJoinSuccess.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/user/jsp/member/userJoinSuccess.jsp").forward(request, response);
 			
 		} else {
 			request.setAttribute("msg", "아파트 주민이 아닙니다.");

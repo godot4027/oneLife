@@ -106,6 +106,7 @@ private Properties query = new Properties();
 			pstmt.setString(2, email);
 			
 			rset = pstmt.executeQuery();
+			
 			if (rset.next()) {
 				result = rset.getInt(1);
 			}
@@ -148,6 +149,7 @@ private Properties query = new Properties();
 		return result;
 	}
 
+	// 닉네임 중복확인
 	public int nickCheck(Connection conn, String nickName) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -194,4 +196,178 @@ private Properties query = new Properties();
 		}
 		return result;
 	}
+
+	// 3. 회원 정보 수정 기능
+	public int updateMember(Connection conn, Member mem) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, mem.getU_NICKNAME());
+			pstmt.setString(2, mem.getU_PHONE());
+			pstmt.setInt(3, mem.getU_NO());
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// userNo로 member 객체 조회
+	public Member selectMember(Connection conn, int u_NO) {
+		Member mem = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, u_NO);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {  
+				mem = new Member(rset.getInt("u_no"),
+						rset.getString("u_id"),
+						rset.getString("u_nickname"),
+						rset.getString("u_pw"),
+						rset.getString("u_phone"),
+						rset.getDate("reg_date"),
+						rset.getDate("mod_date"),
+						rset.getString("u_status"),
+						rset.getInt("r_dong"),
+						rset.getInt("r_ho"),
+						rset.getString("r_name"),
+						rset.getString("r_email"),
+						rset.getString("r_type"),
+						rset.getString("r_status"),
+						rset.getDate("r_date"),
+						rset.getInt("r_no"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mem;
+	}
+
+	// 비밀번호 수정 기능
+	public int updatePwd(Connection conn, int userNo, String userPwd, String newPwd1) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newPwd1);
+			pstmt.setInt(2, userNo);
+			pstmt.setString(3, userPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 회원 탈퇴 기능
+	public int deleteMember(Connection conn, int userNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = query.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 아이디 찾기 기능
+	public Member findUserId(Connection conn, String name, String email) {
+		Member findUserId = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {  
+				findUserId = new Member(rset.getString("U_ID"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return findUserId;
+	}
+
+	// 비밀번호 찾기
+	public Member findUserPwd(Connection conn, String userId, String name, String email) {
+		Member findUserPwd = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("findPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, name);
+			pstmt.setString(3, email);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				findUserPwd = new Member();
+				findUserPwd.setU_PW(rset.getString("u_pw"));
+				}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return findUserPwd;
+	}
+
 }

@@ -68,8 +68,8 @@
 								<button onclick="return loginBtn();" class="login_btn">로그인</button>
 							</div>
 							<ul class="link">
-								<li><a href="javascript:;">아이디 찾기</a></li>
-								<li><a href="javascript:;">비밀번호 찾기</a></li>
+								<li><a href="<%=request.getContextPath()%>/findIdPwd">아이디 찾기</a></li>
+								<li><a href="<%=request.getContextPath()%>/findIdPwd">비밀번호 찾기</a></li>
 								<li><a href="<%=request.getContextPath()%>/userAgree">회원가입</a></li>
 							</ul>
 						</div>
