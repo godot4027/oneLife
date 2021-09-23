@@ -7,6 +7,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입완료</title>
+<style>
+.step7_container{
+margin-bottom: 90px;
+}
+</style>
 
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
@@ -14,7 +19,6 @@
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
-	<jsp:include page="/WEB-INF/views/user/common/menuBar.jsp"></jsp:include>
 	
 	<div class="bottom_wrap1">
 		<p></p>
@@ -26,7 +30,7 @@
 	<div class="step7_container border_test7">
 		<div class="step7_content border_test7">
 			<div class="step7_mail_div border_test7">
-				<img src="${contextPath}/resources/user/images/update.png" alt="mail"
+				<img src="${contextPath}/resources/user/images/update.png" alt="user"
 					class="">
 			</div>
 			<div class="step7_mail_txt border_test7">
