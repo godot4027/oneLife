@@ -15,7 +15,8 @@ import user.member.model.vo.Member;
 /**
  * Servlet implementation class userJoinServlet
  */
-@WebServlet("/userJoin")
+// @WebServlet("/userJoin")
+@WebServlet(name="userJoinServlet", urlPatterns="/userJoin")
 public class userJoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

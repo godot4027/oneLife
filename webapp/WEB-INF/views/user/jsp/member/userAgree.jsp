@@ -14,7 +14,6 @@
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
-	<jsp:include page="/WEB-INF/views/user/common/menuBar.jsp"></jsp:include>
 	
 	<div class="bottom_wrap1">
 		<p></p>
@@ -77,7 +76,7 @@
 			<div class="step01_btn_box border_test">
 				<span> <a href="${ contextPath }" id="" class="cancelBtn"
 					role="button">취소</a>
-				</span> <span> <a href="${contextPath }/userJoin;" id="agreeBtn" class="agreeBtn"
+				</span> <span> <a href="${contextPath}/userJoin" id="agreeBtn" class="agreeBtn"
 					role="button" onclick="return agreeBtn()">확인</a>
 				</span>
 			</div>

@@ -21,10 +21,10 @@
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
-	<jsp:include page="/WEB-INF/views/user/common/menuBar.jsp"></jsp:include>
+	
 	<div class="bottom_wrap1">
 		<p></p>
-		<span>> 아이디찾기 </span>
+		<span>> 아이디/비밀번호 찾기 </span>
 		<h1>아이디 비밀번호 찾기</h1>
 		<div class="bottom_wrap2"></div>
 	</div>

@@ -74,7 +74,7 @@
 					<div class="step2_span_left">비밀번호</div>
 					<div class="step2_span_right">
 						<input type="password" value="<%= loginUser.getU_PW() %>" name="userPwd" id="pwd1" class="pwd1 step2_input_text"
-							placeholder="영문 및 숫자 포함 7자 이상 입력" required>
+							placeholder="영문 및 숫자 포함 7자 이상 입력" readonly required>
 							<span class="eyes">
 								<i class="fa fa-eye-slash fa-lg"></i>
 							</span>

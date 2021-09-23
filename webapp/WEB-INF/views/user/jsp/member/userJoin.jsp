@@ -21,7 +21,6 @@
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
-	<jsp:include page="/WEB-INF/views/user/common/menuBar.jsp"></jsp:include>
 
 	<div class="bottom_wrap1">
 		<p></p>
@@ -354,6 +353,7 @@ var nickUsable = false;
 	<script>
 		$(function() {
 			$("#mailBtn").click(function() {
+				alert("해당 메일로 인증번호를 전송하였습니다.")
 				$.ajax({
 					url : "${contextPath}/mailVerification",
 					data : {
