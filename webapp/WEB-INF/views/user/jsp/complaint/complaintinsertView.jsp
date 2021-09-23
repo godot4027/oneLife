@@ -9,6 +9,16 @@
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 
+<style>
+.col3 > span {
+position: relative;
+top: 9px;
+}
+.col3 {
+    width: 1140px;
+}
+
+</style>
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
@@ -22,7 +32,8 @@
 	</div>
 		<div class="wrap">
 			<div class="complaint_area">
-				<form method="POST">
+				<form method="POST" action="${ contextPath }/complaint/insert">
+				<input type="hidden" name="c_no" value="${ c_no }">
 				<div class="complaint_content">
 					<div class="subject">
 					<h1>문의내용 작성</h1>
@@ -35,17 +46,17 @@
 						</span>
 						</div>
 						<div class="row">
-						<span class="cell col1" id="col_content"><p>내용</p></span>
+						<span class="cell col1" id="col_content">내용</span>
 						<span class="cell col2">
 							<textarea cols="110" rows="30" name="content" placeholder="문의하실 내용을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='문의하실 내용을 입력해주세요'"
-								style="resize: none;"></textarea>
+								style="resize: none;" required></textarea>
 						</span>
 						</div> 
 					</div>
 					<div class="row">
 					<span class="cell col3">
-						<input type="checkbox" name="mysecret" value="mysecret" id="mysecret">
-						<label for="mysecret"> 비밀글로 문의하기</label><span> (관리사무소만 내 민원을 볼 수 있습니다)</span> 
+						<input type="checkbox" name="open" value="N" id="open">
+						<label for="open"> 비밀글로 문의하기</label><span> (관리사무소만 내 민원을 볼 수 있습니다)</span> 
 					</span>
 					</div>
 				</div>

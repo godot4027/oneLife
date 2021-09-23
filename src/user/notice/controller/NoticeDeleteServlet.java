@@ -43,7 +43,7 @@ public class NoticeDeleteServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "공지사항 삭제 되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/notice/list");
 		} else {
-			request.setAttribute("msg", "공지사항 수정에 실패했습니다.");
+			request.setAttribute("msg", "공지사항 삭제에 실패했습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/user/common/errorpage.jsp").forward(request, response);
 		}
 	}

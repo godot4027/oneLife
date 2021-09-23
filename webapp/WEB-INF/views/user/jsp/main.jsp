@@ -6,6 +6,7 @@
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	Info_manager loginUser_man = (Info_manager)session.getAttribute("loginUser_man");
 %>  
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,12 +25,14 @@
                 <h1 class=logo>
                     <a href="${contextPath }/main"><span class="ir_so">로고</span></a>
                 </h1>
+                
                 <div class="top_wrap">
-                    <p class="login_status">201동 103호 <span>홍길동</span>님 반갑습니다.</p>
-                    <ul>
-                        <li><a href="javascript:;">회원정보</a></li>
-                        <li><a href="javascript:;">로그아웃</a></li>
-                    </ul>
+			        <p class="login_status">${ loginUser.getR_DONG() }동 ${ loginUser.getR_HO() }호 <span>${ loginUser.getR_NAME() }</span>님 반갑습니다.</p>
+				            <ul>
+	                        <li><a href="${contextPath}/userModify">회원정보</a></li>
+	                        <li><a href="${contextPath}/userLogout">로그아웃</a></li>
+	                    </ul> 
+			       
                 </div>
             </div>
         </header>

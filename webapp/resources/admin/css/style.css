@@ -22,7 +22,7 @@
 .nav .outer{}
 .nav .outer > li{ margin-bottom: 10px;}
 .nav .outer > li:last-child{margin-bottom: 0;}
-.nav .outer > li > a{position: relative; padding-left: 19px; display: block; font-size: 14px; line-height: 17px; font-weight: bold; color:#fff; letter-spacing: 0; }
+.nav .outer > li > a{position: relative; padding-left: 19px; display: block; font-size: 15px; line-height: 17px; font-weight: bold; color:#fff; letter-spacing: 0; }
 /* .nav .outer > li > a:after{display: block; content:''; position: absolute;top:calc(50% - 3px); right:0; width: 11px; height: 6px; background:url(../images/ico_gnb_down.png) no-repeat 50% 50%;} */
 .nav .outer > li:nth-of-type(1) > a{background:url(../images/ico_gnb_acc.png) no-repeat 0 1px;}
 .nav .outer > li:nth-of-type(2) > a{background:url(../images/ico_gnb_fac.png) no-repeat 0 1px;}
@@ -32,7 +32,7 @@
 .nav .inner{ padding:10px 0 10px 19px;}
 .nav .inner > li{margin-bottom: 8px; }
 .nav .inner > li:last-child{margin-bottom: 0;}
-.nav .inner > li > a{position: relative; display: block;font-size: 12px; color:rgba(255, 255, 255, 0.5);   transition:all .2s;}
+.nav .inner > li > a{position: relative; display: block;font-size: 13px; color:rgba(255, 255, 255, 0.5);   transition:all .2s;}
 .nav .inner > li > a:after{display: block; content:''; position: absolute; top:0; right:10%; width:10px; height:7px; background:url(../images/ico_gnb_link.png) no-repeat 50% 50%; opacity: 0; transition:all .2s;}
 .nav .inner > li > a:hover{color:rgba(255, 255, 255, 1);}
 .nav .inner > li > a:hover:after{opacity: 1; right: 0;}
@@ -177,6 +177,7 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
 .popup_wrap .new_admin .new_item:first-child{padding-top: 20px;}
 .popup_wrap .new_admin .new_item label{display: block; width: 140px; height: 40px; line-height: 40px; box-sizing: border-box; font-size: 16px; color:#666; font-weight: bold; text-align:left; padding-left: 20px;}
 .popup_wrap .new_admin .new_item input{display: block; width: 250px; height: 40px; line-height: 40px; box-sizing: border-box; border:1px solid #666; border-radius:5px; padding: 0 10px; font-size: 16px; font-weight: bold;}
+.popup_wrap .new_admin .new_item input[readonly]{color:rgba(102, 102, 102, 0.8); background:rgba(0, 0, 0, 0.1); cursor:default;}
 .popup_wrap .new_admin .new_item select{display: block; width: 250px; height: 40px; line-height: 40px; box-sizing: border-box; border:1px solid #666; border-radius:5px; padding: 0 30px 0 10px; background:url(../images/ico_select.png) no-repeat right 10px center;}
 .popup_wrap .new_admin .new_item .idCheck{display: block; height: 40px; line-height: 40px; padding: 0 15px; margin-left: 10px; border-radius:3px; background:#3C90F2;color:#fff;}
 .popup_wrap .new_btn_box{display: flex; justify-content: center; margin-top: 20px;}
@@ -217,6 +218,10 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
  .view_wrap .view_btn{text-align: center; padding-top: 30px;}
  .view_wrap .view_btn a{display: inline-block;width: 70px; height: 28px; line-height: 28px;border-radius: 3px; text-align: center; font-size: 14px; color:#fff; font-weight: bold; background: #666; margin: 0 3px;}
  .view_wrap .view_btn a.ok{background: #4094F7;}
+ .view_wrap .view_items .items dd .calendar{}
+ .view_wrap .view_items .items dd .calendar .cal{display: block; float: left; width: 100%; max-width: 110px; height: 29px; line-height: 29px; 
+    padding: 0 8px 0 25px; background: #fff url(../images/ico_cal.png) no-repeat left 8px center; box-sizing: border-box; border: 1px solid #000;
+    cursor: pointer;}
 
 /* 신고내역 */
 .search_box .search_top.report{width: 500px;}
@@ -237,6 +242,11 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
 .table_wrap .table .warning .tb_txt_box .txt{color:#FF0000; font-weight: bold;}
 .table_wrap .table .warning td .status_after{color:#ff0000; font-weight: bold;}
 .table_wrap .table .warning td .report_txt{color:#ff0000;}
+.table_wrap .table .w_hide td{color:#C5C5C5; font-weight: bold;}
+.table_wrap .table .w_hide .tb_txt_box .txt{color:#C5C5C5; font-weight: bold;}
+.table_wrap .table .w_hide td .status_after{color:#C5C5C5; font-weight: bold;}
+.table_wrap .table .w_hide td .report_txt{color:#C5C5C5;}
+
 
 /* 입주자 명부 */
 .search_box .search_bot.resident{width: 634px;}

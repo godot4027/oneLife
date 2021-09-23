@@ -28,7 +28,7 @@
 .login_wrap .items .inner .error{color:#FF0000; font-size: 16px; opacity: 0;}
 .login_wrap .items .inner .form_item{padding-top: 10px;}
 .login_wrap .items .inner .form_item .input{position: relative; margin-bottom: 15px;}
-.login_wrap .items .inner .form_item .input input{display: block; width: 100%; height: 85px; line-height: 85px; box-sizing: border-box; border:1px solid rgba(0,0,0, 0.6); box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); border-radius:3px;  padding: 0 16px; font-size: 30px; background:none;} 
+.login_wrap .items .inner .form_item .input input{display: bloc.sub .login .login_box pk; width: 100%; height: 85px; line-height: 85px; box-sizing: border-box; border:1px solid rgba(0,0,0, 0.6); box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); border-radius:3px;  padding: 0 16px; font-size: 30px; background:none;} 
 .login_wrap .items .inner .form_item .input input + .tip{position: absolute; top:16px; left:16px; z-index:-1; font-size: 18px; letter-spacing: 0; color:rgba(0, 0, 0, 0.6); transition:opacity .3s;}
 .login_wrap .items .inner .form_item .input input.hide + .tip{opacity: 0;}
 .login_wrap .items .inner .form_item .checkbox{text-align:left;}
@@ -402,26 +402,26 @@ li {
 }
 /* --------------------------- */
 
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+/* .modal {
+  display: none; Hidden by default
+  position: fixed; Stay in place
+  z-index: 1; Sit on top
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%; Full width
+  height: 100%; Full height
+  overflow: auto; Enable scroll if needed
+  background-color: rgb(0, 0, 0); Fallback color
+  background-color: rgba(0, 0, 0, 0.4); Black w/ opacity
 }
 
-/* Modal Content/Box */
+Modal Content/Box
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto; 15% from the top and centered
   padding: 20px;
   border: 1px solid #888;
-  width: 400px; /* Could be more or less, depending on screen size */
+  width: 400px; Could be more or less, depending on screen size
   display: table;
   border-radius: 10px;
 }
@@ -430,7 +430,7 @@ li {
   display: table-cell;
   vertical-align: middle;
 }
-/* The Close Button */
+The Close Button
 .close {
   color: #aaa;
   float: right;
@@ -443,7 +443,7 @@ li {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
+} */
 
 /* Visit.css  */
 :root {
@@ -639,6 +639,72 @@ hr {
   font-size: 12pt;
 }
 
+/* The Modal (background) */
+/* .modal {
+  display: none; Hidden by default
+  position: fixed; Stay in place
+  z-index: 1; Sit on top
+  left: 0;
+  top: 0;
+  width: 100%; Full width
+  height: 100%; Full height
+  overflow: auto; Enable scroll if needed
+  background-color: rgb(0, 0, 0); Fallback color
+  background-color: rgba(0, 0, 0, 0.4); Black w/ opacity
+}
+
+Modal Content/Box
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; 15% from the top and centered
+  padding: 15px;
+  border: 1px solid #888;
+  width: 400px; Could be more or less, depending on screen size
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.modal_button {
+  margin: 0 auto;
+}
+.modal_button > button {
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 8px;
+  font-weight: 600;
+  margin:5px;
+} */
+
+/* .register_ok {
+  background-color: var(--main-color--);
+  border-width: 0;
+  color: white;
+}
+
+.close {
+  background-color: white;
+  border: 1.5px solid lightgray;
+}
+.register_ok:hover {
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  cursor: pointer;
+}
+
+.register_confirm {
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.modal_button > button.close{font-size:13px;}
+ */
 
 /* -------------------Visit Car Fix-------------- */
 .fa-edit {
@@ -868,11 +934,11 @@ hr {
 }
 
 .border_test4 {
-	border: 3px solid pink;
+	border: 0px solid pink;
 }
 
 .border_test5 {
-	border: 3px solid pink;
+	border: 0px solid pink;
 }
 
 .border_test6 {
@@ -1012,7 +1078,7 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 
 .step2_span_right {
 	margin-left: 20px;
-	font-size: 17px;
+	font-size: 23px;
 }
 
 .step2_input_text {
@@ -1027,7 +1093,7 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 	font-size: 14px;
 	width: 300px;
 	height: 30px;
-	border: 1px solid #B6B4B4;
+	border: 0px solid #B6B4B4;
 	padding-left: 10px;
 }
 
@@ -1691,6 +1757,7 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 .btn_area {
   text-align: right;
   padding: 30px;
+  margin-left: -30px;
 }
 
 #table {
@@ -1768,7 +1835,6 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 .notice_detail {
   border: 1px solid #c4c4c4;
   height: 500px;
-  width: 1058px;
 }
 
 .notice_detail > h2 {
@@ -2308,6 +2374,86 @@ input[type="checkbox"]:checked {
   align-items: center;
 } */
 
+/* .modal .bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(115, 115, 116, 0.27);
+}
+
+.modalBox {
+  position: absolute;
+  background-color: #fff;
+  width: 550px;
+  padding: 30px;
+  border: 1px solid rgba(63, 63, 68, 0.005);
+  box-shadow: 0px 1px 0px rgba(63, 63, 68, 0.05),
+    0px 1px 3px rgba(63, 63, 68, 0.15);
+  border-radius: 10px;
+}
+
+.modalBox h2 {
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 24px;
+  justify-content: center;
+  text-align: left;
+  letter-spacing: 0.15px;
+  position: relative;
+  top: 8%;
+  left: 1%;
+}
+
+.modalBox span {
+  font-size: 21px;
+  line-height: 35px;
+  letter-spacing: 0.15px;
+  color: #5b5b5b;
+  position: relative;
+  top: 20%;
+  left: 1%;
+  right: 100px;
+  display: block;
+  text-align: justify;
+}
+
+.closeBtn {
+  background: #797979;
+  padding: 15px;
+  margin-top: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  justify-content: center;
+  letter-spacing: 1px;
+  color: #fff;
+  width: 120px;
+  left: 215px;
+}
+
+.container .btn2 {
+  color: #137af3;
+}
+
+
+.container img {
+  height: 50px;
+  margin-top: 5%;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.modalBox h2 {
+  border-bottom: 2px solid rgb(218, 218, 218);
+  padding-bottom: 30px;
+  margin-top: 10px;
+}
+ */
 .bar_area {
   display: block;
   padding-top: 30px;
@@ -2449,7 +2595,7 @@ input[type="checkbox"]:checked {
 
 .complaint_list .nick,
 .complaint_header .nick {
-  width: 100px;
+  width: 180px;
 }
 
 .complaint_header .title {
@@ -2521,14 +2667,15 @@ input[type="checkbox"]:checked {
 
 .input_area label {
   position: absolute;
-  top: -17px;
-  width: 100px;
-  right: 1%;
+  top: 440px;
+  /* width: 100px;
+  right: 1%;  */
   font-weight: normal;
   font-size: 16px;
-  line-height: 24px;
+  /* line-height: 24px; */
   letter-spacing: -0.006em;
   color: #545454;
+  left: 21%;
 }
 
 .input_area2 {
@@ -2647,7 +2794,7 @@ input[type="checkbox"]:checked {
 
 .com_detail_title {
   border-bottom: 2px solid #9a9a9a;
-  width: 1030px;
+  /* width: 1030px; */
   padding-left: 20px;
 }
 
@@ -2657,7 +2804,7 @@ input[type="checkbox"]:checked {
 .com_detail_cell {
   padding: 40px 40px 40px 40px;
   border: 1px solid #d8d8d8;
-  width: 900px;
+ /*  width: 900px; */
   color: #5f5f5f;
   font-weight: 600;
   font-size: 16px;
@@ -2710,7 +2857,7 @@ input[type="checkbox"]:checked {
   color: #a4a4a4;
   position: relative;
   top: 60px;
-  left: -140px;
+  left: -120px;
 }
 
 .title_span {
@@ -2741,11 +2888,11 @@ input[type="checkbox"]:checked {
 }
 
 .reply_write {
-  padding: 4px;
+  padding: 10px;
   background: #ffffff;
-  width: 980px;
+  width: 1020px;
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 60px;
   height: auto;
   position: relative;
   /* display: inline-block; */
@@ -2863,7 +3010,7 @@ h4 {
 
 .complaint_content {
   min-height: 540px;
-  padding: 0px 20px;
+  padding: 50px 30px;
 }
 
 .complaint_content .subject {
@@ -3054,7 +3201,10 @@ h4 {
 
 .board_list .nick,
 .board_header .nick {
-  width: 40px;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .board_header .title {
@@ -3231,8 +3381,8 @@ h4 {
 
 .board_detail_title {
   border-bottom: 2px solid #9a9a9a;
-  width: 1030px;
-  padding-left: 20px;
+ /*  width: 1030px; */
+  padding-left: 30px;
 }
 
 .board_detail_content {
@@ -3241,7 +3391,7 @@ h4 {
 .board_detail_cell {
   padding: 40px 40px 40px 40px;
   border: 1px solid #d8d8d8;
-  width: 900px;
+  /* width: 900px; */
   color: #5f5f5f;
   font-weight: 600;
   font-size: 16px;
@@ -3294,7 +3444,7 @@ h4 {
   color: #a4a4a4;
   position: relative;
   top: 60px;
-  left: -45px;
+  left: -60px;
 }
 
 .title_span {
@@ -3318,7 +3468,8 @@ h4 {
 }
 button.reply_btn2{
 	left: 110px;
-	top:-3px;
+	top:-0.01px;
+	color: #4094f7;
 }
 
 .reply_area {
@@ -3384,7 +3535,7 @@ button.reply_btn2{
 .reply_list {
   display: block;
   margin: 0;
-  padding-left: 20px;
+  padding-left: 30px;
 }
 
 .reply_ul {
@@ -3427,7 +3578,8 @@ button.reply_btn2{
   left: 170px;
   top: -77px;
 }
-.reply_btn_area.type02{left:160px; bottom:53px; top: inherit;}
+.reply_btn_area.type02{
+left:190px;  bottom:53px; top: -50px;}
 
 .reply_btn_area button {
   background: none;
@@ -3436,7 +3588,7 @@ button.reply_btn2{
 }
 .reply_btn_area #reply_btn {
   position: relative;
-  left: 730px;
+  left: 870px;
   top: -10px;
 }
 
@@ -3497,7 +3649,7 @@ button.reply_btn2{
   width: 70px;
   position: relative;
   display: none;
-  left: 970px;
+  left: 1080px;
   top: -30px;
 }
 
@@ -3509,7 +3661,7 @@ button.reply_btn2{
   width: 70px;
   position: relative;
   display: none;
-  left: 825px;
+  left: 905px;
   top: -45px;
 }
 
@@ -3617,7 +3769,220 @@ button.reply_btn2{
 
 }
 
+.step3_container {
+	width: auto;
+	margin: 0 auto;
+	padding: 0px;
+}
 
+#sub .find_wrap {max-width: 1000px; background: #fff; box-sizing: border-box;  border-top: 2px solid #333; }
+#sub .find_wrap .find_tab { margin: 0;}
+#sub .find_wrap .find_tab ul li a {height: 60px; line-height: 60px; font-size: 16px; border: 0; background: #e4e4e4; box-sizing: border-box;}
+#sub .find_wrap .find_tab ul li a.on {background: #fff; font-weight: 600; color: #333;}
+#sub .find_wrap .find_form {padding: 60px 0;}
+ 
+
+.size{
+  padding: 70px 20px;
+  margin: 0 auto;
+}
+
+#sun .find_wrap{
+  max-width: 1000px;
+  background: #fff;
+  box-sizing: border-box;
+  border-top: 2px solid #333;
+}
+
+.find_wrap{
+  position: relative;
+  font-weight: 300px;
+  line-height: 22.5px;
+  width: 100%;
+  margin: auto;
+}
+
+#sub .find_wrap .find_tab{
+  margin : 0;
+}
+
+.find_wrap .find_tab{
+  width:100%;
+}
+
+.find_wrap .find_tab ul{
+  width: 100%;
+}
+
+.find_wrap .find_tab ul li{
+  float:left;
+  width: 50%;
+}
+
+#sub .find_wrap .find_tab ul li a.on{
+  background: #fff;
+  font-weight: 600px;
+  color: #333;
+}
+
+#sub .find_wrap .find_tab ul li a{
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+
+  box-sizing: border-box;
+}
+
+.find_wrap .find_tab ul li a.on{
+  border-bottom : 0;
+  border-top: 2px solid #333;
+  border-left: 2px solid #333;
+  border-right: 2px solid #333;
+  font-weight: bold;
+  background: #fff;
+}
+
+.find_wrap .find_tab ul li a{
+  display: block;
+  height: 45px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 15px;
+  border: 1px solid #dadada;
+  color: #333;
+}
+
+.find_tab{
+  font-size:15px;
+  font-weight: 300px;
+  letter-spacing: -0.5px;
+  line-height: 22.5px;
+  width:960px;
+}
+
+
+
+.find_wrap .find_tab ul li {
+  float: left;
+  width: 50%;
+} 
+
+#sub .find_wrap .find_form{
+  padding: 60px 0px;
+}
+
+.sub .login .in_size{
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.sub .login .login_box p:first-child{
+  border-top: 0;
+}
+
+.sub .login .login_box p{
+  display: block;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  box-sizing: border-box;
+}
+
+.sub .login .login_box p em{
+  display: block;
+  float: left;
+  padding-left: 20px;
+  width: 150px;
+  line-height: 50px;
+  font-size: 16px;
+  color: #333;
+  font-weight: 400;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.sub .login .login_box p span{
+  display: block;
+  float: left;
+  width: calc(100% - 150px);
+}
+
+.clear{
+  list-style-position: outside;
+  vertical-align: middle;
+}
+
+.sub .login .login_box p span input {
+  display: block;
+  width: 350px;
+  height: 50px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.clear:after{
+  content: '';
+  display:block;
+  clear: both;
+}
+
+.sub .login .login_box p {
+  display: block;
+  padding: 10px 0px;
+  border-top: 1px solid #eee;
+  box-sizing: border-box;
+}
+
+.sub .login .login_btn{
+  margin-top: 30px;
+}
+
+.sub .login .login_btn input[type=submit]{
+  width: 100%;
+  height: 60px;
+  font-size: 20px;
+  color: #fff;
+  background: black;
+  font-weight: 500;
+
+}
+
+.sub .login .login_util{
+  text-align: center;
+  margin-top: 20px ;
+
+}
+
+.sub .login .login_util a{
+  position: relative;
+  display: inline-block;
+  padding: 0 25px;
+  font-size: 15px;
+  color: #333;
+  font-weight: 400;
+}
+
+.sub .login .login_util a:before{
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 1px;
+  height: 14px;
+  background: #ccc;
+}
+
+.sub .login .login_util a:first-child::before{
+  display: none;
+}
+
+#searchCondition {
+ text-align: center;
+ padding: 7px;
+ color: #66788a;
+ border-radius: 5px;
+/*  background:#66788a; */
+}
 
 
 

@@ -41,14 +41,16 @@
 	                        <form action="${contextPath}/admin/manager/list" method="get">
 	                            <div class="search_bot resident clearfix">
 	                                <div class="items clearfix">
-	                                    <label for="">검색조건</label>
+	                                    <label for="reser_fac">검색조건</label>
 	                                    <div class="select">
 	                                        <select name="managerListSearch" id="reser_fac">
-	                                            <option value="id">아이디</option>
-	                                            <option value="name">이름</option>
+	                                        	<c:set var="reser" value="${param.managerListSearch}"/>
+	                                            <option value="id" <c:if test="${reser eq 'id' }">selected</c:if>>아이디</option>
+	                                            <option value="name" <c:if test="${reser eq 'name' }">selected</c:if>>이름</option>
 	                                        </select>
 	                                    </div>
-	                                    <input type="text" name="managerListValue" class="input">
+	                                    <c:set var="managerListSearch" value="${param.managerListValue}"/>
+	                                    <input type="text" name="managerListValue" class="input" value="${managerListSearch}">
 	                                    <button type="submit" class="btn">검색</button>
 	                                </div>
 	                            </div>
@@ -80,7 +82,15 @@
                                     
                                     <c:choose>
                                     	<c:when test="${fn:length(mList) == 0}">
-                                    		nodata 넣어야함
+                                    		<%-- 검색결과가 없을시 화면출력 --%>
+                                    		<tr>
+                                    			<td colspan="6">
+                                    				<div class="list_nodate">
+	                                                    <img src="${contextPath}/resources/admin/images/list_nodate.png" alt="NODATE">
+	                                                    <p>일치하는 관리자가 없습니다.</p>
+	                                                </div>
+                                    			</td>
+                                    		</tr>
                                     	</c:when>
                                     	<c:otherwise>
                                     		<c:forEach var="item" items="${mList}">
@@ -91,7 +101,9 @@
 		                                           <td>${item.mJobName}</td>
 		                                           <td>${item.mPhone}</td>
 		                                           <td>
-		                                               <a href="javascript:;" class="tag">변경</a>
+		                                               <a href="javascript:popShow('managerClass');" class="tag">변경</a>
+		                                               <%-- 관리자 번호 --%>
+		                                               <input type="hidden" name="mNo" value="${item.mNo}"/>
 		                                           </td>
 		                                      	</tr>
                                       		</c:forEach>
@@ -101,41 +113,26 @@
                                 </table>
                             </div>
                             <!-- 총관리자만 버튼보임 -->
-                            <div class="btn_box">
-                                <a href="javascript:popShow('newManager');" class="remove">관리자 추가</a>
-                            </div>
+                            <c:if test="${loginManager.mJobcode eq 'M_CODE2'}">
+	                            <div class="btn_box">
+	                                <a href="javascript:popShow('newManager');" class="remove">관리자 추가</a>
+	                            </div>
+                            </c:if>
                           
-                          
-                         	<c:if test="${fn:length(mList) > 0}">
-                         		<div class="paging_wrap">
-                         			   <!-- 이전페이지로 이동  -->
-                         			   <c:choose>
-                         			   	<c:when test="${pi.page <= 1}">
-                         			   		<a href="javascript:;" class="btn_prev"></a>
-                         			   	</c:when>
-                         			   	<c:otherwise>
-                         			   		<a href="${contextPath}/admin/manager/list?page=1" class="btn_prev"></a>
-                         			   	</c:otherwise>
-                         			   </c:choose>
-                         			   
-                         			   <!-- 페이징 -->
-		                               <c:forEach var="page" begin="${pi.startPage}" end="${pi.endPage}">
-		                               
-		                               <a href='${contextPath}/admin/manager/list?page=${page}' class='btn_num <c:if test="${page == pi.page}">on</c:if>' >${page}</a>
-		                               
-		                               </c:forEach>
-		                               
-		                               <!-- 다음페이지로 이동  -->
-                         			   <c:choose>
-                         			   	<c:when test="${pi.page == pi.endPage}">
-                         			   		<a href="javascript:;" class="btn_next"></a>
-                         			   	</c:when>
-                         			   	<c:otherwise>
-                         			   		<a href="${contextPath}/admin/manager/list?page=${pi.page + 1}" class="btn_next"></a>
-                         			   	</c:otherwise>
-                         			   </c:choose>
-		                           </div>
-                         	</c:if>
+                          	<%-- 검색결과에대한 파라미터값 저장 --%>
+                          	<c:if test="${!empty param.managerListSearch && !empty param.managerListValue}">
+                          		<c:set var="searchParam" value="&managerListSearch=${param.managerListSearch}&managerListValue=${param.managerListValue}"/>
+                          	</c:if>
+                          	<jsp:include page="/WEB-INF/views/admin/common/paging.jsp"	flush="false">
+								<jsp:param name="listSize" value="${mList.size()}" />
+								<jsp:param name="piPage" value="${pi.page}" />
+								<jsp:param name="startPage" value="${pi.startPage}" />
+								<jsp:param name="endPage" value="${pi.endPage}" />
+								<jsp:param name="maxPage" value="${pi.maxPage}" />
+								<jsp:param name="pageUrl"
+									value="${pageContext.request.requestURL}" />
+								<jsp:param name="search" value="${searchParam}" />
+							</jsp:include>
                             
                         </div>
                     </div>
@@ -146,6 +143,7 @@
 
     <!-- 팝업영역 -->
      <!-- 신규회원등록 팝업 -->
+     <c:if test="${loginManager.mJobcode eq 'M_CODE2'}">
      <div class="popup_wrap" id="newManager">
         <div class="dim"></div>
         <div class="item">
@@ -181,6 +179,7 @@
            </div>
         </div>
     </div>
+    </c:if>
     <script>
     	let regCheck = false;
     	// 아이디 중복체크
@@ -254,38 +253,87 @@
     </script>
 
     <!-- 계급변경 -->
-    <div class="popup_wrap" style="display:none;">
+    <c:if test="${loginManager.mJobcode eq 'M_CODE2'}">
+    <div class="popup_wrap" id="managerClass">
         <div class="dim"></div>
         <div class="item">
-           <div class="new_admin">
-               <div class="title">관리자 직급 변경</div>
-               <div class="new_item">
-                   <label for="">계정</label>
-                   <input type="text" name="" id="" disabled>
-               </div>
-               <div class="new_item">
-                    <label for="">이름</label>
-                    <input type="text" name="" id="">
-                </div>
-                <div class="new_item">
-                    <label for="">휴대폰 번호</label>
-                    <input type="text" name="" id="">
-                </div>
-                <div class="new_item">
-                    <label for="">직급</label>
-                    <select name="" id="">
-                        <option value="">관리자</option>
-                        <option value="">관리자1</option>
-                    </select>
-                </div>
-           </div>
+        	<form name="managerClassFrm">
+	           <div class="new_admin">
+	               <div class="title">관리자 직급 변경</div>
+	               <input type="hidden" name="page" value="${param.page}"/>
+	               <input type="hidden" name="mNo" id="classmNo"/>
+	               <div class="new_item">
+	                   <label for="mId">계정</label>
+	                   <input type="text" name="mId" id="mId" disabled>
+	               </div>
+	               <div class="new_item">
+	                   <label for="mName">이름</label>
+	                   <input type="text" name="mName" id="mName" disabled>
+	               </div>
+	               <div class="new_item">
+	                   <label for="mPhone">전화번호</label>
+	                   <input type="text" name="mPhone" id="mPhone" disabled>
+	               </div>
+	                <div class="new_item">
+	                    <label for="mClass">직급</label>
+	                    <select name="mClass" id="mClass">
+	                        <option value="M_CODE1">관리자</option>
+	                        <option value="M_CODE2">총관리자</option>
+	                    </select>
+	                </div>
+	           </div>
+           </form>
            <div class="new_btn_box">
-               <a href="javascript:;">변경하기</a>
-               <a href="javascript:;">취소하기</a>
+               <a href="javascript:mcFrm();">변경하기</a>
+               <a href="javascript:popHide('managerClass');">취소하기</a>
            </div>
         </div>
     </div>
     <!-- 팝업영역 -->
+    <script>
+    	$(function(){
+    		// 계급변경시 회원정보 조회
+    		$('.tag').click(function(){
+    			let mNo = $(this).next().val();
+    			$.ajax({
+    				url : "${contextPath}/admin/manager/classChange",
+    				type : "get",
+    				datatype : "json",
+    				data : {mNo : mNo},
+    				success : function(item){
+    					console.log(item);
+    					$('#managerClass #classmNo').val(item.mNo);
+    					$('#managerClass #mName').val(item.mName);
+    					$('#managerClass #mId').val(item.mId);
+    					$('#managerClass #mPhone').val(item.mPhone);
+    					if(item.mJobcode == 'M_CODE1'){
+    						$('#managerClass #mClass option').eq(0).attr('selected', true);
+    					}else if(item.mJobcode == 'M_CODE2'){
+    						$('#managerClass #mClass option').eq(1).attr('selected', true);
+    					}
+    				},
+    				
+    				error : function(e) {
+    					console.log(e);
+    				}
+    				
+    			})
+    			
+    		})
+    	})
+    	
+    	// 계급 변경
+    	function mcFrm(){
+    		let frm = document.forms.managerClassFrm;
+    		frm.action = "${contextPath}/admin/manager/classChange";
+    		frm.method = "post";
+    		frm.submit();
+    	}
+    	
+    	
+    
+    </script>
+    </c:if>
     
     
 </body>

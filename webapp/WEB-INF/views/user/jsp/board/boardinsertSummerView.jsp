@@ -18,6 +18,16 @@
 		.bottom_wrap1 > h1 {
 			top: 10px;
 		}
+		
+		.row:after {
+			content: none;
+		}
+		.row:before {
+			content: none;
+		} 
+		.col1 {
+		  vertical-align: middle;
+		}
 	</style>
 </head>
 <body>
@@ -32,7 +42,8 @@
 	</div>
 		<div class="wrap">
 			<div class="board_area">
-				<form method="POST">
+				<form method="POST" action="${ contextPath }/board/insert">
+				<input type="hidden" name="b_no" value="${ b_no }">
 				<div class="board_content">
 					<div class="subject">
 					<h1>도란도란 글쓰기</h1>
@@ -45,9 +56,9 @@
 						</span>
 						</div>
 						<div class="row">
-						<span class="cell col1" id="col_content"><p>내용</p></span>
+						<span class="cell col1" id="col_content">내용</span>
 						<span class="cell col2">
-							<textarea id="summernote" name="editordata" required></textarea>
+							<textarea id="summernote" name="content" required ></textarea>
 						</span>
 						</div> 
 					</div>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +11,116 @@
 
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
+<script src="/oneLife/resources/user/js/cookie.js"></script>
+<style>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.modal .bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(115, 115, 116, 0.27);
+}
+
+.modalBox {
+  position: absolute;
+  background-color: #fff;
+  width: 460px;
+  height: 350px;
+  padding: 30px;
+  border: 1px solid rgba(63, 63, 68, 0.005);
+  box-shadow: 0px 1px 0px rgba(63, 63, 68, 0.05),
+    0px 1px 3px rgba(63, 63, 68, 0.15);
+  border-radius: 10px;
+}
+
+.modalBox h2 {
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 24px;
+  justify-content: center;
+  text-align: left;
+  letter-spacing: 0.15px;
+  position: relative;
+  top: 8%;
+  left: 1%;
+}
+
+.modalBox span {
+  font-size: 21px;
+  line-height: 35px;
+  letter-spacing: 0.15px;
+  color: #5b5b5b;
+  position: relative;
+  top: 20%;
+  left: 1%;
+  right: 100px;
+  display: block;
+  text-align: justify;
+}
+
+.closeBtn {
+  background: none;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 1px;
+  color: #797979;
+  width: 200px;
+}
+
+.container1 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25%;
+  border-top: 1px solid #b8b8b8;
+}
+
+.container1 .btn2 {
+  color: #137af3;
+}
+
+.container1 img {
+  height: 50px;
+  margin-top: 5%;
+}
+
+.hidden {
+  display: none;
+}
+
+input[type='checkbox']+label:before {
+margin-right: 10px;}
+
+.input_area {
+  border-bottom: none;
+  padding: 0;
+  background: none;
+}
+
+#searchCondition {
+ text-align: center;
+ padding: 7px;
+ color: #66788a;
+ border-radius: 5px;
+/*  background:#66788a; */
+}
+</style>
 
 </head>
 <body>
@@ -26,11 +139,16 @@
 				<h1>간편하게 <b>민원 접수하고<br>처리 결과</b>를 전해 드립니다.</h1>
 			</div>
 			<div class="search_area">
-				<form method="get">
+				<form method="get" action="${ contextPath }/complaint/list">
 					<span class="input_area"> 
 						<input type="checkbox" name="mylist" value="mybbs" id="mylist">
 						<label for="mylist">내 글만 보기</label>
 					</span>
+					<select id="searchCondition" name="searchCondition">
+						<option value="title" <c:if test="${ param.searchCondition == 'title' }">selected</c:if>>제목</option>
+						<option value="content" <c:if test="${ param.searchCondition == 'content' }">selected</c:if>>내용</option>
+					    <option value="writer" <c:if test="${ param.searchCondition == 'writer' }">selected</c:if>>아이디</option>
+					</select>
 					<span class="input_area2"> 
 						<input type="search" name="searchValue" placeholder="검색">
 						<button type="submit" id="btn1"><img src="/oneLife/resources/user/images/Search.png"></button>
@@ -44,25 +162,44 @@
 					<li class="nick">작성자</li>
 					<li class="date">작성일</li>
 				</ul>
+				<c:forEach var="c" items="${ complaintList }">
 				<ul class="complaint_ul type02">
-					<li class="no">1</li>
+					<li class="no" >${ c.c_no }</li>
+					<c:if test="">
 					<!-- 미완료 상태 -->
-					<li class="state"><span>미완료</span></li>
+					<li class="state"><span>미답변</span></li>
+					</c:if>
+					<c:if test="">
 					<!-- 완료 상태 -->
-					<!-- <li class="state fi"><span>처리완료</span></li> -->
-					<!-- 공개글 일시 -->
-					<!-- <li class="title">층간소음이 너무 심해요!!</li> -->
-					<!-- 비밀글 일시 -->
+					<li class="state fi"><span>답변완료</span></li>
+					</c:if>
+					<!-- 비공개 글 -->
+					<c:if test="${ c.open == 'N'}">
+					<c:choose>
+			        <c:when test="${ !empty loginUser_man || !empty loginUser && loginUser.u_ID == c.u_id}"> 
+				    <li class="title" onclick="detailView(${ c.c_no })">${ c.c_title } <img id="lock" src="/oneLife/resources/user/images/lock.png"></li>
+					</c:when>
+					<c:otherwise>
 					<li class="title">비밀글 입니다. <img id="lock" src="/oneLife/resources/user/images/lock.png"></li>
-					<li class="nick">홍길동</li>
-					<li class="date">2021-09-06</li>
+					</c:otherwise>
+					</c:choose>
+					</c:if>
+					<!-- 공개 글 -->
+					<c:if test="${ c.open == null }">
+					<li class="title" onclick="detailView2(${ c.c_no })">${ c.c_title }</li>
+					</c:if>
+					<li class="nick">${ c.u_id }</li>
+					<li class="date"><fmt:formatDate value="${ c.modify_date }" pattern="yyyy-MM-dd"/></li>
 				</ul>
+				</c:forEach>
 			</div>
 			
 		</div>
 		<div class="search_area">
 			<form method="get">
+				<c:if test="${ !empty loginUser }">
 				<button type="button" id="btn2" class="openBtn">문의하기</button>
+				</c:if>
 				<div class="modal hidden">
 					<div class="bg"></div>
 					<div class="modalBox">
@@ -72,27 +209,70 @@
 							및 폭언이 포함된 글은 사전 동의 없이
 							삭제될 수 있습니다
 						</span>
-						<div class="container">
+						<div class="container1">
 						<button type="button" class="closeBtn btn1" id="disagree_btn">미동의</button>
-						<img src="/resources/images/Line 19.png">
-				        <button type="button" class="closeBtn btn2" onclick="location.href='${ contextPath }/notice/insert'">동의</button>
+						<img src="/oneLife/resources/user/images/Line 19.png">
+				        <button type="button" class="closeBtn btn2" onclick="location.href='${ contextPath }/complaint/insert'">동의</button>
 						</div>
 					</div>
 				</div>
 			</form>
 		</div>
 
+		
 		<ul class="board_paging">
-			<li>
-				<a href="javascript:;" class="btn_prev"></a>
-			</li>
-			<li>
-				<a href="javascript:;" class="current_page">1</a>
-			</li>
-			<li>
-				<a href="javascript:;" class="btn_next"></a>
-			</li>
-		</ul>
+				<!-- 검색 결과 화면인 경우 넘겨줄 searchParam 정의 -->
+				<c:if test="${ !empty param.searchCondition && !empty param.searchValue }">
+					<c:set var="searchParam" value="&searchCondition=${ param.searchCondition }&searchValue=${ param.searchValue }"/>
+				</c:if>
+				
+					<!-- 맨 처음으로 (<<) -->
+						<li><a href="${ contextPath }/complaint/list?page=1${ searchParam }">&lt;&lt;</a></li>
+						
+					<!-- 이전 페이지 (<) -->
+					<li>
+					<c:choose>
+						 <c:when test="${ pi.page > 1 }">
+						 <a href="${ contextPath }/complaint/list?page=${ pi.page - 1}${ searchParam }" class="btn_prev">&lt;</a>
+						 </c:when>
+						 <c:otherwise>
+						 <a href="#">&lt;</a>
+						 </c:otherwise>
+					</c:choose>	
+					</li>
+					
+					<!-- 페이지 목록(최대 10개) -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li>
+						<c:choose>
+						   <c:when test="${ p eq pi.page }">
+						   		<a href="#" class="current_page">${ p }</a>
+						   </c:when>
+						   <c:otherwise>
+						   		<a href="${ contextPath }/complaint/list?page=${ p }${ searchParam }">${ p }</a>
+						   </c:otherwise>
+						</c:choose>
+					</li>
+					</c:forEach>
+					
+					
+					<!-- 다음 페이지 (>) -->
+					<li>
+					<c:choose>
+						 <c:when test="${ pi.page < pi.maxPage }">
+						 <a href="${ contextPath }/complaint/list?page=${ pi.page + 1}${ searchParam }" class="btn_next">&gt;</a>
+						 </c:when>
+						 <c:otherwise>
+						 <a href="#">&gt;</a>
+						 </c:otherwise>
+					</c:choose>	
+					</li>		
+						
+					<!-- 맨 끝으로 (>>) -->
+						<li><a href="${ contextPath }/complaint/list?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>	
+						
+				</ul>
+			
 	</div>
 	
 	<%-- 공통 footer --%>
@@ -123,20 +303,66 @@
    
    <!-- 모달 창 부분 -->
    <script>
-    const open = () => {
-        document.querySelector(".modal").classList.remove("hidden");
-    }
-
-    const close = () => {
-        document.querySelector(".modal").classList.add("hidden");
-    }
-
-    document.querySelector(".openBtn").addEventListener("click", open);
-    document.querySelector("#disagree_btn").addEventListener("click", close);
-    document.querySelector(".bg").addEventListener("click", close);
-
-
+	   const open = () => {
+	       document.querySelector(".modal").classList.remove("hidden");
+	   }
+	
+	   const close = () => {
+	       document.querySelector(".modal").classList.add("hidden");
+	   }
+	
+	   document.querySelector(".openBtn").addEventListener("click", open);
+	   document.querySelector("#disagree_btn").addEventListener("click", close);
+	   document.querySelector(".bg").addEventListener("click", close);
     </script>
+    
+    <script>
+     		 function detailView(c_no){
+			  		// cno를 쿼리스트링에 데이터로 넘김
+			  		location.href='${contextPath}/complaint/detail?c_no='+c_no;
+			  	}
+     		 function detailView2(c_no){
+			  		// cno를 쿼리스트링에 데이터로 넘김
+			  		location.href='${contextPath}/complaint/detail?c_no='+c_no;
+			  	}
+     </script>
+    
+    
+    
+	<!--글 오픈 /비밀 -->
+	
+	<%--  <c:if test="${ complaintList.open == 'N'}"> 
+		 <c:choose>
+			<c:when test="${ !empty loginUser_man || !empty loginUser && loginUser.u_ID == c.u_id}">
+				 <script>
+	     		 function detailView(c_no){
+				  		// cno를 쿼리스트링에 데이터로 넘김
+				  		location.href='${contextPath}/complaint/detail?c_no='+c_no;
+				  	}
+	     		</script>
+			</c:when>
+			<c:otherwise>
+				<script>
+	     		 function detailView(c_no){
+				  		alert('비밀글 입니다.');
+				  	}
+	     		</script>
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+	<c:if test="${ complaintList.open == null }">
+        <script>
+   		 function detailView(c_no){
+	  		// cno를 쿼리스트링에 데이터로 넘김
+	  		location.href='${contextPath}/complaint/detail?c_no='+c_no;
+	  	}
+   		</script>
+    </c:if> --%>
+	 
+	  
+	
+	  
+	
 	
 </body>
 </html>

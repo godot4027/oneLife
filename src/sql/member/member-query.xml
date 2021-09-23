@@ -38,7 +38,9 @@
 		where M_ID = ?
 		and M_PASSWORD = ?
 	</entry>
-	
+
+
+
 	<entry key="insertMember">
 	INSERT
 		INTO MEMBER
@@ -67,6 +69,15 @@
 		)
 	</entry>
 	
+	<entry key="changeStatus">
+    UPDATE
+     MEMBER
+    SET
+       U_STATUS = 'Y'
+    WHERE U_NO = ?
+   </entry>
+	
+	
 	<entry key="checkR">
 	select
 	r_no
@@ -80,6 +91,7 @@
 			COUNT(*)
 		 FROM MEMBER
 	    WHERE U_ID = ?
+	    AND U_STATUS = 'Y'
 	</entry>
 	
 	<entry key="nickCheck">
@@ -87,6 +99,77 @@
 			COUNT(*)
 		 FROM MEMBER
 	    WHERE U_NICKNAME = ?
+	    AND U_STATUS = 'Y'
+	</entry>
+	
+	<entry key="updateMember">
+		UPDATE
+			MEMBER
+		SET
+			U_NICKNAME = ?
+			, U_PHONE = ?
+			, MOD_DATE = SYSDATE
+		WHERE
+			U_NO = ?
+	</entry>
+	
+	<entry key="deleteMember">
+		UPDATE
+     		MEMBER
+    	SET
+       		U_STATUS = 'N'
+   		 WHERE
+   		 	U_NO = ?
+   </entry>
+
+	<entry key="selectMember">
+    	SELECT
+			R_NO
+			, U_NO
+			, U_ID
+			, U_NICKNAME
+			, U_PW
+			, U_PHONE
+			, REG_DATE
+			, MOD_DATE
+			, U_STATUS
+			, R_DONG
+			, R_HO
+			, R_NAME
+			, R_EMAIL
+			, R_TYPE
+			, R_STATUS
+			, R_DATE
+			FROM MEMBER JOIN INFO_RESIDENT USING (R_NO)
+	    WHERE U_NO = ?
+			AND U_STATUS = 'Y'
+	</entry>
+	
+	<entry key="updatePwd">
+		UPDATE
+			MEMBER
+		 SET
+		 	U_PW = ? 
+		 WHERE
+		 	 U_NO = ?
+		 AND U_PW = ?
+	</entry>
+	
+	<entry key="findId">
+		SELECT
+    		U_ID
+	    FROM MEMBER JOIN INFO_RESIDENT USING (R_NO)
+	   WHERE R_NAME = ?
+	    AND R_EMAIL = ?
+	</entry>
+	
+	<entry key="findPwd">
+		SELECT
+    		U_PW
+	    FROM MEMBER JOIN INFO_RESIDENT USING (R_NO)
+	   WHERE U_ID = ? 
+	    AND R_NAME = ?
+	    AND R_EMAIL = ?
 	</entry>
 	
 	
