@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +33,8 @@ top: 9px;
 	</div>
 		<div class="wrap">
 			<div class="complaint_area">
-				<form method="POST" action="${ contextPath }/complaint/insert">
-				<input type="hidden" name="c_no" value="${ c_no }">
+				<form method="POST" action="${ contextPath }/complaint/update">
+				<input type="hidden" name="c_no" value="${ complaint.c_no }">
 				<div class="complaint_content">
 					<div class="subject">
 					<h1>문의내용 작성</h1>
@@ -42,20 +43,20 @@ top: 9px;
 						<div class="row">
 						<span class="cell col1">제목</span>
 						<span class="cell col2">
-							<input size="60" type="text" name="title" placeholder="제목을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력해주세요'" required >
+							<input size="60" type="text" name="title" placeholder="제목을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력해주세요'" value="${ complaint.c_title }" required >
 						</span>
 						</div>
 						<div class="row">
 						<span class="cell col1" id="col_content">내용</span>
 						<span class="cell col2">
 							<textarea cols="110" rows="30" name="content" placeholder="문의하실 내용을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='문의하실 내용을 입력해주세요'"
-								style="resize: none;" required></textarea>
+								style="resize: none;" required>${ complaint.c_content }</textarea>
 						</span>
 						</div> 
 					</div>
 					<div class="row">
 					<span class="cell col3">
-						<input type="checkbox" name="open" value="N" id="open">
+						<input type="checkbox" name="open" value="N" id="open" <c:if test="${ complaint.open == 'N' }">checked</c:if>>
 						<label for="open"> 비밀글로 문의하기</label><span> (관리사무소만 내 민원을 볼 수 있습니다)</span> 
 					</span>
 					</div>

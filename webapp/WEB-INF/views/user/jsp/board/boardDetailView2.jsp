@@ -42,7 +42,7 @@
                         <span class="comment">4</span>
 						<button type="button" onclick="dis()"><img src="/oneLife/resources/user/images/Icon button.png"></button>
                         <div class="dis_aera">
-                      <c:choose>
+                      <%--  <c:choose>
                         <c:when test="${ !empty loginUser && loginUser.u_NO == board.u_no }">
                         <div id='dis'>
                             <input type="button" class="dis_btn" value="수정" onclick="updateBoardView();">
@@ -52,7 +52,7 @@
                         <c:otherwise>
                         <div id='dis'><input type="button" class="dis_btn" value="신고" onclick="showPopup();"></div>
                         </c:otherwise>
-                        </c:choose>  
+                        </c:choose>  --%>
                         </div>
 					</div>
                  
@@ -74,18 +74,18 @@
                
 				<div class="reply_area">
                     <p>댓글</p>
-                    <c:forEach items="${ board.replyList }" var="r"> 
+                    <%-- <c:forEach items="${ board.replyList }" var="r"> --%>
                     <div class="reply_list">
                         <ul class="reply_ul">
-                            <img src="/oneLife/resources/user/images/people3.png"> 
+                            <%-- <img src="/oneLife/resources/user/images/people3.png"> --%>
                             <li class="rwriter">${ r.u_nickname }</li>
                             <li class="rcontent">${ r.bc_content }</li>
                             <li class="rdate"><fmt:formatDate value="${ r.bc_modify_date }" type="both" pattern="yyyy.MM.dd HH:mm"/></li>
                         </ul>
                         <div class="reply_btn_area">
-                            <button type="button" id="reply_btn" onclick="reply_dis()"><img src="/oneLife/resources/user/images/Icon button.png"></button>
+                           <%--  <button type="button" id="reply_btn" onclick="reply_dis()"><img src="/oneLife/resources/user/images/Icon button.png"></button> --%>
                             <div class="dis_aera">
-                            <c:choose>
+                         <%--    <c:choose>
                             <c:when test="${ !empty loginUser && loginUser.u_NO == board.u_no }">	
                             <div id='reply_dis'>
                                 <input type="button" class="dis_btn" value="삭제" onclick="deleteReply(${ board.bc_no },${ board.b_no });">
@@ -94,11 +94,11 @@
                        		<c:otherwise>
                             <div id='reply_dis'><input type="button" class="dis_btn" value="신고" onclick="showPopup();"></div> 
                              </c:otherwise>
-                            </c:choose> 
+                            </c:choose> --%>
                             </div>
                         </div>
 					</div>
-					</c:forEach> 
+					<%-- </c:forEach> --%>
 					<div class="reply_write">
 						<textarea class="reply_content" placeholder="도란도란은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." onfocus="this.placeholder=''" onblur="this.placeholder='도란도란은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.'"  maxlength="600"></textarea>
 						<span id="counter">0/ 600</span>
@@ -167,7 +167,8 @@
             }  
         </script>
         
-         <!-- 댓글 -->
+        
+        <!-- 댓글 -->
         <script>
 		function addReply(b_no) {
 			$.ajax({
@@ -189,9 +190,9 @@
 							      + data[key].bc_modify_date + '</li></ul>'
 							      + '<div class="reply_btn_area"><button type="button" id="reply_btn" onclick="reply_dis()"><img src="/oneLife/resources/user/images/Icon button.png"></button>'
 							      + '<div class="dis_aera">'
-							      + '<c:choose><c:when test="${ !empty loginUser && loginUser.u_NO == board.u_no }"><div id="reply_dis">'
+							      + '<c:choose><c:when test="${ !empty loginUser && loginUser.u_NO == ' + data[key].u_no +' }"><div id="reply_dis">'
 							      + '<input type="button" class="dis_btn" value="삭제" onclick="deleteReply(' + data[key].bc_no + ',' + data[key].b_no + ');"></div>'
-							      + '</c:when><c:otherwise><div id="reply_dis"><input type="button" class="dis_btn" value="신고" onclick="showPopup();"></div></c:otherwise></c:choose></div></div>';
+							      + '</c:when><c:otherwise><div id="reply_dis"><input type="button" class="dis_btn" value="신고" onclick="showPopup();"></div></c:otherwise></c:choose></div>';
 							      
 						} 
 						
@@ -212,9 +213,48 @@
 			});
 		}	
 	</script>
+	
+	 <script>
+		function deleteReply(bc_no, b_no) {
+			$.ajax({
+				url : "${ contextPath }/complaint/deleteReply",
+				type : "post",
+				data : { cm_no : cm_no,  c_no : c_no },
+				dataType : "json",
+				success : function(data) {
+					    alert('댓글 삭제 되었습니다.');
+						if (data != null) {
+						
+						var html = '';
+						
+						// 새로 받아온 갱신 된 댓글 목록을 for문을 통해 html에 저장
+						for (var key in data) {
+							html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people2.png">'
+							      + '<li class="rwriter">'
+							      + data[key].m_no + '</li><li class="rcontent">'
+							      + data[key].cm_content + '</li><li class="rdate">'
+							      + data[key].cm_modify_date + '</li></ul>'
+							      + '<div class="reply_btn_area type02">'
+							      + '<button type="button" onclick="deleteReply(' + data[key].cm_no + ',' + data[key].c_no + ');">삭제하기</button></div>';
+							     
+						
+						}
+						
+						// 갱신 된 댓글 목록을 다시 적용
+						$(".reply_list").html(html);
+						
+					} else {
+						alert('댓글 삭제 실패!');
+					}
+					
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		}	
+	</script>
         
-        
-      
 	
 </body>
 </html>
