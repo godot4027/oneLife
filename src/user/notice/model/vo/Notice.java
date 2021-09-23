@@ -14,14 +14,15 @@ public class Notice {
 	private String m_nick;
 	
 	/*
-	N_NO	NUMBER
-	N_TITLE	VARCHAR2(100 BYTE)
-	N_CONTENT	VARCHAR2(4000 BYTE)
-	N_COUNT	NUMBER
-	ENROLL_DATE	DATE
-	MODIFY_DATE	DATE
-	STATUS	VARCHAR2(1 BYTE)
-	M_NO	NUMBER*/
+	N_NO	NUMBER                        공지사항 번호
+	N_TITLE	VARCHAR2(100 BYTE)            제목
+	N_CONTENT	VARCHAR2(4000 BYTE)       작성내용
+	N_COUNT	NUMBER                        조회수
+	ENROLL_DATE	DATE                      등록날짜
+	MODIFY_DATE	DATE                      수정날짜
+	STATUS	VARCHAR2(1 BYTE)              작성여부
+	M_NO	NUMBER                        관리자 번호
+	*/
 		
 		
 	public Notice () {}

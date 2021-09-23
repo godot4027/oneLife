@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String message = (String)request.getAttribute("msg");
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,10 +32,10 @@
 					<div class="subject"></div>
 					<div class="notice_detail">
                         <img src="/oneLife/resources/user/images/Group 77.png">
-                        <h2>등록이 완료되었습니다.</h2>
+                        <h2><%=message %></h2>
                         <div class="btn_area re">
-                            <button type="button" id="re_btn">작성한 글 확인</button>
-                            <button type="button" id="re_btn">목록보기</button>
+                            <button type="button" id="re_btn" onclick="detailView(${b_no});">작성한 글 확인</button>
+                            <button type="button" id="re_btn" onclick="location.href='${ contextPath }/board/list'">목록보기</button>
                         </div>
                     </div>
 				</div>
@@ -43,6 +46,13 @@
 		
 	<%-- 공통 footer --%>
 	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
+	
+	  <script>
+            function detailView(b_no){
+                // nno를 쿼리스트링에 데이터로 넘김
+                location.href='${contextPath}/board/detail?b_no='+b_no;
+	 	    }
+        </script>
 	
 </body>
 </html>

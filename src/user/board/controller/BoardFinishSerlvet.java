@@ -1,4 +1,4 @@
-package user.notice.controller;
+package user.board.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.notice.model.service.NoticeService;
-
 /**
- * Servlet implementation class NoticeDeleteServlet
+ * Servlet implementation class BoardFinishSerlvet
  */
-@WebServlet("/notice/delete")
-public class NoticeDeleteServlet extends HttpServlet {
+@WebServlet("/board/finish")
+public class BoardFinishSerlvet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeDeleteServlet() {
+    public BoardFinishSerlvet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,24 +26,19 @@ public class NoticeDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int b_no = (int)request.getSession().getAttribute("b_no");
 		
+		request.setAttribute("b_no", b_no);
+		request.setAttribute("msg", "등록이 완료되었습니다.");
+		request.getRequestDispatcher("/WEB-INF/views/user/jsp/board/boardfinishpage.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int n_no = Integer.parseInt(request.getParameter("n_no"));
-		
-		int result = new NoticeService().deleteNotice(n_no);
-		
-		if (result > 0) {
-			request.getSession().setAttribute("msg", "공지사항 삭제 되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/notice/list");
-		} else {
-			request.setAttribute("msg", "공지사항 삭제에 실패했습니다.");
-			request.getRequestDispatcher("/WEB-INF/views/user/common/errorpage.jsp").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
