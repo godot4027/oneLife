@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<entry key="managerLogin">
+		SELECT 
+			   M_NO
+		     , M_ID
+		     , M_PASSWORD
+		     , M_NAME
+		     , M_NICK
+		     , M_PHONE
+		     , M_JOBCODE
+		     , M_JOBNAME
+		     FROM INFO_MANAGER
+		     JOIN JOBCODE_MANAGER USING(M_JOBCODE)
+		     WHERE M_ID = ?
+		       AND M_PASSWORD = ?
+			   
+	</entry>
 	<entry key="managerList">
 	SELECT
          *
@@ -105,5 +121,31 @@
 			   , ?
 			   , 'M_CODE1'
 			   )
+	</entry>
+	<entry key="classManager">
+		SELECT
+		       M_NO
+		     , M_ID
+		     , M_PASSWORD
+		     , M_NAME
+		     , M_NICK
+		     , M_PHONE
+		     , M_JOBCODE
+		 FROM INFO_MANAGER
+	    WHERE M_NO = ?
+	</entry>
+	<entry key="classChangeManager">
+		UPDATE INFO_MANAGER
+		SET 
+			M_JOBCODE = ?
+		  , M_NICK = DECODE(?, 'M_CODE1', '관리자', '총관리자' )
+	  WHERE M_NO = ?
+	</entry>
+	<entry key="infoChangeManager">
+		UPDATE INFO_MANAGER
+		   SET M_PASSWORD = ?
+     		 , M_PHONE = ?
+         WHERE M_NO = ?
+           AND M_PASSWORD = ?
 	</entry>
 </properties>

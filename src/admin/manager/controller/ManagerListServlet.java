@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import admin.manager.model.service.ManagerService;
 import admin.manager.model.vo.Search;
 
+
 @WebServlet("/admin/manager/list")
 public class ManagerListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +31,7 @@ public class ManagerListServlet extends HttpServlet {
 		// System.out.println("search : " + search);
 		// System.out.println("value : " + value);
 		Search sc = new Search(search, value);
+		// System.out.println(sc);
 		
 		Map<String, Object> map = new ManagerService().managerList(page, sc);
 		

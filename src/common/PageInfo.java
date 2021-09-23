@@ -1,4 +1,4 @@
-package admin.manager.model.vo;
+package common;
 
 public class PageInfo {
 	private int page;		// 요청 페이지

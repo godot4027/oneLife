@@ -20,7 +20,7 @@ public class MemberService {
 	public Member loginMember(String id, String pwd) {
 
 		Connection conn = getConnection();
-
+    
 		Member loginUser = new MemberDao().loginMember(conn, id, pwd);
 
 		close(conn);

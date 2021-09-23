@@ -1,6 +1,9 @@
 package admin.manager.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -9,14 +12,25 @@ import java.util.Map;
 
 import admin.manager.model.dao.ManagerDao;
 import admin.manager.model.vo.Manager;
-import admin.manager.model.vo.PageInfo;
 import admin.manager.model.vo.Search;
+import common.PageInfo;
 
 public class ManagerService {
 	private ManagerDao DAO = null;
 	
 	public ManagerService() {
 		DAO = new ManagerDao();
+	}
+	
+	// 매니저 로그인 관리
+	public Manager ManagerLogin(String mId, String mPassword) {
+		Connection conn = getConnection();
+		
+		Manager managerLogin = DAO.managerLogin(conn, mId, mPassword);
+		
+		close(conn);
+		
+		return managerLogin;
 	}
 
 	// 매니저 목록 조회
@@ -48,6 +62,8 @@ public class ManagerService {
 		
 		int result = DAO.idCheck(conn, mId);
 		
+		close(conn);
+		
 		return result;
 	}
 	
@@ -63,7 +79,56 @@ public class ManagerService {
 			rollback(conn);
 		}
 		
+		close(conn);
+		
 		return result;
+	}
+	
+	// 관리자 번호로 조회
+	public Manager classManager(int mNo) {
+		Connection conn = getConnection();
+		
+		Manager manager = DAO.classManager(conn, mNo);
+		
+		close(conn);
+		
+		return manager;
+	}
+
+	// 관리자 계급 변경
+	public int classChangeManager(int mNo, String mJobcode) {
+		Connection conn = getConnection();
+		
+		int result = DAO.classChangeManager(conn, mNo, mJobcode);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 개인정보 변경
+	public Manager infoChangeManager(Manager m, String mPwdNew) {
+		Connection conn = getConnection();
+		
+		int result = DAO.infoChangeManager(conn, m, mPwdNew);
+		Manager manager = null;
+		if(result > 0) {
+			commit(conn);
+			
+			manager = DAO.managerLogin(conn, m.getmId(), mPwdNew);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return manager;
 	}
 
 }
