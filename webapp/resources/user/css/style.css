@@ -3772,6 +3772,78 @@ button.reply_btn2{
 }
 
 
+.nav .category > li{ margin-bottom: 10px;}
+.nav .category > li:last-child{margin-bottom: 0;}
+.nav .category > li > a{ padding-left: 19px; display: block; font-size: 14px; line-height: 17px; font-weight: bold; color:#fff; letter-spacing: 0; z-index: 0; }
+.nav .category > li:nth-of-type(1) > a{background:url(../images/ico_gnb_fac.png) no-repeat 0 1px;}
+.nav .category > li:nth-of-type(2) > a{background:url(../images/ico_gnb_fac.png) no-repeat 0 1px;}
+.nav .category > li:nth-of-type(3) > a{background:url(../images/ico_gnb_fac.png) no-repeat 0 1px;}
+
+
+
+.content .subject > li{ margin-top: 100px; margin-bottom: 50px; margin-left: 100px; z-index: -10000;}
+.content .subject > li:last-child{margin-bottom: 0;}
+.content .subject > li > a{position: relative; padding-left: 20px; display: block; font-size: 25px; font-weight: bold;}
+.content .subject > li:nth-of-type(1) > a{background: url(../images/subject_circle.png) no-repeat 0 1px;}
+.content .subject > li:nth-of-type(2) > a{background: url(../images/subject_circle.png) no-repeat 0 1px;}
+.content .subject > li:nth-of-type(3) > a{background: url(../images/subject_circle.png) no-repeat 0 1px;}
+.content .subject > li:nth-of-type(4) > a{background: url(../images/subject_circle.png) no-repeat 0 1px;}
+
+.content .explanation{ padding-left: 30px;padding-top: 20px;}
+.content .explanation > li{position: relative; padding-left: 10px; padding-bottom: 5px;display: block; font-size: 20px;line-height: 30px; font-weight: bold;}
+.content .explanation > li:nth-of-type(1){ background: url(../images/explanation_circle.png) no-repeat 0 10px;}
+.content .explanation > li:nth-of-type(2){ background: url(../images/explanation_circle.png) no-repeat 0 10px;}
+.content .explanation > li:nth-of-type(3){ background: url(../images/explanation_circle.png) no-repeat 0 10px;}
+  
+.content img { margin-left: 100px;}
+
+
+
+
+.search_box .search_main > label { margin-right: 20px; font-size: 15px; font-weight: bold;}
+.search_box .search_main > input { margin-right: 10px; font-size: 15px; font-weight: bold;}
+.search_box .search_main > select{ margin-right: 20px; font-size: 15px; font-weight: bold; width: 150px; padding: .5em .5em; border: 1px solid #999;
+                                   font-family: inherit; background: url(../images/ico_select.png) no-repeat 95% 50%; border-radius: 0%; appearance: none;}
+
+.sr_title { padding-top: 60px; padding-left: 30px; padding-bottom: 45px;}
+.sr_title > a{position: relative; padding-left: 20px; display: block; font-size: 20px; font-weight: bold;}
+.sr_title > a{background: url(../images/subject_circle.png) no-repeat 0 1px;}
+
+.mc_title { padding-left: 20px; margin-top: 50px; margin-bottom: 30px;}
+.mc_title { background: url(../images/subject_circle.png) no-repeat 0 1px;}
+.mc_title > input{ font-weight: bold; font-size: 20px; width: 150px; height: 20px; border: none;}
+
+
+.table_wrap .multi_table{width: 100%; border-collapse: collapse; table-layout: fixed;}
+.table_wrap .multi_table thead tr{border:1px solid #000;}
+.table_wrap .multi_table thead tr th{font-size: 13px; font-weight: 600; height: 40px; box-sizing: border-box; padding: 0 10px; }
+.table_wrap .multi_table tbody{height: 500px; overflow:scroll}
+.table_wrap .multi_table tbody tr{border-bottom:1px solid #E6E6E6;}
+.table_wrap .multi_table tbody tr td{height: 40px; padding: 3px 10px; font-size: 13px; line-height: 18px; text-align: center;}
+.table_wrap .multi_table tbody tr td .bold{font-weight: bold;}
+
+.search_main .submit{ width: 70px; height: 28px; line-height: 28px; border-radius:3px; background:#4094F7; font-size: 13px; color:#fff; font-weight: bold; text-align: center;}
+
+
+
+.reservation_wrap .reservation_A label { margin-left: 400px; font-size: 25px; font-weight: bold; color: gray;}
+.reservation_wrap .reservation_A #Date{ margin-top: 30px; margin-left: 400px; margin-bottom: 30px; font-size: 20px; font-weight: bold; text-align: center; width: 300px;}
+.reservation_wrap .reservation_A a{ margin-left: 540px; font-size: 30px; font-weight: bolder;}
+.reservation_wrap .reservation_A button { margin-top: 30px; margin-left: 30px; font-size: 20px; font-weight: bold; text-align: center; width: 100px;}
+.reservation_wrap .reservation_A button { width: 70px; height: 28px; line-height: 28px; border-radius:3px; background:#4094F7; font-size: 13px; color:#fff; font-weight: bold; text-align: center;}
+.reservation_wrap .reservation_A #seatNumber { margin-left: 400px; width: 70px; height: 28px; font-weight: bold; text-align: center;}
+
+
+.reservation_wrap .reservation_B { margin-left: 400px;}
+.reservation_wrap .reservation_B label{ font-size: 25px; font-weight: bold; color: gray;}
+.reservation_wrap .reservation_B input {  margin-top: 30px; margin-left: 20px; margin-bottom: 30px; font-size: 20px; font-weight: bold; text-align: center;}
+.reservation_wrap .reservation_B a{margin-left: 30px; font-size: 20px; font-weight: bold;}
+
+.reservation_wrap .reservation_result{ padding-top: 130px; margin-left: 800px;}
+.reservation_wrap .reservation_result input{ margin-left: 30px; font-size: 20px; font-weight: bold; text-align: center; width: 100px;}
+.reservation_wrap .reservation_result input{ width: 100px; height: 35px; line-height: 30px; border-radius:5px; background:#4094F7; font-size: 17px; color:#fff; font-weight: bold; text-align: center;}
+
+
 
 
 
