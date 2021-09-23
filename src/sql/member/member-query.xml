@@ -37,7 +37,7 @@
 		from INFO_MANAGER
 		where M_ID = ?
 		and M_PASSWORD = ?
-
+	</entry>
 
 	<entry key="insertMember">
 	INSERT

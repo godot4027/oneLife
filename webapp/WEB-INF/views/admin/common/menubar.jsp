@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%-- 메뉴바의 on클래스를위한 변수 --%>
-<c:set var="menuUrl" value="${requestScope['javax.servlet.forward.servlet_path']}"></c:set>
+<c:set var="menuUrl" value="${requestScope['javax.servlet.forward.servlet_path']}" scope="application"></c:set>
 
 <nav id="nav">
     <div class="nav">
@@ -36,7 +36,7 @@
                 <a href="javascript:;">게시판</a>
                 <ul class="inner">
                     <li class="<c:if test="${fn:contains(menuUrl, '/admin/week/')}">on</c:if>">
-                        <a href="${contextPath}/admin/week/list">주요일정 관리</a>
+                        <a href="${contextPath}/admin/week/list?allDay=on">주요일정 관리</a>
                     </li>
                     <li class="<c:if test="${fn:contains(menuUrl, '/admin/report/')}">on</c:if>">
                         <a href="${contextPath}/admin/report/bList">신고내역 관리</a>

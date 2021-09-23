@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Properties;
 
 import admin.manager.model.vo.Manager;
-import admin.manager.model.vo.PageInfo;
 import admin.manager.model.vo.Search;
+import common.PageInfo;
 
 public class ManagerDao {
 	private Properties query = new Properties();
@@ -36,13 +36,15 @@ public class ManagerDao {
 		String sql = query.getProperty("managerList");
 		List<Manager> mList = new ArrayList<>();
 		
-		if(sc.getManagerListSearch() != null && sc.getManagerListSearch().equals("id")) {
-			// 검색조건이 아이디 일시
-			sql = query.getProperty("managerIdList");
-			
-		}else if(sc.getManagerListSearch() != null && sc.getManagerListSearch().equals("name")) {
-			// 검색조건이 이름 일시
-			sql = query.getProperty("managerNameList");
+		if(sc.getManagerListSearch() != null && sc.getManagerListValue() != null) {
+			if(sc.getManagerListSearch().equals("id") && !sc.getManagerListValue().equals("")) {
+				// 검색조건이 아이디 일시
+				sql = query.getProperty("managerIdList");
+				
+			}else if(sc.getManagerListSearch().equals("name") && !sc.getManagerListValue().equals("")) {
+				// 검색조건이 이름 일시
+				sql = query.getProperty("managerNameList");
+			}
 		}
 		
 		try {
@@ -52,8 +54,15 @@ public class ManagerDao {
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			int paramIndex = 1;
 			
-			if(sc.getManagerListSearch() != null) {
-				pstmt.setString(paramIndex++, sc.getManagerListValue());
+			if(sc.getManagerListSearch() != null && sc.getManagerListValue() != null) {
+				if(sc.getManagerListSearch().equals("id") && !sc.getManagerListValue().equals("")) {
+					// 검색조건이 아이디 일시
+					pstmt.setString(paramIndex++, sc.getManagerListValue());
+					
+				}else if(sc.getManagerListSearch().equals("name") && !sc.getManagerListValue().equals("")) {
+					// 검색조건이 이름 일시
+					pstmt.setString(paramIndex++, sc.getManagerListValue());
+				}
 			}
 			
 			pstmt.setInt(paramIndex++, startRow);
@@ -115,21 +124,26 @@ public class ManagerDao {
 			int result = 0;
 			String sql = query.getProperty("getListCount");
 			
-			if(sc.getManagerListSearch() != null && sc.getManagerListSearch().equals("id")) {
-				// 검색조건이 아이디 일시
-				sql = query.getProperty("getListIdCount");
-				
-			}else if(sc.getManagerListSearch() != null && sc.getManagerListSearch().equals("name")) {
-				// 검색조건이 이름 일시
-				sql = query.getProperty("getListNameCount");
+			if(sc.getManagerListSearch() != null && sc.getManagerListValue() != null) {
+				if(sc.getManagerListSearch().equals("id") && !sc.getManagerListValue().equals("")) {
+					// 검색조건이 아이디 일시
+					sql = query.getProperty("getListIdCount");
+				}else if(sc.getManagerListSearch().equals("name") && !sc.getManagerListValue().equals("")) {
+					// 검색조건이 이름 일시
+					sql = query.getProperty("getListNameCount");
+				}
 			}
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
 				
-				if(sc.getManagerListSearch() != null) {
+				if(sc.getManagerListSearch() != null && sc.getManagerListValue() != null) {
 					// 검색조건이 있을시
-					pstmt.setString(1, sc.getManagerListValue());
+					if(sc.getManagerListSearch().equals("id") && !sc.getManagerListValue().equals("")) {
+						pstmt.setString(1, sc.getManagerListValue());
+					}else if(sc.getManagerListSearch().equals("name") && !sc.getManagerListValue().equals("")) {
+						pstmt.setString(1, sc.getManagerListValue());
+					}
 				}
 				
 				
@@ -190,6 +204,124 @@ public class ManagerDao {
 			pstmt.setString(4, manager.getmName());
 			pstmt.setString(5, manager.getmPhone());
 		
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 관리자 번호로 조회
+	public Manager classManager(Connection conn, int mNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Manager manager = null;
+		String sql = query.getProperty("classManager");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				manager = new Manager(rset.getInt("M_NO"),
+							          rset.getString("M_ID"),
+							          rset.getString("M_NAME"),
+							          rset.getString("M_PHONE"),
+							          rset.getString("M_JOBCODE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return manager;
+	}
+	
+	// 관리자 계급 변경
+	public int classChangeManager(Connection conn, int mNo, String mJobcode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("classChangeManager");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, mJobcode);
+			pstmt.setString(2, mJobcode);
+			pstmt.setInt(3, mNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 매니저 로그인관리
+	public Manager managerLogin(Connection conn, String mId, String mPassword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("managerLogin");
+		Manager mLogin = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			pstmt.setString(2, mPassword);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				mLogin = new Manager();
+				mLogin.setmNo(rset.getInt("M_NO"));
+				mLogin.setmId(rset.getString("M_ID"));
+				mLogin.setmPassword(rset.getString("M_PASSWORD"));
+				mLogin.setmName(rset.getString("M_NAME"));
+				mLogin.setmNick(rset.getString("M_NICK"));
+				mLogin.setmPhone(rset.getString("M_PHONE"));
+				mLogin.setmJobcode(rset.getString("M_JOBCODE"));
+				mLogin.setmJobName(rset.getString("M_JOBNAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return mLogin;
+	}
+
+	// 개인정보 변경
+	public int infoChangeManager(Connection conn, Manager m, String mPwdNew) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("infoChangeManager");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, mPwdNew);
+			pstmt.setString(2, m.getmPhone());
+			pstmt.setInt(3, m.getmNo());
+			pstmt.setString(4, m.getmPassword());
+			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
