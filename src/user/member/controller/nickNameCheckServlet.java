@@ -45,9 +45,9 @@ public class nickNameCheckServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		if (result > 0) {
-			// out.print("fail");
+			 out.print("fail");
 		} else {
-			// out.print("success");
+			 out.print("success");
 		}
 	
 	}

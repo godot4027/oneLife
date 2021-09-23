@@ -13,9 +13,37 @@ public class VisitCar {
 	private Date VC_MODIFYDATE;
 	private String VC_STATUS;
 	private String R_NAME;
+	private int R_DONG;
+	private int R_HO;
 	private int U_NO;
+	private String mName;
 	
 	public VisitCar() {}
+
+	public int getR_DONG() {
+		return R_DONG;
+	}
+
+	
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+
+	public void setR_DONG(int r_DONG) {
+		R_DONG = r_DONG;
+	}
+
+	public int getR_HO() {
+		return R_HO;
+	}
+
+	public void setR_HO(int r_HO) {
+		R_HO = r_HO;
+	}
 
 	public int getVC_ID() {
 		return VC_ID;
@@ -138,12 +166,52 @@ public class VisitCar {
 		VC_PHONE = vC_PHONE;
 	}
 
+	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_ENROLLDATE,
+			Date vC_MODIFYDATE, String vC_STATUS, String r_NAME, int r_DONG, int r_HO, int u_NO) {
+		super();
+		VC_ID = vC_ID;
+		VC_DATE = vC_DATE;
+		VC_NO = vC_NO;
+		VC_PURPOSE = vC_PURPOSE;
+		VC_PHONE = vC_PHONE;
+		VC_ENROLLDATE = vC_ENROLLDATE;
+		VC_MODIFYDATE = vC_MODIFYDATE;
+		VC_STATUS = vC_STATUS;
+		R_NAME = r_NAME;
+		R_DONG = r_DONG;
+		R_HO = r_HO;
+		U_NO = u_NO;
+	}
+
+	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_MODIFYDATE,
+			String vC_STATUS, String r_NAME, int r_DONG, int r_HO, int u_NO, String m_name) {
+		super();
+		VC_ID = vC_ID;
+		VC_DATE = vC_DATE;
+		VC_NO = vC_NO;
+		VC_PURPOSE = vC_PURPOSE;
+		VC_PHONE = vC_PHONE;
+		VC_MODIFYDATE = vC_MODIFYDATE;
+		VC_STATUS = vC_STATUS;
+		R_NAME = r_NAME;
+		R_DONG = r_DONG;
+		R_HO = r_HO;
+		U_NO = u_NO;
+		mName = m_name;
+	}
+
 	@Override
 	public String toString() {
 		return "VisitCar [VC_ID=" + VC_ID + ", VC_DATE=" + VC_DATE + ", VC_NO=" + VC_NO + ", VC_PURPOSE=" + VC_PURPOSE
 				+ ", VC_PHONE=" + VC_PHONE + ", VC_ENROLLDATE=" + VC_ENROLLDATE + ", VC_MODIFYDATE=" + VC_MODIFYDATE
-				+ ", VC_STATUS=" + VC_STATUS + ", R_NAME=" + R_NAME + ", U_NO=" + U_NO + "]";
+				+ ", VC_STATUS=" + VC_STATUS + ", R_NAME=" + R_NAME + ", R_DONG=" + R_DONG + ", R_HO=" + R_HO
+				+ ", U_NO=" + U_NO + ", mName=" + mName + "]";
 	}
+
+	
+
+	
+	
 
 
 }

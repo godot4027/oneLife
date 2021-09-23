@@ -31,15 +31,16 @@
         </div>
         <nav class="nav_wrap">
             <ul>
-                <li><a href="javascript:;">아파트 소개</a></li>
+                <li><a href="${contextPath}/greeting">아파트 소개</a></li>
                 <li><a href="javascript:;">아파트 소식</a></li>
                 <li><a href="javascript:;">부대시설</a></li>
-                <li><a href="javascript:;">방문차량</a></li>
+                <li><a href="${contextPath}/visitCar">방문차량</a></li>
                 <li><a href="javascript:;">아파트 민원</a></li>
             </ul>
             <div class="nav_inner_wrap">
                 <ul class="inner_item">
-                    <li><a href="javascript:;">아파트 소개</a></li>
+                    <li><a href="${contextPath}/location">아파트 정보</a></li>
+                    <li><a href="${contextPath}/aptView">단지 전경</a></li>
                 </ul>
                 <ul class="inner_item">
                     <li><a href="${contextPath}/notice/list">공지사항</a></li>

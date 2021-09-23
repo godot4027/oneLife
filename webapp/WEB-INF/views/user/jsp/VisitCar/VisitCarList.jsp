@@ -28,6 +28,10 @@
 	font-size: 20px;
 	margin: 0;
 }
+
+.visitCarDetail > li.VisitCheck {
+color : #72c2e7;
+}
 </style>
 <body>
 	<%-- 공통 menuBar.jsp --%>
@@ -46,13 +50,22 @@
 				<h1>방문차량 예약내역을 확인하실 수 있습니다!</h1>
 			</div>
 			<div class="search_area">
-				<form method="get">
-					<span class="input_area"> <input type="search"
-						name="searchValue" placeholder="검색" />
-						<button type="submit" id="sear_btn">
+				<form method="get" action="${contextPath}/visitCarList" >
+					<label>방문일</label>
+					<span class="input_area">
+					<input type="date" value="전체" name="date">
+					</span>
+					<label>차량번호</label>
+					<span class="input_area">
+					<input type="search" name="carNo" value="전체" placeholder="띄어쓰기 없이 적어주세요">
+					</span>
+					<label>신청인</label>
+					<span class="input_area">
+					<input type="search" name="applicant" placeholder="신청인" value="전체"/>
+					</span>
+					<button type="submit" id="sear_btn">
 							<img src="/oneLife/resources/user/images/Search.png" />
 						</button>
-					</span>
 				</form>
 			</div>
 			<div class="vistCarList">
@@ -68,15 +81,32 @@
 					<li class="edit">수정</li>
 				</ul>
 				<c:forEach var="v" items="${visitCarList}">
-					<ul class="visitCarDetail" onclick="detailView(${v.VC_ID})">
+					<ul class="visitCarDetail">
 						<li class="no">${v.VC_ID}</li>
 						<li class="date">${v.VC_DATE}</li>
 						<li class="carNo">${v.VC_NO}</li>
 						<li class="visitPurpose">${v.VC_PURPOSE}</li>
 						<li class="phone">${v.VC_PHONE}</li>
-						<li class="applicant">${v.r_NAME}</li>
+						<li class="applicant">
+						<c:choose>
+							<c:when test="${v.r_NAME eq null}">
+								<td>${v.mName}</td>
+							</c:when>
+							<c:otherwise>
+								<td>${v.r_NAME}</td>
+							</c:otherwise>
+						</c:choose>
+						</li>
 						<li class="date">${v.VC_MODIFYDATE}</li>
-						<li class="date">${v.VC_STATUS }</li>
+						<c:set var="status" value="N" />
+						<c:choose>
+							<c:when test="${v.VC_STATUS eq status }">
+							<li class="date">접수</li>
+							</c:when>
+							<c:otherwise>
+							<li class="date VisitCheck">완료</li>
+							</c:otherwise>
+						</c:choose>
 						<c:set var="status" value="N" />
 						<c:set var="current" value="<%=new java.util.Date()%>" />
 						<fmt:formatDate value="${current }" type="both"
@@ -84,7 +114,7 @@
 						<c:choose>
 							<c:when
 								test="${v.u_NO == loginUser.u_NO && v.VC_STATUS eq status && v.VC_DATE >= today}">
-								<li class="edit"><a href="#" id="editBtn"><i
+								<li class="edit" onclick="fix(${v.VC_ID})"><a href="#" id="editBtn"><i
 										class="far fa-edit"></i></a></li>
 							</c:when>
 							<c:otherwise>
@@ -215,7 +245,7 @@
 			location.href = "${contextPath}/visitCarRegister";
 		};
 		
-		function detailView(vid){
+		function fix(vid){
 			location.href = '${contextPath}/visitCarFix?vid=' + vid;
 		}
     </script>

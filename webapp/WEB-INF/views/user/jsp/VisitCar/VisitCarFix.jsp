@@ -16,6 +16,74 @@
 .fix_wrap {
 	margin: 0 auto;
 }
+
+	/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  /* background-color: rgb(0, 0, 0); Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 15px;
+  border: 1px solid #888;
+  width: 400px; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.modal_button {
+  margin: 0 auto;
+}
+.modal_button > button {
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 8px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+.register_ok {
+  background-color: var(--main-color--);
+  border-width: 0;
+  color: white;
+}
+
+.close {
+  background-color: white;
+  border: 1.5px solid lightgray;
+}
+.register_ok:hover {
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  cursor: pointer;
+}
+
+.register_confirm {
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.fa-edit + p {
+text-align : center;
+}
+.modal_button > button.close{font-size:13px;}
 </style>
 </head>
 <body>

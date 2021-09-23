@@ -37,8 +37,8 @@
 		from INFO_MANAGER
 		where M_ID = ?
 		and M_PASSWORD = ?
-
-
+	</entry>
+	
 	<entry key="insertMember">
 	INSERT
 		INTO MEMBER
@@ -69,7 +69,7 @@
 	
 	<entry key="checkR">
 	select
-	count(*)
+	r_no
 	from info_resident
     where r_name = ?
     and r_email = ?
@@ -87,6 +87,7 @@
 			COUNT(*)
 		 FROM MEMBER
 	    WHERE U_NICKNAME = ?
-
 	</entry>
+	
+	
 </properties>

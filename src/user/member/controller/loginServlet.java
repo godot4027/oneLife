@@ -28,7 +28,7 @@ public class loginServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		Info_manager loginUser_man = new Info_managerService().loginUser_man(userId, userPwd);
+//		Info_manager loginUser_man = new Info_managerService().loginUser_man(userId, userPwd);
 		
        
 		if(loginUser != null) {
@@ -37,13 +37,13 @@ public class loginServlet extends HttpServlet {
 	         session.setAttribute("loginUser", loginUser);
 	         response.sendRedirect(request.getContextPath()+"/main");
 	      
-	      } else if(loginUser_man != null) {
+	      } /*else if(loginUser_man != null) {
 	    	  HttpSession session = request.getSession();
 		         
 		      session.setAttribute("loginUser_man", loginUser_man);
 		      response.sendRedirect(request.getContextPath()+"/main");
 	    	  
-	      } else {
+	      }*/ else {
 	         request.setAttribute("msg", "로그인에 실패하였습니다.");
 	         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
 	         view.forward(request, response);

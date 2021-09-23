@@ -11,6 +11,73 @@
     <%-- 공통css/js --%>
 	<jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 	<script src="/oneLife/resources/user/js/visitCar/visit_car.js"></script>
+	<style>
+	/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  /* background-color: rgb(0, 0, 0); Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 15px;
+  border: 1px solid #888;
+  width: 400px; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.modal_button {
+  margin: 0 auto;
+}
+.modal_button > button {
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 8px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+.register_ok {
+  background-color: var(--main-color--);
+  border-width: 0;
+  color: white;
+}
+
+.close {
+  background-color: white;
+  border: 1.5px solid lightgray;
+}
+.register_ok:hover {
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  cursor: pointer;
+}
+
+.register_confirm {
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.modal_button > button.close{font-size:13px;}
+	</style>
   </head>
   <body>
   	<%-- 공통 menuBar.jsp --%>
@@ -43,10 +110,7 @@
           </div>
           <div class="div_input">
             <label>차량번호</label>
-            <input name="carNo"
-              type="text"
-              placeholder="ex)35로5432 띄어쓰기 없이 입력해주세요" maxlength="11" required
-            />
+            <input name="carNo" type="text" placeholder="ex)35로5432 띄어쓰기 없이 입력해주세요"  maxlength="11" required />
           </div>
           <div class="div_input">
             <label>방문목적</label>
@@ -67,7 +131,7 @@
                 <p class="register_confirm">정말로 등록하시겠습니까?</p>
                 <div class="modal_button">
                   <button class="register_ok">확인</button>
-                  <button class="close">취소</button>
+                  <button class="close" type="button">취소</button>
                 </div>
               </div>
             </div>
@@ -80,7 +144,7 @@
                 <p class="register_confirm">정말로 취소하시겠습니까?</p>
                 <div class="modal_button">
                   <button type="button" class="register_ok" onclick="cancleRegister()">취소</button>
-                  <button id="back" class="close">돌아가기</button>
+                  <button id="back" class="close" type="button">돌아가기</button>
                 </div>
               </div>
             </div>
