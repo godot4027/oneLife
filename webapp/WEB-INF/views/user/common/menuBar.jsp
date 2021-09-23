@@ -1,12 +1,13 @@
+<%@page import="admin.manager.model.vo.Manager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="user.member.model.vo.Member" import="admin.member.model.vo.Info_manager"%>
+    pageEncoding="UTF-8" import="user.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- contextPath --%>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
 <% 
 	// session 객체에 담긴 loginUser 정보를 변수에 담아두기
 	Member loginUser = (Member)session.getAttribute("loginUser");
-    Info_manager loginUser_man = (Info_manager)session.getAttribute("loginUser_man");
+	Manager loginManager = (Manager)session.getAttribute("loginManager");
 
 %>
 <% if(session.getAttribute("msg") != null) { %>

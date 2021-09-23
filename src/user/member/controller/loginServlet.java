@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import admin.manager.model.service.ManagerService;
 import admin.manager.model.vo.Manager;
-import admin.member.model.service.Info_managerService;
-import admin.member.model.vo.Info_manager;
 import user.member.model.service.MemberService;
 import user.member.model.vo.Member;
 
@@ -45,7 +43,8 @@ public class loginServlet extends HttpServlet {
 	    	  // 관리자로그인
 
 	    	  HttpSession session = request.getSession();
-		         
+		      
+	    	  
 		      session.setAttribute("loginManager", loginManager);
 		      response.sendRedirect(request.getContextPath()+"/admin/");
 	    	  
