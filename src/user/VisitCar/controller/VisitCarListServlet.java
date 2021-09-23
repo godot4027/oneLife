@@ -41,9 +41,24 @@ public class VisitCarListServlet extends HttpServlet {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
+		String date = request.getParameter("date");
+		String carNo = request.getParameter("carNo");
+		String applicant = request.getParameter("applicant");
+		
+		if (date != null && (date.equals("전체") || carNo.equals(""))) {
+			date = "all";
+		}
+		
+		if (carNo != null && (carNo.equals("전체") || carNo.equals(""))) {
+			carNo = "all";
+		}
+		
+		if (applicant != null && (applicant.equals("전체") || applicant.equals(""))) {
+			applicant = "all";
+		}
 		
 		Map<String, Object> map = new VisitCarService().selectList(page, dong, ho);
-		
+//		System.out.println(map);
 		//응답 페이지 구성 시 사용할 데이터 설정
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("visitCarList", map.get("visitCarList"));

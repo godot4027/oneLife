@@ -37,7 +37,8 @@
 		from INFO_MANAGER
 		where M_ID = ?
 		and M_PASSWORD = ?
-		</entry>
+	</entry>
+
 
 
 	<entry key="insertMember">
@@ -170,4 +171,6 @@
 	    AND R_NAME = ?
 	    AND R_EMAIL = ?
 	</entry>
+	
+	
 </properties>

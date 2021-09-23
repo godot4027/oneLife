@@ -369,5 +369,4 @@ private Properties query = new Properties();
 		
 		return findUserPwd;
 	}
-
 }

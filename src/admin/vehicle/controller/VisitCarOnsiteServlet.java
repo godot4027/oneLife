@@ -1,6 +1,7 @@
-package user.VisitCar.controller;
+package admin.vehicle.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,20 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.tribes.Member;
+
 import user.VisitCar.model.service.VisitCarService;
-import user.member.model.vo.Member;
 
 /**
- * Servlet implementation class VisitCarRegisterServlet
+ * Servlet implementation class VisitCarOnsiteServlet
  */
-@WebServlet("/visitCarRegister")
-public class VisitCarRegisterServlet extends HttpServlet {
+@WebServlet("/admin/visit/register")
+public class VisitCarOnsiteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VisitCarRegisterServlet() {
+    public VisitCarOnsiteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,47 +33,35 @@ public class VisitCarRegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/user/jsp/VisitCar/VisitCarRegister.jsp").forward(request, response);
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+//		Member m = (Member)request.getSession().getAttribute("loginUser");
+//		String rname = m.getName();
 		String dateString = request.getParameter("date");
 		String carNo = request.getParameter("carNo");
 		String purpose = request.getParameter("purpose");
+		int dong = Integer.parseInt(request.getParameter("dong"));
+		int ho = Integer.parseInt(request.getParameter("ho"));
 		String phone = request.getParameter("phone");
 		
-	
-		
-//		Date date = null;
-//		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		try {
-//			date = transFormat.parse(dateString);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-		
-		Member m = (Member)request.getSession().getAttribute("loginUser");
-		int userNo = m.getU_NO();
-		
-		int vid = new VisitCarService().insertVisitCar(dateString, carNo, purpose, phone, userNo);
+		int vid = new VisitCarService().adminInsertVisitCar(1, dateString, carNo, purpose, dong, ho, phone);
 		
 		if (vid > 0) {
 			request.getSession().setAttribute("vid", vid);
 			request.getSession().setAttribute("msg", "등록이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/visitCarList");
+			response.sendRedirect(request.getContextPath() + "/admin/visit/list");
 			
 		} else {
 //			request.setAttribute("msg", "게시글 등록에 실패하였습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
 			view.forward(request, response);
 		}
-		
-		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

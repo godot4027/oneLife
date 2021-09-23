@@ -211,13 +211,6 @@
 
 /* 김현주 작성 css*/
 /* Visit_Car_List.css */
-:root {
-  --main-color--: #72c2e7;
-  --title-font--: 35pt;
-  --desc-font--: 20pt;
-  --font--color--: #7c7c7c;
-  --desc--font--: #66788a;
-}
 
 * {
   box-sizing: border-box;
@@ -646,8 +639,6 @@ hr {
   font-size: 12pt;
 }
 
-
-
 /* The Modal (background) */
 /* .modal {
   display: none; Hidden by default
@@ -714,6 +705,7 @@ Modal Content/Box
 
 .modal_button > button.close{font-size:13px;}
  */
+
 /* -------------------Visit Car Fix-------------- */
 .fa-edit {
   margin: 0 auto;

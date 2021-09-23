@@ -15,100 +15,100 @@
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 <style>
-
 .confirm_wrap {
-  width: 1200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin : 0 auto;
+	width: 1200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
 }
 
 .cofirm_notice {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .fa-check-circle {
-  margin: 0 auto;
-  font-size: 110pt;
-  color: var(--main-color--);
-}
-.fa-check-circle + p {
-  margin: 0 auto;
-  font-size: 20pt;
-  color: var(--font--color--);
-  font-weight: 600;
-  margin-top: 10px;
+	margin: 0 auto;
+	font-size: 110pt;
+	color: var(--main-color--);
 }
 
-.confirm_btn > button {
-  background-color: var(--main-color--);
-  border-width: 0;
-  color: white;
-  width: 120px;
-  height: 40px;
-  border-radius: 7px;
-  margin: 3px 5px;
-  box-shadow: inset 0 0 0 0 #3c90f2;
-  transition: ease-out 0.3s;
-  font-weight: 600;
+.fa-check-circle+p {
+	margin: 0 auto;
+	font-size: 20pt;
+	color: var(--font--color--);
+	font-weight: 600;
+	margin-top: 10px;
 }
 
-.confirm_btn > button:hover {
-  box-shadow: inset 150px 0 0 0 #3c90f2;
-  cursor: pointer;
+.confirm_btn>button {
+	background-color: var(--main-color--);
+	border-width: 0;
+	color: white;
+	width: 120px;
+	height: 40px;
+	border-radius: 7px;
+	margin: 3px 5px;
+	box-shadow: inset 0 0 0 0 #3c90f2;
+	transition: ease-out 0.3s;
+	font-weight: 600;
+}
+
+.confirm_btn>button:hover {
+	box-shadow: inset 150px 0 0 0 #3c90f2;
+	cursor: pointer;
 }
 
 .confirm_information {
-  display: flex;
+	display: flex;
 }
 
 .info_title {
-  font-weight: 600;
-  margin-bottom: 0;
-  color: var(--desc--font--);
-  margin-top : 16px;
+	font-weight: 600;
+	margin-bottom: 0;
+	color: var(--desc--font--);
+	margin-top: 16px;
 }
 
 .info_content {
-  margin-top: 0;
+	margin-top: 0;
 }
 
 .registerNO {
-  color: var(--main-color--);
-  margin-top: 0;
+	color: var(--main-color--);
+	margin-top: 0;
 }
 
 .confirm_registerNO {
-  width: 380px;
-  border-bottom: 1px solid lightgray;
+	width: 380px;
+	border-bottom: 1px solid lightgray;
 }
 
 .confirm_information {
-  width: 380px;
+	width: 380px;
 }
 
 .info_right {
-  margin-left: 95px;
+	margin-left: 95px;
 }
 
 .confirm_content {
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 15px lightgray;
-  margin: 30px auto;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 15px lightgray;
+	margin: 30px auto;
 }
-
 
 .confirm_content p {
-	font-size : 13pt;
-	margin-bottom : 16px;
-
+	font-size: 13pt;
+	margin-bottom: 16px;
 }
+
 .info_margin_bottom {
-  margin-bottom: 0;
+	margin-bottom: 0;
+}
 </style>
 </head>
 <body>
@@ -142,7 +142,7 @@
 		</div>
 		<div class="confirm_btn">
 			<button type="button" onclick="goRegister()">추가 등록하기</button>
-			<button type="button">변경 및 삭제하기</button>
+			<button type="button" onclick="fix(${visitCarDetail.VC_ID})">변경 및 삭제하기</button>
 			<button type="button" onclick="goList()">내역 보기</button>
 		</div>
 	</div>
@@ -154,6 +154,10 @@
     		function goList(){
     			location.href = "${contextPath}/visitCarList";
     		};
+    		
+    		function fix(vid){
+    			location.href = '${contextPath}/visitCarFix?vid=' + vid;
+    		}
     	
     </script>
 	<%-- 공통 footer --%>
