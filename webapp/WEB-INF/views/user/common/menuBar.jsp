@@ -23,11 +23,18 @@
             <a href="javascript:;"><span class="ir_so">로고</span></a>
         </h1>
         <div class="top_wrap">
-            <p class="login_status">201동 103호 <span>홍길동</span>님 반갑습니다.</p>
+        <% if(loginUser == null) { %>
+        	<ul>
+        		<li><a href="<%= request.getContextPath() %>">로그인</a></li>
+                <li><a href="<%= request.getContextPath() %>/userAgree">회원가입</a></li>
+        	</ul>
+        <% } else { %>
+            <p class="login_status">${ loginUser.getR_DONG() }동 ${ loginUser.getR_HO() }호 <span>${ loginUser.getR_NAME() }</span>님 반갑습니다.</p>
             <ul>
-                <li><a href="javascript:;">회원정보</a></li>
-                <li><a href="javascript:;">로그아웃</a></li>
+                <li><a href="<%= request.getContextPath() %>/userModify">회원정보</a></li>
+                <li><a href="<%= request.getContextPath() %>/userLogout">로그아웃</a></li>
             </ul>
+         <% } %>
         </div>
         <nav class="nav_wrap">
             <ul>

@@ -20,28 +20,28 @@ public class MemberService {
 	public Member loginMember(String id, String pwd) {
 
 		Connection conn = getConnection();
-		
-		Member loginUser = new MemberDao().loginMember(conn, userId, userPwd);
+
+		Member loginUser = new MemberDao().loginMember(conn, id, pwd);
 
 		close(conn);
-		
+
 		return loginUser;
 	}
 
 	// 2. 회원가입 기능
 	public int insertMember(Member mem) {
-	Connection conn = getConnection();
-		
+		Connection conn = getConnection();
+
 		int result = new MemberDao().insertMember(conn, mem);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -57,12 +57,12 @@ public class MemberService {
 
 	// 아이디 중복 확인
 	public int idCheck(String userId) {
-	Connection conn = getConnection();
-		
+		Connection conn = getConnection();
+
 		int result = new MemberDao().idCheck(conn, userId);
-		
+
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -87,5 +87,80 @@ public class MemberService {
 
 		return result;
 	}
-	
+
+	// 3. 회원 정보 수정 기능
+	public Member updateMember(Member mem) {
+		Connection conn = getConnection();
+		Member updateMember = null;
+
+		int result = new MemberDao().updateMember(conn, mem);
+
+		// 수정 잘 되었다면 mem객체 select후 리턴
+		if (result > 0) {
+			updateMember = new MemberDao().selectMember(conn, mem.getU_NO());
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		return updateMember;
+	}
+
+	// 비밀번호 변경 기능
+	public Member updatePwd(int userNo, String userPwd, String newPwd1) {
+		Connection conn = getConnection();
+		Member updateMember = null;
+
+		int result = new MemberDao().updatePwd(conn, userNo, userPwd, newPwd1);
+
+		if (result > 0) {
+			updateMember = new MemberDao().selectMember(conn, userNo);
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		close(conn);
+
+		return updateMember;
+	}
+
+	// 회원 탈퇴 기능
+	public int deleteMember(int userNo) {
+		Connection conn = getConnection();
+
+		int result = new MemberDao().deleteMember(conn, userNo);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
+	// 아이디 찾기
+	public Member findUserId(String name, String email) {
+		Connection conn = getConnection();
+
+		Member findUserId = new MemberDao().findUserId(conn, name, email);
+
+		close(conn);
+
+		return findUserId;
+	}
+
+	// 비밀번호 찾기
+	public Member findUserPwd(String userId, String name, String email) {
+		Connection conn = getConnection();
+
+		Member findUserPwd = new MemberDao().findUserPwd(conn, userId, name, email);
+
+		close(conn);
+
+		return findUserPwd;
+	}
+
 }

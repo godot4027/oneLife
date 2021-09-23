@@ -18,8 +18,8 @@
 	
 	<div class="bottom_wrap1">
 		<p></p>
-		<span>> 회원가입 > 회원가입 약관동의</span>
-		<h1>회원가입 약관동의</h1>
+		<span>> 회원정보 </span>
+		<h1>회원정보</h1>
 		<div class="bottom_wrap2"></div>
 	</div>
 	
@@ -33,7 +33,7 @@
 				<p>회원 정보 수정이 완료되었습니다.</p>
 			</div>
 			<div class="step7_mailBtn_div border_test7">
-				<span><a href="javascript:;" id="" class="lgBtn_2"
+				<span><a href="${contextPath}/main" id="" class="lgBtn_2"
 					role="button">메인화면 가기</a> </span>
 			</div>
 		</div>

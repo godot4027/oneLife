@@ -179,7 +179,7 @@
        	 	$('#check_button3').focus();
        	 	return false;
        }else{
-       		alert("성공");
+       		// alert("성공"); - 약관(필수) 동의했을시
        		return true;
        		chk_form.submit();
        }

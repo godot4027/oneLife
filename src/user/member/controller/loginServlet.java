@@ -35,6 +35,7 @@ public class loginServlet extends HttpServlet {
 	         HttpSession session = request.getSession();
 	         
 	         session.setAttribute("loginUser", loginUser);
+	         session.setAttribute("loginNickName", loginUser.getU_NICKNAME());
 	         response.sendRedirect(request.getContextPath()+"/main");
 	      
 	      } else if(loginUser_man != null) {

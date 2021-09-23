@@ -23,6 +23,25 @@ public class Member {
 	public Member() {}
 	
 	
+	
+	public Member(String u_ID, String r_NAME, String r_EMAIL) {
+		super();
+		U_ID = u_ID;
+		R_NAME = r_NAME;
+		R_EMAIL = r_EMAIL;
+	}
+	
+	public Member(String r_NAME, String r_EMAIL) {
+		super();
+		R_NAME = r_NAME;
+		R_EMAIL = r_EMAIL;
+	}
+	
+	public Member(String u_ID) {
+		U_ID = u_ID;
+	}
+
+
 	// 회원가입 객체
 	public Member(String u_ID, String u_NICKNAME, String u_PW, String u_PHONE, String r_NAME, String r_EMAIL) {
 		super();
@@ -33,9 +52,8 @@ public class Member {
 		R_NAME = r_NAME;
 		R_EMAIL = r_EMAIL;
 	}
-
 	
-
+	
 	public Member(String u_ID, String u_NICKNAME, String u_PW, String u_PHONE, int r_NO) {
 		super();
 		U_ID = u_ID;
@@ -44,13 +62,44 @@ public class Member {
 		U_PHONE = u_PHONE;
 		R_NO = r_NO;
 	}
-
+	
+	// 회원정보 수정 객체
+	public Member(int u_NO, String u_ID, String r_NAME,String u_NICKNAME, String u_PW,String u_PHONE, String r_EMAIL) {
+		super();
+		U_NO = u_NO;
+		U_ID = u_ID;
+		U_NICKNAME = u_NICKNAME;
+		U_PW = u_PW;
+		U_PHONE = u_PHONE;
+		R_NAME = r_NAME;
+		R_EMAIL = r_EMAIL;
+	}
+	
+	public Member(int u_NO, String u_ID, String u_NICKNAME, String u_PW, String u_PHONE, Date rEG_DATE, Date mOD_DATE,
+			String u_STATUS, int r_DONG, int r_HO, String r_NAME, String r_EMAIL, String r_type, String r_STATUS,
+			Date r_DATE, int r_NO) {
+		super();
+		U_NO = u_NO;
+		U_ID = u_ID;
+		U_NICKNAME = u_NICKNAME;
+		U_PW = u_PW;
+		U_PHONE = u_PHONE;
+		REG_DATE = rEG_DATE;
+		MOD_DATE = mOD_DATE;
+		U_STATUS = u_STATUS;
+		R_DONG = r_DONG;
+		R_HO = r_HO;
+		R_NAME = r_NAME;
+		R_EMAIL = r_EMAIL;
+		R_type = r_type;
+		R_STATUS = r_STATUS;
+		R_DATE = r_DATE;
+		R_NO = r_NO;
+	}
 
 	public int getU_NO() {
 		return U_NO;
 	}
-
-
 
 
 	public void setU_NO(int u_NO) {
@@ -177,27 +226,6 @@ public class Member {
 		R_NO = r_NO;
 	}
 
-	public Member(int u_NO, String u_ID, String u_NICKNAME, String u_PW, String u_PHONE, Date rEG_DATE, Date mOD_DATE,
-			String u_STATUS, int r_DONG, int r_HO, String r_NAME, String r_EMAIL, String r_type, String r_STATUS,
-			Date r_DATE, int r_NO) {
-		super();
-		U_NO = u_NO;
-		U_ID = u_ID;
-		U_NICKNAME = u_NICKNAME;
-		U_PW = u_PW;
-		U_PHONE = u_PHONE;
-		REG_DATE = rEG_DATE;
-		MOD_DATE = mOD_DATE;
-		U_STATUS = u_STATUS;
-		R_DONG = r_DONG;
-		R_HO = r_HO;
-		R_NAME = r_NAME;
-		R_EMAIL = r_EMAIL;
-		R_type = r_type;
-		R_STATUS = r_STATUS;
-		R_DATE = r_DATE;
-		R_NO = r_NO;
-	}
 
 	@Override
 	public String toString() {
@@ -206,6 +234,11 @@ public class Member {
 				+ U_STATUS + ", R_DONG=" + R_DONG + ", R_HO=" + R_HO + ", R_NAME=" + R_NAME + ", R_EMAIL=" + R_EMAIL
 				+ ", R_type=" + R_type + ", R_STATUS=" + R_STATUS + ", R_DATE=" + R_DATE + ", R_NO=" + R_NO + "]";
 	}
+	
+	
+
+
+
 	
 	
 	

@@ -10,8 +10,7 @@
 
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 .container img {
 	height: auto;
@@ -33,7 +32,7 @@
 
 	<div class="container border_test2">
 		<form name="join_form"
-			action="<%= request.getContextPath() %>/userJoin" method="post"
+			action="<%=request.getContextPath()%>/userJoin" method="post"
 			onsubmit="return validate();">
 			<div class="condition_list border_test2">
 				<div class="check step2_first_div border_test2">
@@ -64,7 +63,7 @@
 						<input type="text" class="step2_input_text" name="nickName"
 							id="nickname" placeholder="한글 및 숫자 포함 2자 이상 입력" required>
 						<span><a href="javascript:;" id="nickCheck" class="ol_btn"
-							role="button">중복확인</a> </span>
+							role="button">중복확인</a></span>
 					</div>
 				</div>
 				<div>
@@ -77,7 +76,7 @@
 							class="pwd1 step2_input_text " placeholder="영문 및 숫자 포함 7자 이상 입력"
 							required> <span class="eyes"> <i
 							class="fa fa-eye-slash fa-lg"></i>
-						</span> <span id="pwd_result"></span>
+						</span><span id="pwd_result"></span>
 					</div>
 				</div>
 				<div>
@@ -87,9 +86,7 @@
 					<div class="step2_span_left">비밀번호 확인</div>
 					<div class="step2_span_right">
 						<input type="password" id="pwd2" class="pwd2 step2_input_text"
-							placeholder="영문 및 숫자 포함 7자 이상 입력" required> <span
-							class="eyes"> <i class="fa fa-eye-slash fa-lg"></i>
-						</span>
+							placeholder="영문 및 숫자 포함 7자 이상 입력" required>
 					</div>
 				</div>
 				<div>
@@ -124,16 +121,12 @@
 						<input type="text" id="numberCheck"
 							class="step2_input_text_emailNum" placeholder="이메일 인증번호를 입력해주세요"
 							required> <span>
-							<button type="button" id="numberBtn" class="numberChkbtn">인증번호
-								확인</button>
-						</span> <span> <img src="/oneLife/resources/user/images/re.png"
-							alt="re" class="re"><a href="javascript:;" id="" class=""
-							role="button">다시보내기</a>
+							<button type="button" id="numberBtn" class="numberChkbtn">
+								인증번호 확인</button>
 						</span>
 					</div>
 				</div>
 				<hr>
-
 			</div>
 	</div>
 	<!--체크박스 코멘트 끝-->
@@ -213,24 +206,11 @@
         "연락처를 입력하세요"))
         return false;
        
-
         // 5. 이메일 검사
         // '@' 필수 입력
         if(!check(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
         document.getElementById('email'),
         "이메일 주소에 '@'를 포함하세요"))
-        return false;
-
-        // 6. 동
-        if(!check(/^[0-9]{3}$/,
-        document.getElementById('dong'),
-        "동을 입력하세요"))
-        return false;
-
-         // 7. 호
-         if(!check(/^[0-9]{3,4}$/,
-        document.getElementById('ho'),
-        "호수를 입력하세요"))
         return false;
 
     };
@@ -301,6 +281,7 @@
 		 }
 	 });
 </script>
+
 	<script>
 var nickUsable = false;
      // 닉네임 중복
@@ -356,7 +337,7 @@ var nickUsable = false;
 </script>
 	<!-- 비밀번호 눈 표시  -->
 	<script>
-$(".eyes").on('click',function(){ 
+	$(".eyes").on('click',function(){ 
          $('#pwd1').toggleClass('active'); 
          if( $('#pwd1').hasClass('active') == true ){ 
                 $(this).find('.fa-eye-slash').attr('class',"fa fa-eye fa-lg");
@@ -367,10 +348,10 @@ $(".eyes").on('click',function(){
                 $('#pwd1').attr('type','password'); 
                 $('#pwd2').attr('type','password'); 
                 } 
-            });
+     });
 </script>
 
-<script>
+	<script>
 		$(function() {
 			$("#mailBtn").click(function() {
 				$.ajax({
@@ -418,13 +399,8 @@ $(".eyes").on('click',function(){
 			})
 		});
 	</script>
-	
-	<script>
-          function goJoinSuccess(){
-             location.href = "${ contextPath }/userJoinSuccess";
-          };
-    </script>
-	
-	
+
+
+
 </body>
 </html>
