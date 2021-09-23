@@ -21,7 +21,7 @@ public class MemberService {
 
 		Connection conn = getConnection();
 		
-		Member loginUser = new MemberDao().loginMember(conn, userId, userPwd);
+		Member loginUser = new MemberDao().loginMember(conn, id, pwd);
 
 		close(conn);
 		

@@ -25,7 +25,19 @@ public class Manager {
 	}
 	
 	
-	
+	public Manager(int mNo, String mId, String mName, String mPhone, String mJobcode) {
+		super();
+		this.mNo = mNo;
+		this.mId = mId;
+		this.mName = mName;
+		this.mPhone = mPhone;
+		this.mJobcode = mJobcode;
+	}
+
+
+
+
+
 	public Manager(String mId, String mPassword, String mName, String mPhone) {
 		super();
 		this.mId = mId;

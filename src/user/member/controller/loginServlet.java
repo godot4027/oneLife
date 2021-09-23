@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.manager.model.service.ManagerService;
+import admin.manager.model.vo.Manager;
 import admin.member.model.service.Info_managerService;
 import admin.member.model.vo.Info_manager;
 import user.member.model.service.MemberService;
@@ -28,7 +30,8 @@ public class loginServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		Info_manager loginUser_man = new Info_managerService().loginUser_man(userId, userPwd);
+		// Info_manager loginUser_man = new Info_managerService().loginUser_man(userId, userPwd);
+		Manager loginManager = new ManagerService().ManagerLogin(userId, userPwd);
 		
        
 		if(loginUser != null) {
@@ -37,11 +40,12 @@ public class loginServlet extends HttpServlet {
 	         session.setAttribute("loginUser", loginUser);
 	         response.sendRedirect(request.getContextPath()+"/main");
 	      
-	      } else if(loginUser_man != null) {
+	      } else if(loginManager != null && (loginManager.getmJobcode().equals("M_CODE1") || loginManager.getmJobcode().equals("M_CODE2"))) {
+	    	  // 관리자로그인
 	    	  HttpSession session = request.getSession();
 		         
-		      session.setAttribute("loginUser_man", loginUser_man);
-		      response.sendRedirect(request.getContextPath()+"/main");
+		      session.setAttribute("loginManager", loginManager);
+		      response.sendRedirect(request.getContextPath()+"/admin/");
 	    	  
 	      } else {
 	         request.setAttribute("msg", "로그인에 실패하였습니다.");
