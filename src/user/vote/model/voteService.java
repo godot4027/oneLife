@@ -45,7 +45,7 @@ public class voteService {
 			int result = vd.insertVote(conn, v);
 			
 			int v_no = 0;
-			if (result > 0) {
+			if (result > 0 ) {
 				v_no =vd.selectVoteNo(conn);
 				commit(conn);
 			} else {
@@ -55,6 +55,23 @@ public class voteService {
 			
 			return v_no;
 		}
+		
+		// 투표게시판 선택지 작성
+		public int insertVoteExample(Vote vv) {
+			Connection conn = getConnection();
+			
+			int result = vd.insertVoteExample(conn, vv);
+			
+			if (result > 0 ) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			close(conn);
+			
+			return result;
+		}
+	
 		
 		// 조회수 증가
 		public int increaseCount(int v_no) {
@@ -98,5 +115,7 @@ public class voteService {
 			
 			return result;
 		}
+
+		
 	
 }

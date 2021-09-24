@@ -104,10 +104,11 @@ public class voteDao {
 													  rset.getString("v_title"),
 													  rset.getString("v_content"),
 													  rset.getInt("v_count"),
-													  rset.getTimestamp("v_enroll_date"),
-													  rset.getTimestamp("v_modify_date"),
+													  rset.getString("v_enroll_date"),
+													  rset.getString("v_modify_date"),
 													  rset.getString("v_status"),
-													  rset.getInt("m_no")));
+													  rset.getInt("m_no"),
+													  rset.getString("m_nick")));
 				}
 				
 			} catch (SQLException e) {
@@ -130,7 +131,9 @@ public class voteDao {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, v.getV_title());
 				pstmt.setString(2, v.getV_content());
-				pstmt.setInt(3, v.getM_no());
+				pstmt.setString(3, v.getV_modify_date());
+				pstmt.setInt(4, v.getM_no());
+				pstmt.setString(5, v.getV_choice());
 				
 				result = pstmt.executeUpdate();
 				
@@ -141,6 +144,8 @@ public class voteDao {
 			}
 			return result;
 		}
+		
+		
 		
 		// 투표게시판 v_no 글가져오기
 		public int selectVoteNo(Connection conn) {
@@ -164,6 +169,31 @@ public class voteDao {
 		      }
 		      
 		      return v_no;
+		}
+		
+		// 투표게시판 선택지 글작성 
+		public int insertVoteExample(Connection conn, Vote vv) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = query.getProperty("insertVoteExample");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, vv.getV_no());
+				pstmt.setString(2, vv.getVe_choice1());
+				pstmt.setString(3, vv.getVe_choice2());
+				pstmt.setString(4, vv.getVe_choice3());
+				pstmt.setString(5, vv.getVe_choice4());
+				pstmt.setString(6, vv.getVe_choice5());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
 		}
 		
 		// 투표게시판 조회수 증가
@@ -204,8 +234,8 @@ public class voteDao {
 								  rset.getString("v_title"),
 								  rset.getString("v_content"),
 								  rset.getInt("v_count"),
-								  rset.getTimestamp("v_enroll_date"),
-								  rset.getTimestamp("v_modify_date"),
+								  rset.getString("v_enroll_date"),
+								  rset.getString("v_modify_date"),
 								  rset.getString("v_status"),
 								  rset.getInt("m_no"));
 				}
@@ -239,6 +269,7 @@ public class voteDao {
 			}
 			return result;
 		}
+		
 		
 		
 		
