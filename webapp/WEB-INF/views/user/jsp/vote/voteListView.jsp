@@ -159,7 +159,7 @@
    
     <script>
      		 function detailView(v_no){
-			  		location.href='${contextPath}/board/detail?v_no='+v_no;
+			  		location.href='${contextPath}/vote/detail?v_no='+v_no;
 			  	}
      </script> 
 	
