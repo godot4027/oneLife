@@ -154,6 +154,7 @@
 			, U_NICKNAME
             , BC_NO
             , B_REPLY_COUNT
+            , B_LIKECNT
 		 FROM BOARD B, MEMBER M, BOARD_COMMENT C
 		 WHERE B.U_NO = M.U_NO 
          AND B.B_NO = C.B_NO(+)
@@ -287,6 +288,25 @@
 			, DEFAULT
 			, BOARD_LIKE_SEQ.NEXTVAL
 		)
+	</entry>  
+	<entry key="countHeart">
+	   UPDATE BOARD
+	   SET B_LIKECNT = (SELECT COUNT(*)
+	                                FROM BOARD_LIKE
+	                                GROUP BY B_NO 
+	                                HAVING B_NO = ?)
+	   WHERE B_NO = ?
+	</entry>  
+    <entry key="selectHeart">
+	  SELECT 
+	      B_LIKECNT
+	    FROM BOARD 
+	   WHERE B_NO = ?
+	</entry> 
+	<entry key="deleteHeart">
+	  DELETE FROM BOARD_LIKE
+		 WHERE B_NO = ?
+	     AND U_NO = ?
 	</entry> 
 	
 	<entry key="reportWrite">
@@ -305,6 +325,7 @@
 	select count(u_no) from board_report
 	where u_no = ? and bc_no = ?
 	</entry>
+	
 	
 	
 </properties>

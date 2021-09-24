@@ -1,8 +1,6 @@
 package user.board.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import user.board.model.service.boardService;
 import user.board.model.vo.Board;
@@ -18,16 +15,16 @@ import user.board.model.vo.Board_Like;
 import user.member.model.vo.Member;
 
 /**
- * Servlet implementation class BoardHeartServlet
+ * Servlet implementation class BoardNoneheartServlet
  */
-@WebServlet("/board/heart")
-public class BoardHeartServlet extends HttpServlet {
+@WebServlet("/board/noneheart")
+public class BoardNoneheartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardHeartServlet() {
+    public BoardNoneheartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +42,7 @@ public class BoardHeartServlet extends HttpServlet {
 		bl.setU_no(u_no);
 		
 		
-		Board b = new boardService().insertHeart(bl);
+		Board b = new boardService().deleteHeart(bl);
 	
 		
 		response.setContentType("application/json; charset=utf-8");

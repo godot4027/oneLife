@@ -18,6 +18,7 @@ public class Board {
 	private int bc_no;
 	private List<Board_Comment> replyList;
 	private int b_reply_count;   // 댓글 수
+	private int b_likecnt;   // 좋아요 수
 	
 	
 	/*
@@ -34,6 +35,44 @@ public class Board {
 
 
 	
+
+	
+
+	public Board(int b_likecnt) {
+		super();
+		this.b_likecnt = b_likecnt;
+	}
+
+
+	
+
+
+
+
+
+
+
+
+	public Board(int b_no, String b_title, String b_content, Date b_enroll_date, Date b_modify_date, int b_count,
+			String b_status, int u_no, String u_nickname, int bc_no, int b_reply_count, int b_likecnt) {
+		super();
+		this.b_no = b_no;
+		this.b_title = b_title;
+		this.b_content = b_content;
+		this.b_enroll_date = b_enroll_date;
+		this.b_modify_date = b_modify_date;
+		this.b_count = b_count;
+		this.b_status = b_status;
+		this.u_no = u_no;
+		this.u_nickname = u_nickname;
+		this.bc_no = bc_no;
+		this.b_reply_count = b_reply_count;
+		this.b_likecnt = b_likecnt;
+	}
+
+
+
+
 
 
 	public Board(int b_no, String b_title, String b_content, Date b_enroll_date, Date b_modify_date, int b_count,
@@ -279,6 +318,24 @@ public class Board {
 	public void setB_reply_count(int b_reply_count) {
 		this.b_reply_count = b_reply_count;
 	}
+	
+	
+	
+
+
+
+
+	public int getB_likecnt() {
+		return b_likecnt;
+	}
+
+
+
+
+
+	public void setB_likecnt(int b_likecnt) {
+		this.b_likecnt = b_likecnt;
+	}
 
 
 
@@ -289,8 +346,14 @@ public class Board {
 		return "Board [b_no=" + b_no + ", b_title=" + b_title + ", b_content=" + b_content + ", b_enroll_date="
 				+ b_enroll_date + ", b_modify_date=" + b_modify_date + ", b_count=" + b_count + ", b_status=" + b_status
 				+ ", u_no=" + u_no + ", u_nickname=" + u_nickname + ", bc_no=" + bc_no + ", replyList=" + replyList
-				+ ", b_reply_count=" + b_reply_count + "]";
+				+ ", b_reply_count=" + b_reply_count + ", b_likecnt=" + b_likecnt + "]";
 	}
+
+
+
+
+
+	
 
 
 

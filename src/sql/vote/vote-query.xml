@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="getListCount">
+      SELECT
+           COUNT(*)
+       FROM VOTE
+      WHERE V_STATUS = 'Y'
+   </entry>
+   <entry key="getTitleListCount">
+		SELECT
+			  COUNT(*)
+		 FROM VOTE
+		WHERE V_STATUS = 'Y'
+		  AND V_TITLE LIKE '%' || ? || '%'
+	</entry>
+	<entry key="getContentListCount">
+		SELECT
+			  COUNT(*)
+		 FROM VOTE
+		WHERE V_STATUS = 'Y'
+		  AND V_CONTENT LIKE '%' || ? || '%'
+	</entry>
+   
+   <entry key="selectsearchList">
+      SELECT
+           V_NO
+         , V_TITLE
+         , V_CONTENT
+         , V_COUNT
+         , V_ENROLL_DATE
+         , V_MODIFY_DATE
+         , V_STATUS
+         , M_NO
+         , M_NICK
+      FROM(SELECT ROWNUM RNUM
+              , VLIST.*
+          FROM(SELECT
+                    *
+                     FROM VOTE 
+                     JOIN INFO_MANAGER USING (M_NO)
+                    WHERE V_STATUS = 'Y'
+                    ORDER BY V_NO DESC) VLIST)
+       WHERE RNUM BETWEEN ? AND ?
+   </entry>
+   <entry key="selecTitleList">
+		SELECT
+           V_NO
+         , V_TITLE
+         , V_CONTENT
+         , V_COUNT
+         , V_ENROLL_DATE
+         , V_MODIFY_DATE
+         , V_STATUS
+         , M_NO
+         , M_NICK
+      FROM(SELECT ROWNUM RNUM
+              , VLIST.*
+          FROM(SELECT
+                    *
+                     FROM VOTE 
+                     JOIN INFO_MANAGER USING (M_NO)
+                    WHERE V_STATUS = 'Y'
+                      AND V_TITLE LIKE '%' || ? || '%'
+                    ORDER BY V_NO DESC) VLIST)
+       WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selecContentList">
+	SELECT
+		    SELECT
+           V_NO
+         , V_TITLE
+         , V_CONTENT
+         , V_COUNT
+         , V_ENROLL_DATE
+         , V_MODIFY_DATE
+         , V_STATUS
+         , M_NO
+         , M_NICK
+      FROM(SELECT ROWNUM RNUM
+              , VLIST.*
+          FROM(SELECT
+                    *
+                     FROM VOTE 
+                     JOIN INFO_MANAGER USING (M_NO)
+                    WHERE V_STATUS = 'Y'
+                      AND V_CONTENT LIKE '%' || ? || '%'
+                    ORDER BY V_NO DESC) VLIST)
+       WHERE RNUM BETWEEN ? AND ?
+	</entry>
+   <entry key="insertVote">
+      INSERT
+      INTO VOTE
+      (
+            V_NO
+         ,   V_TITLE
+         ,   V_CONTENT
+         ,   V_ENROLL_DATE
+         ,   V_MODIFY_DATE
+         ,   V_COUNT
+         ,   V_STATUS
+         ,   M_NO
+      )
+      VALUES
+      (
+         VOTE_SEQ.NEXTVAL
+         , ?
+         , ?
+         , SYSDATE
+         , ?
+         , DEFAULT
+         , DEFAULT
+         , ?
+      )
+   </entry>
+   
+   <entry key="selectvno">
+   SELECT VOTE_SEQ.CURRVAL FROM DUAL
+   </entry>
+   
+   <entry key="increaseCount">
+         UPDATE VOTE
+         SET V_COUNT = V_COUNT +1
+       WHERE V_NO = ?
+         AND V_STATUS = 'Y'
+   </entry>
+   
+</properties>

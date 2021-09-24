@@ -1,33 +1,26 @@
-package user.board.controller;
+package user.vote.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import user.board.model.service.boardService;
-import user.board.model.vo.Board;
-import user.board.model.vo.Board_Like;
-import user.member.model.vo.Member;
+import user.vote.model.voteService;
 
 /**
- * Servlet implementation class BoardHeartServlet
+ * Servlet implementation class VoteDeleteServlet
  */
-@WebServlet("/board/heart")
-public class BoardHeartServlet extends HttpServlet {
+@WebServlet("/vote/delete")
+public class VoteDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardHeartServlet() {
+    public VoteDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,28 +29,22 @@ public class BoardHeartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int b_no = Integer.parseInt(request.getParameter("b_no"));
-		int u_no = ((Member)request.getSession().getAttribute("loginUser")).getU_NO();
-		
-		
-		Board_Like bl = new Board_Like();
-		bl.setB_no(b_no);
-		bl.setU_no(u_no);
-		
-		
-		Board b = new boardService().insertHeart(bl);
-	
-		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(b, response.getWriter());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		int v_no = Integer.parseInt(request.getParameter("v_no"));
+		
+		int result = new voteService().deleteVote(v_no);
+		
+		if (result > 0) {
+			request.getSession().setAttribute("msg", "투표 게시글이 삭제 되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/vote/list");
+		} else {
+			request.setAttribute("msg", "투표 게시글 삭제 실패했습니다.");
+			request.getRequestDispatcher("/WEB-INF/views/user/common/errorpage.jsp").forward(request, response);
+		}
 	}
-
 }

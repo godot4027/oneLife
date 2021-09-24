@@ -80,7 +80,7 @@
 						  </button>
 						  </li>
                         <li class="like">좋아요</li>
-                        <li class="like">1 </li>
+                        <li class="likecount">${ board.b_likecnt }</li>
                         <li class="comm_img"><img src="/oneLife/resources/user/images/message.png"></li>
                         <li class="comment">댓글</li>
                         <li class="comment">${ board.b_reply_count }</li>
@@ -215,7 +215,7 @@
 						
 						
 					} else {
-						alert('댓글 입력 실패!');
+						alert('댓글을 입력해주세요!');
 					}
 					
 				},
@@ -258,7 +258,7 @@
 						$(".reply_list").html(html);
 						
 					} else {
-						alert('댓글 삭제 실패!');
+						alert('댓글 삭제 실패하였습니다!');
 					
 					
 					}
@@ -281,37 +281,78 @@
 			heartSvg.classList.remove("like-default");
 			heartSvg.classList.add("like-fill");
 			heartPath.setAttribute('src','/oneLife/resources/user/images/like2.png');
+			heart();
 		}
 		else{
 		 	heartSvg.classList.remove("like-fill");
 		 	heartSvg.classList.add("like-default");
 		 	heartPath.setAttribute('src','/oneLife/resources/user/images/like.png');
+		 	noneheart();
 		 }
 	}
 	
-	 $(".feed-icon").on("click", function () {
+	 function heart() {
 		 
 		 var b_no = ${board.b_no};
-		 var u_no = ${board.u_no};
+		
 
          $.ajax({
              url :'${ contextPath }/board/heart',
              type :'POST',
-             data : { b_no : b_no,  u_no : u_no },
+             data : { b_no : b_no },
 			 dataType : "json",
              success : function(data){
+            	 
+                if(data != null) {
+                	 
+                 var html =  data.b_likecnt ;
                  
-                 if(data==1) {
-                     $('#heart').prop("src","/resources/images/like2.png");
+                 
+                	$(".likecount").html(html);
+                
                  }
-                 else{
-                     $('#heart').prop("src","/resources/images/like1.png");
-                 }
+                  else{
+                      alert("좋아요 실패!");
+                 } 
 
-
-             }
+             },
+				error : function(e) {
+					console.log(e);
+				}
          });
-     });
+	 }
+	 
+	function noneheart() {
+		 
+		 var b_no = ${board.b_no};
+		
+
+         $.ajax({
+             url :'${ contextPath }/board/noneheart',
+             type :'POST',
+             data : { b_no : b_no },
+			 dataType : "json",
+             success : function(data){
+            	 
+                if(data != null) {
+                	 
+                 var html =  data.b_likecnt ;
+                 
+                 
+                	$(".likecount").html(html);
+                
+                 }
+                  else{
+                      alert("좋아요 삭제 실패!");
+                 } 
+
+             },
+				error : function(e) {
+					console.log(e);
+				}
+         });
+	 }
+ 
 	</script>
         
         
