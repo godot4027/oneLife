@@ -312,4 +312,38 @@ public class MemberCarDao {
 		return listCount;
 	}
 
+	public List<MemberCar> userSelectMemberCar(Connection conn, int dong, int ho) {
+		List<MemberCar> memberCarList = new ArrayList<>();
+		MemberCar mc = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("oneHouseHoldCarList");
+//		입주차량 신규추가시 결과 확인 sql문과 동일 sql
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, dong);
+			pstmt.setInt(2, ho);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				mc = new MemberCar();
+				mc.setMcNo(rset.getString("mc_no"));
+				mc.setrName(rset.getString("r_name"));
+				mc.setcPhone(rset.getString("c_phone"));
+				mc.setMcId(Integer.parseInt(rset.getString("mc_id")));
+				
+				memberCarList.add(mc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return memberCarList;
+	}
+
 }

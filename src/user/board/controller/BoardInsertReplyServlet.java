@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import admin.member.model.vo.Info_manager;
 import user.board.model.service.boardService;
 import user.board.model.vo.Board_Comment;
 import user.complaint.model.service.complaintService;

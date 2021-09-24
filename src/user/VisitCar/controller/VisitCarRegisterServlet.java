@@ -63,7 +63,7 @@ public class VisitCarRegisterServlet extends HttpServlet {
 		if (vid > 0) {
 			request.getSession().setAttribute("vid", vid);
 			request.getSession().setAttribute("msg", "등록이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/visitCarList");
+			response.sendRedirect(request.getContextPath() + "/visitCarConfirm");
 			
 		} else {
 //			request.setAttribute("msg", "게시글 등록에 실패하였습니다.");

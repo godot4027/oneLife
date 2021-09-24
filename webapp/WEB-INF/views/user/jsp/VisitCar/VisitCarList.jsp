@@ -13,7 +13,7 @@
 	crossorigin="anonymous"></script>
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
-<script src="/oneLife/resources/user/js/visitCar/visit_car.js"></script>
+<!-- <script src="/oneLife/resources/user/js/visitCar/visit_car.js"></script> -->
 <%if (session.getAttribute("msg") != null) { %>
 <script>
 	alert('<%= session.getAttribute("msg")%>');
@@ -31,6 +31,12 @@
 
 .visitCarDetail > li.VisitCheck {
 color : #72c2e7;
+}
+
+.visitCarDetail li{
+	overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
 <body>
@@ -53,19 +59,44 @@ color : #72c2e7;
 				<form method="get" action="${contextPath}/visitCarList" >
 					<label>방문일</label>
 					<span class="input_area">
-					<input type="date" value="전체" name="date">
+					<input type="date" name="date"
+						<c:if test="${ !empty param.date }">
+						value="${param.date}"
+						</c:if>>
 					</span>
 					<label>차량번호</label>
 					<span class="input_area">
-					<input type="search" name="carNo" value="전체" placeholder="띄어쓰기 없이 적어주세요">
+					<input type="search" name="carNo" placeholder="띄어쓰기 없이 적어주세요"
+					<c:choose>
+						<c:when test="${ param.carNo eq 'all' }">
+						value="전체"
+						</c:when>
+						<c:when test="${ !empty param.carNo }">
+						value="${param.carNo}"
+						</c:when>
+						<c:otherwise>
+						value="전체"
+						</c:otherwise>
+						</c:choose>>
 					</span>
 					<label>신청인</label>
 					<span class="input_area">
-					<input type="search" name="applicant" placeholder="신청인" value="전체"/>
+					<input type="search" name="applicant" placeholder="신청인" 
+					<c:choose>
+						<c:when test="${ param.applicant eq 'all' }">
+						value="전체"
+						</c:when>
+						<c:when test="${ !empty param.applicant }">
+						value="${param.applicant}"
+						</c:when>
+						<c:otherwise>
+						value="전체"
+						</c:otherwise>
+						</c:choose>/>
 					</span>
-					<button type="submit" id="sear_btn">
+					<button id="sear_btn">
 							<img src="/oneLife/resources/user/images/Search.png" />
-						</button>
+					</button>
 				</form>
 			</div>
 			<div class="vistCarList">
@@ -89,11 +120,11 @@ color : #72c2e7;
 						<li class="phone">${v.VC_PHONE}</li>
 						<li class="applicant">
 						<c:choose>
-							<c:when test="${v.r_NAME eq null}">
-								<td>${v.mName}</td>
+							<c:when test="${v.mName eq null}">
+								${v.r_NAME}
 							</c:when>
 							<c:otherwise>
-								<td>${v.r_NAME}</td>
+								관리자
 							</c:otherwise>
 						</c:choose>
 						</li>
@@ -107,18 +138,17 @@ color : #72c2e7;
 							<li class="date VisitCheck">완료</li>
 							</c:otherwise>
 						</c:choose>
-						<c:set var="status" value="N" />
 						<c:set var="current" value="<%=new java.util.Date()%>" />
 						<fmt:formatDate value="${current }" type="both"
 							pattern="yyyy-MM-dd" var="today" />
 						<c:choose>
 							<c:when
 								test="${v.u_NO == loginUser.u_NO && v.VC_STATUS eq status && v.VC_DATE >= today}">
-								<li class="edit" onclick="fix(${v.VC_ID})"><a href="#" id="editBtn"><i
+								<li class="edit" onclick="fix(${v.VC_ID})"><a href="#" id=""><i
 										class="far fa-edit"></i></a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="edit"></li>
+								<li class="edit" id="editBtn" onclick="cantFix()"><i class="far fa-edit"></i></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
@@ -131,6 +161,35 @@ color : #72c2e7;
 			</form>
 		</div>
 		<ul class="board_paging">
+		<c:choose>
+			<c:when test="${ empty param.date }">
+				<c:set var="paramDate" value="all" />
+			</c:when>
+			<c:otherwise>
+				<c:set var="paramDate" value="${ param.date }" />
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${ empty param.carNo }">
+				<c:set var="paramCarNo" value="all" />
+			</c:when>
+			<c:otherwise>
+				<c:set var="paramCarNo" value="${ param.carNo }" />
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${ empty param.applicant }">
+				<c:set var="paramApplicant" value="all" />
+			</c:when>
+			<c:when test="${ param.applicant eq '관리자'}">
+				<c:set var="paramApplicant" value="관리자" />
+			</c:when>
+			<c:otherwise>
+				<c:set var="paramApplicant" value="${ param.applicant }" />
+			</c:otherwise>
+		</c:choose>
+		
+			<c:set var="searchParam" value="&date=${ paramDate }&carNo=${paramCarNo }&applicant=${paramApplicant}" />
 			<!-- 맨 처음으로 (<<) -->
 			<li><a href="${contextPath }/visitCarList?page=1${searchParam}">&lt;&lt;</a></li>
 			<!-- 이전 페이지로(<) -->
@@ -177,71 +236,66 @@ color : #72c2e7;
 			<li><a href="javascript:;">&gt;</a></li>
 		</ul> -->
 	</div>
-	<!-- <div id="warningModal" class="modal">
+	<!-- 
+	<div id="cantFixModal" class="modal">
 		<div class="modal-content">
-			<p>방문일이 지난 내역은 수정하실 수 없습니다.</p>
+			<p>수정할 수 없는 내역입니다.</p>
 			<span id="warningClose" class="close">&times;</span>
 		</div>
-	</div> -->
+	</div>
+	-->
 
 
 	<%-- 공통 footer --%>
 	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
 
 
-	<div id="warningModal" class="modal">
-		<div class="modal-content">
-			<p>방문일이 지난 내역은 수정하실 수 없습니다.</p>
-			<span id="warningClose" class="close">&times;</span>
-		</div>
-	</div>
+	
 
 	<script>
-      // 게시글 목록에 mouseover/mouseout 시 onmouseover 클래스 추가/제서 처리
-      const noticeList = document.querySelector(".vistCarList");
+		function cantFix() {
+			alert("수정할 수 없는 내역입니다.");
+		}
+	
+     	 // 게시글 목록에 mouseover/mouseout 시 onmouseover 클래스 추가/제서 처리
+     	 const noticeList = document.querySelector(".vistCarList");
 
-      noticeList.addEventListener("mouseover", function () {
-        if (event.target.classList.contains("visitCarDetail"))
-          event.target.classList.add("onmouseover");
-        else if (event.target.parentNode.classList.contains("visitCarDetail"))
-          event.target.parentNode.classList.add("onmouseover");
-      });
+     	 noticeList.addEventListener("mouseover", function () {
+     	  if (event.target.classList.contains("visitCarDetail"))
+      	    event.target.classList.add("onmouseover");
+      	  else if (event.target.parentNode.classList.contains("visitCarDetail"))
+      	    event.target.parentNode.classList.add("onmouseover");
+     	 });
 
-      noticeList.addEventListener("mouseout", function () {
-        if (event.target.classList.contains("visitCarDetail"))
-          event.target.classList.remove("onmouseover");
-        else if (event.target.parentNode.classList.contains("visitCarDetail"))
-          event.target.parentNode.classList.remove("onmouseover");
-      });
+     	 noticeList.addEventListener("mouseout", function () {
+     	   if (event.target.classList.contains("visitCarDetail"))
+     	     event.target.classList.remove("onmouseover");
+    	    else if (event.target.parentNode.classList.contains("visitCarDetail"))
+    	      event.target.parentNode.classList.remove("onmouseover");
+    	  });
+	
+     	 //모달
+    	  /* var cantFixModal = document.getElementById("cantFixModal");
+    	  var editBtn = document.getElementById("editBtn");
+    	  var warningClose = document.getElementById("warningClose");
 
-      var warningModal = document.getElementById("warningModal");
+      	editBtn.onclick = function () {
+     		 console.log("와이");
+          	// 방문일이 지났으면 모달창, 아니면 수정페이지로 이동
+        	cantFixModal.style.display = "block";
+      	};
 
-      // Get the button that opens the modal
-      var fixBtn = document.getElementById("fixBtn");
+      	warningClose.onclick = function () {
+      		cantFixModal.style.display = "none";
+      	};
 
-      var warningClose = document.getElementById("warningClose");
-
-      // When the user clicks on the button, open the modal
-      editBtn.onclick = function () {
-        if (false) {
-          // 방문일이 지났으면 모달창, 아니면 수정페이지로 이동
-          warningModal.style.display = "block";
-        }
-      };
-
-      // When the user clicks on <span> (x), close the modal
-      warningClose.onclick = function () {
-        warningModal.style.display = "none";
-      };
-
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function (event) {
-        if (event.target == warningModal) {
-          warningModal.style.display = "none";
-        }
-      };
-      
-      function goRegister() {
+      	window.onclick = function (event) {
+        	if (event.target == cantFixModal) {
+        		cantFixModal.style.display = "none";
+        	}
+     	};
+       */
+     	 function goRegister() {
 			location.href = "${contextPath}/visitCarRegister";
 		};
 		

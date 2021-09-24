@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import user.VisitCar.model.service.VisitCarService;
+import user.VisitCar.model.vo.UserVisitCarSearch;
 import user.member.model.vo.Member;
 
 /**
@@ -45,7 +46,7 @@ public class VisitCarListServlet extends HttpServlet {
 		String carNo = request.getParameter("carNo");
 		String applicant = request.getParameter("applicant");
 		
-		if (date != null && (date.equals("전체") || carNo.equals(""))) {
+		if (date == null || date.equals("전체") || date.equals("")) {
 			date = "all";
 		}
 		
@@ -57,14 +58,18 @@ public class VisitCarListServlet extends HttpServlet {
 			applicant = "all";
 		}
 		
-		Map<String, Object> map = new VisitCarService().selectList(page, dong, ho);
+		System.out.println(date);
+		System.out.println(carNo);
+		System.out.println(applicant);
+		
+		Map<String, Object> map = new VisitCarService().selectList(page, dong, ho, new UserVisitCarSearch(date, carNo, applicant));
 //		System.out.println(map);
-		//응답 페이지 구성 시 사용할 데이터 설정
+		//응답 페이지 구성 시 사용할 데이터 설정O
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("visitCarList", map.get("visitCarList"));
 		
 		request.getRequestDispatcher("WEB-INF/views/user/jsp/VisitCar/VisitCarList.jsp").forward(request, response);
-	}
+	}    
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

@@ -93,7 +93,7 @@ text-align : center;
 	<div class="bottom_wrap1">
 		<p></p>
 		<span>> 방문차량 > 방문차량 등록</span>
-		<h1>방문차량 등록</h1>
+		<h1>방문차량 수정</h1>
 		<div class="bottom_wrap2"></div>
 	</div>
 	<div class="fix_wrap">
