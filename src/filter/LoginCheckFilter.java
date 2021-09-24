@@ -13,6 +13,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+
 import admin.manager.model.vo.Manager;
 import user.member.model.vo.Member;
 
@@ -67,6 +68,7 @@ public class LoginCheckFilter implements Filter {
 				Manager loginManager= (Manager)hreq.getSession().getAttribute("loginManager");
 				System.out.println(loginManager);
 				if(loginUser == null && loginManager == null) {
+
 					hreq.setAttribute("msg", "올바르지 않은 요청입니다.");
 					hreq.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp").forward(request, response);
 					return; 
