@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
 <!DOCTYPE html>
 <html lang="ko">
@@ -12,6 +13,14 @@
 
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
+
+<%-- 로그인 되어있을 상태일시 --%>
+<c:if test="${!empty loginUser || !empty loginManager}">
+	<script>
+		alert('이미 로그인 상태입니다. 메인페이지로 이동합니다.');
+		location.href = '${contextPath}/main';
+	</script>
+</c:if>
 
 </head>
 <body>
@@ -68,8 +77,7 @@
 								<button onclick="return loginBtn();" class="login_btn">로그인</button>
 							</div>
 							<ul class="link">
-								<li><a href="<%=request.getContextPath()%>/findIdPwd">아이디 찾기</a></li>
-								<li><a href="<%=request.getContextPath()%>/findIdPwd">비밀번호 찾기</a></li>
+								<li><a href="<%=request.getContextPath()%>/findIdPwd">아이디/비밀번호 찾기</a></li>
 								<li><a href="<%=request.getContextPath()%>/userAgree">회원가입</a></li>
 							</ul>
 						</div>

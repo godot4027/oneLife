@@ -15,7 +15,8 @@ import admin.manager.model.vo.Manager;
 import user.member.model.service.MemberService;
 import user.member.model.vo.Member;
 
-@WebServlet("/login")
+// @WebServlet("/login")
+@WebServlet(name="loginServlet", urlPatterns="/login")
 public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,8 +29,10 @@ public class loginServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
+		// System.out.println(loginUser);
 
 		Manager loginManager = new ManagerService().ManagerLogin(userId, userPwd);
+		// System.out.println(loginManager);
        
 		if(loginUser != null) {
 	         HttpSession session = request.getSession();
@@ -43,10 +46,9 @@ public class loginServlet extends HttpServlet {
 	    	  // 관리자로그인
 
 	    	  HttpSession session = request.getSession();
-		      
 	    	  
 		      session.setAttribute("loginManager", loginManager);
-		      response.sendRedirect(request.getContextPath()+"/admin/");
+		      response.sendRedirect(request.getContextPath()+"/main");
 	    	  
 	      } else {
 	         request.setAttribute("msg", "로그인에 실패하였습니다.");

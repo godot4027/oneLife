@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -87,6 +88,44 @@
 
 .table {
 margin-top : 30px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
 <%
@@ -176,9 +215,7 @@ margin-top : 30px;
 									<div class="select">
 										<select name="dong" id="searchDong">
 											<option value="all">동</option>
-											<c:if test="${ !empty param.dong }">
-											<option value="${param.dong }" selected>${param.dong }</option>
-											</c:if>
+											
 										</select>
 									</div>
 									<input type="hidden" value="${param.dong}" id="dropDong">
@@ -186,9 +223,7 @@ margin-top : 30px;
 									<div class="select">
 										<select name="ho" id="searchHo">
 											<option value="all">호</option>
-											<c:if test="${ !empty param.ho }">
-											<option value="${param.ho }" selected>${param.ho }</option>
-											</c:if>
+											
 										</select>
 									</div>
 									<button id="searchBtn" class="btn">검색</button>
@@ -227,7 +262,6 @@ margin-top : 30px;
 										</tr>
 									</thead>
 									<tbody>
-
 										<c:forEach var="v" items="${visitCarList}">
 											<tr>
 												<td>${v.VC_ID}</td>
@@ -261,8 +295,6 @@ margin-top : 30px;
 																onclick="visitCancel(${v.VC_ID}, '${v.VC_DATE}')">완료</p></td>
 													</c:otherwise>
 												</c:choose>
-
-
 											</tr>
 											<!-- 방문차량 접수완료 -->
 											<form action="${contextPath}/admin/visit/check" method="post">
@@ -344,9 +376,12 @@ margin-top : 30px;
 												</div>
 											</form>
 										</c:forEach>
-
+										
 									</tbody>
 								</table>
+									<c:if test="${fn:length(visitCarList) eq 0}">
+													<h3>검색 결과가 없습니다.</h3>
+										</c:if>
 							</div>
 
 							<!-- <div class="paging_wrap type02">
@@ -361,6 +396,8 @@ margin-top : 30px;
 							
 							<%-- 검색 결과 화면인 경우 넘겨줄 searchParam 정의 --%>
 							<c:choose>
+								<c:when test="${ empty param.dong && empty param.ho && empty param.carNo && empty param.date && empty param.status}">
+								</c:when>
 								<c:when test="${ !empty param.dong && !empty param.ho && !empty param.carNo && !empty param.date && !empty param.status}">
 									<c:set var="searchParam" value="&dong=${param.dong}&ho=${param.ho }&carNo=${param.carNo}&date=${param.date}&status=${param.status}" />
 								</c:when>
@@ -623,31 +660,26 @@ margin-top : 30px;
 		  }
 		  
 		  //검색 조건 드롭박스 조건 유지
-		  /* let dropDong = $('#dropDong').val();
-		  let dropHo = $('#dropHo').val();
-		  let searchDropDong = document.getElementById('searchDong');
-		  let searchDropHo = document.getElementById('searchHo');
+		  let dropDong = '${ param.dong }';
+		  let dropHo = '${ param.ho }';
 		  
-		  for (var i = 0; i < searchDropDong.length; i++) {
+		  for (var i = 0; i < searchDong.length; i++) {
 			  if (searchDong.options[i].value == dropDong) {
 				  searchDong.options[i].selected = true;
 			  }
 		  } 
 		  
-		  for (var j = 0; j < searchDropHo.length; j++) {
-			  if (searchHo.options[j].value == dropHo) {
-				  searchHo.options[j].selected = true;
-			  }
-		  }  */
-		  
-		  /* document.querySelector('#test4').addEventListener('click', () => {
-	            age.options[2].selected = true;
-	            age.selectedIndex = 3;
-	            age.value = '50';
-	            console.log(' age.options[2].selected : ' +  age.options[2].selected);
-	            console.log('age.selectedIndex : ' + age.selectedIndex);
-	            console.log('age.value : ' + age.value);
-	        }); */
+		  if (dropDong != "" && dropHo != "") {
+			  var y = subjectObject[dropDong];
+			  
+			  for (var i = 0; i < y.length; i++) {
+	    			searchHo.options[searchHo.options.length] = new Option(y[i], y[i]);
+	    			if (searchHo.options[i+1].value == dropHo) {
+		  				  searchHo.options[i+1].selected = true;
+		  			 }
+	    		} 
+		  }
+		 
 		}
 	</script>
 

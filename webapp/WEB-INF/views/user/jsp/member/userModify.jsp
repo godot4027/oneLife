@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="user.member.model.vo.Member"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	// session 객체에 담긴 loginUser 정보 변수에 담기
 	Member loginUser = (Member)session.getAttribute("loginUser");
@@ -19,6 +23,58 @@
 	margin-top: 0;
 }
 
+.carInfo {
+display : flex;
+}
+
+.carInfoDetail ul:last-of-type{
+margin-bottom : 10px;
+}
+
+.carInfoul li {
+/* display : inline-block; */
+display: table-cell;
+  vertical-align: middle;
+font-size : 15px;
+text-align : left;
+vertical-align: middle;
+padding-top : 8px;
+padding-bottom : 8px;
+}
+
+.carInfoul:not(:last-of-type) {
+border-bottom : 1px solid lightgray;
+}
+
+.carInfoNo {
+width : 60px;
+}
+
+.carInfoNo + li {
+width : 30px;
+}
+
+.carInfoCarNo {
+width : 80px;
+}
+
+.carInfoCarNo + li {
+width : 80px;
+}
+
+.carInfoApplicant {
+width : 60px;
+}
+
+.carInfoApplicant + li{
+width : 60px;
+}
+.carInfoPhone {
+width : 80px;
+}
+.carInfoPhone + li{
+width : 100px;
+}
 
 </style>
 
@@ -74,7 +130,7 @@
 					<div class="step2_span_left">비밀번호</div>
 					<div class="step2_span_right">
 						<input type="password" value="<%= loginUser.getU_PW() %>" name="userPwd" id="pwd1" class="pwd1 step2_input_text"
-							placeholder="영문 및 숫자 포함 7자 이상 입력" required>
+							placeholder="영문 및 숫자 포함 7자 이상 입력" readonly required>
 							<span class="eyes">
 								<i class="fa fa-eye-slash fa-lg"></i>
 							</span>
@@ -106,12 +162,28 @@
 				</div>
 				<div>
 					<hr>
-					<div class="check step2_first_div border_test6">
+					<div class="check step2_first_div border_test6 carInfo">
 						<div class="step2_span_left">등록차량정보</div>
-						<div class="step2_span_right">
-							<span class="step6_span_office"> <img
-								src="${contextPath}/resources/user/images/call.png" alt="re" class="re">
-								입주차량등록은 관리사무소에게 연락주시길 바랍니다.
+						<div class="step2_span_right carInfoDetail">
+						
+						<c:if test="${fn:length(memberCarList) eq 0}">
+							<p>등록된 차량 정보가 없습니다.</p>
+						</c:if>
+						<c:forEach var="v" items="${memberCarList}">
+						<ul class="carInfoul">
+							<li class="carInfoNo">등록번호</li> 
+							<li>${v.mcId}</li>
+							<li class="carInfoCarNo">차량번호</li>
+							<li>${v.mcNo}</li>
+							<li class="carInfoApplicant">신청인</li>
+							<li>${v.rName}</li>
+							<li class="carInfoPhone">비상연락처</label>
+							<li>${v.cPhone}</li>
+						</ul>
+						</c:forEach>
+							<span class="step6_span_office"> 
+							<img src="${contextPath}/resources/user/images/call.png" alt="re" class="re">
+								입주차량등록은 관리사무소로 연락주시기 바랍니다.
 							</span>
 						</div>
 					</div>

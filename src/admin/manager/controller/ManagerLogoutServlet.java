@@ -12,7 +12,7 @@ public class ManagerLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().removeAttribute("loginUser_man");
+		request.getSession().removeAttribute("loginManager");
 		
 		response.sendRedirect(request.getContextPath() + "/");
 	}

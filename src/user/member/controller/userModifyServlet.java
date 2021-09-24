@@ -1,14 +1,16 @@
 package user.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.vehicle.model.service.MemberCarService;
+import admin.vehicle.model.vo.MemberCar;
 import user.member.model.service.MemberService;
 import user.member.model.vo.Member;
 
@@ -31,6 +33,12 @@ public class userModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		int dong = loginUser.getR_DONG();
+		int ho = loginUser.getR_HO();
+		List<MemberCar> memberCarList = new MemberCarService().userSelectMemberCar(dong, ho);
+		
+		request.setAttribute("memberCarList", memberCarList);
 		request.getRequestDispatcher("/WEB-INF/views/user/jsp/member/userModify.jsp").forward(request, response);
 	
 	}

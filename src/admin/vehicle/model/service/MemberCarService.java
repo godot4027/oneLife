@@ -76,5 +76,14 @@ public class MemberCarService {
 		close(conn);
 		return result;
 	}
+
+	public List<MemberCar> userSelectMemberCar(int dong, int ho) {
+		Connection conn = getConnection();
+		List<MemberCar> memberCarList = md.userSelectMemberCar(conn, dong, ho);
+		
+		close(conn);
+		
+		return memberCarList;
+	}
 	
 }
