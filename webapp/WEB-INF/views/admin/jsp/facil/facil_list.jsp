@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,86 +21,89 @@
 	        <%-- menubar 공통 적용  --%>
 	        <jsp:include page="/WEB-INF/views/admin/common/menubar.jsp"></jsp:include>
         
-            <secion id="content">
+            <section id="content">
                 <div class="content">
                     <div class="list_wrap">
                         <h2 class="sub_tit">부대시설 예약관리</h2>
-                        <div class="search_box">
-                            <div class="search_top clearfix">
-                                <div class="items clearfix">
-                                    <label for="reser_fac">예약시설</label>
-                                    <div class="select">
-                                        <select name="" id="reser_fac">
-                                            <option value="">전체</option>
-                                            <option value="">독서실</option>
-                                            <option value="">멀티코트장</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="items clearfix">
-                                    <label for="reser_fac">예약타입</label>
-                                    <div class="select">
-                                        <select name="" id="reser_fac">
-                                            <option value="">전체</option>
-                                            <option value="">정기권</option>
-                                            <option value="">일일석</option>
-                                            <option value="">A</option>  
-                                            <option value="">B</option>  
-                                            <option value="">C</option>  
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="items clearfix">
-                                    <label for="reser_fac">예약타입</label>
-                                    <div class="select">
-                                        <select name="" id="reser_fac">
-                                            <option value="">전체</option>
-                                            <option value="">사용전</option>
-                                            <option value="">사용중</option>
-                                            <option value="">사용완료</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="items clearfix">
-                                    <label for="">예약일자</label>
-                                    <div class="calendar clearfix">
-                                        <input type="text" name="" id="" class="cal" readonly>
-                                        <span>~</span>
-                                        <input type="text" name="" id="" class="cal" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="search_bot clearfix">
-                                <div class="items clearfix">
-                                    <label for="">검색조건</label>
-                                    <div class="select">
-                                        <select name="" id="reser_fac">
-                                            <option value="">전체</option>
-                                            <option value="">아이디</option>
-                                            <option value="">이름</option>
-                                            <option value="">핸드폰번호</option>
-                                        </select>
-                                    </div>
-                                    <input type="text" class="input">
-                                    <button type="button" class="btn">검색</button>
-                                </div>
-                               
-                            </div>
-                        </div>
+                        <form action="${contextPath}/admin/facil/list">
+	                        <div class="search_box">
+	                            <div class="search_top clearfix">
+	                                <div class="items clearfix">
+	                                    <label for="reser_fac">예약시설</label>
+	                                    <div class="select">
+	                                        <select name="facilName" id="reser_fac">
+	                                            <option value="all">전체</option>
+	                                            <option value="독서실">독서실</option>
+	                                            <option value="멀티코트장">멀티코트장</option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                                <div class="items clearfix">
+	                                    <label for="reser_fac">예약타입</label>
+	                                    <div class="select">
+	                                        <select name="facilType" id="reser_fac">
+	                                            <option value="all">전체</option>
+	                                            <option value="일일권">일일권</option>
+	                                            <option value="A">A</option>  
+	                                            <option value="B">B</option>  
+	                                            <option value="C">C</option>  
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                                <div class="items clearfix">
+	                                    <label for="reser_fac">예약상태</label>
+	                                    <div class="select">
+	                                        <select name="facilStatus" id="reser_fac">
+	                                            <option value="all">전체</option>
+	                                            <option value="Y">예약취소</option>
+	                                            <option value="before">사용전</option>
+	                                            <option value="ing">사용중</option>
+	                                            <option value="after">사용완료</option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                                <div class="items clearfix">
+	                                    <label for="">예약일자</label>
+	                                    <div class="calendar clearfix">
+	                                        <input type="text" name="facilDay" id="" class="cal" readonly>
+	                                        <div class="checkbox">
+												<input type="checkbox" name="allDay" id="allDay" checked>
+												<label for="allDay">전체조회</label>
+											</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="search_bot clearfix">
+	                                <div class="items clearfix">
+	                                    <label for="">검색조건</label>
+	                                    <div class="select">
+	                                        <select name="searchName" id="reser_fac">
+	                                            <option value="id">아이디</option>
+	                                            <option value="name">이름</option>
+	                                            <option value="phone">핸드폰번호</option>
+	                                        </select>
+	                                    </div>
+	                                    <input type="text" class="input" name="searchValue">
+	                                    <button type="submit" class="btn">검색</button>
+	                                </div>
+	                            </div>
+	                        </div>
+						</form>
 
                         <div class="list_content">
                             <div class="table_wrap">
                                 <table class="table">
                                     <colgroup>
-                                        <col width="30px">
+                                        <col width="60px">
                                         <col width="8%">
                                         <col width="8%">
                                         <col width="8%">
                                         <col width="8%">
                                         <col width="8%">
                                         <col width="115px">
-                                        <col width="25%">
-                                        <col width="25%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="20%">
                                         <col width="8%">
                                     </colgroup>
                                     <caption class="ir_so">부대시설 예약목록</caption>
@@ -117,221 +122,69 @@
                                             <th>이름</th>
                                             <th>핸드폰 번호</th>
                                             <th>예약 일자</th>
+                                            <th>예약 시작시간</th>
                                             <th>예약 마감시간</th>
                                             <th>예약 상태</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                    
+                                    	<c:forEach var="f" items="${fList}">
+                                    	<tr>
                                             <td>
                                                 <div class="checkbox">
                                                     <input type="checkbox" name="facilCheck" id="facil1">
                                                     <label for="facil1"></label>
                                                 </div>
                                             </td>
-                                            <td>1</td>
-                                            <td>독서실</td>
-                                            <td>정기권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
+                                            <td>${f.fcNo}</td>
+                                            <td>${f.fcName}</td>
+                                            <td>${f.fcSeatType}</td>
+                                            <td>${f.uId}</td>
+                                            <td>${f.rName}</td>
+                                            <td>${f.uPhone}</td>
+                                            <td>
+                                            	<fmt:formatDate value="${f.faDate}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
+                                            </td>
+                                            <td>
+                                            	<fmt:formatDate value="${f.fcStart}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
+                                            </td>
+                                            <td>
+                                            	<fmt:formatDate value="${f.fcEnd}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
+                                            </td>
                                             <td>
                                                 <p class="status_before">사용전</p>
                                             </td>
                                         </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil2">
-                                                    <label for="facil2"></label>
-                                                </div>
-                                            </td>
-                                            <td>2</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_ing">사용중</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil3">
-                                                    <label for="facil3"></label>
-                                                </div>
-                                            </td>
-                                            <td>3</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_after">사용완료</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil4">
-                                                    <label for="facil4"></label>
-                                                </div>
-                                            </td>
-                                            <td>4</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_after">사용완료</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil5">
-                                                    <label for="facil5"></label>
-                                                </div>
-                                            </td>
-                                            <td>5</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_after">사용완료</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil6">
-                                                    <label for="facil6"></label>
-                                                </div>
-                                            </td>
-                                            <td>6</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_after">사용완료</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil7">
-                                                    <label for="facil7"></label>
-                                                </div>
-                                            </td>
-                                            <td>7</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_after">사용완료</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil8">
-                                                    <label for="facil8"></label>
-                                                </div>
-                                            </td>
-                                            <td>8</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_after">사용완료</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil9">
-                                                    <label for="facil9"></label>
-                                                </div>
-                                            </td>
-                                            <td>9</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_after">사용완료</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil10">
-                                                    <label for="facil10"></label>
-                                                </div>
-                                            </td>
-                                            <td>10</td>
-                                            <td>독서실</td>
-                                            <td>일일권</td>
-                                            <td>abc123</td>
-                                            <td>홍길동</td>
-                                            <td>010-1234-5678</td>
-                                            <td>2021년 08월 28일 21시 21분</td>
-                                            <td>2021년 08월 28일 21시 21분 <span class="bold">(3시간)</span></td>
-                                            <td>
-                                                <p class="status_after">사용완료</p>
-                                            </td>
-                                        </tr>
+                                    	</c:forEach>
+                                        
                                     </tbody>
                                 </table>
                             </div>
                             <div class="btn_box">
                                 <a href="javascript:;" class="remove">삭제</a>
                             </div>
-                            <div class="paging_wrap">
-                                <a href="javascript:;" class="btn_prev"></a>
-                                <a href="javascript:;" class="btn_num on">1</a>
-                                <a href="javascript:;" class="btn_num">2</a>
-                                <a href="javascript:;" class="btn_num">3</a>
-                                <a href="javascript:;" class="btn_num">4</a>
-                                <a href="javascript:;" class="btn_num">5</a>
-                                <a href="javascript:;" class="btn_next"></a>
-                            </div>
+                            
+                            <%-- 검색결과에대한 파라미터값 저장 --%>
+                          	<c:if test="${!empty param.managerListSearch && !empty param.managerListValue}">
+                          		<c:set var="searchParam" value="&managerListSearch=${param.managerListSearch}&managerListValue=${param.managerListValue}"/>
+                          	</c:if>
+                          	<jsp:include page="/WEB-INF/views/admin/common/paging.jsp"	flush="false">
+								<jsp:param name="listSize" value="${fList.size()}" />
+								<jsp:param name="piPage" value="${pi.page}" />
+								<jsp:param name="startPage" value="${pi.startPage}" />
+								<jsp:param name="endPage" value="${pi.endPage}" />
+								<jsp:param name="maxPage" value="${pi.maxPage}" />
+								<jsp:param name="pageUrl"
+									value="${pageContext.request.requestURL}" />
+								<jsp:param name="search" value="${searchParam}" />
+							</jsp:include>
+                            
+                            
                         </div>
                     </div>
                 </div>
-            </secion>
+            </section>
         </div>
     </div>
 

@@ -45,7 +45,7 @@
 	                                        <select name="reportNum" id="reportNum">
 	                                            <option value="all">전체</option>
 	                                            <option value="reportDown" <c:if test="${param.reportNum eq 'reportDown'}">selected</c:if>>0~4</option>
-	                                            <option value="reportUp" <c:if test="${param.reportNum eq 'reportDown'}">selected</c:if>>5이상</option>
+	                                            <option value="reportUp" <c:if test="${param.reportNum eq 'reportUp'}">selected</c:if>>5이상</option>
 	                                        </select>
 	                                    </div>
 	                                </div>
