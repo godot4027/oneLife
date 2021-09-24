@@ -7,12 +7,36 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="application"/>
 <%-- 관리자 session 이름 : loginManager --%>
 	<%-- 로그인이 안된경우 로그인페이지로 이동하기위한 조건문 --%>
-	<c:if test="${empty loginManager}">
-		<script>
-			alert('로그인 먼저 진행해주세요. 로그인 페이지로 이동합니다.');
-			location.href= '${contextPath}/';
-		</script>
-	</c:if>
+	<c:choose>
+		<c:when test="${empty loginUser && empty loginManager}">
+		<%-- 만약 로그인이 안되있는 상태일시 --%>
+			<script>
+				alert('로그인 먼저 진행해주세요. 로그인 페이지로 이동합니다.');
+				location.href= '${contextPath}/';
+			</script>
+		</c:when>
+		<c:when test="${!empty loginUser}">
+			<%-- 만약 로그인유저가 로그인상태일시 --%>
+			<script>
+				alert('주민유저는 관리자 페이지를 이용하실수 없습니다. 사용자 페이지로 이동합니다.');
+				location.href= '${contextPath}/main';
+			</script>
+		</c:when>
+	</c:choose>
+	
+	<%-- 사용자 페이지 이동버튼 --%>
+    <c:if test="${!empty loginManager}">
+       	<style>
+        	.page_wrap{position:fixed; right:20px; bottom:20px;}
+        	.page_wrap a{display:block; width:60px; height:60px; border-radius:50%; line-height:60px; background:#fff; box-sizing:border-box; text-align:center; border:1px solid #333; transition: all .3s;}
+        	.page_wrap a:hover{background:#3c90f2; color:#fff; border-color:#3c90f2;}
+        </style>
+        <div class="page_wrap">
+        	<a href="${contextPath}/main">
+        		사용자
+        	</a>
+        </div>
+      </c:if>
 
   <%-- header  --%>
   <header id="header">
@@ -65,6 +89,8 @@
          </div>
         </div>
     </div>
+    
+    
     
     <script>	
  	// 공통 팝업창 열기

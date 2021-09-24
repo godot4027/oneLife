@@ -25,15 +25,30 @@
                 <h1 class=logo>
                     <a href="${contextPath }/main"><span class="ir_so">로고</span></a>
                 </h1>
-                
-                <div class="top_wrap">
-			        <p class="login_status">${ loginUser.getR_DONG() }동 ${ loginUser.getR_HO() }호 <span>${ loginUser.getR_NAME() }</span>님 반갑습니다.</p>
+	                <div class="top_wrap">
+				        <% if(loginManager != null) { %>
+				        	<%-- 관리자 계정으로 로그인했을시 --%>
+				        	<p class="login_status"><span>${loginManager.mNick}</span>님 반갑습니다.</p>
 				            <ul>
-	                        <li><a href="${contextPath}/userModify">회원정보</a></li>
-	                        <li><a href="${contextPath}/userLogout">로그아웃</a></li>
-	                    </ul> 
-			       
-                </div>
+				                <li><a href="<%= request.getContextPath() %>/userLogout">로그아웃</a></li>
+				            </ul>
+				        <% } else if(loginUser != null) { %>
+				        	<%-- 사용자 계정으로 로그인했을시 --%>
+				            <p class="login_status">${ loginUser.getR_DONG() }동 ${ loginUser.getR_HO() }호 <span>${ loginUser.getR_NAME() }</span>님 반갑습니다.</p>
+				            <ul>
+				                <li><a href="<%= request.getContextPath() %>/userModify">회원정보</a></li>
+				                <li><a href="<%= request.getContextPath() %>/userLogout">로그아웃</a></li>
+				            </ul>
+				         <% } else {
+				        	 request.getSession().removeAttribute("loginUser");
+				        	 request.getSession().removeAttribute("loginManager");
+				          %> 
+				        	 <script>
+								alert('로그인 먼저 진행해주세요! 로그인페이지로 이동합니다.');
+								location.href = '${contextPath}/';
+							</script>
+				         <%} %>
+				  </div>
             </div>
         </header>
         <section id="main_container">
@@ -194,5 +209,19 @@
             </div>
         </section>
    </div>
+   
+   <%-- 관리자 페이지 이동버튼 --%>
+    <c:if test="${!empty loginManager}">
+       	<style>
+        	.page_wrap{position:fixed; right:20px; bottom:20px;}
+        	.page_wrap a{display:block; width:60px; height:60px; border-radius:50%; line-height:60px; background:#fff; box-sizing:border-box; text-align:center; border:1px solid #333; transition: all .3s;}
+        	.page_wrap a:hover{background:#3c90f2; color:#fff; border-color:#3c90f2;}
+        </style>
+        <div class="page_wrap">
+        	<a href="${contextPath}/admin/">
+        		관리자
+        	</a>
+        </div>
+      </c:if>
 </body>
 </html>

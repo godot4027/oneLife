@@ -31,6 +31,7 @@ public class userLogoutServlet extends HttpServlet {
 		// 로그아웃 -> session 안에 저장 된 loginUser 객체 값 삭제
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginUser");
+		session.removeAttribute("loginManager");
 		// session 객체 초기화
 		// session.invalidate();
 		
