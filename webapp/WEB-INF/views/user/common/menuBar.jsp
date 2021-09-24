@@ -1,8 +1,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="user.member.model.vo.Member"%>
+pageEncoding="UTF-8" import="user.member.model.vo.Member" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page import="admin.manager.model.vo.Manager"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%-- contextPath --%>
 <c:set var="contextPath"
 	value="${pageContext.servletContext.contextPath }" scope="application" />
@@ -22,6 +25,7 @@
 }
 %>
 <header id="header">
+
 	<div class="header">
 		<h1 class=logo>
 			<a href="javascript:;"><span class="ir_so">로고</span></a>
@@ -68,7 +72,7 @@
 				<li><a href="javascript:;">아파트 소식</a></li>
 				<li><a href="javascript:;">부대시설</a></li>
 				<li><a href="${contextPath}/visitCar">방문차량</a></li>
-				<li><a href="javascript:;">아파트 민원</a></li>
+				<li><a href="${contextPath}/complaint/list">아파트 민원</a></li>
 			</ul>
 			<div class="nav_inner_wrap">
 				<ul class="inner_item">
@@ -95,6 +99,7 @@
 			</div>
 		</nav>
 	</div>
+
 </header>
 
 <!-- 메뉴 슬라이드 스크립트 -->

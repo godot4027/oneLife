@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import user.board.model.vo.Board;
 import user.board.model.vo.Board_Comment;
+import user.board.model.vo.Board_Like;
 import user.board.model.vo.PageInfo;
 import user.board.model.vo.Search;
 
@@ -22,9 +23,9 @@ public class boardDao {
 	private Properties query = new Properties();
 	
 	public boardDao() {
-		String fileNme = boardDao.class.getResource("/sql/board/board-query.xml").getPath();
+		String fileName = boardDao.class.getResource("/sql/board/board-query.xml").getPath();
 		try {
-			query.loadFromXML(new FileInputStream(fileNme));
+			query.loadFromXML(new FileInputStream(fileName));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -114,7 +115,8 @@ public class boardDao {
 												  rset.getInt("b_count"),
 												  rset.getString("b_status"),
 												  rset.getInt("u_no"),
-												  rset.getString("u_nickname") ));
+												  rset.getString("u_nickname"),
+												  rset.getInt("b_reply_count")));
 												 
 												  
 			}
@@ -220,7 +222,8 @@ public class boardDao {
 							  rset.getString("b_status"),
 							  rset.getInt("u_no"),
 							  rset.getString("u_nickname"),
-							  rset.getInt("bc_no") );
+							  rset.getInt("bc_no"),
+							  rset.getInt("b_reply_count"));
 			}
 			
 		} catch (SQLException e) {
@@ -335,117 +338,77 @@ public class boardDao {
 		
 		return replayList;
 	}
+
+	// 댓글 삭제
+	public int deleteReply(Connection conn, Board_Comment b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b.getBc_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
+
+	// 댓글 수 업데이트
+	public int countReply(Connection conn, Board_Comment b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("countReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b.getB_no());
+			pstmt.setInt(2, b.getB_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 좋아요 추가 
+	public int insertHeart(Connection conn, Board_Like bl) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("insertHeart");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bl.getU_no());
+			pstmt.setInt(2, bl.getB_no());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 	
 	
 
-//
-//	// 1. 건의합니다 목록 조회
-////	public List<complaint> selectList(Connection conn) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		List<complaint> complaintList = new ArrayList<>();
-//		String sql = query.getProperty("selectList");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			
-//			rset = pstmt.executeQuery();
-//			
-//			
-//			while(rset.next()) {
-//				complaintList.add(new complaint(rset.getInt("c_no"),
-//										  rset.getString("c_title"),
-//										  rset.getString("c_content"),
-//										  rset.getTimestamp("enroll_date"),
-//										  rset.getTimestamp("modify_date"),
-//										  rset.getString("open"),
-//										  rset.getString("status"),
-//										  rset.getInt("u_no"),
-//										  rset.getString("u_id"),
-//										  rset.getInt("r_dong"),
-//										  rset.getInt("r_ho"),
-//										  rset.getString("r_name")));
-//			}
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		
-//		
-//		return complaintList;
-//	}
-//
-//	
-	
-//
-
-
-
-
-//	// 9. 댓글 삭제 
-//	public int deleteReply(Connection conn, complaint_manager r) {
-//		PreparedStatement pstmt = null;
-//		int result = 0;
-//		String sql = query.getProperty("deleteReply");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, r.getCm_no());
-//			
-//			result = pstmt.executeUpdate();
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//		
-//		return result;
-//	}
-//
-//	// 10. 댓글 전체 조회
-//	public List<complaint_manager> selectList(Connection conn) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		List<complaint_manager> complaintmanList = new ArrayList<>();
-//		String sql = query.getProperty("selectList");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			
-//			rset = pstmt.executeQuery();
-//			
-//			
-//			while(rset.next()) {
-//				complaintmanList.add(new complaint_manager(rset.getInt("cm_no"),
-//										  rset.getInt("c_no"),
-//										  rset.getString("cm_content"),
-//										  rset.getTimestamp("cm_enroll_date"),
-//										  rset.getTimestamp("cm_modify_date"),
-//										  rset.getString("cm_status"),
-//										  rset.getInt("m_no")));
-//										
-//			}
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		
-//		
-//		return complaintmanList;
-//	}
-//
-//	
-//	
-	
 	
 
 }

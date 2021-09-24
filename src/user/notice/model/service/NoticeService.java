@@ -1,14 +1,39 @@
 package user.notice.model.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import static common.JDBCTemplate.*;
 
+
+import user.board.model.vo.PageInfo;
 import user.notice.model.dao.NoticeDao;
 import user.notice.model.vo.Notice;
+import user.notice.model.vo.Search;
 
 public class NoticeService {
 	private NoticeDao nd = new NoticeDao();
+	
+	public Map<String, Object> selectlist(int page, Search s) {
+		Connection conn = getConnection();
+		
+		int listCount = nd.getListCount(conn, s);
+		
+		PageInfo pi = new PageInfo(page, listCount, 10, 10);
+		
+		List<Notice> noticeList = nd.selectList(conn, pi, s);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("pi", pi);
+		returnMap.put("noticeList", noticeList);
+		
+		
+		return returnMap;
+	}
+
 
 	// 1. 공지사항 리스트 조회용 서비스 메소드
 	public List<Notice> selectList() {
@@ -95,6 +120,7 @@ public class NoticeService {
 		
 		return result;
 	}
+
 
 }
 

@@ -8,6 +8,7 @@ import java.util.Map;
 import user.board.model.dao.boardDao;
 import user.board.model.vo.Board;
 import user.board.model.vo.Board_Comment;
+import user.board.model.vo.Board_Like;
 import user.board.model.vo.PageInfo;
 import user.board.model.vo.Search;
 
@@ -80,8 +81,7 @@ public class boardService {
 		
 		// 댓글 조회
 		c.setReplyList(bd.selectReplyList(conn, b_no));
-		
-		
+			
 		close(conn);
 		
 		return c;
@@ -123,11 +123,55 @@ public class boardService {
 	public List<Board_Comment> insertReply(Board_Comment b) {
 		Connection conn = getConnection();
 		
-		int result = bd.insertReply(conn, b);
+		int result1 = bd.insertReply(conn, b);
+		
+		int result2 = bd.countReply(conn, b);
 		
 		List<Board_Comment> replyList = null;
 		
-		if (result > 0) {
+		if (result1 > 0 && result2 > 0) {
+			commit(conn);
+			replyList = bd.selectReplyList(conn, b.getB_no());
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return replyList;
+	}
+
+	// 댓글 삭제
+	public List<Board_Comment> deleteReply(Board_Comment b) {
+		Connection conn = getConnection();
+		
+		int result1 = bd.deleteReply(conn, b);
+		
+		int result2 = bd.countReply(conn, b);
+		
+		List<Board_Comment> replyList = null;
+		
+		if (result1 > 0 && result2 > 0) {
+			commit(conn);
+			replyList = bd.selectReplyList(conn, b.getB_no());
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return replyList;
+	}
+
+	// 좋아요 추가 
+	public Board insertHeart(Board_Like bl) {
+		Connection conn = getConnection();
+		
+		int result1 = bd.insertHeart(conn, bl);
+		
+		int result2 = bd.countHeart(conn, bl);
+		
+		List<Board_Comment> replyList = null;
+		
+		if (result1 > 0 && result2 > 0) {
 			commit(conn);
 			replyList = bd.selectReplyList(conn, b.getB_no());
 		} else {
@@ -140,36 +184,6 @@ public class boardService {
 	
 
 
-
-//
-//	// 7. 댓글 삭제 
-//	public List<complaint_manager> deleteReply(complaint_manager r) {
-//		Connection conn = getConnection();
-//		
-//		int result = cd.deleteReply(conn, r);
-//		
-//		List<complaint_manager> replyList = null;
-//		
-//		if (result > 0) {
-//			commit(conn);
-//			replyList = cd.selectReplyList(conn, r.getC_no());
-//		} else {
-//			rollback(conn);
-//		}
-//		close(conn);
-//		
-//		return replyList;
-//	}
-//
-//    // 8. 댓글 전체 조회
-//	public List<complaint_manager> selectList() {
-//		Connection conn = getConnection();
-//		List<complaint_manager> complaintmanList = cd.selectList(conn); 
-//		close(conn);
-//		return complaintmanList;
-//	}
-//
-//	
 
 	
 

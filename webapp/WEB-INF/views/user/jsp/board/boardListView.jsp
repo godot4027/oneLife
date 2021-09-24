@@ -54,7 +54,9 @@
 					<li class="no">${ b.b_no }</li>
 					<li class="title">${ b.b_title }
 						<!-- 댓글이 달리시 -->
-						<span class="comment_count">[ 5 ]</span>
+						<c:if test="${ b.b_reply_count > 0 }">
+						<span class="comment_count">[ ${ b.b_reply_count } ]</span>
+						</c:if>
 					</li>
 					<li class="nick">${ b.u_nickname }</li>
 					<li class="date"><fmt:formatDate value="${ b.b_modify_date }" pattern="yyyy-MM-dd"/></li>

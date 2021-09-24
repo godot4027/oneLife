@@ -13,7 +13,11 @@ import java.util.Properties;
 
 
 import static common.JDBCTemplate.close;
+
+import user.board.model.vo.Board;
+import user.board.model.vo.PageInfo;
 import user.notice.model.vo.Notice;
+import user.notice.model.vo.Search;
 
 public class NoticeDao {
 	private Properties query = new Properties();
@@ -26,6 +30,96 @@ public class NoticeDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public int getListCount(Connection conn, Search s) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String sql = query.getProperty("getListCount");
+		
+		if (s.getSearchCondition() != null && s.getSearchValue() != null) {
+			if (s.getSearchCondition().equals("title")) {    // 제목 검색
+				sql = query.getProperty("getTitleListCount");
+			} 
+		}
+		
+		try {
+			pstmt= conn.prepareStatement(sql);
+			
+			if (s.getSearchCondition() != null && s.getSearchValue() != null) {
+				pstmt.setString(1, s.getSearchValue());
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	
+	public List<Notice> selectList(Connection conn, PageInfo pi, Search s) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Notice> noticeList = new ArrayList<>();
+		String sql = query.getProperty("selectsearchList");
+		
+		// 검색 조건과 검색 값이 넘어왔을 경우
+		if(s.getSearchCondition() != null && s.getSearchValue() != null) {
+			if (s.getSearchCondition().equals("title")) {    // 제목 검색
+				sql = query.getProperty("selecTitleList");
+			} 
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			int paramIndex = 1;
+			
+			// 검색 조건과 검색 값이 넘어온 경우
+			if(s.getSearchCondition() != null && s.getSearchValue() != null) {
+				pstmt.setString(paramIndex++, s.getSearchValue());
+			}
+			
+			pstmt.setInt(paramIndex++, startRow);
+			pstmt.setInt(paramIndex++, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				noticeList.add(new Notice(rset.getInt("n_no"),
+											  rset.getString("n_title"),
+											  rset.getString("n_content"),
+											  rset.getInt("n_count"),
+											  rset.getDate("enroll_date"),
+											  rset.getDate("modify_date"),
+											  rset.getString("status"),
+											  rset.getInt("m_no"),
+											  rset.getString("m_nick")));
+												 
+												  
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return noticeList;
+	}
+
+	
 	
 	// 1. 공지사항 목록 조회
 	public List<Notice> selectList(Connection conn) {
@@ -213,7 +307,7 @@ public class NoticeDao {
 
 	}
 
-
+	
 	
 	
 	

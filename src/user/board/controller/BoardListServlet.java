@@ -34,6 +34,7 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		// * page : 현재 요청하는 페이지 값 (기본적으로 게시판은 1페이지부터 시작)
 		int page = 1;
 		

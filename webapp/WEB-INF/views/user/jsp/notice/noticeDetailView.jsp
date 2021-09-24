@@ -26,7 +26,6 @@
 				<div class="notice_title">
 					<h1>KH PARK의 <b>공지 및<br>새로운 소식</b>을 전해 드립니다.</h1>
 				</div>
-				<form method="post" name="noticeForm">
 					<div class="notice_content">
 						<div class="subject"></div>
 						<div id="table">
@@ -50,15 +49,14 @@
 					<div class="btn_area">
 						<button type="button" id="btn2" onclick="location.href='${ contextPath }/notice/list'">목록</button>
 						<!-- 관리자한테만 보임 -->
-						<c:if test="${ !empty loginUser_man }">
+						<c:if test="${ !empty loginManager }">
 						<button type="button" id="btn3" onclick="updateNoticeView()">수정하기</button>
 						<button type="button" id="btn3" onclick="noticeDelete()">삭제하기</button>
-						<form namr="noticeForm" method="post">
+						<form name="noticeForm" method="post">
 							<input type="hidden" name="n_no" value="${ notice.n_no }">
 						</form>
 						</c:if> 
 					</div>
-				</form>
 			</div>
 		</div>
 

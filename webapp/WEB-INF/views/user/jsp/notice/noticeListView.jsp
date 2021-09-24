@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="user.member.model.vo.Member" import="admin.member.model.vo.Info_manager"%>
+	pageEncoding="UTF-8" import="user.member.model.vo.Member" import="admin.manager.model.vo.Manager"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
@@ -33,12 +33,13 @@
 			</div>
 			<div class="search_area">
 				<form method="get" action="${ contextPath }/notice/list">
+				   <select id="searchCondition" name="searchCondition">
+							<option value="title" <c:if test="${ param.searchCondition == 'title' }">selected</c:if>>제목</option>
+					</select>
 					<span class="input_area"> 
 					<input type="search" name="searchValue" placeholder="검색" value="${ param.searchValue }">
 					<button type="submit" id="btn1"><img src="/oneLife/resources/user/images/Search.png"></button>
 					</span>
-					<%-- <input type="hidden" name="title" value="${ noticeList.n_title }">
-					<input type="hidden" name="content" value="${ noticeList.n_content }"> --%>
 				</form>
 			</div>
 			<div class="notice_list">
@@ -57,6 +58,7 @@
 					<li class="date">${ n.modify_date }</li>
 					<li class="count">${ n.n_count }</li>
 				</ul>
+				
 				</c:forEach>
 			</div>
 			
@@ -65,23 +67,64 @@
 			<form method="get">
 				<button type="button" id="btn2" onclick="location.href='${ contextPath }/notice/list'">목록</button>
 				<!-- 관리자만 버튼 보이게-->
-				<c:if test="${ !empty loginUser_man }">
+				<c:if test="${ !empty loginManager }">
 				<button type="button" id="btn3" onclick="location.href='${ contextPath }/notice/insert'">작성하기</button>
 				</c:if>  
 			</form>
 		</div>
 
 		<ul class="board_paging">
-			<li>
-				<a href="javascript:;" class="btn_prev"></a>
-			</li>
-			<li>
-				<a href="javascript:;" class="current_page">1</a>
-			</li>
-			<li>
-				<a href="javascript:;" class="btn_next"></a>
-			</li>
-		</ul>
+				<!-- 검색 결과 화면인 경우 넘겨줄 searchParam 정의 -->
+				<c:if test="${ !empty param.searchCondition && !empty param.searchValue }">
+					<c:set var="searchParam" value="&searchCondition=${ param.searchCondition }&searchValue=${ param.searchValue }"/>
+				</c:if>
+				
+					<!-- 맨 처음으로 (<<) -->
+						<li><a href="${ contextPath }/board/list?page=1${ searchParam }">&lt;&lt;</a></li>
+						
+					<!-- 이전 페이지 (<) -->
+					<li>
+					<c:choose>
+						 <c:when test="${ pi.page > 1 }">
+						 <a href="${ contextPath }/board/list?page=${ pi.page - 1}${ searchParam }" class="btn_prev">&lt;</a>
+						 </c:when>
+						 <c:otherwise>
+						 <a href="#">&lt;</a>
+						 </c:otherwise>
+					</c:choose>	
+					</li>
+					
+					<!-- 페이지 목록(최대 10개) -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li>
+						<c:choose>
+						   <c:when test="${ p eq pi.page }">
+						   		<a href="#" class="current_page">${ p }</a>
+						   </c:when>
+						   <c:otherwise>
+						   		<a href="${ contextPath }/board/list?page=${ p }${ searchParam }">${ p }</a>
+						   </c:otherwise>
+						</c:choose>
+					</li>
+					</c:forEach>
+					
+					
+					<!-- 다음 페이지 (>) -->
+					<li>
+					<c:choose>
+						 <c:when test="${ pi.page < pi.maxPage }">
+						 <a href="${ contextPath }/board/list?page=${ pi.page + 1}${ searchParam }" class="btn_next">&gt;</a>
+						 </c:when>
+						 <c:otherwise>
+						 <a href="#">&gt;</a>
+						 </c:otherwise>
+					</c:choose>	
+					</li>		
+						
+					<!-- 맨 끝으로 (>>) -->
+						<li><a href="${ contextPath }/board/list?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>	
+						
+				</ul>
 	</div>
 	
 	<%-- 공통 footer --%>

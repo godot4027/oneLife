@@ -120,6 +120,9 @@ margin-right: 10px;}
  border-radius: 5px;
 /*  background:#66788a; */
 }
+.title span {
+ color: #68a2fa;
+}
 </style>
 
 </head>
@@ -165,22 +168,23 @@ margin-right: 10px;}
 				<c:forEach var="c" items="${ complaintList }">
 				<ul class="complaint_ul type02">
 					<li class="no" >${ c.c_no }</li>
-					<c:if test="">
+					<c:if test="${ c.c_reply_count <= 0 }">
 					<!-- 미완료 상태 -->
 					<li class="state"><span>미답변</span></li>
 					</c:if>
-					<c:if test="">
+					<c:if test="${ c.c_reply_count > 0 }">
 					<!-- 완료 상태 -->
 					<li class="state fi"><span>답변완료</span></li>
 					</c:if>
+					
 					<!-- 비공개 글 -->
 					<c:if test="${ c.open == 'N'}">
 					<c:choose>
-			        <c:when test="${ !empty loginUser_man || !empty loginUser && loginUser.u_ID == c.u_id}"> 
+			        <c:when test="${ !empty loginManager || !empty loginUser && loginUser.u_ID == c.u_id}"> 
 				    <li class="title" onclick="detailView(${ c.c_no })">${ c.c_title } <img id="lock" src="/oneLife/resources/user/images/lock.png"></li>
 					</c:when>
 					<c:otherwise>
-					<li class="title">비밀글 입니다. <img id="lock" src="/oneLife/resources/user/images/lock.png"></li>
+					<li class="title" onclick="detailView3()"><span>비밀글 입니다. </span><img id="lock" src="/oneLife/resources/user/images/lock.png"></li>
 					</c:otherwise>
 					</c:choose>
 					</c:if>
@@ -325,41 +329,14 @@ margin-right: 10px;}
 			  		// cno를 쿼리스트링에 데이터로 넘김
 			  		location.href='${contextPath}/complaint/detail?c_no='+c_no;
 			  	}
+     		 function detailView3(){
+			  		alert('비밀글 입니다.');
+			  	}
      </script>
     
     
     
-	<!--글 오픈 /비밀 -->
 	
-	<%--  <c:if test="${ complaintList.open == 'N'}"> 
-		 <c:choose>
-			<c:when test="${ !empty loginUser_man || !empty loginUser && loginUser.u_ID == c.u_id}">
-				 <script>
-	     		 function detailView(c_no){
-				  		// cno를 쿼리스트링에 데이터로 넘김
-				  		location.href='${contextPath}/complaint/detail?c_no='+c_no;
-				  	}
-	     		</script>
-			</c:when>
-			<c:otherwise>
-				<script>
-	     		 function detailView(c_no){
-				  		alert('비밀글 입니다.');
-				  	}
-	     		</script>
-			</c:otherwise>
-		</c:choose>
-	</c:if>
-	<c:if test="${ complaintList.open == null }">
-        <script>
-   		 function detailView(c_no){
-	  		// cno를 쿼리스트링에 데이터로 넘김
-	  		location.href='${contextPath}/complaint/detail?c_no='+c_no;
-	  	}
-   		</script>
-    </c:if> --%>
-	 
-	  
 	
 	  
 	

@@ -32,7 +32,7 @@
 		  AND U_NICKNAME LIKE '%' || ? || '%'
 	</entry>
 	<entry key="selectsearchList">
-		 SELECT
+		SELECT
 		      B_NO
 			, B_TITLE
 			, B_CONTENT
@@ -42,6 +42,7 @@
 			, B_STATUS
 			, U_NO
 			, U_NICKNAME
+            , B_REPLY_COUNT
 		FROM(SELECT ROWNUM RNUM
 				  , BLIST.*
 		    FROM(SELECT
@@ -64,6 +65,7 @@
 			, B_STATUS
 			, U_NO
 			, U_NICKNAME
+			, B_REPLY_COUNT
 		FROM(SELECT ROWNUM RNUM
 				  , BLIST.*
 		    FROM(SELECT
@@ -87,6 +89,7 @@
 			, B_STATUS
 			, U_NO
 			, U_NICKNAME
+			, B_REPLY_COUNT
 		FROM(SELECT ROWNUM RNUM
 				  , BLIST.*
 		    FROM(SELECT
@@ -110,6 +113,7 @@
 			, B_STATUS
 			, U_NO
 			, U_NICKNAME
+			, B_REPLY_COUNT
 		FROM(SELECT ROWNUM RNUM
 				  , BLIST.*
 		    FROM(SELECT
@@ -149,6 +153,7 @@
 			, B.U_NO
 			, U_NICKNAME
             , BC_NO
+            , B_REPLY_COUNT
 		 FROM BOARD B, MEMBER M, BOARD_COMMENT C
 		 WHERE B.U_NO = M.U_NO 
          AND B.B_NO = C.B_NO(+)
@@ -243,10 +248,46 @@
 		   ORDER BY BC_NO DESC
 	</entry>   
 	<entry key="deleteReply">
-		UPDATE COMPLAINT_MANAGER
-		   SET CM_STATUS = 'N'
-		 WHERE CM_NO = ? 
-	</entry>   
+		UPDATE BOARD_COMMENT
+		   SET BC_STATUS = 'N'
+		 WHERE BC_NO = ? 
+	</entry>    
+	<entry key="countReply">
+	   UPDATE BOARD
+       SET B_REPLY_COUNT = (SELECT
+                                  count(*)
+                             FROM BOARD_COMMENT
+                            WHERE BC_STATUS = 'Y'
+                            GROUP BY B_NO
+                           HAVING B_NO = ?)
+       WHERE B_NO = ?
+	</entry> 
+	<entry key="selectcountReply">
+	  SELECT
+              B_REPLY_COUNT
+		 FROM BOARD 
+		 WHERE B_NO = ?
+		 AND B_STATUS = 'Y'
+	</entry> 
+	<entry key="insertHeart">
+		INSERT
+		INTO BOARD_LIKE
+		(
+			 U_NO
+			, B_NO
+			, BL_DATE
+			, BL_STATUS
+			, BL_NO
+		)
+		VALUES
+		(
+			  ?
+			, ?
+			, SYSDATE
+			, DEFAULT
+			, BOARD_LIKE_SEQ.NEXTVAL
+		)
+	</entry> 
 	
 	
 </properties>

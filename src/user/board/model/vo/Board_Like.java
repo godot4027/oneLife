@@ -8,6 +8,7 @@ public class Board_Like {
 	private int b_no;
 	private Date bl__date;
 	private String bl_status;
+	private int bl_no;
 	
 	/*U_NO	NUMBER
 		B_NO	NUMBER
@@ -56,12 +57,24 @@ public class Board_Like {
 	public void setBl_status(String bl_status) {
 		this.bl_status = bl_status;
 	}
+	
+	
+
+	public int getBl_no() {
+		return bl_no;
+	}
+
+	public void setBl_no(int bl_no) {
+		this.bl_no = bl_no;
+	}
 
 	@Override
 	public String toString() {
 		return "Board_Like [u_no=" + u_no + ", b_no=" + b_no + ", bl__date=" + bl__date + ", bl_status=" + bl_status
-				+ "]";
+				+ ", bl_no=" + bl_no + "]";
 	}
+
+	
 	
 	
 

@@ -45,6 +45,7 @@
 			,   R_DONG
             ,   R_HO
             ,   R_NAME
+            ,   C_REPLY_COUNT
 		FROM(SELECT ROWNUM RNUM
 				  , CLIST.*
 		    FROM(SELECT
@@ -70,6 +71,7 @@
 			,   R_DONG
             ,   R_HO
             ,   R_NAME
+            ,   C_REPLY_COUNT
 		FROM(SELECT ROWNUM RNUM
 				  , CLIST.*
 		    FROM(SELECT
@@ -96,6 +98,7 @@
 			,   R_DONG
             ,   R_HO
             ,   R_NAME
+            ,   C_REPLY_COUNT
 		FROM(SELECT ROWNUM RNUM
 				  , CLIST.*
 		    FROM(SELECT
@@ -122,6 +125,7 @@
 			,   R_DONG
             ,   R_HO
             ,   R_NAME
+            ,   C_REPLY_COUNT
 		FROM(SELECT ROWNUM RNUM
 				  , CLIST.*
 		    FROM(SELECT
@@ -245,6 +249,7 @@
              ,  CM_MODIFY_DATE
              ,  CM_STATUS
              ,  M_NO
+             ,  M_NICK
 		  FROM COMPLAINT_MANAGER 
 		  JOIN INFO_MANAGER USING (M_NO)
 		 WHERE C_NO = ?
@@ -256,6 +261,16 @@
 		   SET CM_STATUS = 'N'
 		 WHERE CM_NO = ? 
 	</entry>  
+	<entry key="countReply">
+	   UPDATE COMPLAINT
+       SET C_REPLY_COUNT = (SELECT
+					              count(*)
+					         FROM COMPLAINT_MANAGER
+					        WHERE CM_STATUS = 'Y'
+					        GROUP BY C_NO
+					       HAVING C_NO = ?)
+       WHERE C_NO = ?
+	</entry> 
 	
 	
 </properties>

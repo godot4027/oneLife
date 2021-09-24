@@ -1,4 +1,4 @@
-package user.complaint.controller;
+package user.board.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,24 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
-import admin.manager.model.vo.Manager;
-
-
-import user.complaint.model.service.complaintService;
-import user.complaint.model.vo.complaint_manager;
+import user.board.model.service.boardService;
+import user.board.model.vo.Board;
+import user.board.model.vo.Board_Like;
+import user.member.model.vo.Member;
 
 /**
- * Servlet implementation class ComplaintInsertReplyServlet
+ * Servlet implementation class BoardHeartServlet
  */
-@WebServlet("/complaint/insertReply")
-public class ComplaintInsertReplyServlet extends HttpServlet {
+@WebServlet("/board/heart")
+public class BoardHeartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ComplaintInsertReplyServlet() {
+    public BoardHeartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,29 +36,28 @@ public class ComplaintInsertReplyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int c_no = Integer.parseInt(request.getParameter("c_no"));
-		String content = request.getParameter("content");
-		int m_no = ((Manager)request.getSession().getAttribute("loginManager")).getmNo();
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		int u_no = ((Member)request.getSession().getAttribute("loginUser")).getU_NO();
 		
-		complaint_manager r = new complaint_manager();
-		r.setC_no(c_no);
-		r.setCm_content(content);
-		r.setM_no(m_no);
+		Board_Like bl = new Board_Like();
+		bl.setB_no(b_no);
+		bl.setU_no(u_no);
 		
-		// complaint_manager 객체 전달하여 insert 하고 현재 게시글의 replyList 리턴
-		List<complaint_manager> replyList = new complaintService().insertReply(r);
+		
+		Board b = new boardService().insertHeart(bl);
 		
 		// GSON 라이브러리 추가 후 replyList 응답
 		// GSON 사용 시 날짜 값 Date 포맷에 대한 컨트롤 가능(GsonBuilder 객체가 가진 기능)
 		response.setContentType("application/json; charset=utf-8");
-		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss").create();
-		gson.toJson(replyList, response.getWriter());
+		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm").create();
+		gson.toJson(b, response.getWriter());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

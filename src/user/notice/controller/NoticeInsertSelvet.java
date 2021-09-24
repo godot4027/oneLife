@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import admin.member.model.vo.Info_manager;
+import admin.manager.model.vo.Manager;
 import user.member.model.vo.Member;
 import user.notice.model.service.NoticeService;
 import user.notice.model.vo.Notice;
@@ -40,7 +40,7 @@ public class NoticeInsertSelvet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		int mno = ((Info_manager)request.getSession().getAttribute("loginUser_man")).getM_no();
+		int mno = ((Manager)request.getSession().getAttribute("loginManager")).getmNo();
 		
 		Notice n = new Notice(title, content, mno);
 		
