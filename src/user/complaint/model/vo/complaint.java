@@ -18,6 +18,7 @@ public class complaint {
 	private String r_name;
 	private List<complaint_manager> replyList;   // 댓글
 	private int cm_no;
+	private int c_reply_count;
 	
 	/*
 	C_NO	NUMBER		                                      건의합니다 번호
@@ -31,6 +32,29 @@ public class complaint {
 	*/
 	
 	public complaint () {}
+	
+	
+
+
+	public complaint(int c_no, String c_title, String c_content, Date enroll_date, Date modify_date, String open,
+			String status, int u_no, String u_id, int r_dong, int r_ho, String r_name, int c_reply_count) {
+		super();
+		this.c_no = c_no;
+		this.c_title = c_title;
+		this.c_content = c_content;
+		this.enroll_date = enroll_date;
+		this.modify_date = modify_date;
+		this.open = open;
+		this.status = status;
+		this.u_no = u_no;
+		this.u_id = u_id;
+		this.r_dong = r_dong;
+		this.r_ho = r_ho;
+		this.r_name = r_name;
+		this.c_reply_count = c_reply_count;
+	}
+
+
 
 
 	public complaint(int c_no, String c_title, String c_content, Date enroll_date, Date modify_date, String open,
@@ -72,24 +96,24 @@ public class complaint {
 		this.r_name = r_name;
 	}
 
-
-	public complaint(int c_no, String c_title, String c_content, Date enroll_date, Date modify_date, String open,
-			String status, int u_no, String u_id, int r_dong, int r_ho, String r_name, int cm_no) {
-		super();
-		this.c_no = c_no;
-		this.c_title = c_title;
-		this.c_content = c_content;
-		this.enroll_date = enroll_date;
-		this.modify_date = modify_date;
-		this.open = open;
-		this.status = status;
-		this.u_no = u_no;
-		this.u_id = u_id;
-		this.r_dong = r_dong;
-		this.r_ho = r_ho;
-		this.r_name = r_name;
-		this.cm_no = cm_no;
-	}
+//
+//	public complaint(int c_no, String c_title, String c_content, Date enroll_date, Date modify_date, String open,
+//			String status, int u_no, String u_id, int r_dong, int r_ho, String r_name, int cm_no) {
+//		super();
+//		this.c_no = c_no;
+//		this.c_title = c_title;
+//		this.c_content = c_content;
+//		this.enroll_date = enroll_date;
+//		this.modify_date = modify_date;
+//		this.open = open;
+//		this.status = status;
+//		this.u_no = u_no;
+//		this.u_id = u_id;
+//		this.r_dong = r_dong;
+//		this.r_ho = r_ho;
+//		this.r_name = r_name;
+//		this.cm_no = cm_no;
+//	}
 
 
 	public complaint(String c_title, String c_content, String open, int u_no) {
@@ -280,6 +304,18 @@ public class complaint {
 	public void setCm_no(int cm_no) {
 		this.cm_no = cm_no;
 	}
+	
+	
+
+
+	public int getC_reply_count() {
+		return c_reply_count;
+	}
+
+
+	public void setC_reply_count(int c_reply_count) {
+		this.c_reply_count = c_reply_count;
+	}
 
 
 	@Override
@@ -287,8 +323,9 @@ public class complaint {
 		return "complaint [c_no=" + c_no + ", c_title=" + c_title + ", c_content=" + c_content + ", enroll_date="
 				+ enroll_date + ", modify_date=" + modify_date + ", open=" + open + ", status=" + status + ", u_no="
 				+ u_no + ", u_id=" + u_id + ", r_dong=" + r_dong + ", r_ho=" + r_ho + ", r_name=" + r_name
-				+ ", replyList=" + replyList + ", cm_no=" + cm_no + "]";
+				+ ", replyList=" + replyList + ", cm_no=" + cm_no + ", c_reply_count=" + c_reply_count + "]";
 	}
+
 
 
 	

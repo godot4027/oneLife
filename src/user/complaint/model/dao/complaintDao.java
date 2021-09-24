@@ -117,7 +117,8 @@ public class complaintDao {
 													  rset.getString("u_id"),
 													  rset.getInt("r_dong"),
 													  rset.getInt("r_ho"),
-													  rset.getString("r_name") ));
+													  rset.getString("r_name"),
+													  rset.getInt("c_reply_count")));
 													  
 				}
 				
@@ -348,7 +349,8 @@ public class complaintDao {
 										rset.getTimestamp("cm_enroll_date"),
 										rset.getTimestamp("cm_modify_date"),
 										rset.getString("cm_status"),
-										rset.getInt("m_no")));
+										rset.getInt("m_no"),
+										rset.getString("m_nick")));
 			}
 			
 		} catch (SQLException e) {
@@ -416,6 +418,49 @@ public class complaintDao {
 		
 		
 		return complaintmanList;
+	}
+
+	// 댓글 수 업데이트
+	public int countReply(Connection conn, int c_no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("countReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c_no);
+			pstmt.setInt(2, c_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int countReply(Connection conn, complaint_manager r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("countReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, r.getC_no());
+			pstmt.setInt(2, r.getC_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

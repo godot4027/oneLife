@@ -43,12 +43,7 @@ public class complaintService {
 	}
 	
 
-	// 1. 건의합니다 리스트 조회용 서비스 메소드
-	/*
-	 * public List<complaint> selectList() { Connection conn = getConnection();
-	 * List<complaint> complaintList = cd.selectList(conn); close(conn); return
-	 * complaintList; }
-	 */
+
 
 	// 2. 건의합니다 글 작성
 	public int insertComplaint(complaint c) {
@@ -76,7 +71,6 @@ public class complaintService {
 		
 		// 댓글 조회
 		c.setReplyList(cd.selectReplyList(conn, c_no));
-		
 		
 		close(conn);
 		
@@ -120,11 +114,13 @@ public class complaintService {
 	public List<complaint_manager> insertReply(complaint_manager r) {
 		Connection conn = getConnection();
 		
-		int result = cd.insertReply(conn, r);
+		int result1 = cd.insertReply(conn, r);
+		
+		int result2 = cd.countReply(conn, r);
 		
 		List<complaint_manager> replyList = null;
 		
-		if (result > 0) {
+		if (result1 > 0 && result2 > 0) {
 			commit(conn);
 			replyList = cd.selectReplyList(conn, r.getC_no());
 		} else {
@@ -139,11 +135,13 @@ public class complaintService {
 	public List<complaint_manager> deleteReply(complaint_manager r) {
 		Connection conn = getConnection();
 		
-		int result = cd.deleteReply(conn, r);
+		int result1 = cd.deleteReply(conn, r);
+		
+		int result2 = cd.countReply(conn, r);
 		
 		List<complaint_manager> replyList = null;
 		
-		if (result > 0) {
+		if (result1 > 0 && result2 > 0) {
 			commit(conn);
 			replyList = cd.selectReplyList(conn, r.getC_no());
 		} else {

@@ -7,7 +7,17 @@
 <title>신고하기</title>
 
 <%-- 공통css/js --%>
-<jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
+<!-- css -->
+<link rel="stylesheet" href="/oneLife/resources/user/fonts/fonts.css">
+<link rel="stylesheet" href="/oneLife/resources/user/css/reset.css">
+<link rel="stylesheet" href="/oneLife/resources/user/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/oneLife/resources/user/css/jquery-ui.min.css">
+<link rel="stylesheet" href="/oneLife/resources/user/css/swiper-bundle.min.css">
+
+ 
+<script src="/oneLife/resources/user/js/jquery-3.6.0.min.js"></script>
+<script src="/oneLife/resources/user/js/jquery-ui.js"></script>
 
     <style>
         .top_area {
@@ -50,13 +60,19 @@
             font-size: 14px;
             letter-spacing: 1px;
             cursor: pointer;
-            margin-top: 80px;
+            margin-top: 70px;
         }
         input[type="submit"]{
-            margin-left: 180px;
+            margin-left: 150px;
+        }
+        input[type="submit"]:hover{
+           background: #f89b9b;
         }
         input[type="button"]{
             background: #C8C8C8;
+        }
+         input[type="button"]:hover{
+            background: #8e8e8e;
         }
 
     </style>
@@ -77,7 +93,7 @@
          alert('정상적으로 접수 됐습니다.');
          self.close();
         }
-        </script>
+     </script>
 	
 </body>
 </html>

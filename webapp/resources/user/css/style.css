@@ -3455,8 +3455,8 @@ h4 {
 .board_detail_area span {
   display: inline;
   position: relative;
-  top: 10px;
-  left: 30px;
+  top: 0.01px;
+  left: 0.5px;
   font-weight: 500;
   font-size: 16px;
   letter-spacing: -0.05px;
@@ -3540,6 +3540,7 @@ button.reply_btn2{
 
 .reply_ul {
   border-bottom: 1px solid #e0e0e0;
+  padding-top: 15px;
 }
 
 /* .reply_ul .rwriter {
@@ -3574,9 +3575,9 @@ button.reply_btn2{
 } */
 
 .reply_btn_area {
-  position: relative;
+  /*  position: relative;
   left: 170px;
-  top: -77px;
+  top: -77px;  */
 }
 .reply_btn_area.type02{
 left:190px;  bottom:53px; top: -50px;}

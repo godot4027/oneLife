@@ -40,7 +40,7 @@
 						<button type="button" onclick="updateComplaintView();">수정하기</button><span>|</span>
 						<button type="button" onclick="deleteComplaint();">삭제하기</button>
 						</c:if> 
-						<c:if test="${ !empty loginUser_man }">
+						<c:if test="${ !empty loginManager }">
                         <!-- 관리자는 삭제하기 버튼만 보여짐 -->
                         <button type="button" onclick="deleteComplaint();">삭제하기</button>
                         </c:if>
@@ -51,26 +51,26 @@
 				</div>
 				<h4>답글</h4>
 				<div class="reply_area">
+					<div class="reply_list">
                     <c:forEach items="${ complaint.replyList }" var="r">
-                    <div class="reply_list">
                      <ul class="reply_ul">
                      		<img src="/oneLife/resources/user/images/people2.png">
-                            <li class="rwriter">${ r.m_no }</li>
+                            <li class="rwriter">${ r.m_nick }</li>
                             <li class="rcontent">${ r.cm_content }</li>
                             <li class="rdate">
                             <fmt:formatDate value="${ r.cm_modify_date }" type="both" pattern="yyyy.MM.dd HH:mm:ss"/>
                             </li>
                         </ul> 
-                       <c:if test="${ !empty loginUser_man }">
+                       <c:if test="${ !empty loginManager }">
                        <div class="reply_btn_area type02">
                             <!-- <button type="button" onclick="updateBoardView();">수정하기</button><span>|</span> -->
-                            <button type="button" onclick="deleteReply(${ complaint.cm_no },${ complaint.c_no });">삭제하기</button>
+                            <button type="button" onclick="deleteReply(${ r.cm_no },${ r.c_no });">삭제하기</button>
                         </div> 
                         </c:if>
+                         </c:forEach>
                         </div>
-                       </c:forEach>
                     
-					<c:if test="${ !empty loginUser_man }">
+					<c:if test="${ !empty loginManager }">
                     <!-- 관리자만 댓글 작성 가능 -->
 					<div class="reply_write">
 						<textarea class="reply_content" placeholder="댓글을 작성해 주세요" onfocus="this.placeholder=''" onblur="this.placeholder='댓글을 작성해 주세요'"  maxlength="600"></textarea>
@@ -84,6 +84,7 @@
 				<div class="btn_area">
 					<button type="button" id="btn2" onclick="location.href='${contextPath}/complaint/list'">목록</button>
 				</div>
+				
 			</div>	
 	</form>	
 	<%-- 공통 footer --%>

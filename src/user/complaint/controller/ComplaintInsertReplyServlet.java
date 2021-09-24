@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import admin.member.model.vo.Info_manager;
+import admin.manager.model.vo.Manager;
 import user.complaint.model.service.complaintService;
 import user.complaint.model.vo.complaint_manager;
 
@@ -37,7 +37,7 @@ public class ComplaintInsertReplyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int c_no = Integer.parseInt(request.getParameter("c_no"));
 		String content = request.getParameter("content");
-		int m_no = ((Info_manager)request.getSession().getAttribute("loginUser_man")).getM_no();
+		int m_no = ((Manager)request.getSession().getAttribute("loginManager")).getmNo();
 		
 		complaint_manager r = new complaint_manager();
 		r.setC_no(c_no);
