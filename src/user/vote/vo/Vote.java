@@ -42,10 +42,6 @@ public class Vote {
 	}
 
 
-
-
-
-
 	public int getV_no() {
 		return v_no;
 	}
