@@ -83,6 +83,7 @@ public class Vote {
 
 
 
+
 	public Vote(int v_no, String ve_choice1, String ve_choice2, String ve_choice3, String ve_choice4,
 			String ve_choice5) {
 		super();

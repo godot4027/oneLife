@@ -104,8 +104,10 @@ public class voteDao {
 													  rset.getString("v_title"),
 													  rset.getString("v_content"),
 													  rset.getInt("v_count"),
+
 													  rset.getString("v_enroll_date"),
 													  rset.getString("v_modify_date"),
+
 													  rset.getString("v_status"),
 													  rset.getInt("m_no"),
 													  rset.getString("m_nick")));
@@ -221,7 +223,7 @@ public class voteDao {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			Vote v = null;
-			String sql = query.getProperty("selectBoard");
+			String sql = query.getProperty("selectVote");
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -234,8 +236,10 @@ public class voteDao {
 								  rset.getString("v_title"),
 								  rset.getString("v_content"),
 								  rset.getInt("v_count"),
+
 								  rset.getString("v_enroll_date"),
 								  rset.getString("v_modify_date"),
+
 								  rset.getString("v_status"),
 								  rset.getInt("m_no"));
 				}
