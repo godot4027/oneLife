@@ -289,5 +289,22 @@
 		)
 	</entry> 
 	
+	<entry key="reportWrite">
+	insert into "BOARD_REPORT"
+	values (?, ?, NULL)
+	</entry>
+	<entry key="reportReply">
+	insert into "BOARD_REPORT"
+	values (?, NULL, ?)
+	</entry>
+	<entry key="chekcUnoWrite">
+	select count(u_no) from board_report
+	where u_no = ? and b_no = ?
+	</entry>
+	<entry key="chekcUnoReply">
+	select count(u_no) from board_report
+	where u_no = ? and bc_no = ?
+	</entry>
+	
 	
 </properties>

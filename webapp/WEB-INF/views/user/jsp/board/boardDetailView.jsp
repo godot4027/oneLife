@@ -59,7 +59,7 @@
                         </div>
                         </c:when>
                         <c:otherwise>
-                        <div id='dis'><input type="button" class="dis_btn" value="신고" onclick="showPopup();"></div>
+                        <div id='dis'><input type="button" class="dis_btn" value="신고" onclick="reportWrite();"></div>
                         </c:otherwise>
                         </c:choose>  
                         </div>
@@ -103,7 +103,7 @@
                             <button type="button" onclick="deleteReply(${ r.bc_no },${ r.b_no });">삭제하기</button>
                             </c:when>
                        		<c:otherwise>
-                            <button type="button" onclick="showPopup();">신고하기</button>
+                            <button type="button" onclick="reportReply(${ r.bc_no });">신고하기</button>
                              </c:otherwise>
                             </c:choose> 
                         </div>
@@ -170,9 +170,13 @@
                 }
             }  
             // 신고 팝업창
-            function showPopup(){
-                window.open("${ contextPath }/board/popup", "신고 팝업창", "width=500, height=400, left=800, top=300"); 
+            function reportWrite(){
+                window.open("${ contextPath }/board/popup?bno=${board.b_no}", "신고 팝업창", "width=500, height=400, left=800, top=300"); 
             }  
+            
+            function reportReply(a){
+                window.open("${ contextPath }/board/popup?bcno="+a, "신고 팝업창", "width=500, height=400, left=800, top=300"); 
+            } 
         </script>
         
          <!-- 댓글 -->

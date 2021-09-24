@@ -181,6 +181,31 @@ public class boardService {
 		
 		return replyList;
 	}
+
+	public int report(String bno, String bcno, int uno) {
+		Connection conn = getConnection();
+		
+		int result = bd.report(conn, bno, bcno, uno);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int chekcUno(String bno, String bcno, int uno) {
+		Connection conn = getConnection();
+		
+		int result = bd.chekcUno(conn, bno, bcno, uno);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 
 

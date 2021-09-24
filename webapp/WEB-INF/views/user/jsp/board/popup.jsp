@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="user.member.model.vo.Member"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	// session 객체에 담긴 loginUser 정보를 변수에 담아두기
+	Member loginUser = (Member) session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,16 +90,37 @@
     </div>
     <h1>이 게시글(댓글)을 One Life 클린센터에<br> 신고하시겠습니까?</h1>
     <h3>※ 신고 누적 시 게시글(댓글)이 강제로 삭제됩니다.</h3>
-    <form method="GET">
-    <input type="submit" value="신고하기" onclick="moveClose();"/>
-    <input type="button" value="취소" onclick="self.close();"/>
+    <form name="reportForm" method="post" action="${contextPath}/board/report">
+    <input name="bno" type="hidden" value="${param.bno}">
+    <input name="bcno" type="hidden" value="${param.bcno}">
+    <input type="submit" value="신고하기"/>
+    <input type="button" value="취소" onclick="window.close();"/>
     </form>
-    <script>
-        function moveClose() {
-         alert('정상적으로 접수 됐습니다.');
-         self.close();
-        }
-     </script>
-	
+<%
+	if(request.getAttribute("result") != null) {
+		if(request.getAttribute("result").equals("success")) {
+%>
+<script>
+		alert('정상적으로 접수되었습니다.');
+		window.close();
+</script>
+<%
+	} else if (request.getAttribute("result").equals("already")) {
+%>
+<script>
+		alert('이미 신고하셨습니다.');
+		window.close();
+</script>
+<%
+	} else {
+%>	
+<script>
+		alert('신고에 실패하였습니다.');
+		window.close();
+</script>
+<%
+	}
+} 
+%>
 </body>
 </html>
