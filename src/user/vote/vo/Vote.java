@@ -14,6 +14,7 @@ public class Vote {
 	private Date v_modify_date;
 	private String v_status;
 	private int m_no;
+	private String m_nick;
 	
 /*
    "V_NO"   NUMBER      NOT NULL,
@@ -108,13 +109,25 @@ public class Vote {
 	public void setM_no(int m_no) {
 		this.m_no = m_no;
 	}
+	
+	
+
+	public String getM_nick() {
+		return m_nick;
+	}
+
+	public void setM_nick(String m_nick) {
+		this.m_nick = m_nick;
+	}
 
 	@Override
 	public String toString() {
 		return "Vote [v_no=" + v_no + ", v_title=" + v_title + ", v_content=" + v_content + ", v_count=" + v_count
 				+ ", v_enroll_date=" + v_enroll_date + ", v_modify_date=" + v_modify_date + ", v_status=" + v_status
-				+ ", m_no=" + m_no + "]";
+				+ ", m_no=" + m_no + ", m_nick=" + m_nick + "]";
 	}
+
+	
 
 	
 }
