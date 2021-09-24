@@ -143,4 +143,105 @@ public class voteDao {
 			}
 			return result;
 		}
+		
+		// 투표게시판 v_no 글가져오기
+		public int selectVoteNo(Connection conn) {
+			 int v_no = 0;
+		      PreparedStatement pstmt = null;
+		      String sql = query.getProperty("selectvno");
+		      ResultSet rset = null;
+		      
+		      try {
+		         pstmt = conn.prepareStatement(sql);
+		         rset = pstmt.executeQuery();
+		         
+		         if (rset.next()) {
+		        	 v_no = rset.getInt(1);
+		         }
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      } finally {
+		         close(pstmt);
+		         close(rset);
+		      }
+		      
+		      return v_no;
+		}
+		
+		// 투표게시판 조회수 증가
+		public int increaseCount(Connection conn, int v_no) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = query.getProperty("increaseCount");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, v_no);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		public Vote selectVote(Connection conn, int v_no) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			Vote v = null;
+			String sql = query.getProperty("selectBoard");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, v_no);
+				
+				rset = pstmt.executeQuery();
+				
+				if (rset.next()) {
+					v = new Vote(rset.getInt("v_no"),
+								  rset.getString("v_title"),
+								  rset.getString("v_content"),
+								  rset.getInt("v_count"),
+								  rset.getTimestamp("v_enroll_date"),
+								  rset.getTimestamp("v_modify_date"),
+								  rset.getString("v_status"),
+								  rset.getInt("m_no"));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return v;
+		}
+		
+		// 게시글 삭제
+		public int deleteVote(Connection conn, int v_no) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = query.getProperty("deleteVote");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, v_no);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		
+		
 	}
