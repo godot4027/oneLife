@@ -142,7 +142,7 @@ public class VisitCar {
 	
 	
 	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_MODIFYDATE,
-			String vC_STATUS, String r_NAME, int u_NO) {
+			String vC_STATUS, String r_NAME, int u_NO, String m_name) {
 		super();
 		VC_ID = vC_ID;
 		VC_DATE = vC_DATE;
@@ -153,6 +153,7 @@ public class VisitCar {
 		VC_STATUS = vC_STATUS;
 		R_NAME = r_NAME;
 		U_NO = u_NO;
+		mName = m_name;
 	}
 	
 	

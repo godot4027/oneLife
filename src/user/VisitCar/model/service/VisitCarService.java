@@ -13,19 +13,20 @@ import java.util.Map;
 import admin.vehicle.model.vo.VisitCarSearch;
 import user.VisitCar.model.dao.VisitCarDao;
 import user.VisitCar.model.vo.PageInfo;
+import user.VisitCar.model.vo.UserVisitCarSearch;
 import user.VisitCar.model.vo.VisitCar;
 
 public class VisitCarService {
 	private VisitCarDao md = new VisitCarDao();
 
-	public Map<String, Object> selectList(int page, int dong, int ho) {
+	public Map<String, Object> selectList(int page, int dong, int ho, UserVisitCarSearch vs) {
 		Connection conn = getConnection();
 
-		int listCount = md.getListCount(conn, dong, ho);
+		int listCount = md.getListCount(conn, dong, ho, vs);
 
 		PageInfo pi = new PageInfo(page, listCount, 10, 10);
 
-		List<VisitCar> visitCarList = md.selectList(conn, pi, dong, ho);
+		List<VisitCar> visitCarList = md.selectList(conn, pi, dong, ho, vs);
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("pi", pi);
 		returnMap.put("visitCarList", visitCarList);

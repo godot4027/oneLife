@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -314,6 +315,9 @@ align-items : center;
 							</div>
 
 							<div class="vehicleList_body">
+							<c:if test="${fn:length(houseHoldCarList) eq 0}">
+								<h3>검색 결과가 없습니다.</h3>
+							</c:if>
 								<!-- 한세트 -->
 								<c:forEach var="m" items="${houseHoldCarList}">
 									<div class="inVehicle">
@@ -363,6 +367,8 @@ align-items : center;
 								<ul class="board_paging">
 								<%-- 검색 결과 화면인 경우 넘겨줄 searchParam 정의 --%>
 								<c:choose>
+									<c:when test="${ empty param.dong && empty param.ho && empty param.carNo}">
+									</c:when>
 									<c:when test="${ !empty param.dong && !empty param.ho && !empty param.carNo}">
 										<c:set var="searchParam" value="&dong=${param.dong}&ho=${param.ho }&carNo=${param.carNo}" />
 									</c:when>
@@ -612,6 +618,27 @@ align-items : center;
 	  		for (var i = 0; i < z.length; i++) {
 	  			inputHo2.options[inputHo2.options.length] = new Option(z[i], z[i]);
 	  		}
+		  }
+		  
+		//검색 조건 드롭박스 조건 유지
+		  let dropDong = '${ param.dong }';
+		  let dropHo = '${ param.ho }';
+		  
+		  for (var i = 0; i < inputDong2.length; i++) {
+			  if (inputDong2.options[i].value == dropDong) {
+				  inputDong2.options[i].selected = true;
+			  }
+		  } 
+		  
+		  if (dropDong != "" && dropHo != "") {
+			  var y = subjectObject[dropDong];
+			  
+			  for (var i = 0; i < y.length; i++) {
+				  inputHo2.options[inputHo2.options.length] = new Option(y[i], y[i]);
+	    			if (inputHo2.options[i+1].value == dropHo) {
+	    				inputHo2.options[i+1].selected = true;
+		  			 }
+	    		} 
 		  }
 		} 
 	

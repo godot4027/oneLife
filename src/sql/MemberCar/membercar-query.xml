@@ -22,7 +22,7 @@
 	<entry key="insertMemberCar">
 		insert into member_car
 		values (membercar_seq.nextval,
-		?, sysdate, sysdate, 'Y', default, ?, ? )
+		?, sysdate, sysdate, ?, 'N', ?, ?)
 	</entry>
 	<entry key="oneHouseHoldCarList">
 		select

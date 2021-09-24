@@ -15,7 +15,8 @@ import admin.manager.model.vo.Manager;
 import user.member.model.service.MemberService;
 import user.member.model.vo.Member;
 
-@WebServlet("/login")
+// @WebServlet("/login")
+@WebServlet(name="loginServlet", urlPatterns="/login")
 public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

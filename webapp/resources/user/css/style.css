@@ -1077,7 +1077,7 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 }
 
 .step2_span_right {
-	margin-left: 20px;
+	/* margin-left: 20px; */
 	font-size: 23px;
 }
 
