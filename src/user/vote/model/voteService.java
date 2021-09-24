@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import user.board.model.vo.Board;
 import user.board.model.vo.PageInfo;
 import user.board.model.vo.Search;
 import user.vote.vo.Vote;
@@ -39,22 +38,65 @@ public class voteService {
 		return returnMap;
 	}
 	
-	// 투표게시판 글 작성 
+		// 투표게시판 글 작성 
 		public int insertVote(Vote v) {
 			Connection conn = getConnection();
 			
 			int result = vd.insertVote(conn, v);
 			
-			int b_no = 0;
+			int v_no = 0;
 			if (result > 0) {
-				b_no =vd.selectBoardNo(conn);
+				v_no =vd.selectVoteNo(conn);
 				commit(conn);
 			} else {
 				rollback(conn);
 			}
 			close(conn);
 			
-			return b_no;
+			return v_no;
+		}
+		
+		// 조회수 증가
+		public int increaseCount(int v_no) {
+			Connection conn = getConnection();
+			
+			int result =  vd.increaseCount(conn, v_no);
+			
+			if (result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			close(conn);
+			
+			return result;
+		}
+		
+		// 게시글 1개 조회
+		public Vote selectVote(int v_no) {
+			Connection conn = getConnection();
+			
+			Vote v = vd.selectVote(conn, v_no);
+			
+			close(conn);
+			
+			return v;
+		}
+		
+		// 게시글 삭제
+		public int deleteVote(int v_no) {
+			Connection conn = getConnection();
+			
+			int result =  vd.deleteVote(conn, v_no);
+			
+			if (result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			close(conn);
+			
+			return result;
 		}
 	
 }
