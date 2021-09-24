@@ -7,8 +7,6 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
-import admin.member.model.dao.Info_managerDao;
-import admin.member.model.vo.Info_manager;
 import user.member.model.dao.MemberDao;
 import user.member.model.vo.Member;
 
