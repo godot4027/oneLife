@@ -221,7 +221,7 @@ public class voteDao {
 			return v;
 		}
 		
-		// 게시글 삭제
+		// 투표게시판 게시글 삭제
 		public int deleteVote(Connection conn, int v_no) {
 			PreparedStatement pstmt = null;
 			int result = 0;

@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import user.board.model.vo.Board;
 import user.board.model.vo.PageInfo;
 import user.board.model.vo.Search;
 import user.vote.vo.Vote;
