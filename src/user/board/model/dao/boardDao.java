@@ -223,7 +223,8 @@ public class boardDao {
 							  rset.getInt("u_no"),
 							  rset.getString("u_nickname"),
 							  rset.getInt("bc_no"),
-							  rset.getInt("b_reply_count"));
+							  rset.getInt("b_reply_count"),
+							  rset.getInt("b_likecnt"));
 			}
 			
 		} catch (SQLException e) {
@@ -394,6 +395,79 @@ public class boardDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bl.getU_no());
 			pstmt.setInt(2, bl.getB_no());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	// 좋아요 수 업데이트
+	public int countHeart(Connection conn, Board_Like bl) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("countHeart");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bl.getB_no());
+			pstmt.setInt(2, bl.getB_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+
+	// 좋아요수 조회
+	public Board selectHeart(Connection conn, Board_Like bl) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board b = null;
+		String sql = query.getProperty("selectHeart");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bl.getB_no());
+			
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				b = new Board(rset.getInt("b_likecnt"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
+
+	// 좋아요 삭제
+	public int deleteHeart(Connection conn, Board_Like bl) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteHeart");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bl.getB_no());
+			pstmt.setInt(2, bl.getU_no());
+			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
