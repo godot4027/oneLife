@@ -13,6 +13,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import admin.manager.model.service.ManagerService;
+import admin.manager.model.vo.Manager;
 import user.member.model.vo.Member;
 
 
@@ -63,6 +65,7 @@ public class LoginCheckFilter implements Filter {
 			
 			if(!isResourceFile) {
 				Member loginUser = (Member)hreq.getSession().getAttribute("loginUser");
+				
 				
 				if(loginUser == null) {
 					hreq.setAttribute("msg", "올바르지 않은 요청입니다.");
