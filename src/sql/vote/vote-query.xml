@@ -92,24 +92,49 @@
       INSERT
       INTO VOTE
       (
-            V_NO
-         ,   V_TITLE
-         ,   V_CONTENT
-         ,   V_ENROLL_DATE
-         ,   V_MODIFY_DATE
-         ,   V_COUNT
-         ,   V_STATUS
-         ,   M_NO
+          V_NO
+		, V_TITLE
+		, V_CONTENT
+		, V_COUNT
+		, V_ENROLL_DATE
+		, V_MODIFY_DATE
+		, V_STATUS
+		, M_NO
+		, V_CHOICE
       )
       VALUES
       (
          VOTE_SEQ.NEXTVAL
          , ?
          , ?
+         , DEFAULT
          , SYSDATE
+         , TO_DATE(?, 'YY/MM/DD')
+         , DEFAULT
          , ?
-         , DEFAULT
-         , DEFAULT
+         , ?
+      )
+   </entry> 
+   <entry key="insertVoteExample">
+      INSERT
+      INTO VOTE_EXAMPLE
+      (
+          VE_NO
+		, V_NO
+		, VE_CHOICE1
+		, VE_CHOICE2
+		, VE_CHOICE3
+		, VE_CHOICE4
+		, VE_CHOICE5
+      )
+      VALUES
+      (
+         VOTE_EXAMPLE_SEQ.NEXTVAL
+         , ?
+         , ?
+         , ?
+         , ?
+         , ?
          , ?
       )
    </entry>
@@ -124,5 +149,27 @@
        WHERE V_NO = ?
          AND V_STATUS = 'Y'
    </entry>
+   <entry key="selectVote">
+        SELECT
+            V.V_NO
+         , V.V_TITLE
+         , V.V_CONTENT
+            , V.V_COUNT
+         , V.V_ENROLL_DATE
+         , V.V_MODIFY_DATE
+         , V.V_STATUS
+            , M.M_NO
+       FROM VOTE V, INFO_MANAGER M
+       WHERE V.V_NO = M.M_NO 
+         AND V_NO = ?
+       AND V_STATUS = 'Y';
+   </entry>
+   
+   <entry key="deleteVote">
+         UPDATE VOTE
+         SET V_STATUS = 'N'
+       WHERE V_NO = ? 
+   </entry>
+   
    
 </properties>

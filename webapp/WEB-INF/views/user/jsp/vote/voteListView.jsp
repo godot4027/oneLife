@@ -60,7 +60,12 @@
 					</c:choose>
 					<li class="title">${ v.v_title }</li>
 					<li class="nick">${ v.m_nick }</li>
-					<li class="date">${ v.v_enroll_date }~${ v.v_modify_date }</li>
+					<li class="date">
+					<fmt:parseDate value='${v.v_enroll_date}' var='enroll_day' pattern='yyyy-MM-dd' scope="page"/>
+					<fmt:formatDate value="${enroll_day}" pattern="yyyy-MM-dd"/> ~
+					<fmt:parseDate value='${v.v_modify_date}' var='modify_day' pattern='yyyy-MM-dd' scope="page"/>
+					<fmt:formatDate value="${modify_day}" pattern="yyyy-MM-dd"/>
+					</li>
 					<li class="count">${ v.v_count }</li>
 				</ul>
 				</c:forEach>
@@ -72,7 +77,7 @@
 				<button type="button" id="btn2">목록</button>
 				<!-- 관리자만 버튼 보이게-->
 				<%-- <c:if test="${ !empty loginManager }"> --%>
-				<button type="button" id="btn3">작성하기</button>
+				<button type="button" id="btn3" onclick="location.href='${ contextPath }/vote/insert'">작성하기</button>
 				<%-- </c:if> --%>
 			</form>
 		</div>
