@@ -406,6 +406,40 @@ public class boardDao {
 		return result;
 	}
 
+	public int report(Connection conn, String bno, String bcno, int uno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "";
+		
+		System.out.println("bno : " + bno);
+		System.out.println("bcno : " + bcno);
+		if (bno.equals("")) {
+			sql = query.getProperty("reportReply");
+		} else {
+			sql = query.getProperty("reportWrite");
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, uno);
+			if (bno.equals("")) {
+				pstmt.setString(2, bcno);
+			} else {
+				pstmt.setString(2, bno);
+			}
+      	result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 	// 좋아요 수 업데이트
 	public int countHeart(Connection conn, Board_Like bl) {
 		PreparedStatement pstmt = null;
@@ -416,7 +450,7 @@ public class boardDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bl.getB_no());
 			pstmt.setInt(2, bl.getB_no());
-			
+
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -427,6 +461,33 @@ public class boardDao {
 		
 		return result;
 	}
+
+
+	public int chekcUno(Connection conn, String bno, String bcno, int uno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = "";
+		
+		if (bno.equals("")) {
+			sql = query.getProperty("chekcUnoReply");
+		} else {
+			sql = query.getProperty("chekcUnoWrite");
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, uno);
+			if (bno.equals("")) {
+				pstmt.setString(2, bcno);
+			} else {
+				pstmt.setString(2, bno);
+			}
+			
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
 
 	
 
@@ -478,11 +539,4 @@ public class boardDao {
 		
 		return result;
 	}
-
-	
-	
-	
-
-	
-
 }
