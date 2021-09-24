@@ -32,7 +32,6 @@
 					<select id="searchCondition" name="searchCondition">
 							<option value="title" <c:if test="${ param.searchCondition == 'title' }">selected</c:if>>제목</option>
 							<option value="content" <c:if test="${ param.searchCondition == 'content' }">selected</c:if>>내용</option>
-						    <option value="writer" <c:if test="${ param.searchCondition == 'writer' }">selected</c:if>>닉네임</option>
 					</select>
 					<span class="input_area"> 
 					<input type="search" name="searchValue" placeholder="검색">
@@ -72,9 +71,9 @@
 			<form method="get">
 				<button type="button" id="btn2">목록</button>
 				<!-- 관리자만 버튼 보이게-->
-				<c:if test="${ !empty loginManager }">
+				<%-- <c:if test="${ !empty loginManager }"> --%>
 				<button type="button" id="btn3">작성하기</button>
-				</c:if>
+				<%-- </c:if> --%>
 			</form>
 		</div>
 

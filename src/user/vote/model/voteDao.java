@@ -42,9 +42,7 @@ public class voteDao {
 					sql = query.getProperty("getTitleListCount");
 				} else if(s.getSearchCondition().equals("content")) {  // 내용 검색
 					sql = query.getProperty("getContentListCount");
-				} else if(s.getSearchCondition().equals("writer")) {  // 작성자 검색
-					sql = query.getProperty("getWriterListCount");
-				}
+				} 
 			}
 			
 			
@@ -83,9 +81,7 @@ public class voteDao {
 					sql = query.getProperty("selecTitleList");
 				} else if(s.getSearchCondition().equals("content")) {  // 내용 검색
 					sql = query.getProperty("selecContentList");
-				} else if(s.getSearchCondition().equals("writer")) {   // 작성자 검색
-					sql = query.getProperty("selecWriterList");
-				}
+				} 
 			}
 			
 			try {
