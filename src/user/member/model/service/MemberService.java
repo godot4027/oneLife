@@ -24,7 +24,7 @@ public class MemberService {
 
 		return loginUser;
 	}
-
+	
 	// 2. 회원가입 기능
 	public int insertMember(Member mem) {
 		Connection conn = getConnection();
@@ -84,6 +84,11 @@ public class MemberService {
 
 		return result;
 	}
+	
+//	// 주민 원라이프 가입여부 상태(중복 가입 방지)
+//	public int changeRstatus(int rno) {
+//		return 0;
+//	}
 
 	// 3. 회원 정보 수정 기능
 	public Member updateMember(Member mem) {
@@ -159,4 +164,16 @@ public class MemberService {
 
 		return findUserPwd;
 	}
+	
+	public Member findMemberByEmail(String email) {
+		Connection conn = getConnection();
+
+		Member findUserPwd = new MemberDao().selectMemberByEmail(conn, email);
+
+		close(conn);
+
+		return findUserPwd;
+	}
+
+	
 }
