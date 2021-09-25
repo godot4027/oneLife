@@ -24,6 +24,21 @@ public class Member {
 	
 	
 	
+	public Member(int r_DONG, int r_HO, String r_NAME, String r_EMAIL, String r_type, String r_STATUS, Date r_DATE,
+			int r_NO) {
+		super();
+		R_DONG = r_DONG;
+		R_HO = r_HO;
+		R_NAME = r_NAME;
+		R_EMAIL = r_EMAIL;
+		R_type = r_type;
+		R_STATUS = r_STATUS;
+		R_DATE = r_DATE;
+		R_NO = r_NO;
+	}
+
+
+
 	public Member(String u_ID, String r_NAME, String r_EMAIL) {
 		super();
 		U_ID = u_ID;

@@ -53,9 +53,10 @@ public class userJoinServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		
 		int rno = new MemberService().checkR(name, email);
-		
+		Member info_resident = new MemberService().findMemberByEmail(email);
 		
 		if (rno > 0) {
+			if(info_resident.getR_STATUS().equals("N")) {
 			// 가입 정보를 담은 Member 객체 생성
 			Member mem = new Member(userId, nickName, userPwd, phone, rno);
 			// 3. 비즈니스 로직을 수행할 서비스 메소드로 Member 객체 전달 후 결과 값 리턴 받기
@@ -64,7 +65,11 @@ public class userJoinServlet extends HttpServlet {
 			 // System.out.println(result2);
 			 // System.out.println(result1);
 			request.getRequestDispatcher("WEB-INF/views/user/jsp/member/userJoinSuccess.jsp").forward(request, response);
-			
+			}else {
+				request.setAttribute("msg", "이미 가입된 입주민 입니다.");
+				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
+				view.forward(request, response);
+			}
 		} else {
 			request.setAttribute("msg", "아파트 주민이 아닙니다.");
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
