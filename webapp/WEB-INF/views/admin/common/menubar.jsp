@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- 메뉴바의 on클래스를위한 변수 --%>
 <c:set var="menuUrl" value="${requestScope['javax.servlet.forward.servlet_path']}" scope="application"></c:set>
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="sysDate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set>
 
 <nav id="nav">
     <div class="nav">
@@ -21,7 +24,7 @@
                 <a href="javascript:;">부대시설</a>
                 <ul class="inner">
                     <li class="<c:if test="${fn:contains(menuUrl, '/admin/facil/')}">on</c:if>" >
-                        <a href="${contextPath}/admin/facil/list">부대시설 예약 관리</a>
+                        <a href="${contextPath}/admin/facil/list?allDay=on">부대시설 예약 관리</a>
                     </li>
                     <%--독서실, 멀티코트장 예약현황 윈도우팝업으로 --%>
                     <li>
@@ -78,7 +81,7 @@
 		let popX = (window.screen.width - popWidth) / 2;
 		let popY = (window.screen.height - popHeight) / 2;
 		let options = 'width=' + popWidth +', height=' + popHeight + ', top=' + popY  + ', left=' + popX + ', resizable=no, scrollbars=no, location=no';
-		window.open("${contextPath}/admin/facil/" + url,"facilPop",options);
+		window.open("${contextPath}/admin/facil/" + url + "?day=${sysDate}","facilPop",options);
 	}
 </script>
 

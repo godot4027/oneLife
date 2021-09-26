@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -72,12 +73,14 @@
 	                                <dt>일정 예정일</dt>
 	                                <dd>    
 	                                    <div class="calendar">
+	                                    	<c:set var="now" value="<%=new java.util.Date()%>" />
+											<c:set var="sysDate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set>
 	                                    	<c:choose>
 					                    		<c:when test="${param.type == 'insert'}">
-					                    			<input type="text" name="searchDay" class="cal" readonly>
+					                    			<input type="text" name="searchDay" class="cal_today" value="${sysDate}" readonly>
 					                    		</c:when>
 					                    		<c:otherwise>
-					                    			<input type="text" name="searchDay" class="cal" value="${weekOne.scOpenDate}" readonly>
+					                    			<input type="text" name="searchDay" class="cal_today" value="${weekOne.scOpenDate}" readonly>
 					                    		</c:otherwise>
 					                    	</c:choose>
 	                                    </div>

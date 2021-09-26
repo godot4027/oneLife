@@ -46,9 +46,11 @@ public class ManagerClassChangeServlet extends HttpServlet {
 		int result = new ManagerService().classChangeManager(mNo, mJobcode);
 		
 		if(result > 0) {// 계급변경에 성공하였을시
-			request.getSession().setAttribute("msg", mNo + "번 회원의 계급을 변경하였습니다.");
+			request.getSession().setAttribute("msgHead", "관리자 계급변경");
+			request.getSession().setAttribute("msgBody", mNo + "번 회원의 계급 변경을 성공 하였습니다.");
 		}else {
-			request.getSession().setAttribute("msg", mNo + "번 회원의 계급 변경실패하였습니다.");
+			request.getSession().setAttribute("msgHead", "관리자 계급변경");
+			request.getSession().setAttribute("msgBody", mNo + "번 회원의 계급 변경을 실패 하였습니다.");
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/admin/manager/list");

@@ -20,7 +20,9 @@ import wrapper.EncryptWrapper;
 // Login, Join, Modify
 @WebFilter(filterName="encrypt", servletNames= {"loginServlet",
 												"userJoinServlet",
-												"pwdModifyServlet"})
+												"pwdModifyServlet",
+												"infoChange",
+												"managerCreate"})
 public class EncryptFilter implements Filter {
 
     /**

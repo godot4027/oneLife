@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import common.PageInfo;
 import admin.member.model.dao.ResidentDao;
 import admin.member.model.vo.Resident;
 import admin.member.model.vo.Search;
+import common.PageInfo;
 
 public class ResidentService {
 	private ResidentDao rd = null;

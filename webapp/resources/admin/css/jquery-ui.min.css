@@ -953,7 +953,9 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
 	font-weight: normal;
-	color: #212121;
+	color: #fff !important;
+	background:#3C90F2 !important;
+	
 }
 .ui-state-active a,
 .ui-state-active a:link,

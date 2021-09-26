@@ -23,7 +23,7 @@
 			</script>
 		</c:when>
 	</c:choose>
-	
+
 	<%-- 사용자 페이지 이동버튼 --%>
     <c:if test="${!empty loginManager}">
        	<style>
@@ -90,6 +90,20 @@
         </div>
     </div>
     
+    <%-- 정보변경 후 팝업창 --%>
+    <div class="popup_wrap" id="complete">
+        <div class="dim"></div>
+        <div class="item">
+            <h3 class="tit">${msgHead}</h3>
+            <p class="txt">${msgBody}</p>
+            <div class="btn_box">
+                <a href="javascript:popHide('complete');" class="ok">확인</a>
+            </div>
+        </div>
+    </div>
+    
+    
+    
     
     
     <script>	
@@ -148,8 +162,17 @@
  		userInfoFrm.submit();
  		
  	}
- 	
- 	
     </script>
+    
+    <%-- msg값 출력 --%>
+	<c:choose>
+		<c:when test="${!empty msgHead && !empty msgBody}">
+			<script>
+				popShow('complete');
+			</script>
+			<c:remove var="msgHead" scope="session" />
+			<c:remove var="msgBody" scope="session" />
+		</c:when>
+	</c:choose>
     
     

@@ -38,7 +38,7 @@
 												<option value="SC_CODE1"
 													<c:if test="${param.sType eq 'SC_CODE1'}">selected</c:if>>공동생활</option>
 												<option value="SC_CODE2"
-													<c:if test="${param.sType eq 'SC_CODE2'}">selected</c:if>>도란도란</option>
+													<c:if test="${param.sType eq 'SC_CODE2'}">selected</c:if>>주민투표</option>
 											</select>
 										</div>
 									</div>
@@ -123,7 +123,7 @@
 										</tr>
 									</thead>
 									<tbody>
-									<form name = "weekFrm">
+									<form name="weekFrm">
 
 										<c:choose>
 											<c:when test="${wList.size() > 0}">

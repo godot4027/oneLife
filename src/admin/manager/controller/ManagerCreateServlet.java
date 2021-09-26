@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import admin.manager.model.service.ManagerService;
 import admin.manager.model.vo.Manager;
 
-@WebServlet("/admin/manager/create")
+@WebServlet(name="managerCreate", urlPatterns="/admin/manager/create")
 public class ManagerCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
