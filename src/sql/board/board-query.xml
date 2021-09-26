@@ -43,6 +43,7 @@
 			, U_NO
 			, U_NICKNAME
             , B_REPLY_COUNT
+            , B_LIKECNT
 		FROM(SELECT ROWNUM RNUM
 				  , BLIST.*
 		    FROM(SELECT
