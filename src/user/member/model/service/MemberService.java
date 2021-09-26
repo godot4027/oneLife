@@ -159,4 +159,14 @@ public class MemberService {
 
 		return findUserPwd;
 	}
+
+	public int checkJoin(int rno) {
+		Connection conn = getConnection();
+
+		int result = new MemberDao().checkJoin(conn, rno);
+
+		close(conn);
+
+		return result;
+	}
 }

@@ -262,7 +262,9 @@ margin-top : 30px;
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="v" items="${visitCarList}">
+										<c:choose>
+											<c:when test="${fn:length(visitCarList) ne 0}">
+											<c:forEach var="v" items="${visitCarList}">
 											<tr>
 												<td>${v.VC_ID}</td>
 												<td>${v.VC_DATE}</td>
@@ -376,12 +378,24 @@ margin-top : 30px;
 												</div>
 											</form>
 										</c:forEach>
-										
+											</c:when>
+											<c:otherwise>
+												<tr>
+                                    			<td>
+                                    				<div class="list_nodate">
+														<img src="/oneLife/resources/admin/images/list_nodate.png" alt="NODATE">
+													<p>신고된 게시글이 존재하지 않습니다.</p>
+												</div>
+                                    			</td>
+                                    		</tr>
+                                    		<script>
+									    		let thSize = $('.table_wrap .table thead tr th').length;
+									    		$('.content .list_nodate').parent('td').attr('colspan', thSize);
+											</script>
+											</c:otherwise>
+										</c:choose>
 									</tbody>
 								</table>
-									<c:if test="${fn:length(visitCarList) eq 0}">
-													<h3>검색 결과가 없습니다.</h3>
-										</c:if>
 							</div>
 
 							<!-- <div class="paging_wrap type02">
@@ -392,6 +406,7 @@ margin-top : 30px;
 							<a href="javascript:;" class="btn_num">5</a> <a
 								href="javascript:;" class="btn_next"></a>
 						</div> -->
+						<c:if test="${fn:length(visitCarList) ne 0}">
 							<ul class="board_paging">
 							
 							<%-- 검색 결과 화면인 경우 넘겨줄 searchParam 정의 --%>
@@ -453,6 +468,7 @@ margin-top : 30px;
 								<li><a
 									href="${contextPath }/admin/visit/list?page=${pi.maxPage}${searchParam}">&gt;&gt;</a></li>
 							</ul>
+							</c:if>
 							<!-- <ul class="board_paging">
 			<li><a href="javascript:;">&lt;</a></li>
 			<li><a href="javascript:;" class="current_page">1</a></li>

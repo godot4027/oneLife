@@ -21,7 +21,16 @@
 		location.href = '${contextPath}/main';
 	</script>
 </c:if>
-
+<%
+	if (session.getAttribute("msg") != null) {
+%>
+<script>
+	alert('<%=session.getAttribute("msg")%>');
+</script>
+<%
+	session.removeAttribute("msg");
+}
+%>
 </head>
 <body>
 	<div id="wrap">
@@ -30,24 +39,19 @@
 				<div class="slide_wrap">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
-							<img src="https://www.wallpaperuse.com/wallp/54-548978_m.jpg"
-								alt="">
+							<img src="resources/user/images/slide1.jpg" width="100%" alt="광고">
 						</div>
 						<div class="swiper-slide">
-							<img src="https://www.wallpaperuse.com/wallp/54-548978_m.jpg"
-								alt="">
+							<img src="resources/user/images/slide2.jpg" width="100%" alt="광고">
 						</div>
 						<div class="swiper-slide">
-							<img src="https://www.wallpaperuse.com/wallp/54-548978_m.jpg"
-								alt="">
+							<img src="resources/user/images/slide3.jpg" width="100%" alt="광고">
 						</div>
 						<div class="swiper-slide">
-							<img src="https://www.wallpaperuse.com/wallp/54-548978_m.jpg"
-								alt="">
+							<img src="resources/user/images/slide4.jpg" width="100%" alt="광고">
 						</div>
 						<div class="swiper-slide">
-							<img src="https://www.wallpaperuse.com/wallp/54-548978_m.jpg"
-								alt="">
+							<img src="resources/user/images/slide5.jpg" width="100%" alt="광고">
 						</div>
 					</div>
 					<div class="swiper-pagination"></div>
@@ -91,7 +95,7 @@
 	<script>
 		// 아이디저장하기 쿠키
 		// userId input 태그
-		const userId = document.querySelector("#userId");
+		/* const userId = document.querySelector("#userId"); */
 		// remember checkbox 태그
 		const remember = document.querySelector("#idSave");
 		// 저장 된 쿠키 값 가져오기(cookieName : rememberId)
@@ -182,12 +186,6 @@
 		});
 	</script>
 	<script>
-
-		
-		function check() {
-			alert("와아~~~");
-		}
-		
 		$(function() {
 			$("#mailBtn").click(function() {
 				$.ajax({

@@ -2,9 +2,11 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="getListCount">
-		SELECT
-               COUNT(*) AS COUNT
-          FROM BOARD_COMMENT
+		 select count(*) as count from 
+		 (select b.*, (select count(*) 
+		 					from board_report sb 
+		 					where sb.bc_no = b.bc_no) as report 
+          					from board_comment b) where report > 4 and bc_status = 'Y'
 	</entry>
 	<entry key="getListSearchCount">
 		SELECT
@@ -21,12 +23,12 @@
 		                FROM BOARD_REPORT
 		                WHERE B_NO IS NULL
 		                  AND BC_NO = BOARD_COMMENT.BC_NO) AS REPORT
-		         , BOARD_COMMENT.STATUS AS COMMENT_STATUS
+		         , BOARD_COMMENT.BC_STATUS AS COMMENT_STATUS
 		         
 		         FROM BOARD
 		         JOIN MEMBER USING(U_NO)
 		         JOIN BOARD_COMMENT USING(B_NO)
-		       )
+		       ) where report > 4
 	</entry>
 	<entry key="selectReplyList">
 	SELECT
@@ -50,7 +52,7 @@
 	     , B_TITLE
 	     , B_CONTENT
 	     , BC_NO AS COMMENT_BC_NO
-	     , BOARD_COMMENT.ENROLL_DATE AS COMMENT_ENROLL_DATE
+	     , BOARD_COMMENT.BC_ENROLL_DATE AS COMMENT_ENROLL_DATE
 	     , BC_CONTENT
 	     , BOARD_COMMENT.U_NO AS COMMENT_U_NO
 	     
@@ -63,12 +65,13 @@
 	            FROM BOARD_REPORT
 	            WHERE B_NO IS NULL
 	              AND BC_NO = BOARD_COMMENT.BC_NO) AS REPORT
-	     , BOARD_COMMENT.STATUS AS COMMENT_STATUS
+	     , BOARD_COMMENT.BC_STATUS AS COMMENT_STATUS
 	     
 	     FROM BOARD
 	     JOIN MEMBER USING(U_NO)
 	     JOIN BOARD_COMMENT USING(B_NO)
-	     ORDER BY REPORT DESC ,COMMENT_BC_NO DESC))
+	     ORDER BY REPORT DESC ,COMMENT_BC_NO DESC)
+	     where report > 4 and COMMENT_STATUS = 'Y')
 	     WHERE ROWN BETWEEN ? AND ?									
 	</entry>
 	<entry key="selectReplySearchList">
@@ -93,7 +96,7 @@
 		     , B_TITLE
 		     , B_CONTENT
 		     , BC_NO AS COMMENT_BC_NO
-		     , BOARD_COMMENT.ENROLL_DATE AS COMMENT_ENROLL_DATE
+		     , BOARD_COMMENT.BC_ENROLL_DATE AS COMMENT_ENROLL_DATE
 		     , BC_CONTENT
 		     , BOARD_COMMENT.U_NO AS COMMENT_U_NO
 		     
@@ -106,17 +109,16 @@
 		            FROM BOARD_REPORT
 		            WHERE B_NO IS NULL
 		              AND BC_NO = BOARD_COMMENT.BC_NO) AS REPORT
-		     , BOARD_COMMENT.STATUS AS COMMENT_STATUS
-		     
+		     , BOARD_COMMENT.BC_STATUS AS COMMENT_STATUS
 		     FROM BOARD
 		     JOIN MEMBER USING(U_NO)
 		     JOIN BOARD_COMMENT USING(B_NO)
-		     ORDER BY REPORT DESC ,COMMENT_BC_NO DESC)	
+		     ORDER BY COMMENT_BC_NO DESC) where report > 4	
 	<!-- dao에서 계속작성 -->
 	</entry>
 	<entry key="removeReply">
 		UPDATE BOARD_COMMENT
-		SET STATUS = 'N'
+		SET BC_STATUS = 'N'
 		WHERE BC_NO = ?
 	</entry>
 

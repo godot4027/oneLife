@@ -39,27 +39,28 @@ public class ReportDao {
 		String sql = query.getProperty("getListCount");
 		
 		if(sc.getStatus() != null && sc.getReportNum() != null) {
+			sql = query.getProperty("getListSearchCount");
 			// 검색어 있을시
 			// 삭제여부
 			if(sc.getStatus().equals("all")) {
-				 sql += " WHERE STATUS IS NOT NULL ";
+				 sql += " and B_STATUS IS NOT NULL ";
 			}else if(sc.getStatus().equals("Y")){
-				 sql += " WHERE STATUS = 'Y' ";
+				 sql += " and B_STATUS = 'Y' ";
 			}else if(sc.getStatus().equals("N")){
-				sql += " WHERE STATUS = 'N' ";
+				sql += " and B_STATUS = 'N' ";
 			}
 			
 			// 신고누적
-			if(sc.getReportNum().equals("all")) {
-				// 전체
-				sql += "AND REPORT IS NOT NULL ";
-			}else if(sc.getReportNum().equals("reportDown")){
-				// 0 ~ 4
-				sql += "AND REPORT BETWEEN 0 AND 4 ";
-			}else {
-				// 5 이상일시
-				sql += "AND REPORT >= 5 ";
-			}
+//			if(sc.getReportNum().equals("all")) {
+//				// 전체
+//				sql += "AND REPORT IS NOT NULL ";
+//			}else if(sc.getReportNum().equals("reportDown")){
+//				// 0 ~ 4
+//				sql += "AND REPORT BETWEEN 0 AND 4 ";
+//			}else {
+//				// 5 이상일시
+//				sql += "AND REPORT >= 5 ";
+//			}
 			
 			// 검색조건
 			if(sc.getSearchName().equals("title") && !sc.getSearchValue().equals("")) {
@@ -71,6 +72,7 @@ public class ReportDao {
 			}
 		}
 		
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -112,37 +114,35 @@ public class ReportDao {
 			sql = query.getProperty("selectListSearchReport");
 			
 			if(sc.getStatus().equals("all")) {
-				sql += " WHERE STATUS IS NOT NULL ";
+				sql += " WHERE B_STATUS IS NOT NULL ";
 			}else if(sc.getStatus().equals("Y")) {
-				sql += " WHERE STATUS = 'Y' ";
+				sql += " WHERE B_STATUS = 'Y' ";
 			}else if(sc.getStatus().equals("N")) {
-				sql += " WHERE STATUS = 'N' ";
+				sql += " WHERE B_STATUS = 'N' ";
 			}
 			
-			sql += " ORDER BY STATUS DESC , REPORT DESC, B_NO DESC) ";
+			sql += " ORDER BY B_STATUS DESC , REPORT DESC, B_NO DESC) where REPORT >= 5";
 			
 			
-			if(sc.getReportNum().equals("all")) {
-				sql += " WHERE REPORT IS NOT NULL ";
-			}else if(sc.getReportNum().equals("reportDown")){
-				sql += " WHERE REPORT BETWEEN 0 AND 4 ";
-			}else {
-				sql += " WHERE REPORT >= 5 ";
-			}
+//			if(sc.getReportNum().equals("all")) {
+//				sql += " WHERE REPORT IS NOT NULL ";
+//			}else if(sc.getReportNum().equals("reportDown")){
+//				sql += " WHERE REPORT BETWEEN 0 AND 4 ";
+//			}else {
+//				sql += " WHERE REPORT >= 5 ";
+//			}
 			
 			if(sc.getSearchName().equals("title") && !sc.getSearchValue().equals("")) {
-				sql += "AND B_TITLE LIKE '%' || ? || '%' ";
+				sql += "and B_TITLE LIKE '%' || ? || '%' ";
 			}else if(sc.getSearchName().equals("content") && !sc.getSearchValue().equals("")) {
-				sql += "AND B_CONTENT LIKE '%' || ? || '%' ";
+				sql += "and B_CONTENT LIKE '%' || ? || '%' ";
 			}else {
-				sql += "AND B_TITLE IS NOT NULL ";
+				sql += "and B_TITLE IS NOT NULL ";
 			}
 			
 			sql += ")";
 			sql += "WHERE ROWN BETWEEN ? AND ?";
 		}
-		
-		
 		
 		try {
 			int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
@@ -171,10 +171,10 @@ public class ReportDao {
 				r.setbNo(rset.getInt("B_NO"));
 				r.setbTtitle(rset.getString("B_TITLE"));
 				r.setbContent(rset.getString("B_CONTENT"));
-				r.setEnrollDate(rset.getTimestamp("ENROLL_DATE"));
-				r.setModfiyDate(rset.getTimestamp("MODIFY_DATE"));
+				r.setEnrollDate(rset.getTimestamp("B_ENROLL_DATE"));
+				r.setModfiyDate(rset.getTimestamp("B_MODIFY_DATE"));
 				r.setbCount(rset.getInt("B_COUNT"));
-				r.setStatus(rset.getString("STATUS"));
+				r.setStatus(rset.getString("B_STATUS"));
 				r.setuNo(rset.getInt("U_NO"));
 				r.setuNickName(rset.getString("U_NICKNAME"));
 				r.setReport(rset.getInt("REPORT"));

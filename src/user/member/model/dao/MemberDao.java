@@ -369,4 +369,29 @@ private Properties query = new Properties();
 		
 		return findUserPwd;
 	}
+
+	public int checkJoin(Connection conn, int rno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("checkJoin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+		}
+		
+		return result;
+	}
 }

@@ -7,8 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>아파트 정보</title>
-    <link rel="stylesheet" href="../resources/css/intro/intro.css" />
-    <link rel="stylesheet" href="resources/fonts.css" />
     <script
       type="text/javascript"
       src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ryntvaz6ho"
@@ -27,7 +25,6 @@
 .addressTable,
 .contactTable {
   margin: 0 auto;
-  margin-bottom: 40px;
   width: 100%;
   border-top: 2px solid gray;
   text-align: center;
@@ -57,6 +54,7 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  min-height: calc(100vh - 284px);
 }
 .apt_img {
   width: 700px;

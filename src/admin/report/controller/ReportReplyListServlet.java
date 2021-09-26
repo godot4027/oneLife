@@ -25,7 +25,7 @@ public class ReportReplyListServlet extends HttpServlet {
 		
 		// 검색
 		String status = request.getParameter("status");
-		String reportNum = request.getParameter("reportNum");
+		String reportNum = "";
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
 		

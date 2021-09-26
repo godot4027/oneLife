@@ -39,7 +39,7 @@
 		                                        </select>
 		                                    </div>
 		                                </div>
-										<div class="items clearfix">
+										<%-- <div class="items clearfix">
 		                                    <label for="reportNum">신고누적</label>
 		                                    <div class="select">
 		                                        <select name="reportNum" id="reportNum">
@@ -48,7 +48,7 @@
 		                                            <option value="reportUp" <c:if test="${param.reportNum eq 'reportUp'}">selected</c:if>>5이상</option>
 		                                        </select>
 		                                    </div>
-		                                </div>
+		                                </div> --%>
 	                            </div>
 	                            <div class="search_bot report clearfix">
 		                                <div class="items clearfix">
@@ -146,7 +146,7 @@
 			                                            <td></td>
 			                                            <td colspan="5">
 			                                                <div class="table_view report">
-			                                                    <a href="javascript:;">
+			                                                    <a href="${contextPath}/board/detail?b_no=${r.bNo}">
 			                                                        <dl>
 			                                                            <dt>${r.bTitle}<span>${r.uNickname}님의 게시물</span></dt>
 			                                                            <dd>
@@ -165,7 +165,7 @@
 	                                    				<div class="list_nodate">
 															<img src="/oneLife/resources/admin/images/list_nodate.png" alt="NODATE">
 														<p>신고된 댓글이 존재하지 않습니다.</p>
-													</div>
+														</div>
 	                                    			</td>
 	                                    		</tr>
 	                                    		<script>
@@ -211,8 +211,8 @@
     <div class="popup_wrap" id="replyPop1">
         <div class="dim"></div>
         <div class="item">
-            <h3 class="tit">예약 내역 삭제</h3>
-            <p class="txt">총 <span class="nub">2</span>건의 예약내역을 삭제하시겠습니까?</p>
+            <h3 class="tit">댓글 삭제</h3>
+            <p class="txt">총 <span class="nub">2</span>건의 댓글을 삭제하시겠습니까?</p>
             <div class="btn_box">
                 <a href="javascript:remove_popOpen2();" class="ok">삭제</a>
                 <a href="javascript:popHide('replyPop1');" class="cancle">취소</a>
@@ -224,8 +224,8 @@
      <div class="popup_wrap"  id="replyPop2">
         <div class="dim"></div>
         <div class="item">
-            <h3 class="tit">예약 내역 삭제</h3>
-            <p class="txt">총 <span class="nub">2</span>건의 예약내역이 삭제되었습니다.</p>
+            <h3 class="tit">댓글 삭제</h3>
+            <p class="txt">총 <span class="nub">2</span>건의 댓글이 삭제되었습니다.</p>
             <div class="btn_box">
                 <a href="javascript:replyLast();" class="ok">확인</a>
             </div>

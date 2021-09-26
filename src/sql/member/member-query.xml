@@ -170,4 +170,10 @@
        AND R_NAME = ?
        AND R_EMAIL = ?
    </entry>
+   
+   <entry key="checkJoin">
+   	select count(*)
+		from info_resident
+		where r_no = ? and r_status = 'Y'
+   </entry>
 </properties>

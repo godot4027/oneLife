@@ -98,7 +98,18 @@ public class WeekService {
 			rollback(conn);
 		}
 		
+		close(conn);
+		
 		return result;
+	}
+
+	public List<Week> oneDayList(String year, String month, String day) {
+		Connection conn = getConnection();
+		
+		List<Week> wList = new WeekDao().oneDayList(conn, year, month, day);
+		close(conn);
+		
+		return wList;
 	}
 
 }

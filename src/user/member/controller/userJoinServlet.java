@@ -54,17 +54,22 @@ public class userJoinServlet extends HttpServlet {
 		
 		int rno = new MemberService().checkR(name, email);
 		
-		
 		if (rno > 0) {
-			// 가입 정보를 담은 Member 객체 생성
-			Member mem = new Member(userId, nickName, userPwd, phone, rno);
-			// 3. 비즈니스 로직을 수행할 서비스 메소드로 Member 객체 전달 후 결과 값 리턴 받기
-			int result1 = new MemberService().insertMember(mem);
-			int result2 = new MemberService().changeStatus(rno);
-			 // System.out.println(result2);
-			 // System.out.println(result1);
-			request.getRequestDispatcher("WEB-INF/views/user/jsp/member/userJoinSuccess.jsp").forward(request, response);
-			
+			int checkJoin = new MemberService().checkJoin(rno);
+			if (checkJoin > 0) {
+				request.getSession().setAttribute("msg", "이미 회원가입이 완료된 정보입니다.");
+				response.sendRedirect(request.getContextPath());
+			} else {
+				// 가입 정보를 담은 Member 객체 생성
+				Member mem = new Member(userId, nickName, userPwd, phone, rno);
+				// 3. 비즈니스 로직을 수행할 서비스 메소드로 Member 객체 전달 후 결과 값 리턴 받기
+				/*int result1 = */new MemberService().insertMember(mem);
+				/*int result2 = */new MemberService().changeStatus(rno);
+				 // System.out.println(result2);
+				 // System.out.println(result1);
+				request.getRequestDispatcher("WEB-INF/views/user/jsp/member/userJoinSuccess.jsp").forward(request, response);
+				
+			}
 		} else {
 			request.setAttribute("msg", "아파트 주민이 아닙니다.");
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");

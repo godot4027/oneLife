@@ -488,7 +488,16 @@ public class boardDao {
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				result = rset.getInt(1);
-
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 
 	// 좋아요수 조회
