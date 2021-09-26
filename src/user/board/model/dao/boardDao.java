@@ -116,7 +116,8 @@ public class boardDao {
 												  rset.getString("b_status"),
 												  rset.getInt("u_no"),
 												  rset.getString("u_nickname"),
-												  rset.getInt("b_reply_count")));
+												  rset.getInt("b_reply_count"),
+												  rset.getInt("b_likecnt")));
 												 
 												  
 			}
@@ -406,6 +407,7 @@ public class boardDao {
 		return result;
 	}
 
+	// 게시글 및 댓글 신고
 	public int report(Connection conn, String bno, String bcno, int uno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -462,32 +464,42 @@ public class boardDao {
 		return result;
 	}
 
-
+	// 신고 했는지 안했는지 구별
 	public int chekcUno(Connection conn, String bno, String bcno, int uno) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		int result = 0;
-		String sql = "";
-		
-		if (bno.equals("")) {
-			sql = query.getProperty("chekcUnoReply");
-		} else {
-			sql = query.getProperty("chekcUnoWrite");
-		}
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, uno);
-			if (bno.equals("")) {
-				pstmt.setString(2, bcno);
-			} else {
-				pstmt.setString(2, bno);
-			}
-			
-			rset = pstmt.executeQuery();
-			if (rset.next()) {
-				result = rset.getInt(1);
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      int result = 0;
+	      String sql = "";
+	      
+	      if (bno.equals("")) {
+	         sql = query.getProperty("chekcUnoReply");
+	      } else {
+	         sql = query.getProperty("chekcUnoWrite");
+	      }
+	      
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setInt(1, uno);
+	         if (bno.equals("")) {
+	            pstmt.setString(2, bcno);
+	         } else {
+	            pstmt.setString(2, bno);
+	         }
+	         
+	         rset = pstmt.executeQuery();
+	         if (rset.next()) {
+	            result = rset.getInt(1);
+	         }
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	      }
+	      
+	      return result;
+	   }
 
 	
 

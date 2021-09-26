@@ -67,9 +67,10 @@
             letter-spacing: 1px;
             cursor: pointer;
             margin-top: 70px;
+            margin-left: 20px;
         }
         input[type="submit"]{
-            margin-left: 150px;
+            margin-left: 130px;
         }
         input[type="submit"]:hover{
            background: #f89b9b;

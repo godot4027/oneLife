@@ -99,7 +99,7 @@
                         </ul>
                         <div class="reply_btn_area">
                             <c:choose>
-                            <c:when test="${ !empty loginUser && loginUser.u_NO == board.u_no }">	
+                            <c:when test="${ !empty loginUser && loginUser.u_NO == r.u_no }">	
                             <button type="button" onclick="deleteReply(${ r.bc_no },${ r.b_no });">삭제하기</button>
                             </c:when>
                        		<c:otherwise>
@@ -171,11 +171,11 @@
             }  
             // 신고 팝업창
             function reportWrite(){
-                window.open("${ contextPath }/board/popup?bno=${board.b_no}", "신고 팝업창", "width=500, height=400, left=800, top=300"); 
+                window.open("${ contextPath }/board/popup?bno=${board.b_no}", "신고 팝업창", "width=500, height=430, left=800, top=300"); 
             }  
             
             function reportReply(a){
-                window.open("${ contextPath }/board/popup?bcno="+a, "신고 팝업창", "width=500, height=400, left=800, top=300"); 
+                window.open("${ contextPath }/board/popup?bcno="+a, "신고 팝업창", "width=500, height=430, left=800, top=300"); 
             } 
         </script>
         
@@ -271,6 +271,7 @@
 		}	
 	</script>
 	
+	<!-- 좋아요 -->
 	<script>
 	const heartSvg = document.querySelector('.feed-icon');
 	const heartPath = document.querySelector('.feed-icon img');

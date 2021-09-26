@@ -2197,6 +2197,7 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 .checkbox_area {
   /* display: inline-block; */
   margin-left: 80px;
+  margin-top: 50px;
 }
 
 .radio_area > ul,
@@ -2454,7 +2455,7 @@ input[type="checkbox"]:checked {
   margin-top: 10px;
 }
  */
-.bar_area {
+/* .bar_area {
   display: block;
   padding-top: 30px;
   padding-bottom: 10px;
@@ -2504,7 +2505,7 @@ input[type="checkbox"]:checked {
   width: 0;
   border-radius: 40px;
   height: 20px;
-}
+} */
 
 /* complaintstyle.css  */
 
@@ -2796,6 +2797,7 @@ input[type="checkbox"]:checked {
   border-bottom: 2px solid #9a9a9a;
   /* width: 1030px; */
   padding-left: 20px;
+  padding-bottom: 10px;
 }
 
 .com_detail_content {
@@ -2821,6 +2823,7 @@ input[type="checkbox"]:checked {
   color: #4e4e4e;
   position: relative;
   top: 15px;
+  z-index: -10;
 }
 .com_detail_title .subject img {
   position: relative;

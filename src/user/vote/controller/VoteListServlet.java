@@ -47,6 +47,8 @@ public class VoteListServlet extends HttpServlet {
 				// 요청 페이지 값을 매개변수로 넘기고 조회 된 게시글 리스트 + 페이징 처리에 대한 객체 값 map 타입에 담아 리턴
 				Map<String, Object> map = new voteService().selectlist(page, new Search(searchCondition, searchValue));
 				
+				System.out.println("voteList : " + map.get("voteList"));
+				
 				request.setAttribute("pi", map.get("pi"));
 				request.setAttribute("voteList", map.get("voteList"));
 				request.getRequestDispatcher("/WEB-INF/views/user/jsp/vote/voteListView.jsp").forward(request, response);

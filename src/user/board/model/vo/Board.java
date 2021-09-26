@@ -75,8 +75,11 @@ public class Board {
 
 
 
+
+
+
 	public Board(int b_no, String b_title, String b_content, Date b_enroll_date, Date b_modify_date, int b_count,
-			String b_status, int u_no, String u_nickname, int bc_no, int b_reply_count) {
+			String b_status, int u_no, String u_nickname, int b_reply_count, int b_likecnt) {
 		super();
 		this.b_no = b_no;
 		this.b_title = b_title;
@@ -87,9 +90,12 @@ public class Board {
 		this.b_status = b_status;
 		this.u_no = u_no;
 		this.u_nickname = u_nickname;
-		this.bc_no = bc_no;
 		this.b_reply_count = b_reply_count;
+		this.b_likecnt = b_likecnt;
 	}
+
+
+
 
 
 

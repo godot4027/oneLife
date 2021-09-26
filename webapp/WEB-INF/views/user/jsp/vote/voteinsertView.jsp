@@ -66,10 +66,10 @@
 						<div class="row" id="choicebox">
 							<span class="cell col1">선택지</span>
 							<span class="cell col2">
-								<input size="60" type="text" name="choice1" placeholder="선택지 내용을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='선택지 내용을 입력해주세요'" required >
+								<input size="60" type="text" name="choice1" placeholder="선택지 내용을 입력해주세요(최대10자)" onfocus="this.placeholder=''" onblur="this.placeholder='선택지 내용을 입력해주세요(최대10자)'" maxlength="10" required>
 							</span>
 							<span class="cell col2">
-								<input size="60" type="text" name="choice2" placeholder="선택지 내용을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='선택지 내용을 입력해주세요'" required >
+								<input size="60" type="text" name="choice2" placeholder="선택지 내용을 입력해주세요(최대10자)" onfocus="this.placeholder=''" onblur="this.placeholder='선택지 내용을 입력해주세요(최대10자)'" maxlength="10" required>
 								<button type="button" id="add_btn" onclick="addCell()"><img src="/oneLife/resources/user/images/addIcon.png"></button>
 							</span>
 						</div>
@@ -108,14 +108,15 @@
 				}
 			}
 			
- 			let a = 2;
+ 			let a = 3;
 			const addCell = () => {
 				const choicebox = document.getElementById("choicebox");
 				const newP = document.createElement('p');
-				if (a > 10) {
-					alert("최대 열개까지 만들수 있습니다.");
+				if (a > 5) {
+					alert("최대 다섯개까지 만들수 있습니다.");
+					return;
 				}
-				newP.innerHTML = "<span class='cell col2'> <input size='60' type='text' name='choice" + (a++) +"' placeholder='선택지 내용을 입력해주세요' onfocus='this.placeholder=''' onblur='this.placeholder='선택지 내용을 입력해주세요'' required > <button type='button' id='remove_btn' onclick='remove(this)'><img src='${contextPath}/resources/user/images/removeIcon.png'></button></span>";
+				newP.innerHTML = "<span class='cell col2'> <input size='60' type='text' name='choice" + (a++) +"' placeholder='선택지 내용을 입력해주세요(최대10자)' onfocus='this.placeholder=''' onblur='this.placeholder='선택지 내용을 입력해주세요(최대10자)'' maxlength='10' required> <button type='button' id='remove_btn' onclick='remove(this)'><img src='${contextPath}/resources/user/images/removeIcon.png'></button></span>";
 				choicebox.appendChild(newP);
 			}
 
@@ -128,7 +129,7 @@
 		
 		<script>
 		function date1() {
-		   
+		 
 	        let date = document.getElementById("date").value;
 		       let today = new Date();
 		       today.setHours(0);

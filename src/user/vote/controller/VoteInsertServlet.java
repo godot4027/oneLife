@@ -68,6 +68,7 @@ public class VoteInsertServlet extends HttpServlet {
 		if (v_no > 0 && result > 0) {
 			request.getSession().setAttribute("v_no", v_no);
 			response.sendRedirect(request.getContextPath() + "/vote/finish");
+			
 		} else {
 			request.setAttribute("msg", "게시글 등록에 실패하였습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/user/common/errorpage.jsp").forward(request, response);
