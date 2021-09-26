@@ -60,8 +60,12 @@ public class WeekDayViewServlet extends HttpServlet {
 		}
 		
 		if(result > 0) {
+			request.getSession().setAttribute("msgHead", "주요일정");
+			request.getSession().setAttribute("msgBody", "주요일정 추가/수정 이 완료되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/admin/week/list?allDay=on");
 		}else {
+			request.getSession().setAttribute("msgHead", "주요일정");
+			request.getSession().setAttribute("msgBody", "주요일정 추가/수정 이 실패하였습니다.");
 			response.sendRedirect(request.getContextPath() + "/admin/week/list?allDay=on");
 		}
 		

@@ -42,11 +42,11 @@ public class ReportDao {
 			// 검색어 있을시
 			// 삭제여부
 			if(sc.getStatus().equals("all")) {
-				 sql += " WHERE STATUS IS NOT NULL ";
+				 sql += " WHERE B_STATUS IS NOT NULL ";
 			}else if(sc.getStatus().equals("Y")){
-				 sql += " WHERE STATUS = 'Y' ";
+				 sql += " WHERE B_STATUS = 'Y' ";
 			}else if(sc.getStatus().equals("N")){
-				sql += " WHERE STATUS = 'N' ";
+				sql += " WHERE B_STATUS = 'N' ";
 			}
 			
 			// 신고누적
@@ -112,14 +112,14 @@ public class ReportDao {
 			sql = query.getProperty("selectListSearchReport");
 			
 			if(sc.getStatus().equals("all")) {
-				sql += " WHERE STATUS IS NOT NULL ";
+				sql += " WHERE B_STATUS IS NOT NULL ";
 			}else if(sc.getStatus().equals("Y")) {
-				sql += " WHERE STATUS = 'Y' ";
+				sql += " WHERE B_STATUS = 'Y' ";
 			}else if(sc.getStatus().equals("N")) {
-				sql += " WHERE STATUS = 'N' ";
+				sql += " WHERE B_STATUS = 'N' ";
 			}
 			
-			sql += " ORDER BY STATUS DESC , REPORT DESC, B_NO DESC) ";
+			sql += " ORDER BY B_STATUS DESC , REPORT DESC, B_NO DESC) ";
 			
 			
 			if(sc.getReportNum().equals("all")) {
@@ -171,10 +171,10 @@ public class ReportDao {
 				r.setbNo(rset.getInt("B_NO"));
 				r.setbTtitle(rset.getString("B_TITLE"));
 				r.setbContent(rset.getString("B_CONTENT"));
-				r.setEnrollDate(rset.getTimestamp("ENROLL_DATE"));
-				r.setModfiyDate(rset.getTimestamp("MODIFY_DATE"));
+				r.setEnrollDate(rset.getTimestamp("B_ENROLL_DATE"));
+				r.setModfiyDate(rset.getTimestamp("B_MODIFY_DATE"));
 				r.setbCount(rset.getInt("B_COUNT"));
-				r.setStatus(rset.getString("STATUS"));
+				r.setStatus(rset.getString("B_STATUS"));
 				r.setuNo(rset.getInt("U_NO"));
 				r.setuNickName(rset.getString("U_NICKNAME"));
 				r.setReport(rset.getInt("REPORT"));

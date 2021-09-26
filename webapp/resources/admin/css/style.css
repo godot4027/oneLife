@@ -124,6 +124,8 @@
 .search_box .search_top .items .select select{display: block; height: 29px; line-height: 29px; box-sizing: border-box; font-size: 12px;padding: 0 25px 0 8px; border:1px solid #000; min-width:100px; background:#fff url(../images/ico_select.png) no-repeat right 8px center; }
 .search_box .search_top .items .calendar{float:left;}
 .search_box .search_top .items .calendar .cal{display: block; float:left; width:100%; max-width:110px; height: 29px; line-height: 29px; padding: 0 8px 0 25px; background:#fff url(../images/ico_cal.png) no-repeat left 8px center; box-sizing: border-box; border:1px solid #000; cursor:pointer; }
+.search_box .search_top .items .calendar .cal[disabled]{background-color: rgba(230, 230, 230, 0.3); border: 1px solid rgba(0, 0, 0,0.2); color: rgba(100, 100, 100, 0.9);
+    cursor: default;}
 .search_box .search_top .items .calendar span{display: block; float:left; line-height: 29px; font-size: 14px; font-weight: bold; padding: 0 10px;}
 .search_box .search_top .items .checkbox{float: left;  margin: 4px 25px 4px 13px;}
 .search_box .search_top .items .checkbox input[type="checkbox"]{position: absolute; left: -9999px;}
@@ -178,6 +180,7 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
 .popup_wrap .new_admin .new_item label{display: block; width: 140px; height: 40px; line-height: 40px; box-sizing: border-box; font-size: 16px; color:#666; font-weight: bold; text-align:left; padding-left: 20px;}
 .popup_wrap .new_admin .new_item input{display: block; width: 250px; height: 40px; line-height: 40px; box-sizing: border-box; border:1px solid #666; border-radius:5px; padding: 0 10px; font-size: 16px; font-weight: bold;}
 .popup_wrap .new_admin .new_item input[readonly]{color:rgba(102, 102, 102, 0.8); background:rgba(0, 0, 0, 0.1); cursor:default;}
+.popup_wrap .new_admin .new_item input[disabled]{color:rgba(102, 102, 102, 0.8); background:rgba(0, 0, 0, 0.1); cursor:default;}
 .popup_wrap .new_admin .new_item select{display: block; width: 250px; height: 40px; line-height: 40px; box-sizing: border-box; border:1px solid #666; border-radius:5px; padding: 0 30px 0 10px; background:url(../images/ico_select.png) no-repeat right 10px center;}
 .popup_wrap .new_admin .new_item .idCheck{display: block; height: 40px; line-height: 40px; padding: 0 15px; margin-left: 10px; border-radius:3px; background:#3C90F2;color:#fff;}
 .popup_wrap .new_btn_box{display: flex; justify-content: center; margin-top: 20px;}
@@ -222,6 +225,10 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
  .view_wrap .view_items .items dd .calendar .cal{display: block; float: left; width: 100%; max-width: 110px; height: 29px; line-height: 29px; 
     padding: 0 8px 0 25px; background: #fff url(../images/ico_cal.png) no-repeat left 8px center; box-sizing: border-box; border: 1px solid #000;
     cursor: pointer;}
+    .view_wrap .view_items .items dd .calendar .cal_today{display: block; float: left; width: 100%; max-width: 110px; height: 29px; line-height: 29px; 
+    padding: 0 8px 0 25px; background: #fff url(../images/ico_cal.png) no-repeat left 8px center; box-sizing: border-box; border: 1px solid #000;
+    cursor: pointer;}
+    
 
 /* 신고내역 */
 .search_box .search_top.report{width: 500px;}
@@ -264,7 +271,8 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
 .view_wrap .view_items.resident .items dd.type01{display:flex; align-items: center;}
 .view_wrap .view_items.resident .items dd.type01 .input{ margin-right: 10px; margin-left: 20px;}
 .view_wrap .view_items.resident .items dd.type01 .input:first-child{margin-left: 0;}
-.view_wrap .view_items.resident .items dd.type01 .input input{width: 60px;}
+.view_wrap .view_items.resident .items dd.type01 .input input{width: 60px; text-align:center;}
+.view_wrap .view_items.resident .items dd.type01 .input input[readonly]{background:rgba(230, 230, 230, 0.3); border:1px solid rgba(0, 0, 0,0.2); color:rgba(100, 100, 100, 0.9); cursor:default;}
 .view_wrap .view_items.resident .items dd .tit{position: relative; font-size: 18px; font-weight: bold; letter-spacing: 0; margin-bottom: 10px;}
 .view_wrap .view_items.resident .items dd .tit:nth-of-type(2){margin-top: 20px;}
 .view_wrap .view_items.resident .items dd .tit .res_plus{display: inline-block; width: 18px; height: 18px; background:url(../images/ico_plus.png) no-repeat 50% 50%;  margin-left: 2px;}
@@ -282,6 +290,7 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
 .multi_pop{padding: 40px;}
 .multi_pop .sub_tit{font-size: 30px; margin-bottom: 40px;}
 .view_wrap.multi_pop .view_items .items dd .input input.cal{width: 160px; background:url(../images/ico_cal.png) no-repeat right 10px center; padding-right: 35px;  cursor:pointer;}
+.view_wrap.multi_pop .view_items .items dd .input input.cal_today{width: 160px; background:url(../images/ico_cal.png) no-repeat right 10px center; padding-right: 35px;  cursor:pointer;}
 .court_items{padding: 10px 0; display: flex; justify-content: space-between;}
 .court_items .c_items{margin-left:20px;}
 .court_items .c_items:first-child{margin-left:0;}
@@ -304,6 +313,8 @@ margin-left: 8px; width:100%; max-width:614px; padding: 0 10px;}
 .library_pop .library_wrap .library_head{position: relative; margin-bottom: 10px;}
 .library_pop .library_wrap .library_head{}
 .library_pop .library_wrap .library_head .input .cal{display: block; width: 160px; height: 30px; line-height: 30px; border: 1px solid #000;box-sizing: border-box;background:url(../images/ico_cal.png) no-repeat right 10px center;padding: 0 10px; padding-right: 35px; cursor: pointer;}
+.library_pop .library_wrap .library_head .input .cal_today{display: block; width: 160px; height: 30px; line-height: 30px; border: 1px solid #000;box-sizing: border-box;background:url(../images/ico_cal.png) no-repeat right 10px center;padding: 0 10px; padding-right: 35px; cursor: pointer;}
+
 .library_pop .library_wrap .library_head .status_item{position: absolute; bottom:0; right:0;}
 .library_pop .library_wrap .library_head .status_item p{position: relative; line-height: 14px; padding-left: 40px; margin-top: 5px;}
 .library_pop .library_wrap .library_head .status_item p:before{display: block; content:''; position: absolute; top:calc(50% - 4px); left:0; width: 37px; height: 8px;font-size: 10px; background: #E6E6E6;}

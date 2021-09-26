@@ -29,10 +29,10 @@ public class loginServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		// System.out.println(loginUser);
+		System.out.println(loginUser);
 
 		Manager loginManager = new ManagerService().ManagerLogin(userId, userPwd);
-		// System.out.println(loginManager);
+		System.out.println(loginManager);
        
 		if(loginUser != null) {
 	         HttpSession session = request.getSession();
@@ -44,7 +44,6 @@ public class loginServlet extends HttpServlet {
 
 	      } else if(loginManager != null && (loginManager.getmJobcode().equals("M_CODE1") || loginManager.getmJobcode().equals("M_CODE2"))) {
 	    	  // 관리자로그인
-
 	    	  HttpSession session = request.getSession();
 	    	  
 		      session.setAttribute("loginManager", loginManager);
@@ -52,7 +51,7 @@ public class loginServlet extends HttpServlet {
 	    	  
 	      } else {
 	         request.setAttribute("msg", "로그인에 실패하였습니다.");
-	         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
+	         RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/user/common/errorpage.jsp");
 	         view.forward(request, response);
 	      }
 

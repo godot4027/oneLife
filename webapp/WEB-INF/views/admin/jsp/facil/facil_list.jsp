@@ -33,8 +33,8 @@
 	                                    <div class="select">
 	                                        <select name="facilName" id="reser_fac">
 	                                            <option value="all">전체</option>
-	                                            <option value="독서실">독서실</option>
-	                                            <option value="멀티코트장">멀티코트장</option>
+	                                            <option value="독서실" <c:if test="${param.facilName eq '독서실'}">selected</c:if>>독서실</option>
+	                                            <option value="멀티코트장" <c:if test="${param.facilName eq '멀티코트장'}">selected</c:if>>멀티코트장</option>
 	                                        </select>
 	                                    </div>
 	                                </div>
@@ -43,10 +43,10 @@
 	                                    <div class="select">
 	                                        <select name="facilType" id="reser_fac">
 	                                            <option value="all">전체</option>
-	                                            <option value="일일권">일일권</option>
-	                                            <option value="A">A</option>  
-	                                            <option value="B">B</option>  
-	                                            <option value="C">C</option>  
+	                                            <option value="일일권" <c:if test="${param.facilType eq '일일권'}">selected</c:if>>일일권</option>
+	                                            <option value="A" <c:if test="${param.facilType eq 'A'}">selected</c:if>>A</option>  
+	                                            <option value="B" <c:if test="${param.facilType eq 'B'}">selected</c:if>>B</option>  
+	                                            <option value="C" <c:if test="${param.facilType eq 'C'}">selected</c:if>>C</option>  
 	                                        </select>
 	                                    </div>
 	                                </div>
@@ -55,19 +55,21 @@
 	                                    <div class="select">
 	                                        <select name="facilStatus" id="reser_fac">
 	                                            <option value="all">전체</option>
-	                                            <option value="Y">예약취소</option>
-	                                            <option value="before">사용전</option>
+	                                            <option value="Y" <c:if test="${param.facilStatus eq 'Y'}">selected</c:if>>예약취소</option>
+	                                            <!-- <option value="before">사용전</option>
 	                                            <option value="ing">사용중</option>
-	                                            <option value="after">사용완료</option>
+	                                            <option value="after">사용완료</option> -->
 	                                        </select>
 	                                    </div>
 	                                </div>
 	                                <div class="items clearfix">
 	                                    <label for="">예약일자</label>
 	                                    <div class="calendar clearfix">
-	                                        <input type="text" name="facilDay" id="" class="cal" readonly>
+		                                    <c:set var="now" value="<%=new java.util.Date()%>" />
+											<c:set var="sysDate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set>
+	                                        <input type="text" name="facilDay" id="facilDay" class="cal" value="${sysDate}" readonly>
 	                                        <div class="checkbox">
-												<input type="checkbox" name="allDay" id="allDay" checked>
+												<input type="checkbox" name="allDay" id="allDay" <c:if test="${param.allDay eq 'on'}">checked</c:if>>
 												<label for="allDay">전체조회</label>
 											</div>
 	                                    </div>
@@ -78,12 +80,12 @@
 	                                    <label for="">검색조건</label>
 	                                    <div class="select">
 	                                        <select name="searchName" id="reser_fac">
-	                                            <option value="id">아이디</option>
-	                                            <option value="name">이름</option>
-	                                            <option value="phone">핸드폰번호</option>
+	                                            <option value="id" <c:if test="${param.searchName eq 'id'}">selected</c:if>>아이디</option>
+	                                            <option value="name" <c:if test="${param.searchName eq 'name'}">selected</c:if>>이름</option>
+	                                            <option value="phone" <c:if test="${param.searchName eq 'phone'}">selected</c:if>>핸드폰번호</option>
 	                                        </select>
 	                                    </div>
-	                                    <input type="text" class="input" name="searchValue">
+	                                    <input type="text" class="input" name="searchValue" value="${param.searchValue}">
 	                                    <button type="submit" class="btn">검색</button>
 	                                </div>
 	                            </div>
@@ -117,7 +119,7 @@
                                             </th>
                                             <th>No.</th>
                                             <th>예약 시설</th>
-                                            <th>예약 타입</th>
+                                            <th>예약 타입(좌석)</th>
                                             <th>아이디</th>
                                             <th>이름</th>
                                             <th>핸드폰 번호</th>
@@ -128,46 +130,72 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
-                                    	<c:forEach var="f" items="${fList}">
-                                    	<tr>
-                                            <td>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="facilCheck" id="facil1">
-                                                    <label for="facil1"></label>
-                                                </div>
-                                            </td>
-                                            <td>${f.fcNo}</td>
-                                            <td>${f.fcName}</td>
-                                            <td>${f.fcSeatType}</td>
-                                            <td>${f.uId}</td>
-                                            <td>${f.rName}</td>
-                                            <td>${f.uPhone}</td>
-                                            <td>
-                                            	<fmt:formatDate value="${f.faDate}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
-                                            </td>
-                                            <td>
-                                            	<fmt:formatDate value="${f.fcStart}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
-                                            </td>
-                                            <td>
-                                            	<fmt:formatDate value="${f.fcEnd}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
-                                            </td>
-                                            <td>
-                                                <p class="status_before">사용전</p>
-                                            </td>
-                                        </tr>
-                                    	</c:forEach>
-                                        
+                                    	<c:choose>
+                                    		<c:when test="${fList.size() > 0}">
+                                    			<c:forEach var="f" items="${fList}">
+			                                    	<tr>
+			                                            <td>
+			                                                <div class="checkbox">
+			                                                    <input type="checkbox" name="facilCheck" id="facil${f.fcNo}" value="${f.fcNo}" <c:if test="${f.fcStatus eq 'Y'}">disabled</c:if>>
+			                                                    <label for="facil${f.fcNo}"></label>
+			                                                </div>
+			                                            </td>
+			                                            <td>${f.fcNo}</td>
+			                                            <td>${f.fcName}</td>
+			                                            <td>${f.fcSeatType} <c:if test="${f.fcName eq '독서실'}">(${f.fcSeatNo})</c:if></td>
+			                                            <td>${f.uId}</td>
+			                                            <td>${f.rName}</td>
+			                                            <td>${f.uPhone}</td>
+			                                            <td>
+			                                            	<fmt:formatDate value="${f.faDate}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
+			                                            </td>
+			                                            <td>
+			                                            	<fmt:formatDate value="${f.fcStart}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
+			                                            </td>
+			                                            <td>
+			                                            	<fmt:formatDate value="${f.fcEnd}" pattern="yyyy년 MM월 dd일 HH시mm분"/>
+			                                            </td>
+			                                            <td>
+			                                            	<c:choose>
+			                                            		<c:when test="${f.fcStatus eq 'Y'}">
+			                                            			<p class="status_after">예약취소</p>
+			                                            		</c:when>
+			                                            		<c:otherwise>
+					                                                <p class="status_before">사용전</p>
+			                                            		</c:otherwise>
+			                                            	</c:choose>
+			                                            </td>
+			                                        </tr>
+			                                    </c:forEach>
+                                    		</c:when>
+                                    		<c:otherwise>
+                                    			<tr>
+													<td>
+														<div class="list_nodate">
+															<img src="/oneLife/resources/admin/images/list_nodate.png" alt="NODATE">
+															<p>조회된 목록이 존재하지 않습니다.</p>
+														</div>
+													</td>
+												</tr>
+												<%-- nodata시 colspan 값 자동 적용 --%>
+												<script>
+										    		let thSize = $('.table_wrap .table thead tr th').length;
+										    		$('.content .list_nodate').parent('td').attr('colspan', thSize);
+												</script>
+                                    			
+                                    		</c:otherwise>
+                                    	
+                                    	</c:choose>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="btn_box">
-                                <a href="javascript:;" class="remove">삭제</a>
+                                <a href="javascript:remove_popOpen();" class="remove">삭제</a>
                             </div>
                             
                             <%-- 검색결과에대한 파라미터값 저장 --%>
-                          	<c:if test="${!empty param.managerListSearch && !empty param.managerListValue}">
-                          		<c:set var="searchParam" value="&managerListSearch=${param.managerListSearch}&managerListValue=${param.managerListValue}"/>
+                          	<c:if test="${!empty param.facilName && !empty param.facilType}">
+                          		<c:set var="searchParam" value="&facilName=${param.facilName}&facilType=${param.facilType}&facilStatus=${param.facilStatus}&facilDay=${param.facilDay}&searchName=${param.searchName}&searchValue=${param.searchValue}"/>
                           	</c:if>
                           	<jsp:include page="/WEB-INF/views/admin/common/paging.jsp"	flush="false">
 								<jsp:param name="listSize" value="${fList.size()}" />
@@ -190,30 +218,142 @@
 
     <!-- 팝업영역 -->
     <!-- 삭제 팝업 -->
-    <div class="popup_wrap" style="display:none;">
+    <div class="popup_wrap" id="remove_step01">
         <div class="dim"></div>
         <div class="item">
             <h3 class="tit">예약 내역 삭제</h3>
-            <p class="txt">총 2건의 예약내역을 삭제하시겠습니까?</p>
+            <p class="txt">총 <span class="nub">?</span>건의 예약내역을 삭제하시겠습니까?</p>
             <div class="btn_box">
-                <a href="javascript:;" class="ok">삭제</a>
-                <a href="javascript:;" class="cancle">취소</a>
+                <a href="javascript:removeStep01();" class="ok">삭제</a>
+                <a href="javascript:popHide('remove_step01');" class="cancle">취소</a>
             </div>
         </div>
     </div>
 
      <!-- 삭제완료 팝업 -->
-     <div class="popup_wrap" style="display:none;">
+     <div class="popup_wrap" id="remove_step02">
         <div class="dim"></div>
         <div class="item">
             <h3 class="tit">예약 내역 삭제</h3>
-            <p class="txt">총 2건의 예약내역이 삭제되었습니다.</p>
+            <p class="txt">총 <span class="nub">?</span>건의 예약내역이 삭제되었습니다.</p>
             <div class="btn_box">
-                <a href="javascript:;" class="ok">확인</a>
+                <a href="javascript:facilLast();" class="ok">확인</a>
             </div>
         </div>
     </div>
     <!-- 팝업영역 -->
+    
+    <script>
+    $(function(){
+    	// 전체조회 버튼
+        check = $('input[name=allDay]').is(':checked');
+           if(check){
+          	 $('#facilDay').removeAttr('readonly');
+          	 $('#facilDay').attr('disabled', true);
+           }else{
+          	 $('#facilDay').removeAttr('disabled');
+          	 $('#facilDay').attr('readonly', true);
+           }
+        
+        $('input[name=allDay]').change(function(){
+       	 check = $('input[name=allDay]').is(':checked');
+       	 
+       	 if(check){
+           	 $('#facilDay').removeAttr('readonly');
+           	 $('#facilDay').attr('disabled', true);
+            }else{
+           	 $('#facilDay').removeAttr('disabled');
+           	 $('#facilDay').attr('readonly', true);
+            }	
+        })
+        
+        //체크박스
+     // 체크박스
+        let checkboxs = [];
+        $('#checkAll').change(function(){
+       	 let checked = $(this).is(':checked');
+       	 if(checked){
+       		 $('input[name=facilCheck]').prop('checked', true);
+       		 $('input[name=facilCheck]:disabled').prop('checked', false);
+       	 }else{
+       		 $('input[name=facilCheck]').prop('checked', false);
+       	 }
+       	 
+       	 checkArr();
+       	 
+       	 
+        });
+        
+        $('input[name=facilCheck]').change(function(){
+       	// 체크박스 갯수
+       	let checkSize = $('input[name=facilCheck]').length;
+       	// 체크갯수
+       	let checkOnSize = $('input[name=facilCheck]:checked').length;
+       	// disalbled 갯수
+       	let checkDis = $('input[name=facilCheck]:disabled').length;
+       	
+       	if(checkSize - checkDis === checkOnSize){
+       		// 전체 체크됐을시
+       		$('#checkAll').prop('checked', true);
+       	}else{
+       		// 체크가 하나라도 풀려있을시
+       		$('#checkAll').prop('checked', false);
+       	}
+       	
+       	checkArr();
+       	
+        });
+        
+        
+    })
+    
+    	// 체크박스 배열로 변환
+        function checkArr(){
+       	 checkboxs = [];
+       	 for(let i = 0; i < $('input[name=facilCheck]').length; i++){
+       		 if($('input[name=facilCheck]').eq(i).is(':checked')){
+       			 checkboxs.push($('input[name=facilCheck]').eq(i).val());
+       		 }
+       	 }
+        }
+    
+     // 게시글 삭제
+        function remove_popOpen(){
+       	 let check = $('input[name=facilCheck]:checked').length;
+       	 if(check > 0){
+       		 $('.nub').text(check);
+       		 popShow('remove_step01');
+       	 }else{
+       		 alert('체크박스를 1개이상 선택해주세요.');
+       	 }
+        }
+    
+    	// 게시글 삭제 여부
+	    function removeStep01(){
+	   	 $.ajax({
+	   		 url : "${contextPath}/admin/facil/remove",
+	   		 traditional : true,
+	   		 type: "post",
+	   		 data : {"facilCheck" : checkboxs},
+	   		 success : function(item){
+	   			 if(item >= 0){
+	   				 $('#remove_step02 .item .txt').text("총 " + item + "건의 예약 내역이 삭제되었습니다.");
+	   			 }else{
+	   				 $('#remove_step02 .item .txt').text("총 " + item + "건의 예약 내역이 삭제 실패 하였습니다.");
+	   			 }
+	   		 }
+	   		 
+	   	 })
+	   	 
+	   	$('#remove_step01').removeClass('pop_on');
+	   	popShow('remove_step02');
+	   	
+	    }
+    	
+	    function facilLast(){
+	    	 location.href = "${contextPath}/admin/facil/list?allDay=on"
+	     }
+    </script>
 
 </body>
 

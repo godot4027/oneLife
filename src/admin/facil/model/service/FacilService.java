@@ -1,5 +1,10 @@
 package admin.facil.model.service;
 
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +14,6 @@ import admin.facil.model.dao.FacilDao;
 import admin.facil.model.vo.Facil;
 import admin.facil.model.vo.Search;
 import common.PageInfo;
-
-import static common.JDBCTemplate.*;
 
 public class FacilService {
 	private FacilDao fd = null;
@@ -43,5 +46,68 @@ public class FacilService {
 		
 		return returnMap;
 	}
+
+	// 게시글 삭제
+	public int removeFacil(String[] facilCheck) {
+		Connection conn = getConnection();
+		
+		int result = fd.removeFacil(conn, facilCheck);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 독서실 예약현황 자리표
+	public List<Facil> librarySelectList(String day) {
+		Connection conn = getConnection();
+		
+		List<Facil> fList = fd.librarySelectList(conn, day);
+		
+		close(conn);
+		
+		return fList;
+	}
+
+	// 독서실 멤버 조회
+	public Facil libraryInfo(int fcSeatNo, String dayInput) {
+		Connection conn = getConnection();
+		
+		Facil facil = fd.libraryInfo(conn, fcSeatNo, dayInput);
+		
+		close(conn);
+		
+		return facil;
+	}
+
+	// 멀티코트장 예약현황 자리표
+	public List<Facil> multicourtSelectList(String day, String time) {
+		Connection conn = getConnection();
+		
+		List<Facil> fList = fd.multicourtSelectList(conn, day, time);
+		
+		close(conn);
+		
+		return fList;
+	}
+
+	// 멀티코트장 멤버 조회
+	public Facil multiInfo(int fcNo, String dayInput, String time) {
+		Connection conn = getConnection();
+		
+		Facil f = fd.multiInfo(conn, fcNo, dayInput, time);
+		
+		close(conn);
+		
+		return f;
+	}
+	
+	
 
 }

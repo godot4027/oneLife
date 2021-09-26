@@ -270,6 +270,198 @@ private Properties query = new Properties();
 		
 		return fList;
 	}
+	
+	// 게시글 삭제
+	public int removeFacil(Connection conn, String[] facilCheck) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("removeFacil");
+		
+		for(int i = 0; i < facilCheck.length; i++) {
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, Integer.parseInt(facilCheck[i]));
+				
+				result += pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		}
+		
+		return result;
+	}
+	
+	// 독서실 예약현황 자리표
+	public List<Facil> librarySelectList(Connection conn, String day) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("librarySelectList");
+		List<Facil> fList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, day);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Facil f = new Facil();
+				f.setFcNo(rset.getInt("FC_NO"));
+				f.setFcName(rset.getString("FC_NAME"));
+				f.setFcSeatNo(rset.getInt("FC_SEAT_NO"));
+				f.setFcSeatType(rset.getString("FC_SEAT_TYPE"));
+				f.setuId(rset.getString("U_ID"));
+				f.setrName(rset.getString("R_NAME"));
+				f.setuPhone(rset.getString("U_PHONE"));
+				f.setFaDate(rset.getTimestamp("FC_DATE"));
+				f.setFcStart(rset.getTimestamp("FC_START"));
+				f.setFcEnd(rset.getTimestamp("FC_END"));
+				f.setFcStatus(rset.getString("FC_STATUS"));
+				
+				fList.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return fList;
+	}
+	
+	// 독서실 멤버조회
+	public Facil libraryInfo(Connection conn, int fcSeatNo, String dayInput) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("libraryInfo");
+		Facil f = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dayInput);
+			pstmt.setInt(2, fcSeatNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				f = new Facil();
+				f.setFcNo(rset.getInt("FC_NO"));
+				f.setFcName(rset.getString("FC_NAME"));
+				f.setFcSeatNo(rset.getInt("FC_SEAT_NO"));
+				f.setFcSeatType(rset.getString("FC_SEAT_TYPE"));
+				f.setuId(rset.getString("U_ID"));
+				f.setrName(rset.getString("R_NAME"));
+				f.setuPhone(rset.getString("U_PHONE"));
+				f.setFaDate(rset.getTimestamp("FC_DATE"));
+				f.setFcStart(rset.getTimestamp("FC_START"));
+				f.setFcEnd(rset.getTimestamp("FC_END"));
+				f.setFcStatus(rset.getString("FC_STATUS"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return f;
+	}
+
+	// 멀티코트장 예약현황 자리표
+	public List<Facil> multicourtSelectList(Connection conn, String day, String time) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("multicourtSelectList");
+		List<Facil> fList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, day);
+			if(time != null) {
+				pstmt.setString(2, time);
+			}else {
+				pstmt.setString(2, "09");
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Facil f = new Facil();
+				f.setFcNo(rset.getInt("FC_NO"));
+				f.setFcName(rset.getString("FC_NAME"));
+				f.setFcSeatNo(rset.getInt("FC_SEAT_NO"));
+				f.setFcSeatType(rset.getString("FC_SEAT_TYPE"));
+				f.setuId(rset.getString("U_ID"));
+				f.setrName(rset.getString("R_NAME"));
+				f.setuPhone(rset.getString("U_PHONE"));
+				f.setFaDate(rset.getTimestamp("FC_DATE"));
+				f.setFcStart(rset.getTimestamp("FC_START"));
+				f.setFcEnd(rset.getTimestamp("FC_END"));
+				f.setFcStatus(rset.getString("FC_STATUS"));
+				
+				fList.add(f);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return fList;
+	}
+	
+	// 멀티 코트장 멤버 조회
+	public Facil multiInfo(Connection conn, int fcNo, String dayInput, String time) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Facil f = null;
+		String sql = query.getProperty("multiInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dayInput);
+			pstmt.setString(2, time);
+			pstmt.setInt(3, fcNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				f = new Facil();
+				f.setFcNo(rset.getInt("FC_NO"));
+				f.setFcName(rset.getString("FC_NAME"));
+				f.setFcSeatNo(rset.getInt("FC_SEAT_NO"));
+				f.setFcSeatType(rset.getString("FC_SEAT_TYPE"));
+				f.setuId(rset.getString("U_ID"));
+				f.setrName(rset.getString("R_NAME"));
+				f.setuPhone(rset.getString("U_PHONE"));
+				f.setFaDate(rset.getTimestamp("FC_DATE"));
+				f.setFcStart(rset.getTimestamp("FC_START"));
+				f.setFcEnd(rset.getTimestamp("FC_END"));
+				f.setFcStatus(rset.getString("FC_STATUS"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return f;
+	}
 
 }
 

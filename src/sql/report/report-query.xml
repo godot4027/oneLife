@@ -8,10 +8,10 @@
 				       B_NO
 				     , B_TITLE
 				     , B_CONTENT
-				     , ENROLL_DATE
-				     , MODIFY_DATE
+				     , B_ENROLL_DATE
+				     , B_MODIFY_DATE
 				     , B_COUNT
-				     , STATUS
+				     , B_STATUS
 				     , U_NO
 				     , U_NICKNAME
 				     , (SELECT
@@ -31,10 +31,10 @@
 		     , B_NO
 		     , B_TITLE
 		     , B_CONTENT
-		     , ENROLL_DATE
-		     , MODIFY_DATE
+		     , B_ENROLL_DATE
+		     , B_MODIFY_DATE
 		     , B_COUNT
-		     , STATUS
+		     , B_STATUS
 		     , U_NO
 		     , U_NICKNAME
 		     , REPORT
@@ -43,10 +43,10 @@
 		       B_NO
 		     , B_TITLE
 		     , B_CONTENT
-		     , ENROLL_DATE
-		     , MODIFY_DATE
+		     , B_ENROLL_DATE
+		     , B_MODIFY_DATE
 		     , B_COUNT
-		     , STATUS
+		     , B_STATUS
 		     , U_NO
 		     , U_NICKNAME
 		     , (SELECT
@@ -57,7 +57,7 @@
 		     JOIN MEMBER USING(U_NO)
 		     
 		     
-		     ORDER BY STATUS DESC , REPORT DESC, B_NO DESC))
+		     ORDER BY B_STATUS DESC , REPORT DESC, B_NO DESC))
 		     WHERE ROWN BETWEEN ? AND ?
 </entry>
 
@@ -70,10 +70,10 @@
 		     , B_NO
 		     , B_TITLE
 		     , B_CONTENT
-		     , ENROLL_DATE
-		     , MODIFY_DATE
+		     , B_ENROLL_DATE
+		     , B_MODIFY_DATE
 		     , B_COUNT
-		     , STATUS
+		     , B_STATUS
 		     , U_NO
 		     , U_NICKNAME
 		     , REPORT
@@ -82,10 +82,10 @@
 		       B_NO
 		     , B_TITLE
 		     , B_CONTENT
-		     , ENROLL_DATE
-		     , MODIFY_DATE
+		     , B_ENROLL_DATE
+		     , B_MODIFY_DATE
 		     , B_COUNT
-		     , STATUS
+		     , B_STATUS	
 		     , U_NO
 		     , U_NICKNAME
 		     , (SELECT
@@ -104,7 +104,7 @@
 </entry>
 <entry key="removeReport">
 	UPDATE BOARD
-	   SET STATUS = 'N'
+	   SET B_STATUS = 'N'
 	 WHERE B_NO = ?
 </entry>
 </properties>
