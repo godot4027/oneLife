@@ -1,4 +1,4 @@
-package user.board.controller;
+package user.vote.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardPopupServlet
+ * Servlet implementation class VoteFinishServlet
  */
-@WebServlet("/board/popup")
-public class BoardPopupServlet extends HttpServlet {
+@WebServlet("/vote/finish")
+public class VoteFinishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardPopupServlet() {
+    public VoteFinishServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,13 @@ public class BoardPopupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int v_no = (int)request.getSession().getAttribute("v_no"); 
 		
-		request.getRequestDispatcher("/WEB-INF/views/user/jsp/board/popup.jsp").forward(request, response);
+		request.setAttribute("v_no", v_no);
+			
+		request.setAttribute("msg", "등록이 완료되었습니다.");
+	
+		request.getRequestDispatcher("/WEB-INF/views/user/jsp/vote/votefinishpage.jsp").forward(request, response);
 	}
 
 	/**

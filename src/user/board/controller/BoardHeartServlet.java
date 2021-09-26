@@ -39,18 +39,17 @@ public class BoardHeartServlet extends HttpServlet {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		int u_no = ((Member)request.getSession().getAttribute("loginUser")).getU_NO();
 		
+		
 		Board_Like bl = new Board_Like();
 		bl.setB_no(b_no);
 		bl.setU_no(u_no);
 		
 		
 		Board b = new boardService().insertHeart(bl);
+	
 		
-		// GSON 라이브러리 추가 후 replyList 응답
-		// GSON 사용 시 날짜 값 Date 포맷에 대한 컨트롤 가능(GsonBuilder 객체가 가진 기능)
 		response.setContentType("application/json; charset=utf-8");
-		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm").create();
-		gson.toJson(b, response.getWriter());
+		new Gson().toJson(b, response.getWriter());
 	}
 
 	/**

@@ -28,7 +28,7 @@ pageEncoding="UTF-8" import="user.member.model.vo.Member" %>
 
 	<div class="header">
 		<h1 class=logo>
-			<a href="javascript:;"><span class="ir_so">로고</span></a>
+			<a href="${contextPath}/main"><span class="ir_so">로고</span></a>
 		</h1>
 		<div class="top_wrap">
 			<%
@@ -90,8 +90,8 @@ pageEncoding="UTF-8" import="user.member.model.vo.Member" %>
 					<li><a href="javascript:;">멀티 코트장 예약</a></li>
 				</ul>
 				<ul class="inner_item">
-					<li><a href="javascript:;">방문차량 등록</a></li>
-					<li><a href="javascript:;">방문예약 목록</a></li>
+					<li><a href="${contextPath}/visitCarRegister">방문차량 등록</a></li>
+                    <li><a href="${contextPath}/visitCarList">방문예약 목록</a></li>
 				</ul>
 				<ul class="inner_item">
 					<li><a href="${contextPath}/complaint/list">아파트 민원</a></li>

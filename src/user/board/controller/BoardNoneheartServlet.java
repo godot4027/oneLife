@@ -7,17 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import user.board.model.service.boardService;
+import user.board.model.vo.Board;
+import user.board.model.vo.Board_Like;
+import user.member.model.vo.Member;
+
 /**
- * Servlet implementation class BoardPopupServlet
+ * Servlet implementation class BoardNoneheartServlet
  */
-@WebServlet("/board/popup")
-public class BoardPopupServlet extends HttpServlet {
+@WebServlet("/board/noneheart")
+public class BoardNoneheartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardPopupServlet() {
+    public BoardNoneheartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +33,20 @@ public class BoardPopupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		int u_no = ((Member)request.getSession().getAttribute("loginUser")).getU_NO();
 		
-		request.getRequestDispatcher("/WEB-INF/views/user/jsp/board/popup.jsp").forward(request, response);
+		
+		Board_Like bl = new Board_Like();
+		bl.setB_no(b_no);
+		bl.setU_no(u_no);
+		
+		
+		Board b = new boardService().deleteHeart(bl);
+	
+		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(b, response.getWriter());
 	}
 
 	/**

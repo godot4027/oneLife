@@ -39,7 +39,6 @@
       and M_PASSWORD = ?
       </entry>
 
-
    <entry key="insertMember">
    INSERT
       INTO MEMBER
@@ -68,14 +67,42 @@
       )
    </entry>
    
+   <!-- 
+   <entry key="insertMember">
+   INSERT
+      INTO MEMBER
+      (
+      U_NO
+      , U_ID
+      , U_NICKNAME
+      , U_PW
+      , U_PHONE
+      , REG_DATE
+      , MOD_DATE
+      , U_STATUS
+      , R_NO
+      )
+      VALUES
+      (
+        MEMBER_SEQ.NEXTVAL
+      , ?
+      , ?
+      , ?
+      , ?
+      , SYSDATE
+      , SYSDATE
+      , DEFAULT
+      , ?
+      )
+   </entry>
+    -->
    <entry key="changeStatus">
     UPDATE
-     MEMBER
+     INFO_RESIDENT
     SET
-       U_STATUS = 'Y'
-    WHERE U_NO = ?
+       R_STATUS = 'Y'
+    WHERE R_NO = ?
    </entry>
-   
    
    <entry key="checkR">
    select
@@ -169,5 +196,11 @@
       WHERE U_ID = ? 
        AND R_NAME = ?
        AND R_EMAIL = ?
+   </entry>
+    <entry key="findInfoResident">
+      SELECT
+          *
+       FROM INFO_RESIDENT
+      WHERE R_EMAIL = ? 
    </entry>
 </properties>

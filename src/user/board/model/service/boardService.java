@@ -23,13 +23,10 @@ public class boardService {
 		Connection conn = getConnection();
 		
 		int listCount = bd.getListCount(conn, s);
-		System.out.println("listCount : " + listCount);
 		
 		PageInfo pi = new PageInfo(page, listCount, 10, 10);
-		System.out.println("pi : " + pi);
 		
 		List<Board> boardList = bd.selectList(conn, pi, s);
-		System.out.println("boardList : " + boardList);
 		
 		Map<String, Object> returnMap = new HashMap<>();
 		
@@ -161,25 +158,74 @@ public class boardService {
 		return replyList;
 	}
 
-	// 좋아요 추가 
+	// 좋아요 추가 + 조회
 	public Board insertHeart(Board_Like bl) {
 		Connection conn = getConnection();
 		
 		int result1 = bd.insertHeart(conn, bl);
 		
+		
 		int result2 = bd.countHeart(conn, bl);
 		
-		List<Board_Comment> replyList = null;
+		
+		Board b = null;
 		
 		if (result1 > 0 && result2 > 0) {
 			commit(conn);
-			replyList = bd.selectReplyList(conn, b.getB_no());
+			b = bd.selectHeart(conn, bl);
 		} else {
 			rollback(conn);
 		}
 		close(conn);
 		
-		return replyList;
+		return b;
+	}
+
+	// 종아요 삭제
+	public Board deleteHeart(Board_Like bl) {
+		Connection conn = getConnection();
+		
+		int result1 = bd.deleteHeart(conn, bl);
+		
+		int result2 = bd.countHeart(conn, bl);
+		
+		Board b = null;
+		
+		if (result1 > 0 && result2 > 0) {
+			commit(conn);
+			b = bd.selectHeart(conn, bl);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		
+		return b;
+	}
+
+	public int report(String bno, String bcno, int uno) {
+		Connection conn = getConnection();
+		
+		int result = bd.report(conn, bno, bcno, uno);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int chekcUno(String bno, String bcno, int uno) {
+		Connection conn = getConnection();
+		
+		int result = bd.chekcUno(conn, bno, bcno, uno);
+		
+		close(conn);
+		
+		return result;
 	}
 	
 

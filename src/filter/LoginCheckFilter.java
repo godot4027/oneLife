@@ -62,7 +62,9 @@ public class LoginCheckFilter implements Filter {
 			if(!isResourceFile) {
 				Member loginUser = (Member)hreq.getSession().getAttribute("loginUser");
 				Manager loginManager= (Manager)hreq.getSession().getAttribute("loginManager");
-				// System.out.println(loginManager);
+        
+				System.out.println(loginManager);
+        
 				if(loginUser == null && loginManager == null) {
 					hreq.setAttribute("msg", "올바르지 않은 요청입니다.");
 					hreq.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp").forward(request, response);
