@@ -116,4 +116,31 @@
 		   WHERE SC_NO = ?
 	
 	</entry>
+	<entry key="oneDayList">
+		SELECT
+		*
+		FROM(
+		SELECT
+		SC_NO
+		, SC_OPEN_DATE
+		, SC_TITLE
+		, SC_CONTENT
+		, SC_IN_DATE
+		, SC_STATUS
+		, SC_CATE_CODE
+		, SC_CATE_NAME
+		FROM (SELECT
+		SC_NO
+		, SC_OPEN_DATE
+		, SC_TITLE
+		, SC_CONTENT
+		, SC_IN_DATE
+		, SC_STATUS
+		, SC_CATE_CODE
+		, SC_CATE_NAME
+		FROM SC_SCHEDULE
+		JOIN SC_CATEGORY USING(SC_CATE_CODE)
+		ORDER BY SC_NO))
+        where sc_open_date =  to_date(?, 'YYYY-MM-DD') 
+	</entry>
 </properties>

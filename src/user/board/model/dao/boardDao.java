@@ -464,43 +464,42 @@ public class boardDao {
 		return result;
 	}
 
-	// 신고 했는지 안했는지 구별
-	public int chekcUno(Connection conn, String bno, String bcno, int uno) {
-	      PreparedStatement pstmt = null;
-	      ResultSet rset = null;
-	      int result = 0;
-	      String sql = "";
-	      
-	      if (bno.equals("")) {
-	         sql = query.getProperty("chekcUnoReply");
-	      } else {
-	         sql = query.getProperty("chekcUnoWrite");
-	      }
-	      
-	      try {
-	         pstmt = conn.prepareStatement(sql);
-	         
-	         pstmt.setInt(1, uno);
-	         if (bno.equals("")) {
-	            pstmt.setString(2, bcno);
-	         } else {
-	            pstmt.setString(2, bno);
-	         }
-	         
-	         rset = pstmt.executeQuery();
-	         if (rset.next()) {
-	            result = rset.getInt(1);
-	         }
-	         
-	      } catch (SQLException e) {
-	         e.printStackTrace();
-	      } finally {
-	         close(pstmt);
-	      }
-	      
-	      return result;
-	   }
-
+  //게시글 신고 한 사람인지 아닌지 
+public int chekcUno(Connection conn, String bno, String bcno, int uno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = "";
+		
+		if (bno.equals("")) {
+			sql = query.getProperty("chekcUnoReply");
+		} else {
+			sql = query.getProperty("chekcUnoWrite");
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, uno);
+			if (bno.equals("")) {
+				pstmt.setString(2, bcno);
+			} else {
+				pstmt.setString(2, bno);
+			}
+			
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 
 	// 좋아요수 조회

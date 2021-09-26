@@ -39,7 +39,7 @@
 	                                        </select>
 	                                    </div>
 	                                </div>
-	                                <div class="items clearfix">
+	                                <%-- <div class="items clearfix">
 	                                    <label for="reportNum">신고누적</label>
 	                                    <div class="select">
 	                                        <select name="reportNum" id="reportNum">
@@ -48,7 +48,7 @@
 	                                            <option value="reportUp" <c:if test="${param.reportNum eq 'reportUp'}">selected</c:if>>5이상</option>
 	                                        </select>
 	                                    </div>
-	                                </div>
+	                                </div> --%>
 	                            </div>
 	                            <div class="search_bot report clearfix">
 	                                <div class="items clearfix">
@@ -131,7 +131,7 @@
 			                                                ${r.bNo}
 			                                            </td>
 			                                            <td>
-			                                                <a href="javascript:;" class="report_txt">${r.bTtitle}</a>
+			                                                <a href="${contextPath}/board/detail?b_no=${r.bNo}" class="report_txt">${r.bTtitle}</a>
 			                                            </td>
 			                                            <td>
 			                                                <p>${r.uNickName}</p> 

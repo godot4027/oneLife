@@ -31,15 +31,20 @@ public class VisitCarRegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/user/jsp/VisitCar/VisitCarRegister.jsp").forward(request, response);
+		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
+		if (m == null) {
+			request.getSession().setAttribute("msg", "입주민 전용 공간입니다.");
+			response.sendRedirect(request.getContextPath()+"/main");
+		}  else {
+			request.getRequestDispatcher("WEB-INF/views/user/jsp/VisitCar/VisitCarRegister.jsp").forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		String dateString = request.getParameter("date");
 		String carNo = request.getParameter("carNo");
 		String purpose = request.getParameter("purpose");

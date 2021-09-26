@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -357,6 +359,51 @@ public class WeekDao {
 		}
 		
 		return result;
+	}
+
+	public List<Week> oneDayList(Connection conn, String year, String month, String day) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Week week = null;
+		List<Week> wList = new ArrayList<>();
+		String sql = query.getProperty("oneDayList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			Calendar cal = Calendar.getInstance();
+			int intYear = Integer.parseInt(year);
+			int intMonth = Integer.parseInt(month);
+			int intDay = Integer.parseInt(day);
+			cal.set(intYear, intMonth-1, intDay);
+			
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+			String date = ft.format(cal.getTime());
+			pstmt.setString(1, date);
+			System.out.println(date);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				week = new Week();
+				week.setScNo(rset.getInt("SC_NO"));
+				week.setScOpenDate(rset.getDate("SC_OPEN_DATE"));
+				week.setScTitle(rset.getString("SC_TITLE"));
+				week.setScContent(rset.getString("SC_CONTENT"));
+				week.setInDate(rset.getDate("SC_IN_DATE"));
+				week.setScStatus(rset.getString("SC_STATUS").charAt(0));
+				week.setScCateCode(rset.getString("SC_CATE_CODE"));
+				
+				wList.add(week);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return wList;
 	}
 }
 

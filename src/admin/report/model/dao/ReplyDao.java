@@ -42,18 +42,18 @@ public class ReplyDao {
 			sql = query.getProperty("getListSearchCount");
 			
 			if(sc.getStatus().equals("all")) {
-				sql += " WHERE COMMENT_STATUS IS NOT NULL ";
+				sql += " AND COMMENT_STATUS IS NOT NULL ";
 			}else {
-				sql += " WHERE COMMENT_STATUS = ? ";
+				sql += " AND COMMENT_STATUS = ? ";
 			}
 			
-			if(sc.getReportNum().equals("all")) {
-				sql += " AND REPORT IS NOT NULL ";
-			}else if(sc.getReportNum().equals("reportDown")) {
-				sql += " AND REPORT BETWEEN 0 AND 4 ";
-			}else if(sc.getReportNum().equals("reportUp")){
-				sql += " AND REPORT >= 5 ";
-			}
+//			if(sc.getReportNum().equals("all")) {
+//				sql += " AND REPORT IS NOT NULL ";
+//			}else if(sc.getReportNum().equals("reportDown")) {
+//				sql += " AND REPORT BETWEEN 0 AND 4 ";
+//			}else if(sc.getReportNum().equals("reportUp")){
+//				sql += " AND REPORT >= 5 ";
+//			}
 			
 			if(sc.getSearchName().equals("comment") && !sc.getSearchValue().equals("")) {
 				sql += " AND BC_CONTENT LIKE '%' || ? || '%' ";
@@ -104,24 +104,23 @@ public class ReplyDao {
 		ResultSet rset = null;
 		List<Reply> rList = new ArrayList<>();
 		String sql = query.getProperty("selectReplyList");
-		
 		// 검색어가 있을시
 		if(sc.getStatus() != null && sc.getReportNum() != null && sc.getSearchValue() != null) {
 			sql = query.getProperty("selectReplySearchList");
 			
 			if(sc.getStatus().equals("all")) {
-				sql += " WHERE COMMENT_STATUS IS NOT NULL ";
+				sql += " AND COMMENT_STATUS IS NOT NULL ";
 			}else {
-				sql += " WHERE COMMENT_STATUS = ? ";
+				sql += " AND COMMENT_STATUS = ? ";
 			}
 			
-			if(sc.getReportNum().equals("all")) {
-				sql += " AND REPORT IS NOT NULL ";
-			}else if(sc.getReportNum().equals("reportDown")) {
-				sql += " AND REPORT BETWEEN 0 AND 4 ";
-			}else if(sc.getReportNum().equals("reportUp")) {
-				sql += " AND REPORT >= 5 ";
-			}
+//			if(sc.getReportNum().equals("all")) {
+//				sql += " AND REPORT IS NOT NULL ";
+//			}else if(sc.getReportNum().equals("reportDown")) {
+//				sql += " AND REPORT BETWEEN 0 AND 4 ";
+//			}else if(sc.getReportNum().equals("reportUp")) {
+//				sql += " AND REPORT >= 5 ";
+//			}
 			
 			if(sc.getSearchName().equals("comment") && !sc.getSearchValue().equals("")) {
 				sql += " AND BC_CONTENT LIKE '%' || ? || '%' ";
@@ -133,7 +132,6 @@ public class ReplyDao {
 			
 			sql += ") WHERE ROWN BETWEEN ? AND ?";
 		}
-		
 		try {
 			int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;

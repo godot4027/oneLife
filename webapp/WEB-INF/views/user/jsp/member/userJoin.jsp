@@ -127,7 +127,6 @@
 				</div>
 				<hr>
 			</div>
-	</div>
 	<!--체크박스 코멘트 끝-->
 	<div class="step01_btn_box border_test2"></div>
 	<div class="step01_btn_box border_test2">

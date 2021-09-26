@@ -223,7 +223,24 @@ border-right : 1px solid #e6e6e6;
 display : flex;
 align-items : center;
 }
+.list_nodate {
+display : flex;
+flex-direction : column;
+}
 
+.list_nodate > img {
+width : 200px;
+margin : 0 auto;
+}
+
+#nodataP {
+font-size : 20px;
+margin : 0 auto;
+}
+
+.content .list_nodate {
+padding-bottom : 30px;
+}
 </style>
 </head>
 <body>
@@ -316,7 +333,10 @@ align-items : center;
 
 							<div class="vehicleList_body">
 							<c:if test="${fn:length(houseHoldCarList) eq 0}">
-								<h3>검색 결과가 없습니다.</h3>
+								<div class="list_nodate">
+									<img src="/oneLife/resources/admin/images/list_nodate.png" alt="NODATE">
+									<p id="nodataP">검색 결과가 존재하지 않습니다.</p>
+								</div>
 							</c:if>
 								<!-- 한세트 -->
 								<c:forEach var="m" items="${houseHoldCarList}">
@@ -363,6 +383,7 @@ align-items : center;
 			                                </ul>
 			                            </div> -->
 							</div>
+							<c:if test="${fn:length(houseHoldCarList) ne 0}">
 							<div class="paging_wrap">
 								<ul class="board_paging">
 								<%-- 검색 결과 화면인 경우 넘겨줄 searchParam 정의 --%>
@@ -420,7 +441,7 @@ align-items : center;
 									href="${contextPath }/admin/in/list?page=${pi.maxPage}${searchParam}">&gt;&gt;</a></li>
 							</ul>
 							</div>
-
+							</c:if>
 						</div>
 					</div>
 				</div>

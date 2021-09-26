@@ -7,6 +7,7 @@
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	Manager loginManager = (Manager)session.getAttribute("loginManager");
 %>  
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,8 +15,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="resources/calendar-04/css/style.css">
 	<%-- 공통 css/js --%>
     <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
+    <%
+	if (session.getAttribute("msg") != null) {
+	%>
+	<script>
+		alert('<%=session.getAttribute("msg")%>');
+	</script>
+	<%
+		session.removeAttribute("msg");
+	}
+	%>
+	<style>
+	.ftco-section {
+	padding : 0;
+	}
+	
+	.cal_list li {
+	display : inline-block;
+	}
+
+	.main_container .items .main_calendar .cal_list {
+	margin-top : 0;
+	}
+	
+	.cal_status {
+	display : inline-block;
+	}
+	
+	.todayBtn {
+	width: 50px; 
+	height: 36px; 
+	line-height: 36px; background:#72C2E7; 
+	color:#fff; text-align: center; border-radius:10px; font-size: 16px; 
+	box-shadow: 0 1px 3px rgba(63, 63, 68, 0.15);
+	
+	}
+	
+	.dayDiv {
+	display : flex;
+	justify-content : space-between;
+	}
+	</style>
 </head>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
 <body class="main">
@@ -138,13 +183,13 @@
                 <div class="items">
                     <h2>우리 아파트 주요 일정</h2>
                     <div class="main_calendar">
-                        <div class="cal_head">
+                        <!-- <div class="cal_head">
                             <a href="javascript:;">&lt;</a>
                             <p>2021.08</p>
                             <a href="javascript:;">&gt;</a>
-                        </div>
+                        </div> -->
                         <div class="cal_body">
-                            <ul class="cal_week">
+                            <!-- <ul class="cal_week">
                                 <li>일</li>
                                 <li>월</li>
                                 <li>화</li>
@@ -189,20 +234,64 @@
                               <li class="hide"><a href="javascript:;">2</a></li>
                               <li class="hide"><a href="javascript:;">3</a></li>
                               <li class="hide"><a href="javascript:;">4</a></li>
-                            </ul>
-
+                            </ul> -->
+							<section class="ftco-section">
+									<div class="row">
+										    <div class="calendar-container">
+										      <div class="calendar"> 
+										        <div class="year-header"> 
+										          <span class="left-button fa fa-chevron-left" id="prev"> </span> 
+										          <span class="year" id="label"></span> 
+										          <span class="right-button fa fa-chevron-right" id="next"> </span>
+										        </div> 
+										        <table class="months-table w-100"> 
+										          <tbody>
+										            <tr class="months-row">
+										              <td class="month">1월</td> 
+										              <td class="month">2월</td> 
+										              <td class="month">3월</td> 
+										              <td class="month">4월</td> 
+										              <td class="month">5월</td> 
+										              <td class="month">6월</td> 
+										              <td class="month">7월</td>
+										              <td class="month">8월</td> 
+										              <td class="month">9월</td> 
+										              <td class="month">10월</td>          
+										              <td class="month">11월</td>
+										              <td class="month">12월</td>
+										            </tr>
+										          </tbody>
+										        </table> 
+										        
+										        <table class="days-table w-100"> 
+										          <td class="day">일</td> 
+										          <td class="day">월</td> 
+										          <td class="day">화</td> 
+										          <td class="day">수</td> 
+										          <td class="day">목</td> 
+										          <td class="day">금</td> 
+										          <td class="day">토</td>
+										        </table> 
+										        <div class="frame"> 
+										          <table class="dates-table w-100"> 
+									              <tbody class="tbody">             
+									              </tbody> 
+										          </table>
+										        </div> 
+										      </div>
+										    </div>
+									</div>
+							</section>
+							<div class="dayDiv">
                             <p class="cal_status">
                                 08.07 토요일
                             </p>
+                            <button class="todayBtn" type="button" onclick="scToday()">오늘</button>
+							</div>
                         </div>
 
                         <ul class="cal_list">
-                            <li>단지 엘레베이터 점검</li>
-                            <li>단지 엘레베이터 점검</li>
-                            <li>단지 엘레베이터 점검</li>
-                            <li>단지 엘레베이터 점검</li>
-                            <li>단지 엘레베이터 점검</li>
-                            <li>단지 엘레베이터 점검</li>
+                                <li style="width : 30%">공동생활</li><li style="width : 70%">단지 엘레베이터 점검</li><br>
                         </ul>
                     </div>
                 </div>
@@ -223,5 +312,18 @@
         	</a>
         </div>
       </c:if>
+      <script src="resources/calendar-04/js/popper.js"></script>
+  <script src="resources/calendar-04/js/bootstrap.min.js"></script>
+  <script src="resources/calendar-04/js/main.js"></script>
+  <script>
+  function scToday() {
+	  let today = new Date();
+	  let year = today.getFullYear();
+	  let month = today.getMonth();
+	  let day = today.getDate();
+	  
+	  show_events(year, month, day);
+  }
+  </script>
 </body>
 </html>

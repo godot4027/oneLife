@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -37,6 +39,23 @@ color : #72c2e7;
 	overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.list_nodate {
+display : flex;
+flex-direction : column;
+margin-top : 20px;
+}
+
+.list_nodate > img {
+width : 350px;
+margin : 0 auto;
+}
+
+#nodataP {
+padding-top : 10px;
+font-size : 30px;
+margin : 0 auto;
 }
 </style>
 <body>
@@ -111,48 +130,58 @@ color : #72c2e7;
 					<li class="date">방문현황</li>
 					<li class="edit">수정</li>
 				</ul>
-				<c:forEach var="v" items="${visitCarList}">
-					<ul class="visitCarDetail">
-						<li class="no">${v.VC_ID}</li>
-						<li class="date">${v.VC_DATE}</li>
-						<li class="carNo">${v.VC_NO}</li>
-						<li class="visitPurpose">${v.VC_PURPOSE}</li>
-						<li class="phone">${v.VC_PHONE}</li>
-						<li class="applicant">
-						<c:choose>
-							<c:when test="${v.mName eq null}">
-								${v.r_NAME}
-							</c:when>
-							<c:otherwise>
-								관리자
-							</c:otherwise>
-						</c:choose>
-						</li>
-						<li class="date">${v.VC_MODIFYDATE}</li>
-						<c:set var="status" value="N" />
-						<c:choose>
-							<c:when test="${v.VC_STATUS eq status }">
-							<li class="date">접수</li>
-							</c:when>
-							<c:otherwise>
-							<li class="date VisitCheck">완료</li>
-							</c:otherwise>
-						</c:choose>
-						<c:set var="current" value="<%=new java.util.Date()%>" />
-						<fmt:formatDate value="${current }" type="both"
-							pattern="yyyy-MM-dd" var="today" />
-						<c:choose>
-							<c:when
-								test="${v.u_NO == loginUser.u_NO && v.VC_STATUS eq status && v.VC_DATE >= today}">
-								<li class="edit" onclick="fix(${v.VC_ID})"><a href="#" id=""><i
-										class="far fa-edit"></i></a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="edit" id="editBtn" onclick="cantFix()"><i class="far fa-edit"></i></li>
-							</c:otherwise>
-						</c:choose>
-					</ul>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${fn:length(visitCarList) ne 0}">
+						<c:forEach var="v" items="${visitCarList}">
+							<ul class="visitCarDetail">
+								<li class="no">${v.VC_ID}</li>
+								<li class="date">${v.VC_DATE}</li>
+								<li class="carNo">${v.VC_NO}</li>
+								<li class="visitPurpose">${v.VC_PURPOSE}</li>
+								<li class="phone">${v.VC_PHONE}</li>
+								<li class="applicant">
+								<c:choose>
+									<c:when test="${v.mName eq null}">
+										${v.r_NAME}
+									</c:when>
+									<c:otherwise>
+										관리자
+									</c:otherwise>
+								</c:choose>
+								</li>
+								<li class="date">${v.VC_MODIFYDATE}</li>
+								<c:set var="status" value="N" />
+								<c:choose>
+									<c:when test="${v.VC_STATUS eq status }">
+									<li class="date">접수</li>
+									</c:when>
+									<c:otherwise>
+								<li class="date VisitCheck">완료</li>
+									</c:otherwise>
+								</c:choose>
+								<c:set var="current" value="<%=new java.util.Date()%>" />
+								<fmt:formatDate value="${current }" type="both"
+									pattern="yyyy-MM-dd" var="today" />
+								<c:choose>
+									<c:when
+										test="${v.u_NO == loginUser.u_NO && v.VC_STATUS eq status && v.VC_DATE >= today}">
+										<li class="edit" onclick="fix(${v.VC_ID})"><a href="#" id=""><i
+												class="far fa-edit"></i></a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="edit" id="editBtn" onclick="cantFix()"><i class="far fa-edit"></i></li>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+					<div class="list_nodate">
+						<img src="/oneLife/resources/admin/images/list_nodate.png" alt="NODATE">
+						<p id="nodataP">검색 결과가 존재하지 않습니다.</p>
+					</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<div class="search_area">
@@ -160,6 +189,8 @@ color : #72c2e7;
 				<button type="button" id="add" onclick="goRegister()">추가하기</button>
 			</form>
 		</div>
+		<c:if test="${fn:length(visitCarList) ne 0}">
+							
 		<ul class="board_paging">
 		<c:choose>
 			<c:when test="${ empty param.date }">
@@ -230,6 +261,7 @@ color : #72c2e7;
 			<li><a
 				href="${contextPath }/visitCarList?page=${pi.maxPage}${searchParam}">&gt;&gt;</a></li>
 		</ul>
+		</c:if>
 		<!-- <ul class="board_paging">
 			<li><a href="javascript:;">&lt;</a></li>
 			<li><a href="javascript:;" class="current_page">1</a></li>

@@ -24,7 +24,7 @@ public class ReportBoardListServlet extends HttpServlet {
 		}
 		
 		String status = request.getParameter("status");
-		String reportNum = request.getParameter("reportNum");
+		String reportNum = "";
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
 		
