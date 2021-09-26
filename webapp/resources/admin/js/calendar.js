@@ -13,5 +13,11 @@ $.datepicker.setDefaults({
 });
 
 $(function() {
-    $(".cal").datepicker();
+    $(".cal").datepicker({
+    	
+    });
+    $(".cal_today").datepicker({
+    	minDate : 0
+    	
+    });
 });

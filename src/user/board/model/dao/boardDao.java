@@ -116,7 +116,8 @@ public class boardDao {
 												  rset.getString("b_status"),
 												  rset.getInt("u_no"),
 												  rset.getString("u_nickname"),
-												  rset.getInt("b_reply_count")));
+												  rset.getInt("b_reply_count"),
+												  rset.getInt("b_likecnt")));
 												 
 												  
 			}
@@ -406,6 +407,7 @@ public class boardDao {
 		return result;
 	}
 
+	// 게시글 및 댓글 신고
 	public int report(Connection conn, String bno, String bcno, int uno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -462,8 +464,8 @@ public class boardDao {
 		return result;
 	}
 
-
-	public int chekcUno(Connection conn, String bno, String bcno, int uno) {
+  //게시글 신고 한 사람인지 아닌지 
+public int chekcUno(Connection conn, String bno, String bcno, int uno) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;

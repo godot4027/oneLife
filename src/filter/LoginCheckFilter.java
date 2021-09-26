@@ -18,9 +18,6 @@ import user.member.model.vo.Member;
 
 
 
-/**
- * Servlet Filter implementation class LoginCheckFilter
- */
 @WebFilter("/*")
 public class LoginCheckFilter implements Filter {
 	// 비로그인 상태에서 가능한 요청 리스트
@@ -65,7 +62,9 @@ public class LoginCheckFilter implements Filter {
 			if(!isResourceFile) {
 				Member loginUser = (Member)hreq.getSession().getAttribute("loginUser");
 				Manager loginManager= (Manager)hreq.getSession().getAttribute("loginManager");
+        
 				System.out.println(loginManager);
+        
 				if(loginUser == null && loginManager == null) {
 					hreq.setAttribute("msg", "올바르지 않은 요청입니다.");
 					hreq.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp").forward(request, response);

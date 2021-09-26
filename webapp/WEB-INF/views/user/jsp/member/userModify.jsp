@@ -191,6 +191,7 @@ width : 100px;
 						<hr>
 					</div>
 					<div class="check step2_first_div border_test6">
+					<div class="step2_span_left">거주세대</div>
 						<input type="text" name="dong" value="<%= loginUser.getR_DONG() %>"class="step2_input_text_dong_n" readonly
 							required>
 						<div class="step2_span_dongho">동</div>
@@ -218,12 +219,8 @@ width : 100px;
 
 
 <script>
-buttonCheck(); // 최초 한번 실행 (왜? buttonCheck함수는 현재 세션에 로그인된 닉네임과 닉네임 인풋박스에 입력된 텍스트값을 비교하는 함수이고
-// 							인풋박스에 변화가 일어날때 실행되는데 최초에 화면을 띄울때도 한번 검사를 해주기위해서 한번 강제실행함)
-// 							한번 검사를 왜햇냐? 이유: 화면을띄울때는 기본적으로 현재닉네임이 닉네임인풋박스에 입력돼있기 때문에
-// 							수정하기 버튼이 활성화 돼 있어야 하고 닉네임 중복 검사가 꺼져있어야됨 근데 현재 html 코드가 기본적으로 
-// 							닉네임 중복검사가 켜져있고 수정하기가 꺼져있는 상태이기때문에 한번 검사를 실행해서 바꿔줌)
-// 					ps.만약 html기본코드에 버튼활성화 상태가 반대였을 경우에는 149줄에있는 최초 한번 실행이 필요할 이유는 없겠죠?
+buttonCheck();
+
 		function buttonCheck(){
 			var loginUser =  '<%=session.getAttribute("loginUser")%>';
 			var nickName =  '<%=session.getAttribute("loginNickName")%>';

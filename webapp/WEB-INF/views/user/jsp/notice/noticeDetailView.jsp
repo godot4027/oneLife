@@ -62,7 +62,7 @@
 
 		<%-- 공통 footer --%>
 		<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
-		<c:if test="${ !empty loginUser_man }">
+		<c:if test="${ !empty loginManager }">
 		<script>
 			function updateNoticeView(){
 				document.forms.noticeForm.action = "${contextPath}/notice/updateView";

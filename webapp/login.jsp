@@ -95,7 +95,8 @@
 	<script>
 		// 아이디저장하기 쿠키
 		// userId input 태그
-		/* const userId = document.querySelector("#userId"); */
+		// const userId = document.querySelector("#userId");
+
 		// remember checkbox 태그
 		const remember = document.querySelector("#idSave");
 		// 저장 된 쿠키 값 가져오기(cookieName : rememberId)
@@ -159,8 +160,8 @@
 
 		// 로그인 체크
 		function loginBtn() {
-			let userId = document.querySelector("#userId");
 			let userPw = document.querySelector("#userPwd");
+			//let userId = document.querySelector("#userId");
 
 			// 아이디 체크
 			if (userId.value.trim().length <= 0) {

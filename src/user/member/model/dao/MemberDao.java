@@ -177,7 +177,7 @@ private Properties query = new Properties();
 		return result;
 	}
 
-	// 회원 상태 바꾸기
+	// 주민 회원가입 상태 바꾸기
 	public int changeStatus(Connection conn, int rno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -385,13 +385,47 @@ private Properties query = new Properties();
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}
+      
+      } catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+      }
+		
+		return result;
+	}
+	
+	public Member selectMemberByEmail(Connection conn, String email) {
+		Member mem = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("findInfoResident");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, email);
 			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {  
+				mem = new Member(
+						rset.getInt("r_dong"),
+						rset.getInt("r_ho"),
+						rset.getString("r_name"),
+						rset.getString("r_email"),
+						rset.getString("r_type"),
+						rset.getString("r_status"),
+						rset.getDate("r_date"),
+						rset.getInt("r_no"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-		}
-		
-		return result;
+			close(pstmt);
+		}		
+		return mem;
 	}
+
 }

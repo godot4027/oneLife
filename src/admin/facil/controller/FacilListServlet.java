@@ -32,11 +32,12 @@ public class FacilListServlet extends HttpServlet {
 		String searchValue = request.getParameter("searchValue");
 		
 		Search sc = new Search(facilName, facilType, facilStatus, facilDay, allDay, searchName, searchValue);
-		System.out.println(sc);
+		// System.out.println(sc);
 		Map<String, Object> map = new FacilService().selectListFacil(page, sc);
 		
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("fList", map.get("fList"));
+		
 		request.getRequestDispatcher("/WEB-INF/views/admin/jsp/facil/facil_list.jsp").forward(request, response);
 	}
 

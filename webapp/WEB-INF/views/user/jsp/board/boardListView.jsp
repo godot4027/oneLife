@@ -31,7 +31,6 @@
 				<form method="get" action="${ contextPath }/board/list">
 					<select id="searchCondition" name="searchCondition">
 							<option value="title" <c:if test="${ param.searchCondition == 'title' }">selected</c:if>>제목</option>
-							<option value="content" <c:if test="${ param.searchCondition == 'content' }">selected</c:if>>내용</option>
 						    <option value="writer" <c:if test="${ param.searchCondition == 'writer' }">selected</c:if>>닉네임</option>
 					</select>
 					<span class="input_area"> 
@@ -61,7 +60,7 @@
 					<li class="nick">${ b.u_nickname }</li>
 					<li class="date"><fmt:formatDate value="${ b.b_modify_date }" pattern="yyyy-MM-dd"/></li>
 					<li class="count">${ b.b_count }</li>
-					<li class="like">1</li>
+					<li class="like">${ b.b_likecnt }</li>
 				</ul>
 				</c:forEach>
 			</div>

@@ -43,6 +43,7 @@ public class ReportDao {
 			// 검색어 있을시
 			// 삭제여부
 			if(sc.getStatus().equals("all")) {
+
 				 sql += " and B_STATUS IS NOT NULL ";
 			}else if(sc.getStatus().equals("Y")){
 				 sql += " and B_STATUS = 'Y' ";
@@ -122,7 +123,6 @@ public class ReportDao {
 			}
 			
 			sql += " ORDER BY B_STATUS DESC , REPORT DESC, B_NO DESC) where REPORT >= 5";
-			
 			
 //			if(sc.getReportNum().equals("all")) {
 //				sql += " WHERE REPORT IS NOT NULL ";

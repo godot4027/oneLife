@@ -16,6 +16,7 @@ import user.board.model.dao.boardDao;
 import user.board.model.vo.PageInfo;
 import user.board.model.vo.Search;
 import user.vote.vo.Vote;
+import user.vote.vo.Vote_choice;
 
 public class voteDao {
 	private Properties query = new Properties();
@@ -104,10 +105,11 @@ public class voteDao {
 													  rset.getString("v_title"),
 													  rset.getString("v_content"),
 													  rset.getInt("v_count"),
-													  rset.getDate("v_enroll_date"),
-													  rset.getDate("v_modify_date"),
+													  rset.getString("v_enroll_date"),
+													  rset.getString("v_modify_date"),
 													  rset.getString("v_status"),
-													  rset.getInt("m_no")));
+													  rset.getInt("m_no"),
+													  rset.getString("m_nick")));
 				}
 				
 			} catch (SQLException e) {
@@ -130,7 +132,9 @@ public class voteDao {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, v.getV_title());
 				pstmt.setString(2, v.getV_content());
-				pstmt.setInt(3, v.getM_no());
+				pstmt.setString(3, v.getV_modify_date());
+				pstmt.setInt(4, v.getM_no());
+				pstmt.setString(5, v.getV_choice());
 				
 				result = pstmt.executeUpdate();
 				
@@ -141,6 +145,8 @@ public class voteDao {
 			}
 			return result;
 		}
+		
+		
 		
 		// 투표게시판 v_no 글가져오기
 		public int selectVoteNo(Connection conn) {
@@ -166,6 +172,31 @@ public class voteDao {
 		      return v_no;
 		}
 		
+		// 투표게시판 선택지 글작성 
+		public int insertVoteExample(Connection conn, Vote vv) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = query.getProperty("insertVoteExample");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, vv.getV_no());
+				pstmt.setString(2, vv.getVe_choice1());
+				pstmt.setString(3, vv.getVe_choice2());
+				pstmt.setString(4, vv.getVe_choice3());
+				pstmt.setString(5, vv.getVe_choice4());
+				pstmt.setString(6, vv.getVe_choice5());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
 		// 투표게시판 조회수 증가
 		public int increaseCount(Connection conn, int v_no) {
 			PreparedStatement pstmt = null;
@@ -187,6 +218,7 @@ public class voteDao {
 			return result;
 		}
 		
+		// 게시글 1개 조회
 		public Vote selectVote(Connection conn, int v_no) {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -204,10 +236,18 @@ public class voteDao {
 								  rset.getString("v_title"),
 								  rset.getString("v_content"),
 								  rset.getInt("v_count"),
-								  rset.getDate("v_enroll_date"),
-								  rset.getDate("v_modify_date"),
+								  rset.getString("v_enroll_date"),
+								  rset.getString("v_modify_date"),
 								  rset.getString("v_status"),
-								  rset.getInt("m_no"));
+								  rset.getInt("m_no"),
+								  rset.getString("m_nick"),
+								  rset.getString("v_choice"),
+								  rset.getInt("ve_no"),
+								  rset.getString("ve_choice1"),
+								  rset.getString("ve_choice2"),
+								  rset.getString("ve_choice3"),
+								  rset.getString("ve_choice4"),
+								  rset.getString("ve_choice5"));
 				}
 				
 			} catch (SQLException e) {
@@ -239,6 +279,119 @@ public class voteDao {
 			}
 			return result;
 		}
+		
+		// 사용자 투표 값
+		public int insertVoteval(Connection conn, Vote_choice vc) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = query.getProperty("insertVoteval");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, vc.getVe_no());
+				pstmt.setInt(2, vc.getV_no());
+				pstmt.setString(3, vc.getVc_val1());
+				pstmt.setString(4, vc.getVc_val2());
+				pstmt.setString(5, vc.getVc_val3());
+				pstmt.setString(6, vc.getVc_val4()); 
+				pstmt.setString(7, vc.getVc_val5());
+				pstmt.setInt(8, vc.getU_no());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		// 주민 세대주 구분
+		public String selectType(Connection conn, int u_no) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String v = null;
+			String sql = query.getProperty("selectType");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, u_no);
+				
+				rset = pstmt.executeQuery();
+				
+				if (rset.next()) {
+					v = rset.getString("r_type");
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return v;
+		}
+		
+		// 투표 값 조회
+		public Vote_choice selectVal(Connection conn, int v_no) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			Vote_choice vc = null;
+			String sql = query.getProperty("selectVal");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, v_no);
+				
+				rset = pstmt.executeQuery();
+				
+				if (rset.next()) {
+					vc = new Vote_choice(rset.getInt("val1"),
+										  rset.getInt("val2"),
+										  rset.getInt("val3"),
+										  rset.getInt("val4"),
+										  rset.getInt("val5"));
+								 
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return vc;
+		}
+		
+		// 주민 투표했는지 여부 확인문
+		public int selectUnoCount(Connection conn, int v_no, int u_no) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			int v = 0;
+			String sql = query.getProperty("selectUnoCount");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, u_no);
+				pstmt.setInt(2, v_no);
+				
+				rset = pstmt.executeQuery();
+				
+				if (rset.next()) {
+					v = rset.getInt("uno");
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return v;
+		}
+		
 		
 		
 		

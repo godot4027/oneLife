@@ -65,7 +65,9 @@
                                         <col width="auto">
                                         <col width="auto">
                                         <col width="auto">
-                                        <col width="auto">
+                                        <c:if test="${loginManager.mJobcode eq 'M_CODE2'}">
+                                        	<col width="auto">
+                                        </c:if>
                                     </colgroup>
                                     <caption class="ir_so">입주자 명부 목록</caption>
                                     <thead>
@@ -75,7 +77,9 @@
                                             <th>이름</th>
                                             <th>계급</th>
                                             <th>전화번호</th>
-                                            <th>수정</th>
+                                            <c:if test="${loginManager.mJobcode eq 'M_CODE2'}">
+                                            	<th>수정</th>
+                                            </c:if>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -87,7 +91,7 @@
                                     			<td colspan="6">
                                     				<div class="list_nodate">
 	                                                    <img src="${contextPath}/resources/admin/images/list_nodate.png" alt="NODATE">
-	                                                    <p>일치하는 관리자가 없습니다.</p>
+	                                                    <p>등록된 관리자가 없습니다.</p>
 	                                                </div>
                                     			</td>
                                     		</tr>
@@ -100,11 +104,13 @@
 		                                           <td>${item.mName}</td>
 		                                           <td>${item.mJobName}</td>
 		                                           <td>${item.mPhone}</td>
-		                                           <td>
-		                                               <a href="javascript:popShow('managerClass');" class="tag">변경</a>
-		                                               <%-- 관리자 번호 --%>
-		                                               <input type="hidden" name="mNo" value="${item.mNo}"/>
-		                                           </td>
+		                                           <c:if test="${loginManager.mJobcode eq 'M_CODE2'}">
+			                                           <td>
+			                                               <a href="javascript:popShow('managerClass');" class="tag">변경</a>
+			                                               <%-- 관리자 번호 --%>
+			                                               <input type="hidden" name="mNo" value="${item.mNo}"/>
+			                                           </td>
+		                                           </c:if>
 		                                      	</tr>
                                       		</c:forEach>
                                     	</c:otherwise>

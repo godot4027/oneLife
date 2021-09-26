@@ -11,6 +11,26 @@
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 
+<style>
+.fi span {
+ background: #DFF4FF;
+ border: 1px solid #00A7FF;
+ color: #00A8FF;
+ padding: 5px 11px;
+ 
+} 
+.go span {
+    -webkit-animation: blink 1s linear infinite;
+} 
+@-webkit-keyframes blink {
+    0% { color: red; }
+    50% { color: white; }
+    100% { color: red; }
+
+}
+
+
+</style>
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
@@ -47,20 +67,32 @@
 					<li class="date">기간</li>
 					<li class="count">조회</li>
 				</ul>
+			
 				<c:forEach var="v" items="${ voteList }">
+				<c:if test="${ !empty loginManager }">
 				<ul class="vote_ul" onclick="detailView(${ v.v_no })">
+				</c:if>
+				<c:if test="${ !empty loginUser }">
+				<ul class="vote_ul" onclick="detailUserView(${ v.v_no })">
+				</c:if>
+					<fmt:parseDate value='${v.v_modify_date}' var='modify_day' pattern='yyyy-MM-dd' scope="page"/>
+					<fmt:formatDate value="${modify_day}" pattern="yyyy-MM-dd" var="deadline"/> 
+					<fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy-MM-dd" var="today"/>
 					<li class="no">${ v.v_no }</li>
-					<c:choose>
-					<c:when test="">
-					<li class="state"><span>투표 진행중</span></li>
+					<c:choose> 
+					<c:when test="${ today <= deadline }">
+					<li class="state go"><span>투표 진행중</span></li>
 					</c:when>
 					<c:otherwise>
-					<li class="state"><span>투표 완료</span></li>
+					<li class="state fi"><span>투표 완료</span></li>
 					</c:otherwise>
 					</c:choose>
 					<li class="title">${ v.v_title }</li>
 					<li class="nick">${ v.m_nick }</li>
-					<li class="date">${ v.v_enroll_date }~${ v.v_modify_date }</li>
+					<li class="date">
+					<fmt:parseDate value='${v.v_enroll_date}' var='enroll_day' pattern='yyyy-MM-dd' scope="page"/>
+					<fmt:formatDate value="${enroll_day}" pattern="yyyy-MM-dd"/> ~ ${ deadline }
+					</li>
 					<li class="count">${ v.v_count }</li>
 				</ul>
 				</c:forEach>
@@ -71,12 +103,11 @@
 			<form method="get">
 				<button type="button" id="btn2">목록</button>
 				<!-- 관리자만 버튼 보이게-->
-				<%-- <c:if test="${ !empty loginManager }"> --%>
-				<button type="button" id="btn3">작성하기</button>
-				<%-- </c:if> --%>
+				<c:if test="${ !empty loginManager }">
+				<button type="button" id="btn3" onclick="location.href='${ contextPath }/vote/insert'">작성하기</button>
+				</c:if> 
 			</form>
 		</div>
-
 		<ul class="board_paging">
 				<!-- 검색 결과 화면인 경우 넘겨줄 searchParam 정의 -->
 				<c:if test="${ !empty param.searchCondition && !empty param.searchValue }">
@@ -158,9 +189,13 @@
    </script>
    
     <script>
-     		 function detailView(v_no){
-			  		location.href='${contextPath}/vote/detail?v_no='+v_no;
-			  	}
+    	
+     		function detailView(v_no){    			 
+     				location.href='${contextPath}/vote/detail?v_no='+v_no;			
+				 }
+     		function detailUserView(v_no){    			 
+				location.href='${contextPath}/vote/userdetail?v_no='+v_no;
+			 }
      </script> 
 	
 </body>

@@ -69,7 +69,7 @@ public class NoticeDetailServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/user/jsp/notice/noticeDetailView.jsp").forward(request, response);
 		} else {
 			request.setAttribute("msg", "게시글 상세 조회에 실패하였습니다.");
-			request.getRequestDispatcher("/WEB-INF/views/common/errorpage.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/user/common/errorpage.jsp").forward(request, response);
 		}
 		
 		

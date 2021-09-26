@@ -75,7 +75,7 @@
   letter-spacing: 1px;
   color: #fff;
   width: 120px;
-  left: 215px;
+  left: 180px;
 }
 
 .container .btn2 {
@@ -120,7 +120,7 @@
 .bar_area .vote_per {
   color: #ff726d;
   font-size: 25px;
-  padding-left: 370px;
+  padding-left: 20px;
 }
 
 .zt-skill-bar {
@@ -149,6 +149,28 @@
   height: 20px;
 }
 
+.radio_area,
+.checkbox_area {
+  /* display: inline-block; */
+  margin-left: 80px;
+}
+
+.radio_area > div > ul,
+.checkbox_area > div > ul {
+  height: 60px;
+  line-height: 40px;
+  display: flex;
+  margin: 0;
+  margin-left: 10px;
+}
+
+.radio_area label,
+.checkbox_area label {
+  font-size: 18px;
+  margin-left: 30px;
+  cursor: pointer;
+}
+
 </style>
      <%-- 공통css/js --%>
 	<jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
@@ -163,12 +185,16 @@
 		<div class="bottom_wrap2">
 		</div>
 	</div>
+	<form method="post" name="voteForm">
 		<div class="wrap">
 			<div class="vote_area">
 				<div class="vote_title">
 					<h1>비대면으로 안전하게, <b>언제 어디서든<br>투표</b>를 진행해보세요!</h1>
 				</div>
-				<form method="post" name="voteForm">
+		
+				<input type="hidden" name="v_no" value="${ vote.v_no }">
+				<input type="hidden" name="ve_no" value="${ vote.ve_no }">
+				<input type="hidden" name="v_choice" value="${ vote.v_choice }">
 					<div class="notice_content">
 						<div class="subject"></div>
 						<div id="table">
@@ -178,93 +204,189 @@
 							</div>
 							<div class="row">
 							<span class="cell col1">글쓴이</span>
-							<span class="cell col2">${ vote.m_no }</span>
+							<span class="cell col2">${ vote.m_nick }</span>
 							</div>
 							<div class="row">
 							<span class="cell col1">기간</span>
-							<span class="cell col2">${ vote.v_enroll_date } ~ ${ vote.v_modify_date }</span>
+							<span class="cell col2">
+							<fmt:parseDate value='${vote.v_enroll_date}' var='enroll_day' pattern='yyyy-MM-dd' scope="page"/>
+							<fmt:formatDate value="${enroll_day}" pattern="yyyy-MM-dd"/> ~
+							<fmt:parseDate value='${vote.v_modify_date}' var='modify_day' pattern='yyyy-MM-dd' scope="page"/>
+							<fmt:formatDate value="${modify_day}" pattern="yyyy-MM-dd" var="deadline"/> ${ deadline }
+							<fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy-MM-dd" var="today"/>
+							</span>
 							</div>
 				 		</div>
 						 <div class="detail_content">
-						<pre class="col3">투표 내용 </pre>
+						<pre class="col3">${ vote.v_content }</pre>
 						</div>
 						<span class="ment">※ 투표완료 후 선택 수정 불가함으로 신중한 투표 부탁드립니다.</span>
+						<span class="ment">※ 투표는 세대주만 1투표권 행사 가능합니다.</span>
 					</div>
-					 <input type="hidden" name="v_no" value="${ vote.v_no }">
-					<form>
-						<!--  -->
+					<c:if test="${  today <= deadline  }"> 
+						<c:choose>
+						<c:when test="${ vote.v_choice == 'radiobtn' }">
 						<div class="radio_area">
-							<ul>
-							<li>
-							<input type="radio" id="agree" name="radio_val" value="agree">
-							<label for="agree">찬성</label>
-							</li>
-							</ul>
-							<ul>
-							<li>
-							<input type="radio" id="oppose" name="radio_val" value="oppose">
-							<label for="oppose">반대</label>
-							</li>
-							</ul>
+							<c:if test="${ empty vote.ve_choice1 }">
+							<c:set value="style='display : none'" var="nonesty1"/></c:if>
+							<div ${ nonesty1 }>
+							<ul><li>
+							<input type="radio" id="val1" name="radio_val" value="val1" required>
+							<label for="val1">${ vote.ve_choice1 }</label>
+							</li></ul></div>
+							<c:if test="${ empty vote.ve_choice2 }">
+							<c:set value="style='display : none'" var="nonesty2"/></c:if>
+							<div ${ nonesty2 }>
+							<ul><li>
+							<input type="radio" id="val2" name="radio_val" value="val2">
+							<label for="val2">${ vote.ve_choice2 }</label>
+							</li></ul></div>
+							<c:if test="${ empty vote.ve_choice3 }">
+							<c:set value="style='display : none'" var="nonesty3"/></c:if>
+							<div ${ nonesty3 }>
+							<ul><li>
+							<input type="radio" id="val3" name="radio_val" value="val3">
+							<label for="val3">${ vote.ve_choice3 }</label>
+							</li></ul></div>
+							<c:if test="${ empty vote.ve_choice4 }">
+							<c:set value="style='display : none'" var="nonesty4"/></c:if>
+							<div ${ nonesty4 }>
+							<ul><li>
+							<input type="radio" id="val4" name="radio_val" value="val4" >
+							<label for="val4">${ vote.ve_choice4 }</label>
+							</li></ul></div>
+							<c:if test="${ empty vote.ve_choice5 }">
+							<c:set value="style='display : none'" var="nonesty5"/></c:if>
+							<div ${ nonesty5 }>
+							<ul><li>
+							<input type="radio" id="val5" name="radio_val" value="val5">
+							<label for="val5">${ vote.ve_choice5 }</label>
+							</li></ul></div>
 						</div>
-						<!--  -->
+						</c:when>
+						<c:otherwise>
 						<div class="checkbox_area">
-							<ul>
-							<li>
-							<input type="checkbox" id="val1" name="checkbox_val" value="val1">
-							<label for="val1">1번</label>
-							</li>
-							</ul>
-							<ul>
-							<li>
-							<input type="checkbox" id="val2" name="checkbox_val" value="val2">
-							<label for="val2">2번</label>
-							</li>
-							</ul>
-							<ul>
-							<li>
-							<input type="checkbox" id="val3" name="checkbox_val" value="val3">
-							<label for="val3">3번</label>
-							</li>
-							</ul>
+							<c:if test="${ empty vote.ve_choice1 }">
+							<c:set value="style='display : none'" var="nonesty1"/></c:if>
+							<div ${ nonesty1 }>
+							<ul><li>
+							<input type="checkbox" id="val6" name="checkbox_val1" value="val1" >
+							<label for="val6">${ vote.ve_choice1 }</label>
+							</li></ul>
+							</div>
+							<c:if test="${ empty vote.ve_choice2 }">
+							<c:set value="style='display : none'" var="nonesty2"/></c:if>
+							<div ${ nonesty2 }>
+							<ul><li>
+							<input type="checkbox" id="val7" name="checkbox_val2" value="val2">
+							<label for="val7">${ vote.ve_choice2 }</label>
+							</li></ul></div>
+							<c:if test="${ empty vote.ve_choice3 }">
+							<c:set value="style='display : none'" var="nonesty3"/></c:if>
+							<div ${ nonesty3 }>
+							<ul><li>
+							<input type="checkbox" id="val8" name="checkbox_val3" value="val3">
+							<label for="val8">${ vote.ve_choice3 }</label>
+							</li></ul></div>
+							<c:if test="${ empty vote.ve_choice4 }">
+							<c:set value="style='display : none'" var="nonesty4"/></c:if>
+							<div ${ nonesty4 }>
+							<ul><li>
+							<input type="checkbox" id="val9" name="checkbox_val4" value="val4">
+							<label for="val9">${ vote.ve_choice4 }</label>
+							</li></ul></div>
+							<c:if test="${ empty vote.ve_choice5 }">
+							<c:set value="style='display : none'" var="nonesty5"/></c:if>
+							<div ${ nonesty5 }>
+							<ul><li>
+							<input type="checkbox" id="val10" name="checkbox_val5" value="val5">
+							<label for="val10">${ vote.ve_choice5 }</label>
+							</li></ul></div>
 						</div>
-						<!-- 기간 동안 보일 버튼 -->
+						</c:otherwise>
+						</c:choose>
+					</c:if> 
+						
+						<!-- 기간 동안 보일 버튼 투표하기 / 결과보기 -->
+					<c:choose>
+						<c:when test="${  today <= deadline  }">
+						<c:if test="${ !empty loginUser }">
 						<div class="btn_area_vote"> 
-							<input type="submit" value="투표하기" id="btn2">
+							<input type="button" value="투표하기" id="btn2" onclick="votesub()">
 						</div>
-						<!-- 기간 이후 보일 버튼 -->
-						<div class="btn_area_vote"> 
+						</c:if>
+						</c:when>
+						<c:otherwise> 
+						<div class="btn_area_vote">  
 							<button type="button" id="btn3" class="openBtn">결과보기</button>
 							<div class="modal hidden">
 								<div class="bg"></div>
 								<div class="modalBox">
 									<h2>투표결과</h2>
-									<div class="bar_area">
-										<span class="vote_val">찬성</span>
-										<span class="vote_count">40명</span>
-										<span class="vote_per">43%</span>
-										<div class="zt-skill-bar"><div data-width="43"></div></div>
+									<c:set value="${ 100 / (voteval.val1+voteval.val2+voteval.val3+voteval.val4+voteval.val5) }" var="valSum" />
+									<c:if test="${ voteval.val1 == 0}">
+									<c:set value="style='display : none'" var="val1"/></c:if>
+									<div class="bar_area" ${ val1 }>
+										<span class="vote_val">${ vote.ve_choice1 }</span>
+										<span class="vote_count">${ voteval.val1 }명</span>
+										<span class="vote_per"><fmt:formatNumber type="number" var="value1" maxFractionDigits="0"  value="${ valSum * voteval.val1 }" />
+										${ value1 }%</span>
+										<div class="zt-skill-bar"><div data-width="${ value1 }"></div></div>
 									</div>
-									<div class="bar_area">
-										<span class="vote_val">반대</span>
-										<span class="vote_count">32명</span>
-										<span class="vote_per">30%</span>
-										<div class="zt-skill-bar"><div data-width="27"></div></div>
+									<c:if test="${ voteval.val2 == 0}">
+									<c:set value="style='display : none'" var="val2"/></c:if>
+									<div class="bar_area" ${ val2 }>
+										<span class="vote_val">${ vote.ve_choice2 }</span>
+										<span class="vote_count">${ voteval.val2 }명</span>
+										<span class="vote_per"><fmt:formatNumber type="number" var="value2" maxFractionDigits="0"  value="${ valSum * voteval.val2 }" />
+										${ value2}%</span>
+										<div class="zt-skill-bar"><div data-width="${ value2}"></div></div>
+									</div>
+									<c:if test="${ voteval.val3 == 0}">
+									<c:set value="style='display : none'" var="val3"/></c:if>
+									<div class="bar_area" ${ val3 }>
+										<span class="vote_val">${ vote.ve_choice3 }</span>
+										<span class="vote_count">${ voteval.val3 }명</span>
+										<span class="vote_per"><fmt:formatNumber type="number" var="value3" maxFractionDigits="0"  value="${ valSum * voteval.val3 }" />
+										${ value3 }%</span>
+										<div class="zt-skill-bar"><div data-width="${ value3 }"></div></div>
+									</div>
+									<c:if test="${ voteval.val4 == 0}">
+									<c:set value="style='display : none'" var="val4"/></c:if>
+									<div class="bar_area" ${ val4 }>
+										<span class="vote_val">${ vote.ve_choice4 }</span>
+										<span class="vote_count">${ voteval.val4 }명</span>
+										<span class="vote_per"><fmt:formatNumber type="number" var="value4" maxFractionDigits="0"  value="${ valSum * voteval.val4 }" />
+										${ value4 }%</span>
+										<div class="zt-skill-bar"><div data-width="${ value4 }"></div></div>
+									</div>
+									<c:if test="${ voteval.val5 == 0}">
+									<c:set value="style='display : none'" var="val5"/></c:if>
+									<div class="bar_area" ${ val5 }>
+										<span class="vote_val">${ vote.ve_choice5 }</span>
+										<span class="vote_count">${ voteval.val5 }명</span>
+										<span class="vote_per"><fmt:formatNumber type="number" var="value5" maxFractionDigits="0"  value="${ valSum * voteval.val5 }" />
+										${ value5 }%</span>
+										<div class="zt-skill-bar"><div data-width="${ value5 }"></div></div>
 									</div>
 									<button type="button" class="closeBtn">확인</button>
 									</div>
 								</div>
 							</div>
-						</div>
-					</form>
+						</c:otherwise>
+						</c:choose> 
+					</div>
+						
 					<!-- 관리자한테만 보임 -->
+					<c:if test="${ !empty loginManager }">
 					<div class="btn_area">
 						<button type="button" id="btn3" onclick="voteDelete()">삭제하기</button>
 					</div>
-				</form>
-			</div>
-		</div>
-		
+					</c:if>
+				
+			  </div>
+			</form>
+	
 	<%-- 공통 footer --%>
 	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
 	
@@ -275,6 +397,25 @@
 			 		document.forms.voteForm.submit();
 				}
 			}
+			
+			var u_nocount = "${ vote.u_nocount}";
+			var rtype = "${ vote.r_type}";
+			var rty = "세대주";
+			function votesub(){
+				if (u_nocount > 0 ) {
+					alert('이미 투표 했습니다. \n※ 1인 1투표권 행사 가능합니다.');
+					return;
+				}
+				
+				if (rtype == rty) {
+					document.forms.voteForm.action = "${contextPath}/vote/votefinish";
+					document.forms.voteForm.submit();
+				} else {
+					alert('세대주가 아니므로 투표 불가합니다.\n※ 세대주만 투표 가능합니다.');
+				} 
+			}	
+				
+				
 		</script>
 
 		<!-- 모달 창 부분 -->
@@ -308,18 +449,16 @@
         </script>
 	
 	<script>
-        function date1() {
+	
+       /*  	var Deadline = ${ Last_day };
         	
-        	var Deadline = ${ vote.v_modify_date };
-        	
-           let date = document.getElementById("date").value;
              let today = new Date();
              today.setHours(0);
              today.setSeconds(0);
              today.setMilliseconds(0);
              let endDay = new Date(Deadline);
              
-             if (Deadline >= today) { 
+             if (endDay >= today) { 
             	 console.log("dd1");
             	 $("#btn2").removeAttr("disabled"); // 사용하겠다고 선택한 경우 가입하기 버튼 활성화 !
 				 $('#btn2').css('background-color','#4094F7');
@@ -333,11 +472,8 @@
                   document.forms.voteForm.submit();
             }
                
-             }
+             } */
          
-      }
-        
-        
         </script>
 
 </body>
