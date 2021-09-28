@@ -17,14 +17,14 @@ import user.member.model.vo.Member;
 /**
  * Servlet implementation class BoardDetailServlet
  */
-@WebServlet("/board/detail")
-public class BoardDetailServlet extends HttpServlet {
+@WebServlet("/board/Mandetail")
+public class BoardManDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailServlet() {
+    public BoardManDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +34,6 @@ public class BoardDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
-		int u_no = ((Member)request.getSession().getAttribute("loginUser")).getU_NO();
 		boardService bs = new boardService();
 		
 		// 요청으로 부터 쿠키 정보 읽어옴
@@ -68,11 +67,9 @@ public class BoardDetailServlet extends HttpServlet {
 		// 게시글 조회
 		Board b = bs.selectBoard(b_no);
 		
-		int result = bs.selectUsercnt(b_no, u_no);
 		
 		if(b != null) {
 			request.setAttribute("board", b);
-			request.setAttribute("result", result);
 			request.getRequestDispatcher("/WEB-INF/views/user/jsp/board/boardDetailView.jsp").forward(request, response);
 		} else {
 			request.setAttribute("msg", "게시글 상세 조회에 실패하였습니다.");

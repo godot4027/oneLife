@@ -254,7 +254,7 @@
 		  JOIN INFO_MANAGER USING (M_NO)
 		 WHERE C_NO = ?
 		   AND CM_STATUS = 'Y'
-		   ORDER BY CM_NO DESC
+		   ORDER BY CM_NO 
 	</entry>   
 	<entry key="deleteReply">
 		UPDATE COMPLAINT_MANAGER

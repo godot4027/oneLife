@@ -57,8 +57,6 @@
   top: 20%;
   left: 1%;
   right: 100px;
-  display: block;
-  text-align: justify;
 }
 
 .closeBtn {
@@ -98,7 +96,6 @@
 }
 
 .bar_area {
-  display: block;
   padding-top: 30px;
   padding-bottom: 10px;
   margin: 0;
@@ -106,21 +103,27 @@
 .bar_area .vote_val,
 .bar_area .vote_per,
 .bar_area .vote_count {
-  display: inline;
-  position: relative;
+  display: inline-block;
   color: #1d498b;
   font-weight: bold;
   font-size: 22px;
 }
+.bar_area .vote_val {
+  color: #1d498b;
+  width: 60%;
+  text-align: left;
+}
 .bar_area .vote_count {
   color: rgb(173, 173, 173);
   font-size: 18px;
-  padding-left: 30px;
+  width: 100px;
+  text-align: center;
 }
 .bar_area .vote_per {
   color: #ff726d;
   font-size: 25px;
-  padding-left: 20px;
+  text-align: right;
+  width: 80px;
 }
 
 .zt-skill-bar {
@@ -402,21 +405,19 @@
 			var rtype = "${ vote.r_type}";
 			var rty = "세대주";
 			function votesub(){
-				if(checked <= 0){
-					if (u_nocount > 0 ) {
-						alert('이미 투표 했습니다. \n※ 1인 1투표권 행사 가능합니다.');
-						return;
-					}
-					
-					if (rtype == rty) {
-						document.forms.voteForm.action = "${contextPath}/vote/votefinish";
-						document.forms.voteForm.submit();
-					} else {
-						alert('세대주가 아니므로 투표 불가합니다.\n※ 세대주만 투표 가능합니다.');
-					} 
-					
-				}else{
-					
+				
+				let len = $('.checkbox_area div ul li input:checked').length;
+	            let len2 = $('.radio_area div ul li input:checked').length;
+			
+	            if (len == 0 && len2 ==0) {
+	               alert('보기를 선택해주세요!')
+	               return;
+	            }
+				
+				if (u_nocount > 0 ) {
+					alert('이미 투표 했습니다. \n※ 1인 1투표권 행사 가능합니다.');
+					return;
+
 				}
 				
 			}	
@@ -456,33 +457,7 @@
 					}
         </script>
 	
-	<script>
 	
-       /*  	var Deadline = ${ Last_day };
-        	
-             let today = new Date();
-             today.setHours(0);
-             today.setSeconds(0);
-             today.setMilliseconds(0);
-             let endDay = new Date(Deadline);
-             
-             if (endDay >= today) { 
-            	 console.log("dd1");
-            	 $("#btn2").removeAttr("disabled"); // 사용하겠다고 선택한 경우 가입하기 버튼 활성화 !
-				 $('#btn2').css('background-color','#4094F7');
-				 
-                alert("투표 완료되었습니다.");
-             } else {
-            	 $("#btn3").removeAttr("disabled"); // 사용하겠다고 선택한 경우 가입하기 버튼 활성화 !
-				 $('#btn3').css('background-color','#4094F7');
-				 $("#btn2").hide()
-                if (confirm("업로드 이후 수정 불가합니다. 최종 업로드 하시겠습니까?")) {
-                  document.forms.voteForm.submit();
-            }
-               
-             } */
-         
-        </script>
 
 </body>
 </html>

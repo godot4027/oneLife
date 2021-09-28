@@ -110,7 +110,7 @@
                         <li><a href="${contextPath}/greeting">아파트 소개</a></li>
                     </ul>
                 </div>
-                <div class="items">
+                <div class="items"> 
                     <h2><a href="${contextPath}/notice/list">공지사항</a></h2>
                     <div class="main_notice_wrap">
                         <ul class="main_notice_list notice_header">
@@ -119,69 +119,15 @@
                             <li class="date">작성일</li>
                         </ul>
                         <div class="main_scroll">
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
-	                        <ul class="main_notice_list notice_body">
-	                            <li class="title">주요 소식 게시판 입니다.</li>
-	                            <li class="writer">운영자</li>
-	                            <li class="date">2021-08-20</li>
-	                        </ul>
+                          <c:forEach var="n" items="${noticeList}">
+                          <ul class="main_notice_list notice_body" onclick="detailView(${ n.n_no })">
+                              <li class="title">${ n.n_title }</li>
+                              <li class="writer">${ n.m_nick }</li>
+                              <li class="date">${ n.modify_date }</li>
+                          </ul>
+                          </c:forEach>
                         </div>
                     </div>
-
                 </div>
                 <div class="items">
                     <h2>우리 아파트 주요 일정</h2>
@@ -327,6 +273,10 @@
 	  
 	  show_events(year, month, day);
   }
+  
+  function detailView(n_no){
+		location.href='${contextPath}/notice/detail?n_no='+n_no;
+	}
   </script>
 </body>
 </html>

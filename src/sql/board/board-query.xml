@@ -247,7 +247,7 @@
 		  JOIN MEMBER USING (U_NO)
 		 WHERE B_NO = ?
 		   AND BC_STATUS = 'Y'
-		   ORDER BY BC_NO DESC
+		   ORDER BY BC_NO 
 	</entry>   
 	<entry key="deleteReply">
 		UPDATE BOARD_COMMENT
@@ -325,7 +325,19 @@
 	<entry key="chekcUnoReply">
 	select count(u_no) from board_report
 	where u_no = ? and bc_no = ?
-	</entry>
+	</entry> 
+	
+	<entry key="selectUsercnt">
+	SELECT COUNT(U_NO) FROM BOARD_LIKE
+	WHERE B_NO = ? AND U_NO = ?
+	</entry> 
+	<entry key="replyCnt">
+	 SELECT
+              B_REPLY_COUNT
+		 FROM BOARD 
+		 WHERE B_NO = ?
+		 AND B_STATUS = 'Y'
+	</entry> 
 	
 	
 	

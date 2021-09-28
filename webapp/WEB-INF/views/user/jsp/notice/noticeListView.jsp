@@ -14,7 +14,11 @@
      <link rel="stylesheet" href="/oneLife/resources/user/css/style.css"> -->
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
-
+<style>
+.list_no > ul {height: 50px;}
+.list_no { margin-top: 50px;}
+.list_no > ul > li > p {font-weight: bold; font-size: 27px; color: #9EA0A5; }
+</style>
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
@@ -50,6 +54,10 @@
 					<li class="date">작성일</li>
 					<li class="count">조회</li>
 				</ul>
+				
+			<!-- 검색시 값이 있는지 없는지 -->	
+			<c:choose>
+				<c:when test="${ noticeList.size() > 0 }">
 				<c:forEach var="n" items="${ noticeList }">
 				<ul class="notice_ul" onclick="detailView(${ n.n_no })">
 					<li class="no">${ n.n_no }</li>
@@ -58,8 +66,17 @@
 					<li class="date">${ n.modify_date }</li>
 					<li class="count">${ n.n_count }</li>
 				</ul>
-				
 				</c:forEach>
+				</c:when>
+				<c:otherwise>
+    				<div class="list_no">
+         				<ul class="list_noli"> 
+							<li><img src="/oneLife/resources/user/images/speech.png" alt="NODATE"> </li>
+						    <li><p>게시글이 존재하지 않습니다.</p></li>
+                   		</ul>
+			        </div>
+				</c:otherwise>
+				</c:choose>	
 			</div>
 			
 		</div>
@@ -80,13 +97,13 @@
 				</c:if>
 				
 					<!-- 맨 처음으로 (<<) -->
-						<li><a href="${ contextPath }/board/list?page=1${ searchParam }">&lt;&lt;</a></li>
+						<li><a href="${ contextPath }/notice/list?page=1${ searchParam }">&lt;&lt;</a></li>
 						
 					<!-- 이전 페이지 (<) -->
 					<li>
 					<c:choose>
 						 <c:when test="${ pi.page > 1 }">
-						 <a href="${ contextPath }/board/list?page=${ pi.page - 1}${ searchParam }" class="btn_prev">&lt;</a>
+						 <a href="${ contextPath }/notice/list?page=${ pi.page - 1}${ searchParam }" class="btn_prev">&lt;</a>
 						 </c:when>
 						 <c:otherwise>
 						 <a href="#">&lt;</a>
@@ -102,7 +119,7 @@
 						   		<a href="#" class="current_page">${ p }</a>
 						   </c:when>
 						   <c:otherwise>
-						   		<a href="${ contextPath }/board/list?page=${ p }${ searchParam }">${ p }</a>
+						   		<a href="${ contextPath }/notice/list?page=${ p }${ searchParam }">${ p }</a>
 						   </c:otherwise>
 						</c:choose>
 					</li>
@@ -113,7 +130,7 @@
 					<li>
 					<c:choose>
 						 <c:when test="${ pi.page < pi.maxPage }">
-						 <a href="${ contextPath }/board/list?page=${ pi.page + 1}${ searchParam }" class="btn_next">&gt;</a>
+						 <a href="${ contextPath }/notice/list?page=${ pi.page + 1}${ searchParam }" class="btn_next">&gt;</a>
 						 </c:when>
 						 <c:otherwise>
 						 <a href="#">&gt;</a>
@@ -122,7 +139,7 @@
 					</li>		
 						
 					<!-- 맨 끝으로 (>>) -->
-						<li><a href="${ contextPath }/board/list?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>	
+						<li><a href="${ contextPath }/notice/list?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>	
 						
 				</ul>
 	</div>
