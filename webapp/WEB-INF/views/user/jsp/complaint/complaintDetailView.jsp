@@ -7,7 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>아파트민원 게시판</title>
+<style>
+.reply_ul .rcontent {
+   font-weight: 300;
+}
+.type02 {
+	left: 190px;
+    bottom: 53px;
+    top: -40px;
+}
 
+</style>
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 </head>
@@ -136,7 +146,7 @@
 						for (var key in data) {
 							html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people2.png">'
 							      + '<li class="rwriter">'
-							      + data[key].m_no + '</li><li class="rcontent">'
+							      + data[key].m_nick + '</li><li class="rcontent">'
 							      + data[key].cm_content + '</li><li class="rdate">'
 							      + data[key].cm_modify_date + '</li></ul>'
 							      + '<div class="reply_btn_area type02">'
@@ -180,7 +190,7 @@
 						for (var key in data) {
 							html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people2.png">'
 							      + '<li class="rwriter">'
-							      + data[key].m_no + '</li><li class="rcontent">'
+							      + data[key].m_nick + '</li><li class="rcontent">'
 							      + data[key].cm_content + '</li><li class="rdate">'
 							      + data[key].cm_modify_date + '</li></ul>'
 							      + '<div class="reply_btn_area type02">'

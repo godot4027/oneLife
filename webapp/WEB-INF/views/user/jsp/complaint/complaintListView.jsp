@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,6 +122,22 @@ margin-right: 10px;}
 .title span {
  color: #68a2fa;
 }
+
+.list_no > ul {height: 50px;}
+.list_no { margin-top: 50px;}
+.list_no > ul > li > p {font-weight: bold; font-size: 27px; color: #9EA0A5; }
+
+button#mylist {
+    margin-right: 750px;
+    font-size: 14px;
+    color: #ffffff;
+    background: #647389;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 14%), 0px 2px 1px rgb(0 0 0 / 12%), 0px 1px 3px rgb(0 0 0 / 20%);
+}
 </style>
 
 </head>
@@ -142,15 +157,16 @@ margin-right: 10px;}
 				<h1>간편하게 <b>민원 접수하고<br>처리 결과</b>를 전해 드립니다.</h1>
 			</div>
 			<div class="search_area">
-				<form method="get" action="${ contextPath }/complaint/list">
+					<form method="get" action="${ contextPath }/complaint/list" >
 					<span class="input_area"> 
-						<input type="checkbox" name="mylist" value="mybbs" id="mylist">
-						<label for="mylist">내 글만 보기</label>
+						<input type="hidden" name="u_id" value="${ loginUser.u_ID }">
+						<button type="submit" id="mylist">내 글만 보기</button>
 					</span>
+					</form>
+					<form method="get" action="${ contextPath }/complaint/list" >
 					<select id="searchCondition" name="searchCondition">
 						<option value="title" <c:if test="${ param.searchCondition == 'title' }">selected</c:if>>제목</option>
 						<option value="content" <c:if test="${ param.searchCondition == 'content' }">selected</c:if>>내용</option>
-					    <option value="writer" <c:if test="${ param.searchCondition == 'writer' }">selected</c:if>>아이디</option>
 					</select>
 					<span class="input_area2"> 
 						<input type="search" name="searchValue" placeholder="검색">
@@ -165,6 +181,9 @@ margin-right: 10px;}
 					<li class="nick">작성자</li>
 					<li class="date">작성일</li>
 				</ul>
+			<!-- 검색시 값이 있는지 없는지 -->	
+			<c:choose>
+				<c:when test="${ complaintList.size() > 0 }">
 				<c:forEach var="c" items="${ complaintList }">
 				<ul class="complaint_ul type02">
 					<li class="no" >${ c.c_no }</li>
@@ -192,10 +211,20 @@ margin-right: 10px;}
 					<c:if test="${ c.open == null }">
 					<li class="title" onclick="detailView2(${ c.c_no })">${ c.c_title }</li>
 					</c:if>
-					<li class="nick">${ c.u_id }</li>
+					<li class="nick">${ c.r_name }</li>
 					<li class="date"><fmt:formatDate value="${ c.modify_date }" pattern="yyyy-MM-dd"/></li>
 				</ul>
 				</c:forEach>
+				</c:when>
+				<c:otherwise>
+    				<div class="list_no">
+         				<ul class="list_noli"> 
+							<li><img src="/oneLife/resources/user/images/speech.png" alt="NODATE"> </li>
+						    <li><p>게시글이 존재하지 않습니다.</p></li>
+                   		</ul>
+			        </div>
+				</c:otherwise>
+				</c:choose>	
 			</div>
 			
 		</div>
@@ -332,6 +361,8 @@ margin-right: 10px;}
      		 function detailView3(){
 			  		alert('비밀글 입니다.');
 			  	}
+     		 
+     	
      </script>
     
     
