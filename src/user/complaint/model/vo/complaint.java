@@ -16,6 +16,7 @@ public class complaint {
 	private int r_dong;
 	private int r_ho;
 	private String r_name;
+	private String r_nickName;
 	private List<complaint_manager> replyList;   // 댓글
 	private int cm_no;
 	private int c_reply_count;
@@ -233,6 +234,13 @@ public class complaint {
 		return r_dong;
 	}
 
+	public String getR_nickName() {
+		return r_nickName;
+	}
+
+	public void setR_nickName(String r_nickName) {
+		this.r_nickName = r_nickName;
+	}
 
 
 

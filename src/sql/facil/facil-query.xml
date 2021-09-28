@@ -30,7 +30,11 @@
          , FC_DATE
          , FC_START
          , FC_END
-         , FC_STATUS
+         , CASE WHEN FC_STATUS = 'Y' THEN '예약취소'
+            WHEN SYSDATE - FC_START &lt;= 0 THEN '사용전'
+            WHEN (SYSDATE - FC_END &gt;= 0) THEN '사용완료'
+            ELSE '사용중'
+            END AS FC_STATUS
          FROM FACILITY
          JOIN MEMBER USING(U_NO)
          JOIN INFO_RESIDENT USING(R_NO)
@@ -39,7 +43,7 @@
          )
 	</entry>
 	<entry key="selectListFacil">
-     	    SELECT
+     	         SELECT
          *
           FROM (
             SELECT
@@ -67,7 +71,11 @@
          , FC_DATE
          , FC_START
          , FC_END
-         , FC_STATUS
+         , CASE WHEN FC_STATUS = 'Y' THEN '예약취소'
+            WHEN SYSDATE - FC_START &lt;= 0 THEN '사용전'
+            WHEN (SYSDATE - FC_END &gt;= 0) THEN '사용완료'
+            ELSE '사용중'
+            END AS FC_STATUS
          FROM FACILITY
          JOIN MEMBER USING(U_NO)
          JOIN INFO_RESIDENT USING(R_NO)
@@ -105,7 +113,11 @@
          , FC_DATE
          , FC_START
          , FC_END
-         , FC_STATUS
+         , CASE WHEN FC_STATUS = 'Y' THEN '예약취소'
+            WHEN SYSDATE - FC_START &lt;= 0 THEN '사용전'
+            WHEN (SYSDATE - FC_END &gt;= 0) THEN '사용완료'
+            ELSE '사용중'
+          END AS FC_STATUS
          FROM FACILITY
          JOIN MEMBER USING(U_NO)
          JOIN INFO_RESIDENT USING(R_NO)

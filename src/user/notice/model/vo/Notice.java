@@ -12,6 +12,7 @@ public class Notice {
 	private String status;
 	private int m_no;
 	private String m_nick;
+	private int fileCount; // 파일이있는지없는지여부
 	
 	/*
 	N_NO	NUMBER                        공지사항 번호
@@ -136,6 +137,15 @@ public class Notice {
 
 	public void setM_nick(String m_nick) {
 		this.m_nick = m_nick;
+	}
+	
+
+	public int getFileCount() {
+		return fileCount;
+	}
+
+	public void setFileCount(int fileCount) {
+		this.fileCount = fileCount;
 	}
 
 

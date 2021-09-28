@@ -55,9 +55,6 @@
                     <li class="<c:if test="${fn:contains(menuUrl, '/admin/visit/')}">on</c:if>">
                         <a href="${contextPath}/admin/visit/list">방문 차량 등록 현황</a>
                     </li>
-                    <li class="<c:if test="${fn:contains(menuUrl, '/admin/company/')}">on</c:if>">
-                        <a href="${contextPath}/admin/company/list">업체 차량 등록 현황</a>
-                    </li>
                 </ul>
             </li>   
             <li>

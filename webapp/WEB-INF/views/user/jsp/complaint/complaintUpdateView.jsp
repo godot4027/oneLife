@@ -13,11 +13,20 @@
 <style>
 .col3 > span {
 position: relative;
-top: 9px;
+    top: -12px;
+    left: -120px;
 }
 .col3 {
     width: 1140px;
+    padding: 0;
 }
+
+.col3 label {
+     left: -130px;
+    position: relative;
+    top: -10px;
+}
+
 
 </style>
 </head>

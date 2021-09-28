@@ -18,8 +18,9 @@
     top: -12px; }
  .reply_btn_area {
      left: 180px;
-    top: -48px;
+    top: -38px;
 }
+
 </style>
 </head>
 <body>
@@ -48,7 +49,7 @@
 					<div class="btn_area">
 						<img class="comm_img" src="/oneLife/resources/user/images/message.png">
                         <span class="comment">댓글</span>
-                        <span class="comment">${ board.b_reply_count }</span>
+                        <span class="commentcnt">${ board.b_reply_count }</span>
 						<button type="button" onclick="dis()"><img src="/oneLife/resources/user/images/Icon button.png"></button>
                         <div class="dis_aera">
                       <c:choose>
@@ -83,7 +84,7 @@
                         <li class="likecount">${ board.b_likecnt }</li>
                         <li class="comm_img"><img src="/oneLife/resources/user/images/message.png"></li>
                         <li class="comment">댓글</li>
-                        <li class="comment">${ board.b_reply_count }</li>
+                        <li class="commentcnt">${ board.b_reply_count }</li>
                     </ul>
                 </div>
                
@@ -97,23 +98,22 @@
                             <li class="rcontent">${ r.bc_content }</li>
                             <li class="rdate"><fmt:formatDate value="${ r.bc_modify_date }" type="both" pattern="yyyy.MM.dd HH:mm"/></li>
                         </ul>
-                        <div class="reply_btn_area">
-                            <c:choose>
-                            <c:when test="${ !empty loginUser && loginUser.u_NO == r.u_no }">	
-                            <button type="button" onclick="deleteReply(${ r.bc_no },${ r.b_no });">삭제하기</button>
-                            </c:when>
-                       		<c:otherwise>
-                            <button type="button" onclick="reportReply(${ r.bc_no });">신고하기</button>
-                             </c:otherwise>
-                            </c:choose> 
+                			
+					       <div class="reply_btn_area">
+                            <c:if test="${ loginUser.u_NO == r.u_no }">
+                            <button type="button" onclick="deleteReply(${ r.bc_no },${ r.b_no });">삭제하기</button></c:if>
+                       		<c:if test="${ loginUser.u_NO != r.u_no }">
+                            <button type="button" onclick="reportReply(${ r.bc_no });">신고하기</button></c:if>
                         </div>
                        </c:forEach> 
 					</div>
+					<c:if test="${ !empty loginUser }">
 					<div class="reply_write">
 						<textarea class="reply_content" placeholder="도란도란은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." onfocus="this.placeholder=''" onblur="this.placeholder='도란도란은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.'"  maxlength="600"></textarea>
 						<span id="counter">0/ 600</span>
                         <button type="button" onclick="addReply(${ board.b_no });" class="reply_btn2">등록</button>
 					</div>
+					</c:if>
 			</div>
 			</div>	
 				<div class="btn_area">
@@ -192,27 +192,41 @@
 						
 						var html = '';
 						
+						var user = ${ loginUser.u_NO };
+						
 						// 새로 받아온 갱신 된 댓글 목록을 for문을 통해 html에 저장
 						for (var key in data) {
-					          html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people3.png">'
-							      + '<li class="rwriter">'
-							      + data[key].u_nickname + '</li><li class="rcontent">'
-							      + data[key].bc_content + '</li><li class="rdate">'
-							      + data[key].bc_modify_date + '</li></ul>'
-							      + '<div class="reply_btn_area">'
-							      + '<c:choose><c:when test="${ !empty loginUser && loginUser.u_NO == board.u_no }">'
-							      + '<button type="button" onclick="deleteReply(' + data[key].bc_no + ',' + data[key].b_no + ');">삭제하기</button>'
-							      + '</c:when><c:otherwise><button type="button" onclick="showPopup();">신고하기</button></c:otherwise></c:choose></div>';
-							      
+							
+							var fi = (user == data[key].u_no);
+							
+							if (fi) {
+								html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people3.png">'
+								      + '<li class="rwriter">'
+								      + data[key].u_nickname + '</li><li class="rcontent">'
+								      + data[key].bc_content + '</li><li class="rdate">'
+								      + data[key].bc_modify_date + '</li></ul>'
+								      + '<div class="reply_btn_area">'
+								      + '<button type="button" onclick="deleteReply(' + data[key].bc_no + ',' + data[key].b_no + ');">삭제하기</button></div>';
+								
+							} else {
+								html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people3.png">'
+								      + '<li class="rwriter">'
+								      + data[key].u_nickname + '</li><li class="rcontent">'
+								      + data[key].bc_content + '</li><li class="rdate">'
+								      + data[key].bc_modify_date + '</li></ul>'
+								      + '<div class="reply_btn_area">'
+								      + '<button type="button" onclick="showPopup();">신고하기</button></div>';
+							}
+							
+					          
+					        
 						} 
-						
-						console.log(data);
 						
 						// 갱신 된 댓글 목록을 다시 적용
 						$(".reply_list").html(html);
 						// 댓글 작성 부분 리셋
 						$(".reply_content").val("");
-						
+						addReplyCnt();
 						
 					} else {
 						alert('댓글을 입력해주세요!');
@@ -224,6 +238,36 @@
 				}
 			});
 		}	
+		
+		 function addReplyCnt() {
+			 
+			 let b_no = ${board.b_no};
+
+	         $.ajax({
+	             url :'${ contextPath }/board/cntReply',
+	             type :'POST',
+	             data : { b_no : b_no },
+				 dataType : "json",
+	             success : function(data){
+	            
+	                if(data != null) {
+	                	 
+	                 var html =  data;
+	                 
+	                 
+	                	$(".commentcnt").html(html);
+	                
+	                 }
+	                  else{
+	                      alert("댓글수 조회 실패!");
+	                 } 
+
+	             },
+					error : function(e) {
+						console.log(e);
+					}
+	         });
+		 }
 	</script>
 	
 	<script>
@@ -239,23 +283,39 @@
 						
 						var html = '';
 						
+						var user = ${ loginUser.u_NO };
+						
 						// 새로 받아온 갱신 된 댓글 목록을 for문을 통해 html에 저장
 						for (var key in data) {
-							 html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people3.png">'
-							      + '<li class="rwriter">'
-							      + data[key].u_nickname + '</li><li class="rcontent">'
-							      + data[key].bc_content + '</li><li class="rdate">'
-							      + data[key].bc_modify_date + '</li></ul>'
-							      + '<div class="reply_btn_area">'
-							      + '<c:choose><c:when test="${ !empty loginUser && loginUser.u_NO == board.u_no }">'
-							      + '<button type="button" onclick="deleteReply(' + data[key].bc_no + ',' + data[key].b_no + ');">삭제하기</button>'
-							      + '</c:when><c:otherwise><button type="button" onclick="showPopup();">신고하기</button></c:otherwise></c:choose></div>';
-							     
+							
+							var fi = (user == data[key].u_no);
+							
+							if (fi) {
+								html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people3.png">'
+								      + '<li class="rwriter">'
+								      + data[key].u_nickname + '</li><li class="rcontent">'
+								      + data[key].bc_content + '</li><li class="rdate">'
+								      + data[key].bc_modify_date + '</li></ul>'
+								      + '<div class="reply_btn_area">'
+								      + '<button type="button" onclick="deleteReply(' + data[key].bc_no + ',' + data[key].b_no + ');">삭제하기</button></div>';
+								
+							} else {
+								html += '<ul class="reply_ul"><img src="/oneLife/resources/user/images/people3.png">'
+								      + '<li class="rwriter">'
+								      + data[key].u_nickname + '</li><li class="rcontent">'
+								      + data[key].bc_content + '</li><li class="rdate">'
+								      + data[key].bc_modify_date + '</li></ul>'
+								      + '<div class="reply_btn_area">'
+								      + '<button type="button" onclick="showPopup();">신고하기</button></div>';
+							}
+							
+					          
+					        
+						} 
 						
-						}
-						console.log(data);
 						// 갱신 된 댓글 목록을 다시 적용
 						$(".reply_list").html(html);
+						addReplyCnt();
 						
 					} else {
 						alert('댓글 삭제 실패하였습니다!');
@@ -291,6 +351,18 @@
 		 	noneheart();
 		 }
 	}
+	
+	var Userlike = ${ result}; 
+	if (Userlike > 0) {
+		heartSvg.classList.remove("like-default");
+		heartSvg.classList.add("like-fill");
+		heartPath.setAttribute('src','/oneLife/resources/user/images/like2.png');
+	} else {
+		heartSvg.classList.remove("like-fill");
+	 	heartSvg.classList.add("like-default");
+	 	heartPath.setAttribute('src','/oneLife/resources/user/images/like.png');
+	}
+	
 	
 	 function heart() {
 		 

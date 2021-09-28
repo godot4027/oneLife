@@ -20,29 +20,77 @@ public class VisitCar {
 	
 	public VisitCar() {}
 
-	public int getR_DONG() {
-		return R_DONG;
+	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_ENROLLDATE,
+			Date vC_MODIFYDATE, String vC_STATUS, String r_NAME, int u_NO) {
+		super();
+		VC_ID = vC_ID;
+		VC_DATE = vC_DATE;
+		VC_NO = vC_NO;
+		VC_PURPOSE = vC_PURPOSE;
+		VC_PHONE = vC_PHONE;
+		VC_ENROLLDATE = vC_ENROLLDATE;
+		VC_MODIFYDATE = vC_MODIFYDATE;
+		VC_STATUS = vC_STATUS;
+		R_NAME = r_NAME;
+		U_NO = u_NO;
 	}
-
 	
-	public String getmName() {
-		return mName;
+	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_MODIFYDATE,
+			String vC_STATUS, String r_NAME, int u_NO, String m_name) {
+		super();
+		VC_ID = vC_ID;
+		VC_DATE = vC_DATE;
+		VC_NO = vC_NO;
+		VC_PURPOSE = vC_PURPOSE;
+		VC_PHONE = vC_PHONE;
+		VC_MODIFYDATE = vC_MODIFYDATE;
+		VC_STATUS = vC_STATUS;
+		R_NAME = r_NAME;
+		U_NO = u_NO;
+		mName = m_name;
 	}
 
-	public void setmName(String mName) {
-		this.mName = mName;
+	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE) {
+		super();
+		VC_ID = vC_ID;
+		VC_DATE = vC_DATE;
+		VC_NO = vC_NO;
+		VC_PURPOSE = vC_PURPOSE;
+		VC_PHONE = vC_PHONE;
 	}
 
-	public void setR_DONG(int r_DONG) {
+	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_ENROLLDATE,
+			Date vC_MODIFYDATE, String vC_STATUS, String r_NAME, int r_DONG, int r_HO, int u_NO) {
+		super();
+		VC_ID = vC_ID;
+		VC_DATE = vC_DATE;
+		VC_NO = vC_NO;
+		VC_PURPOSE = vC_PURPOSE;
+		VC_PHONE = vC_PHONE;
+		VC_ENROLLDATE = vC_ENROLLDATE;
+		VC_MODIFYDATE = vC_MODIFYDATE;
+		VC_STATUS = vC_STATUS;
+		R_NAME = r_NAME;
 		R_DONG = r_DONG;
-	}
-
-	public int getR_HO() {
-		return R_HO;
-	}
-
-	public void setR_HO(int r_HO) {
 		R_HO = r_HO;
+		U_NO = u_NO;
+	}
+
+	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_MODIFYDATE,
+			String vC_STATUS, String r_NAME, int r_DONG, int r_HO, int u_NO, String m_name) {
+		super();
+		VC_ID = vC_ID;
+		VC_DATE = vC_DATE;
+		VC_NO = vC_NO;
+		VC_PURPOSE = vC_PURPOSE;
+		VC_PHONE = vC_PHONE;
+		VC_MODIFYDATE = vC_MODIFYDATE;
+		VC_STATUS = vC_STATUS;
+		R_NAME = r_NAME;
+		R_DONG = r_DONG;
+		R_HO = r_HO;
+		U_NO = u_NO;
+		mName = m_name;
 	}
 
 	public int getVC_ID() {
@@ -117,6 +165,22 @@ public class VisitCar {
 		R_NAME = r_NAME;
 	}
 
+	public int getR_DONG() {
+		return R_DONG;
+	}
+
+	public void setR_DONG(int r_DONG) {
+		R_DONG = r_DONG;
+	}
+
+	public int getR_HO() {
+		return R_HO;
+	}
+
+	public void setR_HO(int r_HO) {
+		R_HO = r_HO;
+	}
+
 	public int getU_NO() {
 		return U_NO;
 	}
@@ -125,80 +189,12 @@ public class VisitCar {
 		U_NO = u_NO;
 	}
 
-	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_ENROLLDATE,
-			Date vC_MODIFYDATE, String vC_STATUS, String r_NAME, int u_NO) {
-		super();
-		VC_ID = vC_ID;
-		VC_DATE = vC_DATE;
-		VC_NO = vC_NO;
-		VC_PURPOSE = vC_PURPOSE;
-		VC_PHONE = vC_PHONE;
-		VC_ENROLLDATE = vC_ENROLLDATE;
-		VC_MODIFYDATE = vC_MODIFYDATE;
-		VC_STATUS = vC_STATUS;
-		R_NAME = r_NAME;
-		U_NO = u_NO;
-	}
-	
-	
-	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_MODIFYDATE,
-			String vC_STATUS, String r_NAME, int u_NO, String m_name) {
-		super();
-		VC_ID = vC_ID;
-		VC_DATE = vC_DATE;
-		VC_NO = vC_NO;
-		VC_PURPOSE = vC_PURPOSE;
-		VC_PHONE = vC_PHONE;
-		VC_MODIFYDATE = vC_MODIFYDATE;
-		VC_STATUS = vC_STATUS;
-		R_NAME = r_NAME;
-		U_NO = u_NO;
-		mName = m_name;
-	}
-	
-	
-
-	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE) {
-		super();
-		VC_ID = vC_ID;
-		VC_DATE = vC_DATE;
-		VC_NO = vC_NO;
-		VC_PURPOSE = vC_PURPOSE;
-		VC_PHONE = vC_PHONE;
+	public String getmName() {
+		return mName;
 	}
 
-	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_ENROLLDATE,
-			Date vC_MODIFYDATE, String vC_STATUS, String r_NAME, int r_DONG, int r_HO, int u_NO) {
-		super();
-		VC_ID = vC_ID;
-		VC_DATE = vC_DATE;
-		VC_NO = vC_NO;
-		VC_PURPOSE = vC_PURPOSE;
-		VC_PHONE = vC_PHONE;
-		VC_ENROLLDATE = vC_ENROLLDATE;
-		VC_MODIFYDATE = vC_MODIFYDATE;
-		VC_STATUS = vC_STATUS;
-		R_NAME = r_NAME;
-		R_DONG = r_DONG;
-		R_HO = r_HO;
-		U_NO = u_NO;
-	}
-
-	public VisitCar(int vC_ID, Date vC_DATE, String vC_NO, String vC_PURPOSE, String vC_PHONE, Date vC_MODIFYDATE,
-			String vC_STATUS, String r_NAME, int r_DONG, int r_HO, int u_NO, String m_name) {
-		super();
-		VC_ID = vC_ID;
-		VC_DATE = vC_DATE;
-		VC_NO = vC_NO;
-		VC_PURPOSE = vC_PURPOSE;
-		VC_PHONE = vC_PHONE;
-		VC_MODIFYDATE = vC_MODIFYDATE;
-		VC_STATUS = vC_STATUS;
-		R_NAME = r_NAME;
-		R_DONG = r_DONG;
-		R_HO = r_HO;
-		U_NO = u_NO;
-		mName = m_name;
+	public void setmName(String mName) {
+		this.mName = mName;
 	}
 
 	@Override
@@ -208,11 +204,5 @@ public class VisitCar {
 				+ ", VC_STATUS=" + VC_STATUS + ", R_NAME=" + R_NAME + ", R_DONG=" + R_DONG + ", R_HO=" + R_HO
 				+ ", U_NO=" + U_NO + ", mName=" + mName + "]";
 	}
-
-	
-
-	
-	
-
 
 }

@@ -45,20 +45,5 @@ margin-bottom: 90px;
 
 	<%-- 공통 footer --%>
 	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>	
-
-<!-- 팝업영역 -->
-<!-- 필수 약관 동의 팝업 -->
-<div class="popup_wrap" style="display: none;">
-	<div class="dim"></div>
-	<div class="item">
-		<h3 class="tit">이 페이지 내용 :</h3>
-		<p class="txt">
-			해당 정보를 가진 주민은 존재하지 않습니다.<br> 다시 입력해주세요.
-		</p>
-		<div class="btn_box">
-			<a href="javascript:;" class="ok">확인</a>
-		</div>
-	</div>
-</div>
 </body>
 </html>

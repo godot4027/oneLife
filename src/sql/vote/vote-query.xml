@@ -148,8 +148,9 @@
        WHERE V_NO = ?
          AND V_STATUS = 'Y'
    </entry>
+   
    <entry key="selectVote">
-        SELECT
+       SELECT
           V_NO
         , V_TITLE
         , V_CONTENT
@@ -172,6 +173,7 @@
         WHERE V_NO = ?
         AND V_STATUS = 'Y'
    </entry>
+
    
    <entry key="deleteVote">
          UPDATE VOTE

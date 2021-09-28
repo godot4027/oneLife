@@ -36,6 +36,7 @@ public class VoteUserDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int v_no = Integer.parseInt(request.getParameter("v_no"));
 	    int u_no = ((Member)request.getSession().getAttribute("loginUser")).getU_NO();
+	    
 		
 		
 		voteService vs = new voteService();
@@ -70,12 +71,12 @@ public class VoteUserDetailServlet extends HttpServlet {
 		} 
 		// 게시글 조회
 		Vote v = vs.selectVote(v_no, u_no);
+		System.out.println("v  : " + v );
 		
 		// 투표 선택 조회
 		Vote_choice vc = vs.selectVal(v_no);
-		
-		System.out.println("v  : " + v );
 		System.out.println("vc  : " + vc );
+		
 	
 		
 		if(v != null) {

@@ -55,10 +55,10 @@
 	                                    <div class="select">
 	                                        <select name="facilStatus" id="reser_fac">
 	                                            <option value="all">전체</option>
-	                                            <option value="Y" <c:if test="${param.facilStatus eq 'Y'}">selected</c:if>>예약취소</option>
-	                                            <!-- <option value="before">사용전</option>
-	                                            <option value="ing">사용중</option>
-	                                            <option value="after">사용완료</option> -->
+	                                            <option value="예약취소" <c:if test="${param.facilStatus eq '예약취소'}">selected</c:if>>예약취소</option>
+	                                            <option value="사용전">사용전</option>
+	                                            <option value="사용중">사용중</option>
+	                                            <option value="사용완료">사용완료</option>
 	                                        </select>
 	                                    </div>
 	                                </div>
@@ -157,12 +157,18 @@
 			                                            </td>
 			                                            <td>
 			                                            	<c:choose>
-			                                            		<c:when test="${f.fcStatus eq 'Y'}">
+			                                            		<c:when test="${f.fcStatus eq '예약취소'}">
 			                                            			<p class="status_after">예약취소</p>
 			                                            		</c:when>
-			                                            		<c:otherwise>
-					                                                <p class="status_before">사용전</p>
-			                                            		</c:otherwise>
+			                                            		<c:when test="${f.fcStatus eq '사용전'}">
+			                                            			<p class="status_before">사용전</p>
+			                                            		</c:when>
+			                                            		<c:when test="${f.fcStatus eq '사용중'}">
+			                                            			<p class="status_ing">사용중</p>
+			                                            		</c:when>
+			                                            		<c:when test="${f.fcStatus eq '사용완료'}">
+			                                            			<p class="status_after">사용완료</p>
+			                                            		</c:when>
 			                                            	</c:choose>
 			                                            </td>
 			                                        </tr>

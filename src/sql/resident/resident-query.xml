@@ -115,4 +115,18 @@
 			  WHERE R_DONG = ?
 			    AND R_HO = ?
 	</entry>
+	   <entry key="userInfoSelect">
+   	SELECT
+		       U_NO
+		     , U_ID
+		     , U_NICKNAME
+		     , U_PHONE
+		     , REG_DATE
+		     , R_NAME
+		     , R_DONG
+		     , R_HO
+		     FROM INFO_RESIDENT
+		     JOIN MEMBER USING(R_NO)
+		     WHERE r_NO = ?
+   </entry>
 </properties>

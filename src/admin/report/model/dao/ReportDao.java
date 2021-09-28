@@ -73,7 +73,7 @@ public class ReportDao {
 			}
 		}
 		
-		System.out.println(sql);
+		// System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			

@@ -79,9 +79,11 @@ public class findIdPwdServlet extends HttpServlet {
 
 		} else {
 			// userId && 유저 userPwd가 넘어오지 않았을 때 alert
-			request.setAttribute("msg", "해당 정보를 가진 주민은 존재하지 않습니다 다시 입력해주세요.");
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
-			view.forward(request, response);
+			// request.setAttribute("msg", "해당 정보를 가진 주민은 존재하지 않습니다 다시 입력해주세요.");
+			// RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
+			// view.forward(request, response);
+			request.getSession().setAttribute("msg", "해당 정보를 가진 주민은 존재하지 않습니다 다시 입력해주세요.");
+			response.sendRedirect(request.getContextPath()+"/findIdPwd");
 
 		}
 

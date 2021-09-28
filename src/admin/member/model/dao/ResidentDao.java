@@ -465,6 +465,43 @@ public class ResidentDao {
 		return result;
 	}
 
+	// 회원가입 정보
+	public Resident userInfoSelect(Connection conn, int rNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("userInfoSelect");
+		Resident r = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				r = new Resident();
+				r.setuNo(rset.getInt("U_NO"));
+				r.setuId(rset.getString("U_ID"));
+				r.setuNickName(rset.getString("U_NICKNAME"));
+				r.setuPhone(rset.getString("U_PHONE"));
+				r.setrDate(rset.getDate("REG_DATE"));
+				r.setrName(rset.getString("R_NAME"));
+				r.setrDong(rset.getInt("R_DONG"));
+				r.setrHo(rset.getInt("R_HO"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return r;
+	}
+
 	
 
 }

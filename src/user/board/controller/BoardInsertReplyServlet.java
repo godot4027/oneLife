@@ -49,6 +49,8 @@ public class BoardInsertReplyServlet extends HttpServlet {
 		// Board_Comment 객체 전달하여 insert 하고 현재 게시글의 replyList 리턴
 		List<Board_Comment> replyList = new boardService().insertReply(b);
 		
+		
+		
 		// GSON 라이브러리 추가 후 replyList 응답
 		// GSON 사용 시 날짜 값 Date 포맷에 대한 컨트롤 가능(GsonBuilder 객체가 가진 기능)
 		response.setContentType("application/json; charset=utf-8");

@@ -137,7 +137,7 @@
 															</c:choose></td>
 														<td><c:choose>
 																<c:when test="${r.rStatus eq 'Y'}">
-																	<p class="tag type01">가입</p>
+																	<p class="tag type01" onclick="userInfo(${r.rNo});" style="cursor:pointer;">가입</p>
 																</c:when>
 																<c:otherwise>
 																	<p class="tag type03">미가입</p>
@@ -206,10 +206,74 @@
 			</div>
 		</div>
 	</div>
-	<!-- 팝업영역 -->
+	<!-- 유저 회원가입 여부 -->
+	<div class="popup_wrap" id="userInfoSelect">
+        <div class="dim"></div>
+        <div class="item">
+            <h3 class="tit">회원 가입내역</h3>
+            <ul>
+               <li>
+                    <span>회원번호 : </span>
+                    <p class="txt1"></p>
+               </li>
+               <li>
+                    <span>아이디 : </span>
+                    <p class="txt2"></p>
+               </li>
+                <li>
+                    <span>거주세대 : </span>
+                    <p class="txt3"></p>
+               </li>
+               <li>
+                    <span>닉네임 : </span>
+                    <p class="txt4"></p>
+                </li>
+                <li>
+                    <span>연락처 : </span>
+                    <p class="txt5"></p>
+               </li>
+               <li>
+                    <span>가입일 : </span>
+                    <p class="txt6"></p>
+               </li>
+            </ul>
+            <div class="btn_box">
+                <a href="javascript:popHide('userInfoSelect');" class="ok">확인</a>
+            </div>
+        </div>
+    </div>
+	
+	
 
 	<%-- 목록 계산 --%>
 	<script>
+		function userInfo(rNo){
+			$.ajax({
+				url : "${contextPath}/admin/member/userInfo",
+				type : "post",
+				data : { rNo : rNo  },
+				success : function(item){
+					$('#userInfoSelect .tit').text(item.rName + "님 회원 가입내역");
+					$('.txt1').text(item.uNo);
+					$('.txt2').text(item.uId);
+					$('.txt3').text(item.rDong + "동 " + item.rHo + "호");
+					$('.txt4').text(item.uNickName);
+					$('.txt5').text(item.uPhone);
+					$('.txt6').text(item.rDate);
+					
+					popShow('userInfoSelect');
+				},
+				error : function(){
+					console.log('에러발생');
+				}
+			});
+			
+			
+		}
+	
+	
+	
+	
     		// 동계산
     		let index = 0;
     		let firstDong = $('.table_wrap .table tbody tr:eq(0) td.dong').text();

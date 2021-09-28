@@ -55,10 +55,15 @@ private Properties query = new Properties();
 			}
 			
 			// 예약 상태
-			// 일단보류..
 			if(sc.getFacilStatus().equals("all")) {
 				sql += "AND FC_STATUS IS NOT NULL ";
-			}else if(sc.getFacilStatus().equals("Y")) {
+			}else if(sc.getFacilStatus().equals("예약취소")) {
+				sql += "AND FC_STATUS = ? ";
+			}else if(sc.getFacilStatus().equals("사용전")) {
+				sql += "AND FC_STATUS = ? ";
+			}else if(sc.getFacilStatus().equals("사용중")) {
+				sql += "AND FC_STATUS = ? ";
+			}else if(sc.getFacilStatus().equals("사용완료")) {
 				sql += "AND FC_STATUS = ? ";
 			} else {
 				sql += "AND FC_STATUS IS NOT NULL ";
@@ -100,11 +105,17 @@ private Properties query = new Properties();
 				}
 				
 				// 예약 상태
-				// 일단보류..
 				if(sc.getFacilStatus().equals("all")) {
-				}else if(sc.getFacilStatus().equals("Y")) {
+				}else if(sc.getFacilStatus().equals("예약취소")) {
+					pstmt.setString(paramIndex++, sc.getFacilStatus());
+				}else if(sc.getFacilStatus().equals("사용전")) {
+					pstmt.setString(paramIndex++, sc.getFacilStatus());
+				}else if(sc.getFacilStatus().equals("사용중")) {
+					pstmt.setString(paramIndex++, sc.getFacilStatus());
+				}else if(sc.getFacilStatus().equals("사용완료")) {
 					pstmt.setString(paramIndex++, sc.getFacilStatus());
 				}
+				
 				
 				// 예약일자
 				if(sc.getAllDay() != null && sc.getAllDay().equals("on")) {
@@ -164,10 +175,15 @@ private Properties query = new Properties();
 			}
 			
 			// 예약 상태
-			// 일단보류..
 			if(sc.getFacilStatus().equals("all")) {
 				sql += "AND FC_STATUS IS NOT NULL ";
-			}else if(sc.getFacilStatus().equals("Y")) {
+			}else if(sc.getFacilStatus().equals("예약취소")) {
+				sql += "AND FC_STATUS = ? ";
+			}else if(sc.getFacilStatus().equals("사용전")) {
+				sql += "AND FC_STATUS = ? ";
+			}else if(sc.getFacilStatus().equals("사용중")) {
+				sql += "AND FC_STATUS = ? ";
+			}else if(sc.getFacilStatus().equals("사용완료")) {
 				sql += "AND FC_STATUS = ? ";
 			} else {
 				sql += "AND FC_STATUS IS NOT NULL ";
@@ -214,11 +230,15 @@ private Properties query = new Properties();
 				}
 				
 				// 예약 상태
-				// 일단보류..
 				if(sc.getFacilStatus().equals("all")) {
-				}else if(sc.getFacilStatus().equals("Y")) {
+				}else if(sc.getFacilStatus().equals("예약취소")) {
 					pstmt.setString(paramIndex++, sc.getFacilStatus());
-				} else {
+				}else if(sc.getFacilStatus().equals("사용전")) {
+					pstmt.setString(paramIndex++, sc.getFacilStatus());
+				}else if(sc.getFacilStatus().equals("사용중")) {
+					pstmt.setString(paramIndex++, sc.getFacilStatus());
+				}else if(sc.getFacilStatus().equals("사용완료")) {
+					pstmt.setString(paramIndex++, sc.getFacilStatus());
 				}
 				
 				// 예약일자

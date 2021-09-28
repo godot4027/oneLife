@@ -10,7 +10,11 @@
 
 <%-- 공통css/js --%>
 <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
-
+<style>
+.list_no > ul {height: 50px;}
+.list_no { margin-top: 50px;}
+.list_no > ul > li > p {font-weight: bold; font-size: 27px; color: #9EA0A5; }
+</style>
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
@@ -48,9 +52,17 @@
 					<li class="count">조회</li>
 					<li class="like">좋아요</li>
 				</ul>
+				
+			<!-- 검색시 값이 있는지 없는지 -->	
+			<c:choose>
+				<c:when test="${ boardList.size() > 0 }">
 				<c:forEach var="b" items="${ boardList }">
+				<c:if test="${ !empty loginUser }">
 				<ul class="board_ul" onclick="detailView(${ b.b_no })">
-				<li class="no">${ b.b_no }</li>
+				</c:if>
+				<c:if test="${ !empty loginManager }">
+				<ul class="board_ul" onclick="detailManView(${ b.b_no })">
+				</c:if>
 					<li class="no">${ b.b_no }</li>
 					<li class="title">${ b.b_title }
 						<!-- 댓글이 달리시 -->
@@ -64,6 +76,16 @@
 					<li class="like">${ b.b_likecnt }</li>
 				</ul>
 				</c:forEach>
+				</c:when>
+				<c:otherwise>
+    				<div class="list_no">
+         				<ul class="list_noli"> 
+							<li><img src="/oneLife/resources/user/images/speech.png" alt="NODATE"> </li>
+						    <li><p>게시글이 존재하지 않습니다.</p></li>
+                   		</ul>
+			        </div>
+				</c:otherwise>
+				</c:choose>	
 			</div>
 		</div>
 		<div class="search_area">
@@ -159,6 +181,9 @@
      		 function detailView(b_no){
 			  		location.href='${contextPath}/board/detail?b_no='+b_no;
 			  	}
+		    function detailManView(b_no){
+		  		location.href='${contextPath}/board/Mandetail?b_no='+b_no;
+		  	}
      </script> 
 	
 </body>
