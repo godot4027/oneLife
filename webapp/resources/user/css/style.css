@@ -789,6 +789,7 @@ Modal Content/Box
 	line-height: 55px;
 	font-size: 24px;
 	margin-left: 100px;
+	cursor:pointer;
 }
 
 .agreeBtn {
@@ -803,8 +804,16 @@ Modal Content/Box
 	line-height: 55px;
 	font-size: 24px;
 	margin-left: 37px;
+	cursor:pointer;
 }
 
+.agreeBtn:hover{
+  background-color: rgba(105, 173, 247, 0.9);
+}
+
+.cancelBtn:hover{
+  background-color: rgba(105, 173, 247, 0.9);
+}
 .step6_updateBtn {
 	display: block;
 	width: 311px;
@@ -817,6 +826,7 @@ Modal Content/Box
 	line-height: 55px;
 	font-size: 24px;
 	margin-left: 100px;
+	cursor:pointer;
 }
 
 .step6_deleteBtn {
@@ -831,6 +841,14 @@ Modal Content/Box
 	line-height: 55px;
 	font-size: 24px;
 	margin-left: 37px;
+	cursor:pointer;
+}
+
+.step6_updateBtn:hover{
+	background-color: rgba(105, 173, 247, 0.9);
+}
+.step6_deleteBtn:hover{
+	background-color: rgba(247, 151, 151, 0.9);
 }
 
 .step01_btn_box {
@@ -876,7 +894,10 @@ Modal Content/Box
 	line-height: 26px;
 	margin-left: 13px;
 	font-size: 18px;
+	cursor: pointer;
 }
+
+
 
 .lgBtn {
 	display: block;
@@ -907,6 +928,12 @@ Modal Content/Box
 	font-weight: bold;
 	margin-top: 90px
 }
+
+.lgBtn_2:hover{
+  background-color: rgba(133, 192, 227, 0.9);
+}
+
+
 
 .fpw_btn {
 	width: 477px;
@@ -1258,6 +1285,7 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 	width: 1300px;
 	margin: 0 auto;
 	padding: 0px;
+	height: 740px;
 }
 
 .step4_content {
@@ -1471,6 +1499,7 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 .step7_container {
 	width: 1300px;
 	margin: 0 auto;
+	height: 750px;
 }
 
 .step7_content {

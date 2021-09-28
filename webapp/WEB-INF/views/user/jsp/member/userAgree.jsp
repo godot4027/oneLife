@@ -14,14 +14,14 @@
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
-	
+
 	<div class="bottom_wrap1">
 		<p></p>
 		<span>> 회원가입 > 회원가입 약관동의</span>
 		<h1>회원가입 약관동의</h1>
 		<div class="bottom_wrap2"></div>
 	</div>
-	
+
 	<div class="container border_test">
 		<form name="chk_form" id="chk_form" action="#">
 			<div class="check_list border_test">
@@ -76,8 +76,8 @@
 			<div class="step01_btn_box border_test">
 				<span> <a href="${ contextPath }" id="" class="cancelBtn"
 					role="button">취소</a>
-				</span> <span> <a href="${contextPath}/userJoin" id="agreeBtn" class="agreeBtn"
-					role="button" onclick="return agreeBtn()">확인</a>
+				</span> <span> <a href="${contextPath}/userJoin" id="agreeBtn"
+					class="agreeBtn" role="button" onclick="return agreeBtn()">확인</a>
 				</span>
 			</div>
 		</form>
@@ -85,105 +85,108 @@
 
 	<%-- 공통 footer --%>
 	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
-	
-<!-- 팝업영역 -->
-<!-- 필수 약관 동의 팝업 -->
-<div class="popup_wrap" style="display: none;">
-	<div class="dim"></div>
-	<div class="item">
-		<h3 class="tit">회원가입 약관동의 :</h3>
-		<p class="txt">필수 약관에 동의해주세요.</p>
-		<div class="btn_box">
-			<a href="javascript:;" class="ok">확인</a>
+
+	<!-- 팝업영역 -->
+	<!-- 필수 약관 동의 팝업 -->
+	<div class="popup_wrap" style="display: none;">
+		<div class="dim"></div>
+		<div class="item">
+			<h3 class="tit">회원가입 약관동의 :</h3>
+			<p class="txt">필수 약관에 동의해주세요.</p>
+			<div class="btn_box">
+				<a href="javascript:;" class="ok">확인</a>
+			</div>
 		</div>
 	</div>
-</div>
-<!-- footer -->
-<!-- 메뉴 슬라이드 스크립트 -->
-<script>
-    $(function(){
-         $('.header').mouseenter(function(){
-             $('.header').addClass('on');
-             $('.header .nav_wrap .nav_inner_wrap').stop().slideDown(300);
-         })
+	<!-- footer -->
+	<!-- 메뉴 슬라이드 스크립트 -->
+	<script>
+		$(function() {
+			$('.header').mouseenter(function() {
+				$('.header').addClass('on');
+				$('.header .nav_wrap .nav_inner_wrap').stop().slideDown(300);
+			})
 
-         $('.header').mouseleave(function(){
-             $('.header').removeClass('on');
-             $('.header .nav_wrap .nav_inner_wrap').stop().slideUp(300);
-         })
+			$('.header').mouseleave(function() {
+				$('.header').removeClass('on');
+				$('.header .nav_wrap .nav_inner_wrap').stop().slideUp(300);
+			})
 
+		})
+	</script>
 
-    })
-</script>
+	<!-- 모두선택 스크립트 -->
+	<script>
+		// 체크박스 전체 선택
+		$(".check_list").on(
+				"click",
+				"#check_button1",
+				function() {
+					var checked = $(this).is(":checked");
 
-<!-- 모두선택 스크립트 -->
-<script>
-// 체크박스 전체 선택
-    $(".check_list").on("click", "#check_button1", function () {
-        var checked = $(this).is(":checked");
+					if (checked) {
+						$(this).parents(".check_list").find('input').prop(
+								"checked", true);
+					} else {
+						$(this).parents(".check_list").find('input').prop(
+								"checked", false);
+					}
+				});
+	</script>
 
-        if(checked){
-            $(this).parents(".check_list").find('input').prop("checked", true);
-        } else {
-            $(this).parents(".check_list").find('input').prop("checked", false);
-        }
-    });
-</script>
+	<!-- 약관 동의 체크박스 개별선택 -->
+	<script>
+		$(".check_list").on("click", ".normal", function() {
+			var is_checked = true;
 
-<!-- 약관 동의 체크박스 개별선택 -->
-<script>
-    $(".check_list").on("click", ".normal", function() {
-        var is_checked = true;
-        
-        $(".check_list .normal").each(function(){
-            is_checked = is_checked && $(this).is(":checked");
-        });
-        
-        $("#check_button1").prop("checked", is_checked);
-    });
-</script>
+			$(".check_list .normal").each(function() {
+				is_checked = is_checked && $(this).is(":checked");
+			});
 
-<!-- 필수 동의! -->
-<script>
-    
-    $("#check_button2").change(function(){
-        agree_CheckedChanged();
-    });
+			$("#check_button1").prop("checked", is_checked);
+		});
+	</script>
 
-    $("#check_button3").change(function(){
-        agree_CheckedChanged();
-    });
+	<!-- 필수 동의! -->
+	<script>
+		$("#check_button2").change(function() {
+			agree_CheckedChanged();
+		});
 
-    //  체크박스 체크 선택 또는 해제할 때 상태 업데이트
-    function agree_CheckedChanged() {
-        if($("#check_button2").prop("checked") && $("#check_button3").prop("checked")){
-            console.log("체크");
-            $("#agreeBtn").prop("disabled",false); // 활성화
-        }  else {
-            console.log("언 체크");
-            $("#agreeBtn").prop("disabled",true); // 비활성화
-        }
-     }
-    
-     function agreeBtn(){
-       var chk2 = $('#check_button2').is(':checked');
-       var chk3 = $('#check_button3').is(':checked');
-       
-       if(!chk2){
-       		alert("필수 약관에 동의해주세요.");
-        	$('#check_button2').focus();
-        	return false;
-       }else if(!chk3){
-       		alert("필수 약관에 동의해주세요.");
-       	 	$('#check_button3').focus();
-       	 	return false;
-       }else{
-       		// alert("성공"); - 약관(필수) 동의했을시
-       		return true;
-       		chk_form.submit();
-       }
-            
-      } 
-</script>
+		$("#check_button3").change(function() {
+			agree_CheckedChanged();
+		});
+
+		//  체크박스 체크 선택 또는 해제할 때 상태 업데이트
+		function agree_CheckedChanged() {
+			if ($("#check_button2").prop("checked")
+					&& $("#check_button3").prop("checked")) {
+				console.log("체크");
+				$("#agreeBtn").prop("disabled", false); // 활성화
+			} else {
+				console.log("언 체크");
+				$("#agreeBtn").prop("disabled", true); // 비활성화
+			}
+		}
+
+		function agreeBtn() {
+			var chk2 = $('#check_button2').is(':checked');
+			var chk3 = $('#check_button3').is(':checked');
+
+			if (!chk2) {
+				alert("필수 약관에 동의해주세요.");
+				$('#check_button2').focus();
+				return false;
+			} else if (!chk3) {
+				alert("필수 약관에 동의해주세요.");
+				$('#check_button3').focus();
+				return false;
+			} else {
+				return true;
+				chk_form.submit();
+			}
+
+		}
+	</script>
 </body>
 </html>

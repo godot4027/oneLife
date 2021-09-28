@@ -202,7 +202,7 @@ width : 100px;
 						<hr>
 					</div>
 				</div>
-				<!--                체크박스 코멘트 끝-->
+				<!-- 체크박스 코멘트 끝-->
 				<div class="step01_btn_box border_test6"></div>
 				<div class="step01_btn_box border_test6">
 					<span >
@@ -250,7 +250,7 @@ buttonCheck();
     // 4. 연락처
     if(!check(/^[0-9]{11}$/,
     document.getElementById('phone'),
-    "연락처를 입력하세요"))
+    "올바른 연락처를 입력하세요"))
     return false;
 };
 
