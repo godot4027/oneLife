@@ -417,15 +417,12 @@
 				if (u_nocount > 0 ) {
 					alert('이미 투표 했습니다. \n※ 1인 1투표권 행사 가능합니다.');
 					return;
+
 				}
 				
-				if (rtype == rty) {
-					document.forms.voteForm.action = "${contextPath}/vote/votefinish";
-					document.forms.voteForm.submit();
-				} else {
-					alert('세대주가 아니므로 투표 불가합니다.\n※ 세대주만 투표 가능합니다.');
-				} 
 			}	
+
+			
 				
 				
 		</script>

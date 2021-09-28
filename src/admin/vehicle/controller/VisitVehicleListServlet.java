@@ -31,11 +31,11 @@ public class VisitVehicleListServlet extends HttpServlet {
 		String dateStr = request.getParameter("date");
 		String status = request.getParameter("status");
 		
-		System.out.println("dong :" + dongStr);
-		System.out.println("ho : " + hoStr);
-		System.out.println(carNo);
-		System.out.println(dateStr);
-		System.out.println(status);
+		// System.out.println("dong :" + dongStr);
+		// System.out.println("ho : " + hoStr);
+		// System.out.println(carNo);
+		// System.out.println(dateStr);
+		// System.out.println(status);
 		
 		if (dateStr != null && (dateStr.equals("") || dateStr.equals("전체"))) {
 			dateStr ="all";

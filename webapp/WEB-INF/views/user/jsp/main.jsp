@@ -17,7 +17,8 @@
     <title>메인페이지</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="resources/calendar-04/css/style.css">
+    <link rel="stylesheet" href="resources/calendar-04/css/style.css">
+	
 	<%-- 공통 css/js --%>
     <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
     <%
@@ -117,15 +118,16 @@
                             <li class="writer">작성자</li>
                             <li class="date">작성일</li>
                         </ul>
-                        <c:forEach var="n" items="${noticeList}">
-                        <ul class="main_notice_list notice_body" onclick="detailView(${ n.n_no })">
-                            <li class="title">${ n.n_title }</li>
-                            <li class="writer">${ n.m_nick }</li>
-                            <li class="date">${ n.modify_date }</li>
-                        </ul>
-                        </c:forEach>
+                        <div class="main_scroll">
+                          <c:forEach var="n" items="${noticeList}">
+                          <ul class="main_notice_list notice_body" onclick="detailView(${ n.n_no })">
+                              <li class="title">${ n.n_title }</li>
+                              <li class="writer">${ n.m_nick }</li>
+                              <li class="date">${ n.modify_date }</li>
+                          </ul>
+                          </c:forEach>
+                        </div>
                     </div>
-
                 </div>
                 <div class="items">
                     <h2>우리 아파트 주요 일정</h2>

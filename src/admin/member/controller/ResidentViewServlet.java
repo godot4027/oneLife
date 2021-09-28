@@ -72,10 +72,6 @@ public class ResidentViewServlet extends HttpServlet {
 		response.sendRedirect(request.getContextPath() + "/admin/member/list");
 		
 		
-		
-	
-		
-		
 	}
 
 }

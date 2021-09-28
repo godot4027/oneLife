@@ -29,10 +29,10 @@ public class loginServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		System.out.println(loginUser);
+		// System.out.println(loginUser);
 
 		Manager loginManager = new ManagerService().ManagerLogin(userId, userPwd);
-		System.out.println(loginManager);
+		// System.out.println(loginManager);
        
 		if(loginUser != null) {
 	         HttpSession session = request.getSession();
