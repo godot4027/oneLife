@@ -380,7 +380,9 @@ public class WeekDao {
 			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 			String date = ft.format(cal.getTime());
 			pstmt.setString(1, date);
+
 			// System.out.println(date);
+
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

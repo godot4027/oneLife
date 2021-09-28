@@ -167,7 +167,6 @@ public class boardService {
 		
 		int result2 = bd.countHeart(conn, bl);
 		
-		
 		Board b = null;
 		
 		if (result1 > 0 && result2 > 0) {

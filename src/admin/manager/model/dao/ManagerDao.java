@@ -296,7 +296,6 @@ public class ManagerDao {
 				mLogin.setmJobcode(rset.getString("M_JOBCODE"));
 				mLogin.setmJobName(rset.getString("M_JOBNAME"));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

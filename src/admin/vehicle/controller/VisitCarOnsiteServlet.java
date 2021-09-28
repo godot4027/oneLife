@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.tribes.Member;
 
+import admin.manager.model.vo.Manager;
 import user.VisitCar.model.service.VisitCarService;
 
 /**
@@ -42,7 +43,8 @@ public class VisitCarOnsiteServlet extends HttpServlet {
 		int ho = Integer.parseInt(request.getParameter("ho"));
 		String phone = request.getParameter("phone");
 		
-		int vid = new VisitCarService().adminInsertVisitCar(1, dateString, carNo, purpose, dong, ho, phone);
+		int mno = ((Manager)request.getSession().getAttribute("loginManager")).getmNo(); //관리자 번호
+		int vid = new VisitCarService().adminInsertVisitCar(mno, dateString, carNo, purpose, dong, ho, phone);
 		
 		if (vid > 0) {
 			request.getSession().setAttribute("vid", vid);

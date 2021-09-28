@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import admin.manager.model.vo.Manager;
 import admin.vehicle.model.service.MemberCarService;
 import admin.vehicle.model.vo.HouseHoldCar;
 import admin.vehicle.model.vo.MemberCar;
-import user.member.model.service.MemberService;
 
 /**
  * Servlet implementation class AddMemberCarServlet
@@ -39,26 +39,31 @@ public class AddMemberCarServlet extends HttpServlet {
 		String carNo = request.getParameter("carNo");
 		String rName = request.getParameter("rName");
 		String cPhone = request.getParameter("cPhone");
-//		int mno = ((Member)request.getSession().getAttribute("loginUser")).getUserNo(); 매니저 로그인 세션
+		int mno = ((Manager)request.getSession().getAttribute("loginManager")).getmNo(); 
 		
 		int rno = new MemberCarService().selectRno(dong, ho, rName);
 		
-		MemberCar m = new MemberCar();
-		m.setMcNo(carNo);
-		m.setmNo(1); //매니저 로그인 세션
-		m.setrNo(rno);
-		m.setcPhone(cPhone);
+		if (rno > 0) {
+			MemberCar m = new MemberCar();
+			m.setMcNo(carNo);
+			m.setmNo(mno); //매니저 로그인 세션
+			m.setrNo(rno);
+			m.setcPhone(cPhone);
+			
+//			HouseHoldCar h = new HouseHoldCar();
+//			h.setDong(dong);
+//			h.setHo(ho);
+//			h.getMemberCarList().add(m);
+			
+			HouseHoldCar houseHoldCar = new MemberCarService().insertMemberCar(m, dong, ho);
+			
+			response.setContentType("application/json; charset=utf-8");		
+			new Gson().toJson(houseHoldCar, response.getWriter());
+		} else {
+			response.setContentType("application/json; charset=utf-8");		
+			new Gson().toJson(0, response.getWriter());
+		}
 		
-//		HouseHoldCar h = new HouseHoldCar();
-//		h.setDong(dong);
-//		h.setHo(ho);
-//		h.getMemberCarList().add(m);
-		
-		
-		HouseHoldCar houseHoldCar = new MemberCarService().insertMemberCar(m, dong, ho);
-		
-		response.setContentType("application/json; charset=utf-8");		
-		new Gson().toJson(houseHoldCar, response.getWriter());
 	}
 
 	/**

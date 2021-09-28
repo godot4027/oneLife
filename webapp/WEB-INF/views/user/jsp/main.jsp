@@ -32,10 +32,6 @@
 	}
 	%>
 	<style>
-	.ftco-section {
-	padding : 0;
-	}
-	
 	.cal_list li {
 	display : inline-block;
 	}
@@ -61,6 +57,16 @@
 	display : flex;
 	justify-content : space-between;
 	}
+	
+	li {
+	text-align : left;
+	}
+	
+	.cal_list > ul > li:first-of-type {
+	color : #72C2E7;
+	font-weight : bold;
+	}
+	
 	</style>
 </head>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
@@ -185,7 +191,6 @@
                               <li class="hide"><a href="javascript:;">4</a></li>
                             </ul> -->
 							<section class="ftco-section">
-									<div class="row">
 										    <div class="calendar-container">
 										      <div class="calendar"> 
 										        <div class="year-header"> 
@@ -228,7 +233,6 @@
 										          </table>
 										        </div> 
 										      </div>
-										    </div>
 									</div>
 							</section>
 							<div class="dayDiv">
@@ -240,7 +244,7 @@
                         </div>
 
                         <ul class="cal_list">
-                                <li style="width : 30%">공동생활</li><li style="width : 70%">단지 엘레베이터 점검</li><br>
+                                <li style="width : 30%">공동생활</li><li style="width : 70%">단지 엘레베이터 점검</li>
                         </ul>
                     </div>
                 </div>
@@ -261,22 +265,39 @@
         	</a>
         </div>
       </c:if>
+      
       <script src="resources/calendar-04/js/popper.js"></script>
-  <script src="resources/calendar-04/js/bootstrap.min.js"></script>
-  <script src="resources/calendar-04/js/main.js"></script>
-  <script>
-  function scToday() {
-	  let today = new Date();
-	  let year = today.getFullYear();
-	  let month = today.getMonth();
-	  let day = today.getDate();
-	  
-	  show_events(year, month, day);
-  }
+	  <script src="resources/calendar-04/js/bootstrap.min.js"></script>
+	  <script src="resources/calendar-04/js/main.js"></script>
+	  <script>
+	  function scToday() {
+		  let today = new Date();
+		  let year = today.getFullYear();
+		  let month = today.getMonth();
+		  let day = today.getDate();
+		  
+		  $('#label').text(year);
+		  $(".active-date").removeClass("active-date");
+		  $(".active-month").removeClass("active-month");
+		  
+		  init_calendar(today);
+		  
+		  $(".month").each(function(){
+			  let a = $(this).text();
+			  let num = month + 1;
+				if (a == num + '월') {
+					$(this).addClass("active-month");
+				}
+		  });
+		  
+          show_events(year, months[month], day);
+	  }
   
   function detailView(n_no){
 		location.href='${contextPath}/notice/detail?n_no='+n_no;
 	}
+
   </script>
+  
 </body>
 </html>

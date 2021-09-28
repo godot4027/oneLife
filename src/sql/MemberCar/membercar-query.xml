@@ -19,6 +19,23 @@
 		order by r_dong asc, r_ho asc, mc_id) VLIST)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="excelSelectMemberCar">
+		SELECT
+		r_name
+		, r_dong
+		, r_ho
+		, mc_id
+		, mc_no
+		, c_phone
+		FROM (select
+		ROWNUM RNUM, VLIST.*
+		from (select
+		*
+		from member_car
+		join info_resident using (r_no)
+		where mc_status = 'N'
+		order by r_dong asc, r_ho asc, mc_id) VLIST)
+	</entry>
 	<entry key="insertMemberCar">
 		insert into member_car
 		values (membercar_seq.nextval,

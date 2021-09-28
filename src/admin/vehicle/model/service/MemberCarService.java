@@ -27,11 +27,13 @@ public class MemberCarService {
 		PageInfo pi = new PageInfo(page, listCount, 10, 10);
 
 		List<HouseHoldCar> houseHoldCarList = md.selectMemberCar(conn, pi, is);
+		List<HouseHoldCar> excelDownList = md.selectMemberCar(conn, is);
 //		System.out.println(houseHoldCarList);
 		
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("pi", pi);
 		returnMap.put("houseHoldCarList", houseHoldCarList);
+		returnMap.put("excelDownList", excelDownList);
 
 		close(conn);
 

@@ -498,8 +498,10 @@ margin-top : 30px;
 				<div class="new_admin">
 					<div class="title">방문차량 현장접수</div>
 					<div class="new_item">
+					<c:set var="current" value="<%= new java.util.Date() %>"/>
+					<fmt:formatDate var="elToday" value="${current }" type="both" pattern="yyyy-MM-dd"/>
 						<label>방문일</label> <input type="date" name="date" id="date"
-							required>
+							readonly value="${elToday}">
 					</div>
 					<div class="new_item">
 						<label>차량번호</label> <input type="text"
@@ -529,7 +531,8 @@ margin-top : 30px;
 					</div>
 				</div>
 				<div class="new_btn_box">
-					<button class="submitBtn" onclick="return checkDate()">등록하기</button>
+					<button class="submitBtn">등록하기</button>
+					<!-- <button class="submitBtn" onclick="return checkDate()">등록하기</button> -->
 					<button class="submitBtn" onclick="popHide('onSite')" type="button">취소하기</button>
 					<!-- <a href="javascript:popHide('onSite');">취소하기</a> -->
 				</div>
