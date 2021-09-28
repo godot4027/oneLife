@@ -37,7 +37,7 @@ public class complaintDao {
 			int listCount = 0;
 			String sql = query.getProperty("getListCount");
 			
-			if (s.getSearchCondition() != null && s.getSearchValue() != null) {
+			if (s.getSearchCondition() != null && s.getSearchValue() != null)  {
 				if (s.getSearchCondition().equals("title")) {    // 제목 검색
 					sql = query.getProperty("getTitleListCount");
 				} else if(s.getSearchCondition().equals("content")) {  // 내용 검색
@@ -47,12 +47,20 @@ public class complaintDao {
 				}
 			}
 			
+			if (s.getU_id() != null) {
+				sql = query.getProperty("getWriterListCount");
+			}
+			
 			
 			try {
 				pstmt= conn.prepareStatement(sql);
 				
 				if (s.getSearchCondition() != null && s.getSearchValue() != null) {
 					pstmt.setString(1, s.getSearchValue());
+				}
+				
+				if (s.getU_id() != null) {
+					pstmt.setString(1, s.getU_id());
 				}
 				
 				rset = pstmt.executeQuery();
@@ -88,6 +96,10 @@ public class complaintDao {
 				}
 			}
 			
+			if (s.getU_id() != null) {
+				sql = query.getProperty("selecWriterList");
+			}
+			
 			try {
 				pstmt = conn.prepareStatement(sql);
 				
@@ -99,6 +111,11 @@ public class complaintDao {
 				if(s.getSearchCondition() != null && s.getSearchValue() != null) {
 					pstmt.setString(paramIndex++, s.getSearchValue());
 				}
+				
+				if (s.getU_id() != null) {
+					pstmt.setString(paramIndex++, s.getU_id());
+				}
+				
 				
 				pstmt.setInt(paramIndex++, startRow);
 				pstmt.setInt(paramIndex++, endRow);

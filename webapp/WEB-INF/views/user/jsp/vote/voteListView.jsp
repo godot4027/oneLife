@@ -29,6 +29,10 @@
 
 }
 
+.list_no > ul {height: 50px;}
+.list_no { margin-top: 50px;}
+.list_no > ul > li > p {font-weight: bold; font-size: 27px; color: #9EA0A5; }
+
 
 </style>
 </head>
@@ -67,7 +71,10 @@
 					<li class="date">기간</li>
 					<li class="count">조회</li>
 				</ul>
-			
+				
+			<!-- 검색시 값이 있는지 없는지 -->	
+			<c:choose>
+				<c:when test="${ voteList.size() > 0 }">
 				<c:forEach var="v" items="${ voteList }">
 				<c:if test="${ !empty loginManager }">
 				<ul class="vote_ul" onclick="detailView(${ v.v_no })">
@@ -96,6 +103,16 @@
 					<li class="count">${ v.v_count }</li>
 				</ul>
 				</c:forEach>
+				</c:when>
+				<c:otherwise>
+    				<div class="list_no">
+         				<ul class="list_noli"> 
+							<li><img src="/oneLife/resources/user/images/speech.png" alt="NODATE"> </li>
+						    <li><p>게시글이 존재하지 않습니다.</p></li>
+                   		</ul>
+			        </div>
+				</c:otherwise>
+				</c:choose>	
 			</div>
 			
 		</div>
@@ -115,13 +132,13 @@
 				</c:if>
 				
 					<!-- 맨 처음으로 (<<) -->
-						<li><a href="${ contextPath }/complaint/list?page=1${ searchParam }">&lt;&lt;</a></li>
+						<li><a href="${ contextPath }/vote/list?page=1${ searchParam }">&lt;&lt;</a></li>
 						
 					<!-- 이전 페이지 (<) -->
 					<li>
 					<c:choose>
 						 <c:when test="${ pi.page > 1 }">
-						 <a href="${ contextPath }/complaint/list?page=${ pi.page - 1}${ searchParam }" class="btn_prev">&lt;</a>
+						 <a href="${ contextPath }/vote/list?page=${ pi.page - 1}${ searchParam }" class="btn_prev">&lt;</a>
 						 </c:when>
 						 <c:otherwise>
 						 <a href="#">&lt;</a>
@@ -137,7 +154,7 @@
 						   		<a href="#" class="current_page">${ p }</a>
 						   </c:when>
 						   <c:otherwise>
-						   		<a href="${ contextPath }/complaint/list?page=${ p }${ searchParam }">${ p }</a>
+						   		<a href="${ contextPath }/vote/list?page=${ p }${ searchParam }">${ p }</a>
 						   </c:otherwise>
 						</c:choose>
 					</li>
@@ -148,7 +165,7 @@
 					<li>
 					<c:choose>
 						 <c:when test="${ pi.page < pi.maxPage }">
-						 <a href="${ contextPath }/complaint/list?page=${ pi.page + 1}${ searchParam }" class="btn_next">&gt;</a>
+						 <a href="${ contextPath }/vote/list?page=${ pi.page + 1}${ searchParam }" class="btn_next">&gt;</a>
 						 </c:when>
 						 <c:otherwise>
 						 <a href="#">&gt;</a>
@@ -157,7 +174,7 @@
 					</li>		
 						
 					<!-- 맨 끝으로 (>>) -->
-						<li><a href="${ contextPath }/complaint/list?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>	
+						<li><a href="${ contextPath }/vote/list?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>	
 						
 				</ul>
 	</div>

@@ -23,15 +23,12 @@ public class complaintService {
 		
 		// 1. 게시글 총 개수 구하기
 		int listCount = cd.getListCount(conn, s);
-		System.out.println("listCount : " + listCount);
 		
 		// 2. PageInfo 객체 만들기
 		PageInfo pi = new PageInfo(page, listCount, 10, 10);
-		System.out.println("pi : " + pi);
 		
 		// 3. 페이징 처리가 된 게시글 목록 조회
 		List<complaint> complaintList = cd.selectList(conn, pi, s);
-		System.out.println("complaintList : " + complaintList);
 		
 		// 리턴용 Map 선언
 		Map<String, Object> returnMap = new HashMap<>();

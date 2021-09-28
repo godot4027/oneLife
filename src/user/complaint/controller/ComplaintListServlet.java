@@ -52,18 +52,19 @@ public class ComplaintListServlet extends HttpServlet {
 		// 검색 조건과 검색 값 추가하기
 		String searchCondition = request.getParameter("searchCondition");
 		String searchValue = request.getParameter("searchValue");
+		String u_id = request.getParameter("u_id");
 		
 		// 요청 페이지 값을 매개변수로 넘기고 조회 된 게시글 히스트 + 페이징 처리에 대한 객체 값 map 타입에 담아 리턴
-		Map<String, Object> map = new complaintService().selectlist(page, new Search(searchCondition, searchValue));
+		Map<String, Object> map = new complaintService().selectlist(page, new Search(searchCondition, searchValue, u_id));
 		
 		request.setAttribute("pi", map.get("pi"));
 		request.setAttribute("complaintList", map.get("complaintList"));
 		request.setAttribute("complaint_man_List", complaint_man_List);
 		
-		System.out.println(" complaint_man_List : " + complaint_man_List);
+		System.out.println("complaintList : " + map.get("complaintList"));
 	
-		
 		request.getRequestDispatcher("/WEB-INF/views/user/jsp/complaint/complaintListView.jsp").forward(request, response);
+		
 		
 	}
 

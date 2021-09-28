@@ -227,8 +227,33 @@ public class boardService {
 		
 		return result;
 	}
+
+	
+	public int selectUsercnt(int b_no, int u_no) {
+		Connection conn = getConnection();
+		
+		int result = bd.selectUsercnt(conn, b_no, u_no);
+			
+		close(conn);
+		
+		return result;
+	}
+
 	
 
+	public int replyCnt(int b_no) {
+		Connection conn = getConnection();
+		
+		int result = bd.replyCnt(conn, b_no);
+			
+		close(conn);
+		
+		return result;
+	}
+
+	
+
+	
 
 
 	

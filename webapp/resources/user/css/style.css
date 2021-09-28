@@ -456,7 +456,7 @@ The Close Button
 
 
 .wrap {
-  width: 1200px;
+  width: 1150px;
   /* display: flex; */
   justify-content : center;
   align-items: center;
@@ -1758,7 +1758,7 @@ input[type='checkbox']:checked+label:before { /* 체크 후 이미지 적용 */
 
 .btn_area {
   text-align: right;
-  padding: 30px;
+  padding: 20px;
   margin-left: -30px;
 }
 
@@ -2792,14 +2792,16 @@ input[type="checkbox"]:checked {
 .com_detail_area {
   border: 1px solid #e2e1e1;
   box-sizing: border-box;
-  padding: 60px 30px 30px 25px;
+  /* padding: 60px 30px 30px 25px; */
 }
 
 .com_detail_title {
-  border-bottom: 2px solid #9a9a9a;
+  border-bottom: 1px solid #9a9a9a;
   /* width: 1030px; */
-  padding-left: 20px;
-  padding-bottom: 10px;
+  padding-left: 40px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-top: 40px;
 }
 
 .com_detail_content {
@@ -2807,7 +2809,7 @@ input[type="checkbox"]:checked {
 }
 .com_detail_cell {
   padding: 40px 40px 40px 40px;
-  border: 1px solid #d8d8d8;
+  /* border: 1px solid #d8d8d8; */
  /*  width: 900px; */
   color: #5f5f5f;
   font-weight: 600;
@@ -2819,13 +2821,15 @@ input[type="checkbox"]:checked {
 
 .com_detail_title .subject p {
   font-weight: 500;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 20px;
   letter-spacing: -0.05px;
   color: #4e4e4e;
   position: relative;
   top: 15px;
   z-index: -10;
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 .com_detail_title .subject img {
   position: relative;
@@ -2840,7 +2844,9 @@ input[type="checkbox"]:checked {
   color: #666666;
   position: relative;
   top: 30px;
-  left: 10px;
+  left: 12px;
+  display: inline-block;
+  text-align: left;
 }
 
 .com_detail_title .subject .dong {
@@ -2852,6 +2858,8 @@ input[type="checkbox"]:checked {
   position: relative;
   top: 30px;
   left: 20px;
+  display: inline-block;
+  text-align: left;
 }
 
 .com_detail_title .subject .date {
@@ -2861,8 +2869,11 @@ input[type="checkbox"]:checked {
   letter-spacing: -0.006em;
   color: #a4a4a4;
   position: relative;
-  top: 60px;
-  left: -120px;
+  top: 40px;
+  left: 50px;
+  display: block;
+  width: 150px;
+  text-align: left;
 }
 
 .title_span {
@@ -2895,7 +2906,7 @@ input[type="checkbox"]:checked {
 .reply_write {
   padding: 10px;
   background: #ffffff;
-  width: 1020px;
+  width: 990px;
   margin-top: 20px;
   margin-left: 60px;
   height: auto;
@@ -2949,7 +2960,7 @@ input[type="checkbox"]:checked {
   display: block;
   margin: 0;
   padding-left: 20px;
-  padding-top: 25px;
+ 
 }
 
 .reply_ul {
@@ -2960,10 +2971,11 @@ input[type="checkbox"]:checked {
   position: relative;
   width: 150px;
   font-weight: bold;
-  font-size: 20px;
-  left: 50px;
-  top: -32px;
-  text-align:left;
+  font-size: 18px;
+      left: 16px;
+    top: -20px;
+    text-align: left;
+    display: inline-block;
 }
 
 .reply_ul .rcontent {
@@ -2971,12 +2983,12 @@ input[type="checkbox"]:checked {
   position: relative;
   word-break: break-all;
   white-space: pre-wrap;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 18px;
   line-height: 24px;
   padding: 10px;
   left: 40px;
-  top: -32px;
+  top: -23px;
   text-align:left;
 }
 
@@ -2986,7 +2998,7 @@ input[type="checkbox"]:checked {
   font-size: 16px;
   color: #a0a0a0;
   left: 50px;
-  top: -32px;
+  top: -23px;
   text-align:left;
 }
 
@@ -3073,7 +3085,6 @@ h4 {
   font-weight: normal;
   font-size: 16px;
   line-height: 20px;
-  display: flex;
 }
 
 .col3 #mysecret {
@@ -3381,13 +3392,16 @@ h4 {
 .board_detail_area {
   border: 1px solid #e2e1e1;
   box-sizing: border-box;
-  padding: 60px 30px 30px 25px;
+ /*  padding: 30px 30px 30px 25px; */
 }
 
 .board_detail_title {
-  border-bottom: 2px solid #9a9a9a;
- /*  width: 1030px; */
-  padding-left: 30px;
+  border-bottom: 1px solid #9a9a9a;
+  padding-left: 50px;
+  padding-top: 20PX;
+  padding-right: 20px;
+  padding-bottom: 20px;
+    z-index: -10;
 }
 
 .board_detail_content {
@@ -3395,7 +3409,7 @@ h4 {
 }
 .board_detail_cell {
   padding: 40px 40px 40px 40px;
-  border: 1px solid #d8d8d8;
+  /* border: 1px solid #d8d8d8; */
   /* width: 900px; */
   color: #5f5f5f;
   font-weight: 600;
@@ -3407,27 +3421,29 @@ h4 {
 
 .board_detail_title .subject p {
   font-weight: 500;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 20px;
   letter-spacing: -0.05px;
   color: #4e4e4e;
   position: relative;
-  top: 15px;
+  top: 45px;
+  z-index: -10;
 }
 .board_detail_title .subject img {
   position: relative;
-  top: 55px;
+  top: 95px;
 }
 .board_detail_title .subject .name {
   font-weight: 900;
   font-size: 20px;
   line-height: 20px;
-  text-align: center;
+  text-align: left;
   letter-spacing: -0.05px;
   color: #666666;
   position: relative;
-  top: 30px;
-  left: 10px;
+  top: 50px;
+  left: 50px;
+  display: block;
 }
 
 .board_detail_title .subject .count {
@@ -3437,8 +3453,9 @@ h4 {
   letter-spacing: -0.006em;
   color: #a4a4a4;
   position: relative;
-  top: 60px;
-  left: -25px;
+  top: 59px;
+  left: 50px;
+  display: inline-block;
 }
 
 .board_detail_title .subject .date {
@@ -3448,16 +3465,30 @@ h4 {
   letter-spacing: -0.006em;
   color: #a4a4a4;
   position: relative;
-  top: 60px;
-  left: -60px;
+  top: 59px;
+  left: 50px;
+  display: inline-block;
+  width: 150px;
 }
 
 .title_span {
   background-color: #282a35;
 }
 
-.board_detail_area button,
+
 .board_detail_area span {
+  display: inline;
+  position: relative;
+  top: 0.01px;
+  left: 0.5px;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.05px;
+  color: #7e7e7e;
+  top: -5px;
+  left: -8px;
+}
+.board_detail_area button{
   display: inline;
   position: relative;
   top: 0.01px;
@@ -3480,6 +3511,8 @@ button.reply_btn2{
 .reply_area {
   border-top: 1px solid #9a9a9a;
   transform: rotate(-0.05deg);
+  background: whitesmoke;
+    padding-bottom: 20px;
 }
 
 /* .reply_write {
@@ -3541,11 +3574,13 @@ button.reply_btn2{
   display: block;
   margin: 0;
   padding-left: 30px;
+  background: whitesmoke;
+  padding-top: 10px;
 }
 
 .reply_ul {
   border-bottom: 1px solid #e0e0e0;
-  padding-top: 15px;
+  padding-top: 20px;
 }
 
 /* .reply_ul .rwriter {
@@ -3585,7 +3620,7 @@ button.reply_btn2{
   top: -77px;  */
 }
 .reply_btn_area.type02{
-left:190px;  bottom:53px; top: -50px;}
+left:190px;  bottom:53px; top: -40px;}
 
 .reply_btn_area button {
   background: none;
@@ -3655,7 +3690,7 @@ left:190px;  bottom:53px; top: -50px;}
   width: 70px;
   position: relative;
   display: none;
-  left: 1080px;
+  left: 1050px;
   top: -30px;
 }
 

@@ -11,6 +11,7 @@ public class Board_Comment {
 	private String bc_status;
 	private int u_no;
 	private String u_nickname;
+	private int b_replay_count;
 	
 	/*
 	 * BC_NO	NUMBER
@@ -49,6 +50,24 @@ public class Board_Comment {
 		this.u_no = u_no;
 		this.u_nickname = u_nickname;
 	}
+	
+	
+	
+
+	public Board_Comment(int b_replay_count) {
+		super();
+		this.b_replay_count = b_replay_count;
+	}
+
+	public int getB_replay_count() {
+		return b_replay_count;
+	}
+
+	public void setB_replay_count(int b_replay_count) {
+		this.b_replay_count = b_replay_count;
+	}
+
+	
 
 	public int getBc_no() {
 		return bc_no;
@@ -120,9 +139,10 @@ public class Board_Comment {
 	public String toString() {
 		return "Board_Comment [bc_no=" + bc_no + ", b_no=" + b_no + ", bc_content=" + bc_content + ", bc_enroll_date="
 				+ bc_enroll_date + ", bc_modify_date=" + bc_modify_date + ", bc_status=" + bc_status + ", u_no=" + u_no
-				+ ", u_nickname=" + u_nickname + "]";
+				+ ", u_nickname=" + u_nickname + ", b_replay_count=" + b_replay_count + "]";
 	}
 
+	
 	
 	
 	
