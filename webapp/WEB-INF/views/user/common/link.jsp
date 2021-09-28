@@ -10,3 +10,4 @@
  
 <script src="/oneLife/resources/user/js/jquery-3.6.0.min.js"></script>
 <script src="/oneLife/resources/user/js/jquery-ui.js"></script>
+<script src="/oneLife/resources/user/js/calendar.js"></script>
