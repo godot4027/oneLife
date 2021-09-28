@@ -1,9 +1,10 @@
-(function($) {
+/*(function($) {
 
-	"use strict";
+	"use strict";*/
 
 	// Setup the calendar with the current date
 $(document).ready(function(){
+	
     var date = new Date();
     var today = date.getDate();
     // Set click handlers for DOM elements
@@ -79,6 +80,7 @@ function date_click(event) {
     $(".events-container").show(250);
     $("#dialog").hide(250);
     $(".active-date").removeClass("active-date");
+    console.log(this);
     $(this).addClass("active-date");
     let year = $(".year").text();
     show_events(year, event.data.month, event.data.day);
@@ -174,26 +176,52 @@ function new_event_json(name, count, date, day) {
 
 // Display all events of the selected date in card views
 function show_events(year, month, day) {
-	
 	$.ajax({
 		url : "admin/week/oneDayList",
 		type : "post",
 		data : {year : year, month : month, day : day},
 		dateType : "json",
 		success : function(data) {
-			console.log(data);
+			let day = data['pickDate'].substr(14, 3);
+			
+			let dayKor = '';
+			switch(day) {
+			case 'Sun' : dayKor ="일요일";
+			break;
+			case 'Mon' : dayKor ="월요일";
+			break;
+			case 'Tue' : dayKor ="화요일";
+			break;
+			case 'Wed' : dayKor ="수요일";
+			break;
+			case 'Thu' : dayKor ="목요일";
+			break;
+			case 'Fri' : dayKor ="금요일";
+			break;
+			case 'Sat' : dayKor ="토요일";
+			break;
+			};
 			
 			var text = '';
-			text = data[0].scOpenDate;
+			if(data['wList'].length == 0) {
+				text = data['pickDate'].substr(0, 14) + dayKor;
+			} else {
+				text = data['wList'][0].scOpenDate.substr(0, 14) + dayKor;
+			}
 			$('.cal_status').text(text);
-			
 			var html = '';
 			if (data != null) {
-				if (data.length == 0) {
+				if (data['wList'].length == 0) {
 					html += '<h3>오늘 주요일정은 없습니다.</h3>';
 				} else {
-					for (var key in data) {
-						html += '<li style="width : 30%">' + data[key].scTitle + '</li><li style="width : 70%">'+ data[key].scContent + '</li><br>';
+					for (var key in data['wList']) {
+						var category = "";
+						if (data['wList'][key].scTitle == "SC_CODE1") {
+							category = "공동생활";
+						} else {
+							category = "주민투표";
+						}
+						html += '<ul><li sytle="width : 10%">' + category + '</li><li style="width : 85%">' + data['wList'][key].scTitle + '<br></li><li style="width : 100%">'+ data['wList'][key].scContent + '</li></ul>';
 					}
 				}
 				$('.cal_list').html(html);
@@ -206,6 +234,7 @@ function show_events(year, month, day) {
 		}
 		
 	});
+	
 	
 	
     /*// Clear the dates container
@@ -251,6 +280,9 @@ function check_events(day, month, year) {
     }
     return events;
 }
+
+
+
 
 // Given data for events in JSON format
 var event_data = {
@@ -356,4 +388,4 @@ const months = [
     "12" 
 ];
 
-})(jQuery);
+//})(jQuery);

@@ -11,7 +11,16 @@
     <title>신고내역 목록</title>
 
     <jsp:include page="/WEB-INF/views/admin/common/link.jsp"></jsp:include>
-
+	<style>
+	#searchDiv{
+	width : 100%;
+	margin-top : 0;
+	}
+	
+	#searchDiv .select {
+	margin-right : 15px;
+	}
+	</style>
 </head>
 <body>
     <div id="wrap">
@@ -28,17 +37,10 @@
                         <h2 class="sub_tit">신고 내역 관리</h2>
                         <form>
 	                        <div class="search_box">
-	                            <div class="search_top report clearfix">
-	                                <div class="items clearfix">
-	                                    <label for="reser_fac">게시 여부</label>
-	                                    <div class="select">
-	                                        <select name="status" id="reser_fac">
-	                                            <option value="all">전체</option>
-	                                            <option value="Y" <c:if test="${param.status eq 'Y'}">selected</c:if>>Y</option>
-	                                            <option value="N" <c:if test="${param.status eq 'N'}">selected</c:if>>N</option>
-	                                        </select>
-	                                    </div>
-	                                </div>
+	                            <!-- <div class="search_top report clearfix"> -->
+	                                <!-- <div class="items clearfix">
+	                                    
+	                                </div> -->
 	                                <%-- <div class="items clearfix">
 	                                    <label for="reportNum">신고누적</label>
 	                                    <div class="select">
@@ -49,9 +51,18 @@
 	                                        </select>
 	                                    </div>
 	                                </div> --%>
-	                            </div>
-	                            <div class="search_bot report clearfix">
+	                            <!-- </div> -->
+	                            <div class="search_bot report clearfix" id="searchDiv">
+	                            	
 	                                <div class="items clearfix">
+	                                <label for="reser_fac">게시 여부</label>
+	                                    <div class="select">
+	                                        <select name="status" id="reser_fac">
+	                                            <option value="all">전체</option>
+	                                            <option value="Y" <c:if test="${param.status eq 'Y'}">selected</c:if>>Y</option>
+	                                            <option value="N" <c:if test="${param.status eq 'N'}">selected</c:if>>N</option>
+	                                        </select>
+	                                    </div>
 	                                    <label for="">검색조건</label>
 	                                    <div class="select">
 	                                        <select name="searchName" id="reser_fac">

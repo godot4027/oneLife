@@ -50,6 +50,7 @@
 				</ul>
 				<c:forEach var="b" items="${ boardList }">
 				<ul class="board_ul" onclick="detailView(${ b.b_no })">
+				<li class="no">${ b.b_no }</li>
 					<li class="no">${ b.b_no }</li>
 					<li class="title">${ b.b_title }
 						<!-- 댓글이 달리시 -->

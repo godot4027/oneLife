@@ -57,6 +57,56 @@ padding-top : 10px;
 font-size : 30px;
 margin : 0 auto;
 }
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  /* background-color: rgb(0, 0, 0); Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 15px;
+  border: 1px solid #888;
+  width: 400px; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+  display: flex;
+  flex-direction : column;
+}
+
+.modal-content > div > p, .modal-content > div > span{
+display : inline-block;
+font-size : 20px;
+}
+
+.modal-content > div > span {
+margin-left : 130px;
+cursor 
+}
+
+
+.modal-content > div > span:hover {
+cursor : pointer;
+}
+
+.description {
+margin-top : 20px;
+}
+
+.description > ul > li {
+text-align : left;
+font-size : 15px;
+}
 </style>
 <body>
 	<%-- 공통 menuBar.jsp --%>
@@ -169,7 +219,7 @@ margin : 0 auto;
 												class="far fa-edit"></i></a></li>
 									</c:when>
 									<c:otherwise>
-										<li class="edit" id="editBtn" onclick="cantFix()"><i class="far fa-edit"></i></li>
+										<li class="edit" id="editBtn"><i class="far fa-edit"></i></li>
 									</c:otherwise>
 								</c:choose>
 							</ul>
@@ -268,14 +318,23 @@ margin : 0 auto;
 			<li><a href="javascript:;">&gt;</a></li>
 		</ul> -->
 	</div>
-	<!-- 
+	
 	<div id="cantFixModal" class="modal">
 		<div class="modal-content">
-			<p>수정할 수 없는 내역입니다.</p>
+			<div>
+				<p>수정할 수 없는 내역입니다.</p>
 			<span id="warningClose" class="close">&times;</span>
+			</div>
+			<div class="description">
+			<ul>
+				<li>1. 신청인이 다를 경우</li>
+				<li>2. 방문일이 지났을 경우</li>
+				<li>3. 방문을 완료했을 경우</li>
+			</ul>
+			</div>
 		</div>
 	</div>
-	-->
+	
 
 
 	<%-- 공통 footer --%>
@@ -285,10 +344,6 @@ margin : 0 auto;
 	
 
 	<script>
-		function cantFix() {
-			alert("수정할 수 없는 내역입니다.");
-		}
-	
      	 // 게시글 목록에 mouseover/mouseout 시 onmouseover 클래스 추가/제서 처리
      	 const noticeList = document.querySelector(".vistCarList");
 
@@ -306,14 +361,17 @@ margin : 0 auto;
     	      event.target.parentNode.classList.remove("onmouseover");
     	  });
 	
+     	 
+     	function cantFix() {
+			alert("수정할 수 없는 내역입니다.");
+		}
+     	
      	 //모달
-    	  /* var cantFixModal = document.getElementById("cantFixModal");
-    	  var editBtn = document.getElementById("editBtn");
-    	  var warningClose = document.getElementById("warningClose");
+    	var cantFixModal = document.getElementById("cantFixModal");
+    	var editBtn = document.getElementById("editBtn");
+    	var warningClose = document.getElementById("warningClose");
 
       	editBtn.onclick = function () {
-     		 console.log("와이");
-          	// 방문일이 지났으면 모달창, 아니면 수정페이지로 이동
         	cantFixModal.style.display = "block";
       	};
 
@@ -326,7 +384,7 @@ margin : 0 auto;
         		cantFixModal.style.display = "none";
         	}
      	};
-       */
+       
      	 function goRegister() {
 			location.href = "${contextPath}/visitCarRegister";
 		};

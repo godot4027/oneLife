@@ -298,7 +298,7 @@ padding-bottom : 30px;
 							</div>
 							</form>
 							<div class="excel_wrap">
-								<a href="javascript:" class="excel_btn">검색 결과 엑셀로 다운받기</a>
+								<a href="#" class="excel_btn" onclick="exportData()">검색 결과 엑셀로 다운받기</a>
 							</div>
 							<div class="precautions_wrap">
 								<button type="button" id="add" onclick="openAddPopUp()">신규차량 추가하기</button>
@@ -560,6 +560,37 @@ padding-bottom : 30px;
 	<!-- 팝업영역 -->
 
 	<script>
+	function exportData() {
+		let fileName = prompt('파일 제목을 입력해주세요.');
+		if  (fileName != null ) {
+			if (fileName == "") {
+				alert("파일명을 올바르게 입력해주시기 바랍니다.")
+			} else {
+				$.ajax({
+					url : "${contextPath}/admin/in/exportData",
+					type : "post",
+					data : {fileName : fileName},				
+					dataType : "json",
+					success : function(data){
+						if (data != null) {
+							if (data == "success") {
+								alert("다운로드가 완료되었습니다.")
+							} else {
+								alert("다운로드를 실패하였습니다.")
+							}
+						}
+					},
+					error : function(e){
+						console.log(e);
+						console.log('실패');
+					}
+				});
+			}
+		} else {
+			alert("다운로드를 취소하셨습니다.");
+		}
+		
+	}
 	/* function searchMemberCar() {
 		let dong = $('#searchInput1').val();
 		let ho = $('#searchInput2').val();
@@ -682,32 +713,36 @@ padding-bottom : 30px;
 				dataType : "json",
 				success : function(data){
 					if(data != null) {
-						
-					$('#addInput1').val("");
-					$("#addInput2").val("");
-					$("#addCarNo").val("");
-					$('#addRname').val("");
-					$('#addCPhone').val("");
-					document.querySelector('#addMemberCar').classList.remove('pop_on');
-					
-					 $('#checkDong').html(data.dong);
-					 $('#checkHo').html(data.ho);
-					 let n = data.memberCarList.length;
-					 $('#carCount').html(n);
-					 var html = '';
-					 var count = 1;
-					 for (var key in data.memberCarList) {
-						html += '<ul class="v_body">'; 
-						html += '<li>' + count++ + '</li>';
-						html += '<li>' + data.memberCarList[key].mcNo + '</li>';
-						html += '<li>' + data.memberCarList[key].rName + '</li>';
-						html += '<li>' + data.memberCarList[key].cPhone + '</li>';
-						html += '</ul>';
-					 }
-					 
-					 $(".vehicle_content").html(html);
-					
-					popShow('addMemberCarCheck');
+						if ( data != 0 ) {
+							$('#addInput1').val("");
+							$("#addInput2").val("");
+							$("#addCarNo").val("");
+							$('#addRname').val("");
+							$('#addCPhone').val("");
+							document.querySelector('#addMemberCar').classList.remove('pop_on');
+							
+							 $('#checkDong').html(data.dong);
+							 $('#checkHo').html(data.ho);
+							 let n = data.memberCarList.length;
+							 $('#carCount').html(n);
+							 var html = '';
+							 var count = 1;
+							 for (var key in data.memberCarList) {
+								html += '<ul class="v_body">'; 
+								html += '<li>' + count++ + '</li>';
+								html += '<li>' + data.memberCarList[key].mcNo + '</li>';
+								html += '<li>' + data.memberCarList[key].rName + '</li>';
+								html += '<li>' + data.memberCarList[key].cPhone + '</li>';
+								html += '</ul>';
+							 }
+							 
+							 $(".vehicle_content").html(html);
+							
+							popShow('addMemberCarCheck');
+						} else {
+							alert("잘못된 입주민 정보입니다.");
+							location.href = "${contextPath}/admin/in/list";
+						}
 					} else {
 						alert("차량 신규등록에 실패하였습니다.");
 					}

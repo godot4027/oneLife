@@ -59,6 +59,7 @@ public class InVehicleListServlet extends HttpServlet {
 		else*/ if (map != null) {
 			request.setAttribute("pi", map.get("pi"));
 			request.setAttribute("houseHoldCarList", map.get("houseHoldCarList"));
+			request.getSession().setAttribute("excelDownList", map.get("excelDownList"));
 			request.getRequestDispatcher("/WEB-INF/views/admin/jsp/vehicle/inVehicle_list.jsp").forward(request,
 					response);
 		} else {

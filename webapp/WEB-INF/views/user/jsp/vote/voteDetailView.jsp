@@ -402,6 +402,13 @@
 			var rtype = "${ vote.r_type}";
 			var rty = "세대주";
 			function votesub(){
+				let len = $('.checkbox_area div ul li input:checked').length;
+				let len2 = $('.radio_area div ul li input:checked').length;
+				if (len == 0 && len2 ==0) {
+					alert('보기를 선택해주세요!')
+					return;
+				}
+				
 				if (u_nocount > 0 ) {
 					alert('이미 투표 했습니다. \n※ 1인 1투표권 행사 가능합니다.');
 					return;
