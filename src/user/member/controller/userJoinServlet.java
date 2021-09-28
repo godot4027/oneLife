@@ -53,8 +53,6 @@ public class userJoinServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		
 		int rno = new MemberService().checkR(name, email);
-    
-    int rno = new MemberService().checkR(name, email);
 		
 		if (rno > 0) {
 			int checkJoin = new MemberService().checkJoin(rno);

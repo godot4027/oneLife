@@ -148,7 +148,32 @@
        WHERE V_NO = ?
          AND V_STATUS = 'Y'
    </entry>
+   
    <entry key="selectVote">
+	   	SELECT
+	       V_NO
+	     , V_TITLE
+	     , V_CONTENT
+	     , V_COUNT
+	     , V_ENROLL_DATE
+	     , V_MODIFY_DATE
+	     , V_STATUS
+	     , M_NO
+	     , M_NICK
+	     , V_CHOICE
+	     , VE_NO
+	     , VE_CHOICE1
+	     , VE_CHOICE2
+	     , VE_CHOICE3
+	     , VE_CHOICE4
+	     , VE_CHOICE5
+	     FROM VOTE
+	     JOIN INFO_MANAGER USING(M_NO)
+	     JOIN VOTE_EXAMPLE USING(V_NO)
+	     WHERE V_NO = ?
+	     AND V_STATUS = 'Y'
+   </entry>
+   <!-- <entry key="selectVote">
         SELECT
             V.V_NO
           , V.V_TITLE
@@ -171,7 +196,7 @@
         AND V.V_NO =  E.V_NO
          AND V.V_NO = ?
        AND V.V_STATUS = 'Y'
-   </entry>
+   </entry> -->
    
    <entry key="deleteVote">
          UPDATE VOTE

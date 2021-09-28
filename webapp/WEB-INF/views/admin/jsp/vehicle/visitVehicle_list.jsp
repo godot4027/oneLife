@@ -245,7 +245,6 @@ margin-top : 30px;
 										<col width="auto">
 										<col width="auto">
 										<col width="auto">
-										<col width="auto">
 									</colgroup>
 									<caption class="ir_so">방문차량 예약 현황</caption>
 									<thead>

@@ -180,6 +180,8 @@
 		// 로그인 슬라이드
 		let swiper = new Swiper(".slide_wrap", {
 			loop : true,
+			autoplay: true,
+			delay : 3000,	
 			pagination : {
 				el : ".swiper-pagination",
 				clickable : true,

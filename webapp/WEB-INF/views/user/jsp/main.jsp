@@ -17,7 +17,8 @@
     <title>메인페이지</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="resources/calendar-04/css/style.css">
+    <link rel="stylesheet" href="resources/calendar-04/css/style.css">
+	
 	<%-- 공통 css/js --%>
     <jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
     <%
@@ -117,66 +118,68 @@
                             <li class="writer">작성자</li>
                             <li class="date">작성일</li>
                         </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
-                        <ul class="main_notice_list notice_body">
-                            <li class="title">주요 소식 게시판 입니다.</li>
-                            <li class="writer">운영자</li>
-                            <li class="date">2021-08-20</li>
-                        </ul>
+                        <div class="main_scroll">
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+	                        <ul class="main_notice_list notice_body">
+	                            <li class="title">주요 소식 게시판 입니다.</li>
+	                            <li class="writer">운영자</li>
+	                            <li class="date">2021-08-20</li>
+	                        </ul>
+                        </div>
                     </div>
 
                 </div>

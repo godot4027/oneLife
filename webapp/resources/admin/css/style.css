@@ -79,7 +79,7 @@
 
 /* table */
 .table_wrap{}
-.table_wrap .main_table{height: 235px; overflow-y: auto; box-shadow: 0 4px 2px rgb(0 0 0 / 5%);}
+.table_wrap .main_table{max-height: 235px; overflow-y: auto; box-shadow: 0 4px 2px rgb(0 0 0 / 5%);}
 .table_wrap .main_table .main_table_nodate{text-align: center; padding: 71px 0;}
 .table_wrap .main_table .main_table_nodate p{font-size: 18px;}
 .table_wrap .main_table .main_table_nodate img{margin-top: 20px;}

@@ -92,6 +92,17 @@ public class ResidentService {
 		
 		return result;
 	}
+
+	// 회원가입 정보
+	public Resident userInfoSelect(int rNo) {
+		Connection conn = getConnection();
+		
+		Resident r = rd.userInfoSelect(conn, rNo);
+		
+		close(conn);
+		
+		return r;
+	}
 	
 	
 }
