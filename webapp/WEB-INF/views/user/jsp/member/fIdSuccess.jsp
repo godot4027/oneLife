@@ -14,7 +14,6 @@
 </head>
 <body>
 	<%-- 공통 menuBar.jsp --%>
-	<jsp:include page="/WEB-INF/views/user/common/menuBar.jsp"></jsp:include>
 	
 	<div class="bottom_wrap1">
 		<p></p>

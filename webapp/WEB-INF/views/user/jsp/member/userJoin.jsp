@@ -281,7 +281,7 @@
 </script>
 
 	<script>
-var nickUsable = false;
+	var nickUsable = false;
      // 닉네임 중복
      $("#nickCheck").click(function(){
 		 // input nickName 변수
