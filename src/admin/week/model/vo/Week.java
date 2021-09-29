@@ -14,18 +14,35 @@ public class Week {
 	 * */
 	private int scNo;
 	private Date scOpenDate;
+	private Date scEndDate;
 	private String scTitle;
 	private String scContent;
 	private Date inDate;
 	private char scStatus;
 	private String scCateCode;
 	private String scCateName;
+	private int nno;
+	
 	
 	public Week() {
 		super();
 	}
 	
-	
+	public Date getScEndDate() {
+		return scEndDate;
+	}
+
+	public void setScEndDate(Date scEndDate) {
+		this.scEndDate = scEndDate;
+	}
+
+	public int getNno() {
+		return nno;
+	}
+
+	public void setNno(int nno) {
+		this.nno = nno;
+	}
 
 	public int getScNo() {
 		return scNo;
@@ -93,9 +110,12 @@ public class Week {
 
 	@Override
 	public String toString() {
-		return "Week [scNo=" + scNo + ", scOpenDate=" + scOpenDate + ", scTitle=" + scTitle + ", scContent=" + scContent
-				+ ", inDate=" + inDate + ", scStatus=" + scStatus + ", scCateCode=" + scCateCode + ", scCateName="
-				+ scCateName + "]";
+		return "Week [scNo=" + scNo + ", scOpenDate=" + scOpenDate + ", scEndDate=" + scEndDate + ", scTitle=" + scTitle
+				+ ", scContent=" + scContent + ", inDate=" + inDate + ", scStatus=" + scStatus + ", scCateCode="
+				+ scCateCode + ", scCateName=" + scCateName + ", nno=" + nno + "]";
 	}
+
+	
+	
 	
 }

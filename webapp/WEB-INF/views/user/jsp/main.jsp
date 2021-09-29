@@ -34,6 +34,7 @@
 	<style>
 	.cal_list li {
 	display : inline-block;
+	overflow: hidden; white-space: nowrap; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis;text-overflow: ellipsis;
 	}
 
 	.main_container .items .main_calendar .cal_list {

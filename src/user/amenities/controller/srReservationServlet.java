@@ -24,7 +24,6 @@ public class srReservationServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
 		Member member = ((Member)request.getSession().getAttribute("loginUser"));
 		int uNo = member.getU_NO();
 		// 이미 예약된 날짜 가져오기

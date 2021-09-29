@@ -394,6 +394,7 @@ public class WeekDao {
 				week.setInDate(rset.getDate("SC_IN_DATE"));
 				week.setScStatus(rset.getString("SC_STATUS").charAt(0));
 				week.setScCateCode(rset.getString("SC_CATE_CODE"));
+				week.setNno(rset.getInt("nno"));
 				
 				wList.add(week);
 			}
@@ -406,6 +407,56 @@ public class WeekDao {
 		}
 		
 		return wList;
+	}
+
+	public int insertWeekUP(Connection conn, int maxCount, Week week) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("insertWeekUP");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, maxCount + 1);
+			pstmt.setDate(2, week.getScOpenDate());
+			pstmt.setString(3, week.getScTitle());
+			pstmt.setString(4, week.getScContent());
+			pstmt.setString(5, week.getScCateCode());
+			pstmt.setInt(6, week.getNno());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int checkNno(Connection conn, int nno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+
+		String sql = query.getProperty("checkNno");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, nno);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
 
