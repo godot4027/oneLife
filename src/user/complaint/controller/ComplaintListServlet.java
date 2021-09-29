@@ -61,7 +61,6 @@ public class ComplaintListServlet extends HttpServlet {
 		request.setAttribute("complaintList", map.get("complaintList"));
 		request.setAttribute("complaint_man_List", complaint_man_List);
 		
-		System.out.println("complaintList : " + map.get("complaintList"));
 	
 		request.getRequestDispatcher("/WEB-INF/views/user/jsp/complaint/complaintListView.jsp").forward(request, response);
 		

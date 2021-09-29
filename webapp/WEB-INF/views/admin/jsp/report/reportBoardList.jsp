@@ -142,7 +142,7 @@
 			                                                ${r.bNo}
 			                                            </td>
 			                                            <td>
-			                                                <a href="${contextPath}/board/detail?b_no=${r.bNo}" class="report_txt">${r.bTtitle}</a>
+			                                                <a href="${contextPath}/board/Mandetail?b_no=${r.bNo}" class="report_txt">${r.bTtitle}</a>
 			                                            </td>
 			                                            <td>
 			                                                <p>${r.uNickName}</p> 

@@ -28,7 +28,7 @@ public class srUseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/jsp/studyRoomUsageStatus.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/jsp/amenities/studyRoomUsageStatus.jsp");
 		view.forward(request, response);
 	}
 
