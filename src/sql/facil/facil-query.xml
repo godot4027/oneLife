@@ -165,43 +165,80 @@
          JOIN INFO_RESIDENT USING(R_NO)
          WHERE FC_NAME = '독서실'
            AND TO_CHAR(FC_START, 'YYYY-MM-DD') = ?
-         ORDER BY FC_NO
+         ORDER BY FC_SEAT_NO 
          )
 	</entry>
 	<entry key="libraryInfo">
+		SELECT
+		         FC_NO
+		         , FC_NAME
+		         , FC_SEAT_NO
+		         , FC_SEAT_TYPE
+		         , U_ID
+		         , R_NAME
+		         , U_PHONE
+		         , FC_DATE
+		         , FC_START
+		         , FC_END
+		         , FC_STATUS
+		         FROM (
+		            SELECT
+		           FC_NO
+		         , FC_NAME
+		         , FC_SEAT_NO
+		         , DECODE(FC_NAME, '독서실', '일일권', '멀티코트장', DECODE(FC_SEAT_NO, 1, 'A', 2, 'B', 3, 'C')) AS FC_SEAT_TYPE
+		         , U_ID
+		         , R_NAME
+		         , U_PHONE
+		         , FC_DATE
+		         , FC_START
+		         , FC_END
+		         , FC_STATUS
+		         FROM FACILITY
+		         JOIN MEMBER USING(U_NO)
+		         JOIN INFO_RESIDENT USING(R_NO)
+		         WHERE FC_NAME = '독서실'
+		           AND TO_CHAR(FC_START, 'YYYY-MM-DD') = ?
+		           AND FC_SEAT_NO = ?
+		         ORDER BY FC_SEAT_NO 
+		         )
+	</entry>
+	<entry key="libraryDayCount">
 		       SELECT
-			         FC_NO
-			         , FC_NAME
-			         , FC_SEAT_NO
-			         , FC_SEAT_TYPE
-			         , U_ID
-			         , R_NAME
-			         , U_PHONE
-			         , FC_DATE
-			         , FC_START
-			         , FC_END
-			         , FC_STATUS
-			         FROM (
-			            SELECT
-			           FC_NO
-			         , FC_NAME
-			         , FC_SEAT_NO
-			         , DECODE(FC_NAME, '독서실', '일일권', '멀티코트장', DECODE(FC_SEAT_NO, 1, 'A', 2, 'B', 3, 'C')) AS FC_SEAT_TYPE
-			         , U_ID
-			         , R_NAME
-			         , U_PHONE
-			         , FC_DATE
-			         , FC_START
-			         , FC_END
-			         , FC_STATUS
-			         FROM FACILITY
-			         JOIN MEMBER USING(U_NO)
-			         JOIN INFO_RESIDENT USING(R_NO)
-			         WHERE FC_NAME = '독서실'
-			           AND TO_CHAR(FC_START, 'YYYY-MM-DD') = ?
-			           AND FC_SEAT_NO = ?
-			         ORDER BY FC_NO
-			         )
+                COUNT(*) AS COUNT
+                FROM(SELECT
+         FC_NO
+         , FC_NAME
+         , FC_SEAT_NO
+         , FC_SEAT_TYPE
+         , U_ID
+         , R_NAME
+         , U_PHONE
+         , FC_DATE
+         , FC_START
+         , FC_END
+         , FC_STATUS
+         FROM (
+            SELECT
+           FC_NO
+         , FC_NAME
+         , FC_SEAT_NO
+         , DECODE(FC_NAME, '독서실', '일일권', '멀티코트장', DECODE(FC_SEAT_NO, 1, 'A', 2, 'B', 3, 'C')) AS FC_SEAT_TYPE
+         , U_ID
+         , R_NAME
+         , U_PHONE
+         , FC_DATE
+         , FC_START
+         , FC_END
+         , FC_STATUS
+         FROM FACILITY
+         JOIN MEMBER USING(U_NO)
+         JOIN INFO_RESIDENT USING(R_NO)
+         WHERE FC_NAME = '독서실'
+           AND TO_CHAR(FC_START, 'YYYY-MM-DD') = ?
+           AND U_NO = ?
+         ORDER BY FC_SEAT_NO 
+         ))
 	</entry>
 	<entry key="multicourtSelectList">
              SELECT

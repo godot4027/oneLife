@@ -354,6 +354,36 @@ private Properties query = new Properties();
 		return fList;
 	}
 	
+	// 독서실 예약 카운트
+	public int libraryDayCount(Connection conn, String day, int uNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = query.getProperty("libraryDayCount");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, day);
+			pstmt.setInt(2, uNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	
 	// 독서실 멤버조회
 	public Facil libraryInfo(Connection conn, int fcSeatNo, String dayInput) {
 		PreparedStatement pstmt = null;
@@ -482,6 +512,8 @@ private Properties query = new Properties();
 		
 		return f;
 	}
+
+	
 
 }
 

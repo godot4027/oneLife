@@ -70,7 +70,7 @@ pageEncoding="UTF-8" import="user.member.model.vo.Member" %>
 			<ul>
 				<li><a href="${contextPath}/greeting">아파트 소개</a></li>
 				<li><a href="javascript:;">아파트 소식</a></li>
-				<li><a href="javascript:;">부대시설</a></li>
+				<li><a href="${contextPath}/srIntro">부대시설</a></li>
 				<li><a href="${contextPath}/visitCar">방문차량</a></li>
 				<li><a href="${contextPath}/complaint/list">아파트 민원</a></li>
 			</ul>
