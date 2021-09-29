@@ -86,16 +86,15 @@
                     <div class="reservation_wrap">
                         <div class="reservation_B">
                             <label for="multiA">멀티코트A</label>
-                            <input type="radio" id="multiA">
+                            <input type="radio" name="multi" id="multiA" value="1">
                             <label for="multiB">멀티코트B</label>
-                            <input type="radio" id="multiB">
+                            <input type="radio" name="multi" id="multiB" value="2">
                             <label for="multiC">멀티코트C</label>
-                            <input type="radio" id="multiC">
+                            <input type="radio" name="multi" id="multiC" value="3">
                             <br>
-                            <input type="date">
+                            <input type="text" class="cal_today">
                             <br>
-                            <input type="time">
-                            <a>~</a>
+                            <input type="time" value="09:00:00" min="09:00:00" max="21:00:00">
                             <input type="time">
                         </div>
                         <div class="reservation_result">

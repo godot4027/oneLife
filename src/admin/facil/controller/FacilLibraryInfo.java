@@ -30,6 +30,7 @@ public class FacilLibraryInfo extends HttpServlet {
 		int fcSeatNo = Integer.parseInt(request.getParameter("fcSeatNo"));
 		
 		Facil facil = new FacilService().libraryInfo(fcSeatNo, dayInput);
+		System.out.println(facil);
 		
 		response.setContentType("application/json; charset=utf-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH시 mm분").create();
