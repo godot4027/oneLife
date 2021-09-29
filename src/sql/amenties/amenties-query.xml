@@ -14,4 +14,64 @@
 	         GROUP BY FC_START
 	         ORDER BY FC_START
 	</entry>
+	
+	<entry key="getListCount">
+		SELECT
+			  COUNT(*)
+		 FROM FACILITY
+		 WHERE U_NO = ?
+	</entry>
+	<entry key="getWriterListCount">
+		SELECT
+			  COUNT(*)
+		 FROM FACILITY 
+		 JOIN MEMBER USING(U_NO)
+		WHERE U_NO = ?
+		  AND FC_NAME = '독서실'
+	</entry>
+	<entry key="selectsearchList">
+		SELECT
+		     FC_NO
+			, FC_NAME
+			, FC_SEAT_NO
+			, FC_DATE
+			, FC_START
+			, FC_END
+			, U_NO
+			, FC_STATUS
+		FROM(SELECT ROWNUM RNUM
+				  , FLIST.*
+		    FROM(SELECT
+                    *
+                     FROM FACILITY 
+                     JOIN MEMBER USING (U_NO)
+                     WHERE FC_NAME = '독서실'
+                     AND U_NO = ?
+                     ORDER BY FC_NO DESC) FLIST)
+	    WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selecWriterList">
+		 SELECT
+		     FC_NO
+			, FC_NAME
+			, FC_SEAT_NO
+			, FC_DATE
+			, FC_START
+			, FC_END
+			, U_NO
+			, FC_STATUS
+		FROM(SELECT ROWNUM RNUM
+				  , FLIST.*
+		    FROM(SELECT
+                         *
+                     FROM FACILITY 
+                     JOIN MEMBER USING (U_NO)
+                     WHERE FC_NAME = '독서실'
+                     AND EXTRACT(MONTH FROM FC_START) = SUBSTR( ?, 6, 2)
+                     AND U_NO = ?
+                     ORDER BY FC_NO DESC) FLIST)
+	    WHERE RNUM BETWEEN ? AND ?
+	</entry>        
+	
 </properties>

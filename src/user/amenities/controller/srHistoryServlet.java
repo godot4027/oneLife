@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.amenities.model.service.amenitiesService;
+import user.amenities.model.service.AmentiesService;
 import user.amenities.model.vo.Search;
 import user.member.model.vo.Member;
 
@@ -56,7 +56,7 @@ public class srHistoryServlet extends HttpServlet {
 				
 				
 				// 요청 페이지 값을 매개변수로 넘기고 조회 된 게시글 히스트 + 페이징 처리에 대한 객체 값 map 타입에 담아 리턴
-				Map<String, Object> map = new amenitiesService().selectlist(page, new Search(mydate, u_no));
+				Map<String, Object> map = new AmentiesService().selectlist(page, new Search(mydate, u_no));
 				
 				request.setAttribute("pi", map.get("pi"));
 				request.setAttribute("studyRoomList", map.get("studyRoomList"));
