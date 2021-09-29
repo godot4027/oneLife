@@ -82,7 +82,7 @@ public class findIdPwdServlet extends HttpServlet {
 			// request.setAttribute("msg", "해당 정보를 가진 주민은 존재하지 않습니다 다시 입력해주세요.");
 			// RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
 			// view.forward(request, response);
-			request.getSession().setAttribute("msg", "해당 정보를 가진 주민은 존재하지 않습니다 다시 입력해주세요.");
+			request.getSession().setAttribute("msg", "해당 정보를 가진 회원은 존재하지 않습니다 다시 입력해주세요.");
 			response.sendRedirect(request.getContextPath()+"/findIdPwd");
 
 		}
