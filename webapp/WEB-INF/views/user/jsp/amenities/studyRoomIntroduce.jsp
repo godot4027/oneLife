@@ -30,7 +30,6 @@
                             <ul class="nav_inner">
                                 <li>
                                     <a href="<%= request.getContextPath() %>/srIntro">시설소개</a>
-                                    <a href="<%= request.getContextPath() %>/srUse">이용현황</a>
                                     <a href="<%= request.getContextPath() %>/srRes">예약신청</a>
                                 </li>
                             </ul>
@@ -40,7 +39,6 @@
                             <ul class="nav_inner">
                                 <li>
                                     <a href="<%= request.getContextPath() %>/mcIntro">시설소개</a>
-                                    <a href="<%= request.getContextPath() %>/mcUse">이용현황</a>
                                     <a href="<%= request.getContextPath() %>/mcRes">예약신청</a>
                                 </li>
                             </ul>

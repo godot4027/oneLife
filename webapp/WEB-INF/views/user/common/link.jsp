@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="/oneLife/resources/user/css/jquery-ui.min.css">
 <link rel="stylesheet" href="/oneLife/resources/user/css/swiper-bundle.min.css">
 <link rel="stylesheet" href="/oneLife/resources/user/css/style.css"> 
+<link rel="stylesheet" href="/oneLife/resources/user/css/amenities.css">
 
  
 <script src="/oneLife/resources/user/js/jquery-3.6.0.min.js"></script>
