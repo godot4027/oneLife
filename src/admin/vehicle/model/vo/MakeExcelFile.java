@@ -13,7 +13,6 @@ public class MakeExcelFile {
 	public String exportData(String fileName, List<HouseHoldCar> houseHoldCarList) {
 		String result = "";
         try {
- 
             // 엑셀파일 객체 생성
             WritableWorkbook workbook = null;
  
@@ -29,7 +28,6 @@ public class MakeExcelFile {
             if (houseHoldCarList != null) {
             	file = new File("C:\\Users\\김재형\\git\\oneLife\\" + fileName + ".xls" );
             }
-            
  
             // 테스트 데이터 (S)
 //            HashMap hm_0 = new HashMap();
