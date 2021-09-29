@@ -6,6 +6,8 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +112,64 @@ public class WeekService {
 		close(conn);
 		
 		return wList;
+	}
+
+	public int insertWeekUP(Week week) {
+		Connection conn = getConnection();
+		
+		if (week.getScEndDate() != null) {
+			Calendar c1 = Calendar.getInstance();
+			c1.setTime(week.getScOpenDate());
+			
+			Calendar c2 = Calendar.getInstance();
+			c2.setTime(week.getScEndDate());
+			
+			System.out.println(c1.getTime());
+			System.out.println(c2.getTime());
+			int result = 0;
+			while( c1.compareTo( c2 ) !=1 ){
+				int maxCount = new WeekDao().maxCount(conn);
+				
+				int result2 = new WeekDao().insertWeekUP(conn, maxCount, week);
+				
+				System.out.println(result2);
+				if(result2 > 0) {
+					c1.add(Calendar.DATE, 1);
+					Date date = new java.sql.Date(c1.getTimeInMillis());
+ 					week.setScOpenDate(date);
+					result = 1;
+				}else {
+					rollback(conn);
+					break;
+				}
+				commit(conn);
+			}
+			close(conn);
+			return result;
+		} else {
+			int maxCount = new WeekDao().maxCount(conn);
+			
+			int result = new WeekDao().insertWeekUP(conn, maxCount, week);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+		
+			return result;
+		}
+	}
+
+	public int checkNno(int nno) {
+		Connection conn = getConnection();
+		
+		int result = new WeekDao().checkNno(conn, nno);
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

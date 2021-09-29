@@ -221,7 +221,7 @@ function show_events(year, month, day) {
 						} else {
 							category = "주민투표";
 						}
-						html += '<ul><li sytle="width : 10%">' + category + '</li><li style="width : 85%">' + data['wList'][key].scTitle + '<br></li><li style="width : 100%">'+ data['wList'][key].scContent + '</li></ul>';
+						html += '<ul><li sytle="width : 10%">' + category + '</li><li style="width : 85%"><a href="/oneLife/notice/detail?n_no=' + data['wList'][key].nno + '">'+ data['wList'][key].scTitle + '</a></li></ul>';
 					}
 				}
 				$('.cal_list').html(html);
@@ -235,36 +235,6 @@ function show_events(year, month, day) {
 		
 	});
 	
-	
-	
-    /*// Clear the dates container
-    $(".events-container").empty();
-    $(".events-container").show(250);
-    console.log(event_data["events"]);
-    // If there are no events for this date, notify the user
-    if(events.length===0) {
-        var event_card = $("<div class='event-card'></div>");
-        var event_name = $("<div class='event-name'>There are no events planned for "+month+" "+day+".</div>");
-        $(event_card).css({ "border-left": "10px solid #FF1744" });
-        $(event_card).append(event_name);
-        $(".events-container").append(event_card);
-    }
-    else {
-        // Go through and add each event as a card to the events container
-        for(var i=0; i<events.length; i++) {
-            var event_card = $("<div class='event-card'></div>");
-            var event_name = $("<div class='event-name'>"+events[i]["occasion"]+":</div>");
-            var event_count = $("<div class='event-count'>"+events[i]["invited_count"]+" Invited</div>");
-            if(events[i]["cancelled"]===true) {
-                $(event_card).css({
-                    "border-left": "10px solid #FF1744"
-                });
-                event_count = $("<div class='event-cancelled'>Cancelled</div>");
-            }
-            $(event_card).append(event_name).append(event_count);
-            $(".events-container").append(event_card);
-        }
-    }*/
 }
 
 // Checks if a specific date has any events

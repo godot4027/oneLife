@@ -101,6 +101,30 @@
 		)
 	
 	</entry>
+	<entry key="insertWeekUP">
+		INSERT INTO SC_SCHEDULE
+		(
+			SC_NO
+			, SC_OPEN_DATE
+			, SC_TITLE
+			, SC_CONTENT
+			, SC_IN_DATE
+			, SC_STATUS
+			, SC_CATE_CODE
+			, nno
+		)
+		VALUES(
+			?
+		  , ?
+		  , ?
+		  , ?
+		  , SYSDATE
+		  , default
+		  , ?
+		  , ?
+		)
+	
+	</entry>
 	<entry key="updateWeek">
 		UPDATE SC_SCHEDULE
 		SET SC_STATUS = ?
@@ -119,28 +143,13 @@
 	<entry key="oneDayList">
 		SELECT
 		*
-		FROM(
-		SELECT
-		SC_NO
-		, SC_OPEN_DATE
-		, SC_TITLE
-		, SC_CONTENT
-		, SC_IN_DATE
-		, SC_STATUS
-		, SC_CATE_CODE
-		, SC_CATE_NAME
-		FROM (SELECT
-		SC_NO
-		, SC_OPEN_DATE
-		, SC_TITLE
-		, SC_CONTENT
-		, SC_IN_DATE
-		, SC_STATUS
-		, SC_CATE_CODE
-		, SC_CATE_NAME
 		FROM SC_SCHEDULE
 		JOIN SC_CATEGORY USING(SC_CATE_CODE)
-		ORDER BY SC_NO))
-        where sc_open_date =  to_date(?, 'YYYY-MM-DD') 
+         where sc_open_date =  to_date(?, 'YYYY-MM-DD')
+         and sc_status = 'Y'
+		ORDER BY SC_NO
+	</entry>
+	<entry key="checkNno">
+	select count(*) from sc_schedule where nno = ?
 	</entry>
 </properties>
