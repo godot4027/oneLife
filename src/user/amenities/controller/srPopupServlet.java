@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class srUseServlet
+ * Servlet implementation class srPopupServlet
  */
-@WebServlet("/srUse")
-public class srUseServlet extends HttpServlet {
+@WebServlet("/srPopup")
+public class srPopupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public srUseServlet() {
+    public srPopupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class srUseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/jsp/studyRoomUsageStatus.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/jsp/amenities/studyRoomPopup.jsp");
 		view.forward(request, response);
 	}
 

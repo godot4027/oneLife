@@ -86,8 +86,8 @@ pageEncoding="UTF-8" import="user.member.model.vo.Member" %>
 					<li><a href="javascript:;">주요일정</a></li>
 				</ul>
 				<ul class="inner_item">
-					<li><a href="javascript:;">독서실 예약</a></li>
-					<li><a href="javascript:;">멀티 코트장 예약</a></li>
+					<li><a href="${contextPath}/srRes">독서실 예약</a></li>
+					<li><a href="${contextPath}/mcRes">멀티 코트장 예약</a></li>
 				</ul>
 				<ul class="inner_item">
 					<li><a href="${contextPath}/visitCarRegister">방문차량 등록</a></li>

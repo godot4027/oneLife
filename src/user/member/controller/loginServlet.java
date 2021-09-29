@@ -34,6 +34,7 @@ public class loginServlet extends HttpServlet {
 		Manager loginManager = new ManagerService().ManagerLogin(userId, userPwd);
 		// System.out.println(loginManager);
        
+		System.out.println(userPwd);
 		if(loginUser != null) {
 	         HttpSession session = request.getSession();
 	         

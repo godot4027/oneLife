@@ -4057,7 +4057,7 @@ left:190px;  bottom:53px; top: -40px;}
 .explanation > li{text-align: left; margin-left: 13px; margin-bottom: 10px; font-size: 15px; font-weight: bold; padding-left: 10px;}
 .explanation > li{background: url(../images/explanation_circle.png) no-repeat 0;}
 
-.amenities_search{padding-left: 400px; padding-bottom: 100px;}
+.amenities_search{text-align: center; padding-bottom: 100px;}
 
 .amenities_search > label{margin-right: 20px; font-size: 20px; font-weight: bold;}
 .amenities_search .cal{ padding: 0 8px 0 25px; background: #fff url(../images/ico_cal.png) no-repeat left 8px center; width: 150px;}
@@ -4065,6 +4065,7 @@ left:190px;  bottom:53px; top: -40px;}
 
 .amenities_use > p{ font-size: 20px; font-weight: bold; padding-left: 20px; padding-bottom: 30px;}
 .amenities_use > p{background: url(../images/subject_circle.png) no-repeat 0 2px;}
+
 
 
 
