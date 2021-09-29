@@ -74,6 +74,23 @@ public class FacilService {
 		
 		return fList;
 	}
+	
+	// 독서실 예약 카운트
+	public int libraryDayCount(String day, int uNo) {
+		Connection conn = getConnection();
+		
+		int result = fd.libraryDayCount(conn, day, uNo);
+		
+		close(conn);
+		
+		if(result > 0) {
+			return -1;
+		}else {
+			return 0;
+		}
+		
+	}
+
 
 	// 독서실 멤버 조회
 	public Facil libraryInfo(int fcSeatNo, String dayInput) {
@@ -107,7 +124,8 @@ public class FacilService {
 		
 		return f;
 	}
-	
+
+		
 	
 
 }

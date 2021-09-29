@@ -142,6 +142,7 @@
             	type : "post",
             	data : {"fcSeatNo" : $(this).find('.seatNum').text(), "dayInput" : $('#dayInput').val()},
             	success : function(item){
+            		console.log(item);
             		$('.txt1').text(item.fcNo);
             		$('.txt2').text(item.fcName);
             		$('.txt3').text(item.fcSeatType);

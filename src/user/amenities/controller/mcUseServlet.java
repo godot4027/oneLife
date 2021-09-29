@@ -28,7 +28,7 @@ public class mcUseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/jsp/multiCourtUsageStatus.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/jsp/amenities/multiCourtUsageStatus.jsp");
 		view.forward(request, response);
 	}
 
