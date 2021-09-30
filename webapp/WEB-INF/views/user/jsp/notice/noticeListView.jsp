@@ -63,7 +63,7 @@
 					<li class="no">${ n.n_no }</li>
 					<li class="title">${ n.n_title }</li>
 					<li class="nick">${ n.m_nick }</li>
-					<li class="date">${ n.modify_date }</li>
+					<li class="date">${ n.enroll_date }</li>
 					<li class="count">${ n.n_count }</li>
 				</ul>
 				</c:forEach>

@@ -310,7 +310,7 @@
 						</c:choose>
 					</c:if> 
 						
-						<!-- 기간 동안 보일 버튼 투표하기 / 결과보기 -->
+					<!-- 기간 동안 보일 버튼 투표하기 / 결과보기 -->
 					<c:choose>
 						<c:when test="${  today <= deadline  }">
 						<c:if test="${ !empty loginUser }">

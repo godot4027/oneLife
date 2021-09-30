@@ -42,7 +42,7 @@
 						<span class="name">${ complaint.r_name }</span> 
 						<span class="dong">${ complaint.r_dong }동 ${ complaint.r_ho }호</span>
 						<span class="date">
-						<fmt:formatDate value="${ complaint.modify_date }" pattern="yyyy.MM.dd HH:mm:ss"/>
+						<fmt:formatDate value="${ complaint.enroll_date }" pattern="yyyy.MM.dd HH:mm:ss"/>
 						</span>
 					</div>
 					<div class="btn_area">

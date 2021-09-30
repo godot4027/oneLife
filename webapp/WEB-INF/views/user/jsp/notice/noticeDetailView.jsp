@@ -164,7 +164,7 @@
 							</div>
 							<div class="row">
 							<span class="cell col1">날짜</span>
-							<span class="cell col2">${ notice.modify_date }</span>
+							<span class="cell col2">${ notice.enroll_date }</span>
 							</div>
 				 		</div>
 						 <div class="detail_content">
