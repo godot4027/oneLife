@@ -72,7 +72,7 @@
                             <li>
                                 <p>시설</p>
                                 <ul class="explanation">
-                                    <li>A코트 / B코트 / C코트</li>
+                                    <li>1코트 / 2코트 / 3코트</li>
                                 </ul>
                             </li>
                         </ul>

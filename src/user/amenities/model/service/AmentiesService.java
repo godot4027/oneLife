@@ -70,10 +70,10 @@ public class AmentiesService {
 	}
 	
 	// 멀티코트 예약신청
-		public int mcResInsert(String dayInput, String timeInput, int courtNumber, int uNo) {
+		public int mcResInsert(String dayInput, int courtNumber, int uNo) {
 			Connection conn = getConnection();
 			
-			int result = new AmentiesDao().mcResInsert(conn, dayInput, timeInput, courtNumber, uNo);
+			int result = new AmentiesDao().mcResInsert(conn, dayInput, courtNumber, uNo);
 			
 			if(result > 0) {
 				commit(conn);

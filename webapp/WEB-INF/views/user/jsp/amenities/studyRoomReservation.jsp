@@ -64,7 +64,7 @@
                 <div class="amenities_content">
                     <ul class="subject">
                         <li>
-                            <a>신청자 정보를 입력해 주세요.</a>
+                            <p>신청자 정보를 입력해 주세요.</p>
                             <ul class="explanation">
                                 <li>신청 확인시 입력하신 정보로 확인 가능하오니 정확하게 입력해주시기 바랍니다.</li>
                             </ul>
