@@ -425,7 +425,7 @@ private Properties query = new Properties();
 	}
 
 	// 멀티코트장 예약현황 자리표
-	public List<Facil> multicourtSelectList(Connection conn, String day, String time) {
+	public List<Facil> multicourtSelectList(Connection conn, String day) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = query.getProperty("multicourtSelectList");
@@ -435,11 +435,11 @@ private Properties query = new Properties();
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, day);
-			if(time != null) {
-				pstmt.setString(2, time);
-			}else {
-				pstmt.setString(2, "09");
-			}
+			
+			/*
+			 * if(time != null) { pstmt.setString(2, time); }else { pstmt.setString(2,
+			 * "09"); }
+			 */
 			
 			rset = pstmt.executeQuery();
 			
@@ -472,7 +472,7 @@ private Properties query = new Properties();
 	}
 	
 	// 멀티 코트장 멤버 조회
-	public Facil multiInfo(Connection conn, int fcNo, String dayInput, String time) {
+	public Facil multiInfo(Connection conn, int fcNo, String dayInput) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Facil f = null;
@@ -482,8 +482,8 @@ private Properties query = new Properties();
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, dayInput);
-			pstmt.setString(2, time);
-			pstmt.setInt(3, fcNo);
+			// pstmt.setString(2, time);
+			pstmt.setInt(2, fcNo);
 			
 			rset = pstmt.executeQuery();
 			

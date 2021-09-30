@@ -19,9 +19,9 @@ public class MulticourtServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String day = request.getParameter("day");
-		String time = request.getParameter("time");
+		// String time = request.getParameter("time");
 		
-		List<Facil> fList = new FacilService().multicourtSelectList(day, time);
+		List<Facil> fList = new FacilService().multicourtSelectList(day);
 		// System.out.println(fList);
 		
 		request.setAttribute("fList", fList);

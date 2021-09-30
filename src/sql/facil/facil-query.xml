@@ -271,7 +271,7 @@
 			         JOIN INFO_RESIDENT USING(R_NO)
 			         WHERE FC_NAME = '멀티코트장'
 			           AND TO_CHAR(FC_START, 'YYYY-MM-DD') = ?
-			           AND TO_CHAR(FC_START, 'HH') = ?
+			           <!-- AND TO_CHAR(FC_START, 'HH') = ? -->
 			           AND FC_STATUS = 'N'
 			         ORDER BY FC_SEAT_TYPE
 			         )
@@ -307,7 +307,7 @@
          JOIN INFO_RESIDENT USING(R_NO)
          WHERE FC_NAME = '멀티코트장'
            AND TO_CHAR(FC_START, 'YYYY-MM-DD') = ?
-           AND TO_CHAR(FC_START, 'HH') = ?
+           <!-- AND TO_CHAR(FC_START, 'HH') = ? -->
            AND FC_STATUS = 'N'
            AND FC_NO = ?
          ORDER BY FC_SEAT_TYPE DESC

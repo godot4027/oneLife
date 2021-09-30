@@ -25,7 +25,7 @@
                     </dd>
                 </dl>
 
-                <dl class="items">
+                <%-- <dl class="items">
                     <dt>예약 시간</dt>
                     <dd>    
                         <div class="select">
@@ -45,7 +45,7 @@
                            </select>
                          </div>
                     </dd>
-                </dl>
+                </dl> --%>
                 <dl class="items">
                     <dt></dt>
                     <dd>

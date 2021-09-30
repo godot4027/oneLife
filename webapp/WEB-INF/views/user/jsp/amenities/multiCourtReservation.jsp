@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,13 +85,13 @@
 	                        <br>
 	                        <input type="text" id="dayInput" name="dayInput" class="cal_today" readonly >
 	                    </div>
-	                    <div class="reservation_wrap3">
+	                    <!-- <div class="reservation_wrap3">
 	                        <label class="selectTime">시간 선택</label>
 	                        <br>
 	                        <div class="time_wrap">
 	                            <input type="time" id="timeInput" name="timeInput" class="startTime" min="09:00" max="21:00" step="3600" required>
 	                        </div>
-	                    </div>
+	                    </div> -->
 	                     <div class="reservation_submit">
 	                            <input class="submit" type="button" onclick="resFrm()" value="신청하기">
 	                            <input class="reset" type="reset" value="취소">
@@ -113,11 +114,11 @@
 	        		return;
 	        	}
 	        	
-	        	if($('#timeInput').val().length == 0){
+	        	/* if($('#timeInput').val().length == 0){
 	        		alert('시간을 선택해주세요!');
 	        		$('#timeInput').focus();
 	        		return;
-	        	}
+	        	} */
 	        	
 	        	document.forms.mcFrm.submit();
 	        	

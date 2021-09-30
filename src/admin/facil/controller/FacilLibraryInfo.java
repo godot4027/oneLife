@@ -33,7 +33,7 @@ public class FacilLibraryInfo extends HttpServlet {
 		System.out.println(facil);
 		
 		response.setContentType("application/json; charset=utf-8");
-		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH시 mm분").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create();
 		gson.toJson(facil, response.getWriter());
 		
 	}

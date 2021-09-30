@@ -104,10 +104,10 @@ public class FacilService {
 	}
 
 	// 멀티코트장 예약현황 자리표
-	public List<Facil> multicourtSelectList(String day, String time) {
+	public List<Facil> multicourtSelectList(String day) {
 		Connection conn = getConnection();
 		
-		List<Facil> fList = fd.multicourtSelectList(conn, day, time);
+		List<Facil> fList = fd.multicourtSelectList(conn, day);
 		
 		close(conn);
 		
@@ -115,10 +115,10 @@ public class FacilService {
 	}
 
 	// 멀티코트장 멤버 조회
-	public Facil multiInfo(int fcNo, String dayInput, String time) {
+	public Facil multiInfo(int fcNo, String dayInput) {
 		Connection conn = getConnection();
 		
-		Facil f = fd.multiInfo(conn, fcNo, dayInput, time);
+		Facil f = fd.multiInfo(conn, fcNo, dayInput);
 		
 		close(conn);
 		
