@@ -32,7 +32,7 @@
 	  padding : 10px;
 	  margin: 15% auto; /* 15% from the top and centered */
 	  border: 1px solid #888;
-	  width: 80%; /* Could be more or less, depending on screen size */
+	  width: 700px; /* Could be more or less, depending on screen size */
 	  border-radius : 10px;
 	}
 	
@@ -126,8 +126,11 @@
     padding: 0 8px 0 25px; background: #fff url(../resources/admin/images/ico_cal.png) no-repeat left 8px center; box-sizing: border-box; border: 1px solid #000;
     cursor: pointer;}
     
-    .modalCheck {
-    margin-left : 15px;
+    .periodLabel {
+    padding-left : 10px;
+    text-align:center;
+	vertical-align:middle; 
+	display:table-cell;
     }
     
     #modalP, #modalDate2 {
@@ -136,6 +139,11 @@
     
     #modalP2, #modalChangeDate2 {
     display : none;
+    }
+    
+    #modalP2 {
+    float : left;
+    margin : 0 5px; 
     }
 	</style>
 	
@@ -215,7 +223,7 @@
 					                    	<input id="modalDate" type="text" name="searchDay" class="cal_today" value="${sysDate}">
 					                    	<p id="modalP"> ~ </p>  
 			                    			<input id="modalDate2" type="text" name="searchDay" class="cal_today">
-			                    			<input type="checkbox" id="modalCheck" ><label for="modalCheck">기간 설정</label>
+			                    			<input type="checkbox" id="modalCheck" ><label for="modalCheck" class="periodLabel">기간 설정</label>
 	                                    
 	                                    </div>
 	                                </dd>
@@ -274,7 +282,7 @@
 					                    	<input id="modalChangeDate" type="text" name="searchDay" class="cal_today" value="${check.scOpenDate}">
 					                    	<p id="modalP2"> ~ </p>  
 			                    			<input id="modalChangeDate2" type="text" name="searchDay" class="cal_today" value="${check.scEndDate}">
-			                    			<input type="checkbox" id="modalChangeCheck" ><label for="modalChangeCheck">기간 설정</label>
+			                    			<input type="checkbox" id="modalChangeCheck" ><label for="modalChangeCheck" class="periodLabel">기간 설정</label>
 	                                    
 	                                    </div>
 	                                </dd>
