@@ -107,7 +107,6 @@
 			SC_NO
 			, SC_OPEN_DATE
 			, SC_TITLE
-			, SC_CONTENT
 			, SC_IN_DATE
 			, SC_STATUS
 			, SC_CATE_CODE
@@ -115,7 +114,6 @@
 		)
 		VALUES(
 			?
-		  , ?
 		  , ?
 		  , ?
 		  , SYSDATE
@@ -150,6 +148,11 @@
 		ORDER BY SC_NO
 	</entry>
 	<entry key="checkNno">
-	select count(*) from sc_schedule where nno = ?
+	select * from sc_schedule where nno = ? and sc_status = 'Y'
+	</entry>
+	<entry key="deleteWeekUP">
+	UPDATE SC_SCHEDULE
+		   SET SC_STATUS = 'N'
+		   WHERE nno = ?
 	</entry>
 </properties>

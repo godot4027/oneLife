@@ -11,7 +11,6 @@ import jxl.write.WritableWorkbook;
 
 public class MakeExcelFile {
 	public String exportData(String fileName, List<HouseHoldCar> houseHoldCarList) {
-		String result = "";
         try {
             // 엑셀파일 객체 생성
             WritableWorkbook workbook = null;

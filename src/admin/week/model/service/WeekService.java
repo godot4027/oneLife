@@ -124,15 +124,12 @@ public class WeekService {
 			Calendar c2 = Calendar.getInstance();
 			c2.setTime(week.getScEndDate());
 			
-			System.out.println(c1.getTime());
-			System.out.println(c2.getTime());
 			int result = 0;
 			while( c1.compareTo( c2 ) !=1 ){
 				int maxCount = new WeekDao().maxCount(conn);
 				
 				int result2 = new WeekDao().insertWeekUP(conn, maxCount, week);
 				
-				System.out.println(result2);
 				if(result2 > 0) {
 					c1.add(Calendar.DATE, 1);
 					Date date = new java.sql.Date(c1.getTimeInMillis());
@@ -162,10 +159,25 @@ public class WeekService {
 		}
 	}
 
-	public int checkNno(int nno) {
+	public Week checkNno(int nno) {
 		Connection conn = getConnection();
 		
-		int result = new WeekDao().checkNno(conn, nno);
+		Week week = new WeekDao().checkNno(conn, nno);
+		
+		close(conn);
+		
+		return week;
+	}
+
+	public int deleteWeekUP(int nno) {
+		Connection conn = getConnection();
+		
+		int result = new WeekDao().deleteWeekUP(conn, nno);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		

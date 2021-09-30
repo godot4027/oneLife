@@ -390,7 +390,7 @@ public class WeekDao {
 				week.setScNo(rset.getInt("SC_NO"));
 				week.setScOpenDate(rset.getDate("SC_OPEN_DATE"));
 				week.setScTitle(rset.getString("SC_TITLE"));
-				week.setScContent(rset.getString("SC_CONTENT"));
+//				week.setScContent(rset.getString("SC_CONTENT"));
 				week.setInDate(rset.getDate("SC_IN_DATE"));
 				week.setScStatus(rset.getString("SC_STATUS").charAt(0));
 				week.setScCateCode(rset.getString("SC_CATE_CODE"));
@@ -419,9 +419,9 @@ public class WeekDao {
 			pstmt.setInt(1, maxCount + 1);
 			pstmt.setDate(2, week.getScOpenDate());
 			pstmt.setString(3, week.getScTitle());
-			pstmt.setString(4, week.getScContent());
-			pstmt.setString(5, week.getScCateCode());
-			pstmt.setInt(6, week.getNno());
+//			pstmt.setString(4, week.getScContent());
+			pstmt.setString(4, week.getScCateCode());
+			pstmt.setInt(5, week.getNno());
 			
 			result = pstmt.executeUpdate();
 			
@@ -434,19 +434,31 @@ public class WeekDao {
 		return result;
 	}
 
-	public int checkNno(Connection conn, int nno) {
+	public Week checkNno(Connection conn, int nno) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		int result = 0;
-
+		Week week = new Week();
 		String sql = query.getProperty("checkNno");
-		
+		int count = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, nno);
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				result = rset.getInt(1);
+			while(rset.next()) {
+				if (count < 1 ) {
+					week.setScNo(rset.getInt("SC_NO"));
+					week.setScOpenDate(rset.getDate("SC_OPEN_DATE"));
+					week.setScTitle(rset.getString("SC_TITLE"));
+					week.setScContent(rset.getString("SC_CONTENT"));
+					week.setInDate(rset.getDate("SC_IN_DATE"));
+					week.setScStatus(rset.getString("SC_STATUS").charAt(0));
+					week.setScCateCode(rset.getString("SC_CATE_CODE"));
+					week.setNno(rset.getInt("nno"));
+				}
+				if (count > 0) {
+					week.setScEndDate(rset.getDate("SC_OPEN_DATE"));
+				}
+				count++;
 			}
 			
 		} catch (SQLException e) {
@@ -455,6 +467,25 @@ public class WeekDao {
 			close(rset);
 			close(pstmt);
 		}
+		
+		return week;
+	}
+
+	public int deleteWeekUP(Connection conn, int nno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("deleteWeekUP");
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, nno);
+				
+				result += pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
 		
 		return result;
 	}
