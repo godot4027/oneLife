@@ -83,7 +83,6 @@ pageEncoding="UTF-8" import="user.member.model.vo.Member" %>
 					<li><a href="${contextPath}/notice/list">공지사항</a></li>
 					<li><a href="${contextPath}/board/list">도란도란</a></li>
 					<li><a href="${contextPath}/vote/list">투표하기</a></li>
-					<li><a href="javascript:;">주요일정</a></li>
 				</ul>
 				<ul class="inner_item">
 					<li><a href="${contextPath}/srIntro">독서실 예약</a></li>

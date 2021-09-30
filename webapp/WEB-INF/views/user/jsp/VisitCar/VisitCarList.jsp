@@ -215,11 +215,10 @@ font-size : 15px;
 								<c:choose>
 									<c:when
 										test="${v.u_NO == loginUser.u_NO && v.VC_STATUS eq status && v.VC_DATE >= today}">
-										<li class="edit" onclick="fix(${v.VC_ID})"><a href="#" id=""><i
-												class="far fa-edit"></i></a></li>
+										<li class="edit" onclick="fix(${v.VC_ID})"><i class="far fa-edit"></i></li>
 									</c:when>
 									<c:otherwise>
-										<li class="edit" id="editBtn"><i class="far fa-edit"></i></li>
+										<li class="edit" id="editBtn" onclick="fixWarning()"><i class="far fa-edit"></i></li>
 									</c:otherwise>
 								</c:choose>
 							</ul>
@@ -361,29 +360,23 @@ font-size : 15px;
     	      event.target.parentNode.classList.remove("onmouseover");
     	  });
 	
-     	 
-     	function cantFix() {
-			alert("수정할 수 없는 내역입니다.");
-		}
-     	
-     	 //모달
-    	var cantFixModal = document.getElementById("cantFixModal");
-    	var editBtn = document.getElementById("editBtn");
-    	var warningClose = document.getElementById("warningClose");
+     	function fixWarning() {
+     		 //모달
+        	var cantFixModal = document.getElementById("cantFixModal");
+        	var warningClose = document.getElementById("warningClose");
 
-      	editBtn.onclick = function () {
-        	cantFixModal.style.display = "block";
-      	};
+            	cantFixModal.style.display = "block";
 
-      	warningClose.onclick = function () {
-      		cantFixModal.style.display = "none";
-      	};
+          	warningClose.onclick = function () {
+          		cantFixModal.style.display = "none";
+          	};
 
-      	window.onclick = function (event) {
-        	if (event.target == cantFixModal) {
-        		cantFixModal.style.display = "none";
-        	}
-     	};
+          	window.onclick = function (event) {
+            	if (event.target == cantFixModal) {
+            		cantFixModal.style.display = "none";
+            	}
+         	};
+     	}
        
      	 function goRegister() {
 			location.href = "${contextPath}/visitCarRegister";
