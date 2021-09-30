@@ -40,8 +40,8 @@ public class ExportDataServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fileName = request.getParameter("fileName");
-		List<HouseHoldCar> excelDownList = (List<HouseHoldCar>) request.getSession().getAttribute("excelDownList");
 		
+		List<HouseHoldCar> excelDownList = (List<HouseHoldCar>) request.getSession().getAttribute("excelDownList");
 		String result = new MakeExcelFile().exportData(fileName, excelDownList);
 		
 		response.setContentType("application/json; charset=utf-8");

@@ -1,6 +1,7 @@
 package user.notice.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.week.model.service.WeekService;
+import admin.week.model.vo.Week;
 import user.notice.model.service.NoticeService;
 import user.notice.model.vo.Notice;
 
@@ -63,9 +65,10 @@ public class NoticeDetailServlet extends HttpServlet {
 		} 
 		// 게시글 조회
 		Notice n = ns.selectNotice(n_no);
-		int check = new WeekService().checkNno(n_no);
+		Week week = new WeekService().checkNno(n_no);
+		
 		if(n != null) {
-			request.setAttribute("check", check);
+			request.setAttribute("check", week);
 			request.setAttribute("notice", n);
 			request.getRequestDispatcher("/WEB-INF/views/user/jsp/notice/noticeDetailView.jsp").forward(request, response);
 		} else {

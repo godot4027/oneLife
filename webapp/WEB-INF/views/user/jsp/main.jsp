@@ -68,6 +68,29 @@
 	font-weight : bold;
 	}
 	
+	
+	.noSchedule {
+	margin-top : 15px;
+	display : flex;
+	justify-content : center;
+	}
+	.noSchedule > img {
+	width : 25px;
+	display : inline-block;
+	ma
+	}
+	
+	.noSchedule > p {
+	font-size : 16px;
+	font-weight : bold;
+	color : gray;
+	margin-left : 8px;
+	display : inline-block;
+	}
+	
+	.noScheduleLi {
+	width : 100%;
+	}
 	</style>
 </head>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
@@ -138,7 +161,7 @@
                 </div>
                 <div class="items">
                     <h2>우리 아파트 주요 일정</h2>
-                    <div class="main_calendar">
+                    <div class="main_calendar" id="main_cal">
                         <!-- <div class="cal_head">
                             <a href="javascript:;">&lt;</a>
                             <p>2021.08</p>
@@ -243,9 +266,9 @@
                             <button class="todayBtn" type="button" onclick="scToday()">오늘</button>
 							</div>
                         </div>
-
+						
                         <ul class="cal_list">
-                                <li style="width : 30%">공동생활</li><li style="width : 70%">단지 엘레베이터 점검</li>
+                        		<li class="noScheduleLi"><div class="noSchedule"><img src="/oneLife/resources/admin/images/ico_cal.png"><p>오늘 예정된 일정은 없습니다.</p></div></li>
                         </ul>
                     </div>
                 </div>

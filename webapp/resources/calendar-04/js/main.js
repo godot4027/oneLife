@@ -212,11 +212,11 @@ function show_events(year, month, day) {
 			var html = '';
 			if (data != null) {
 				if (data['wList'].length == 0) {
-					html += '<h3>오늘 주요일정은 없습니다.</h3>';
+					html += '<li class="noScheduleLi"><div class="noSchedule"><img src="/oneLife/resources/admin/images/main_nodata.png"><p>오늘 예정된 일정은 없습니다.</p></div></li>';
 				} else {
 					for (var key in data['wList']) {
 						var category = "";
-						if (data['wList'][key].scTitle == "SC_CODE1") {
+						if (data['wList'][key].scCateCode == "SC_CODE1") {
 							category = "공동생활";
 						} else {
 							category = "주민투표";

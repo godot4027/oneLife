@@ -2,8 +2,6 @@ package admin.week.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,16 +15,16 @@ import admin.week.model.service.WeekService;
 import admin.week.model.vo.Week;
 
 /**
- * Servlet implementation class WeekUserPageInsert
+ * Servlet implementation class WeekUserPageUpdate
  */
-@WebServlet("/admin/week/upInsert")
-public class WeekUserPageInsert extends HttpServlet {
+@WebServlet("/admin/week/upUpdate")
+public class WeekUserPageUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WeekUserPageInsert() {
+    public WeekUserPageUpdate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,30 +36,34 @@ public class WeekUserPageInsert extends HttpServlet {
 		String dateStr = request.getParameter("date1");
 		String dateStr2 = request.getParameter("date2");
 		String title = request.getParameter("title");
-//		String content = request.getParameter("content");
 		String type = request.getParameter("type");
 		int nno = Integer.parseInt(request.getParameter("nno"));
 		
-		Date date = Date.valueOf(dateStr);
-		Date date2 = null;
-		if (!dateStr2.equals("")) {
-			 date2 = Date.valueOf(dateStr2);
-		} 
-		Week week = new Week();
-		week.setScCateCode(type);
-//		week.setScContent(content);
-		week.setScOpenDate(date);
-		week.setScTitle(title);
-		week.setNno(nno);
-		if (!dateStr2.equals("")) {
-			week.setScEndDate(date2);
+		int deleteResult = new WeekService().deleteWeekUP(nno);
+		if (deleteResult < 1) {
+			response.setContentType("application/json; charset=utf-8"); new
+			 Gson().toJson(deleteResult, response.getWriter());
+		} else {
+			Date date = Date.valueOf(dateStr);
+			Date date2 = null;
+			if (!dateStr2.equals("")) {
+				 date2 = Date.valueOf(dateStr2);
+			} 
+			Week week = new Week();
+			week.setScCateCode(type);
+			week.setScOpenDate(date);
+			week.setScTitle(title);
+			week.setNno(nno);
+			if (!dateStr2.equals("")) {
+				week.setScEndDate(date2);
+			}
+			
+			 int result = new WeekService().insertWeekUP(week);
+			 
+			 response.setContentType("application/json; charset=utf-8"); new
+			 Gson().toJson(result, response.getWriter());
 		}
 		
-		 int result = new WeekService().insertWeekUP(week);
-		 
-		 response.setContentType("application/json; charset=utf-8"); new
-		 Gson().toJson(result, response.getWriter());
-		 
 	}
 
 	/**
