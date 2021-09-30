@@ -4075,7 +4075,7 @@ left:190px;  bottom:53px; top: -40px;}
 .nav_inner > li.on > a{color:rgba(255, 255, 255, 1);}
 .nav_inner > li.on > a:after{opacity: 1; right: 0;}
 
-.amenities_content{box-sizing: border-box; padding: 40px; width: calc(100vw - 381px); height: calc(100vh - 100px); overflow-y: auto;}
+.amenities_content{box-sizing: border-box; padding: 40px; width: calc(100vw - 20%); height: calc(100vh - 100px); overflow-y: auto;}
 
 .amenities_text{width: 700px;}
 .amenities_img{width: calc(100vw - 700px);}
@@ -4087,10 +4087,10 @@ left:190px;  bottom:53px; top: -40px;}
 .explanation > li{text-align: left; margin-left: 13px; margin-bottom: 10px; font-size: 15px; font-weight: bold; padding-left: 10px;}
 .explanation > li{background: url(../images/explanation_circle.png) no-repeat 0;}
 
-.amenities_search{padding-left: 400px; padding-bottom: 100px;}
+.amenities_search{padding-left:550px; padding-bottom: 100px;}
 
 .amenities_search > label{margin-right: 20px; font-size: 20px; font-weight: bold;}
-.amenities_search .cal{ padding: 0 8px 0 25px; background: #fff url(../images/ico_cal.png) no-repeat left 8px center; width: 150px;}
+.amenities_search .cal_today{ padding: 0 8px 0 25px; background: #fff url(../images/ico_cal.png) no-repeat left 8px center; width: 150px;}
 .amenities_search .submit{ margin-left: 20px; height: 29px; width: 40px; border-radius: 3px; color: #fff; background: #4094f7; font-size: 15px;}
 
 .amenities_use > p{ font-size: 20px; font-weight: bold; padding-left: 20px; padding-bottom: 30px;}

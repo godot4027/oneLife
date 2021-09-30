@@ -170,7 +170,7 @@ public class AmentiesDao {
 	}
 
 	// 멀티코트 예약신청
-	public int mcResInsert(Connection conn, String timeInput, String dayInput, int courtNumber, int uNo) {
+	public int mcResInsert(Connection conn, String dayInput, int courtNumber, int uNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = query.getProperty("mcResInsert");
@@ -178,11 +178,10 @@ public class AmentiesDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, courtNumber); // 코트번호
-			pstmt.setString(2, dayInput); // 예약 날짜
-			pstmt.setString(3, timeInput); // 시작 시간
-			pstmt.setString(4, timeInput); // 끝 시간
-			pstmt.setInt(5, uNo); // 유저번호
+			pstmt.setInt(1, courtNumber); // 시트번호
+			pstmt.setString(2, dayInput); // 시작 날짜
+			pstmt.setString(3, dayInput); // 끝 날짜
+			pstmt.setInt(4, uNo); // 유저번호
 			
 			result = pstmt.executeUpdate();
 			

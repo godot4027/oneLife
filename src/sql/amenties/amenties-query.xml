@@ -128,7 +128,18 @@
 		FROM(SELECT ROWNUM RNUM
 				  , FLIST.*
 		    FROM(SELECT
-                    *
+                    FC_NO
+			, FC_NAME
+			, FC_SEAT_NO
+			, FC_DATE
+			, FC_START
+			, FC_END
+			, U_NO
+			, CASE WHEN FC_STATUS = 'Y' THEN '예약취소'
+           WHEN SYSDATE - FC_START &lt;= 0 THEN '사용전'
+           WHEN (SYSDATE - FC_END &gt;= 0) THEN '사용완료'
+           ELSE '사용중'
+           END AS FC_STATUS
                      FROM FACILITY 
                      JOIN MEMBER USING (U_NO)
                      WHERE FC_NAME = '멀티코트장'
@@ -138,7 +149,7 @@
 	</entry>   
 	
 	<entry key="selecWriterMultiList">
-		 SELECT
+		      SELECT
 		     FC_NO
 			, FC_NAME
 			, FC_SEAT_NO
@@ -150,7 +161,18 @@
 		FROM(SELECT ROWNUM RNUM
 				  , FLIST.*
 		    FROM(SELECT
-                         *
+                        FC_NO
+			, FC_NAME
+			, FC_SEAT_NO
+			, FC_DATE
+			, FC_START
+			, FC_END
+			, U_NO
+			, CASE WHEN FC_STATUS = 'Y' THEN '예약취소'
+           WHEN SYSDATE - FC_START &lt;= 0 THEN '사용전'
+           WHEN (SYSDATE - FC_END &gt;= 0) THEN '사용완료'
+           ELSE '사용중'
+           END AS FC_STATUS
                      FROM FACILITY 
                      JOIN MEMBER USING (U_NO)
                      WHERE FC_NAME = '멀티코트장'
