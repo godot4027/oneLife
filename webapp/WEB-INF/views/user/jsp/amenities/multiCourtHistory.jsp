@@ -75,7 +75,7 @@
                         <form method="get" action="${contextPath}/mcHistory">
                             <input type="hidden" name="u_no" value="${loginUser.u_NO}">
                             <label> 이용기간 </label>
-                            <input class="cal" type="text">
+                            <input type="month" name="mydate">
                             <input class="submit" type="submit" value="조회">
                         </form>
                     </div>
@@ -88,10 +88,10 @@
                                 <th>시간</th>
                             </thead>
                             <tbody>
-                                <c:forEach var="s" items="${studyRoomList}">
+                                <c:forEach var="s" items="${multiCourtList}">
                                     <tr>
-                                        <th>#</th>
-                                        <th>#</th>
+                                        <th>${s.fc_start}</th>
+                                        <th>${s.fc_seat_no}</th>
                                         <th>#</th>
                                     </tr>
                                 </c:forEach>
@@ -111,13 +111,13 @@
                         </c:if>
                         
                             <!-- 맨 처음으로 (<<) -->
-                                <li><a href="${ contextPath }/srHistory?page=1${ searchParam }">&lt;&lt;</a></li>
+                                <li><a href="${ contextPath }/mcHistory?page=1${ searchParam }">&lt;&lt;</a></li>
                                 
                             <!-- 이전 페이지 (<) -->
                             <li>
                             <c:choose>
                                  <c:when test="${ pi.page > 1 }">
-                                 <a href="${ contextPath }/srHistory?page=${ pi.page - 1}${ searchParam }" class="btn_prev">&lt;</a>
+                                 <a href="${ contextPath }/mcHistory?page=${ pi.page - 1}${ searchParam }" class="btn_prev">&lt;</a>
                                  </c:when>
                                  <c:otherwise>
                                  <a href="#">&lt;</a>
@@ -133,7 +133,7 @@
                                            <a href="#" class="current_page">${ p }</a>
                                    </c:when>
                                    <c:otherwise>
-                                           <a href="${ contextPath }/srHistory?page=${ p }${ searchParam }">${ p }</a>
+                                           <a href="${ contextPath }/mcHistory?page=${ p }${ searchParam }">${ p }</a>
                                    </c:otherwise>
                                 </c:choose>
                             </li>
@@ -144,7 +144,7 @@
                             <li>
                             <c:choose>
                                  <c:when test="${ pi.page < pi.maxPage }">
-                                 <a href="${ contextPath }/srHistory?page=${ pi.page + 1}${ searchParam }" class="btn_next">&gt;</a>
+                                 <a href="${ contextPath }/mcHistory?page=${ pi.page + 1}${ searchParam }" class="btn_next">&gt;</a>
                                  </c:when>
                                  <c:otherwise>
                                  <a href="#">&gt;</a>
@@ -153,7 +153,7 @@
                             </li>		
                                 
                             <!-- 맨 끝으로 (>>) -->
-                                <li><a href="${ contextPath }/srHistory?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>	
+                                <li><a href="${ contextPath }/mcHistory?page=${ pi.maxPage }${ searchParam }">&gt;&gt;</a></li>	
                                 
                     </ul>
 

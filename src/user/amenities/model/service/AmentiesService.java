@@ -69,5 +69,53 @@ public class AmentiesService {
 		return returnMap;
 	}
 	
+	// 멀티코트 예약신청
+		public int mcResInsert(String dayInput, String timeInput, int courtNumber, int uNo) {
+			Connection conn = getConnection();
+			
+			int result = new AmentiesDao().mcResInsert(conn, dayInput, timeInput, courtNumber, uNo);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+	
+		// 멀티코트 예약된 날짜 가져오기
+		public List<String> mcDateList(int uNo) {
+			Connection conn = getConnection();
+			
+			List<String> mcDateList = new AmentiesDao().mcDateList(conn, uNo);
+			
+			close(conn);
+			
+			return mcDateList;
+		}
+		
+		public Map<String, Object> selectMultilist(int page, Search s) {
+			Connection conn = getConnection();
+			
+			// 1. 게시글 총 개수 구하기
+			int listCount = ad.getListCount(conn, s);
+			
+			// 2. PageInfo 객체 만들기
+			PageInfo pi = new PageInfo(page, listCount, 10, 10);
+			
+			// 3. 페이징 처리가 된 게시글 목록 조회
+			List<Facility> multiCourtList = ad.selectMultiList(conn, pi, s);
+			
+			// 리턴용 Map 선언
+			Map<String, Object> returnMap = new HashMap<>();
+			
+			returnMap.put("pi", pi);
+			returnMap.put("multiCourtList", multiCourtList);
+			
+			return returnMap;
+		}
 
 }

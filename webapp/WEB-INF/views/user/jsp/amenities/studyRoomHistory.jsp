@@ -75,7 +75,7 @@
                         <form method="get" action="${contextPath}/srHistory">
                             <input type="hidden" name="u_no" value="${loginUser.u_NO}">
                             <label> 이용기간 </label>
-                            <input class="cal" type="text" name="mydate">
+                            <input type="month" name="mydate">
                             <input class="submit" type="submit" value="조회">
                         </form>
                     </div>
