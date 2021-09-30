@@ -85,12 +85,14 @@
                             <thead class="table_head">
                                 <th>신청 일자</th>
                                 <th>좌석 번호</th>
+                                <th>사용 상태</th>
                             </thead>
                             <tbody>
                                 <c:forEach var="s" items="${studyRoomList}">
                                     <tr>
                                         <th>${s.fc_start}</th>
                                         <th>${s.fc_seat_no}</th>
+                                        <th>${s.fc_status}</th>
                                     </tr>
                                 </c:forEach>
                             </tbody>

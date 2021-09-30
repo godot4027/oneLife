@@ -153,7 +153,7 @@
 
         </script>
 
-        <!-- 작은 창 -->
+        <!--버튼 작은 창 -->
         <script>
             function dis(){
                 if($('#dis').css('display') == 'none'){

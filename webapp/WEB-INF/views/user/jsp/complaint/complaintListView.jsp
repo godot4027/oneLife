@@ -212,7 +212,7 @@ button#mylist {
 					<li class="title" onclick="detailView2(${ c.c_no })">${ c.c_title }</li>
 					</c:if>
 					<li class="nick">${ c.r_name }</li>
-					<li class="date"><fmt:formatDate value="${ c.modify_date }" pattern="yyyy-MM-dd"/></li>
+					<li class="date"><fmt:formatDate value="${ c.enroll_date }" pattern="yyyy-MM-dd"/></li>
 				</ul>
 				</c:forEach>
 				</c:when>

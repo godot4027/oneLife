@@ -76,8 +76,11 @@
 			<div class="step01_btn_box border_test">
 				<span> <a href="${ contextPath }" id="" class="cancelBtn"
 					role="button">취소</a>
-				</span> <span> <a href="${contextPath}/userJoin" id="agreeBtn"
-					class="agreeBtn" role="button" onclick="return agreeBtn()">확인</a>
+				</span> 
+				<span>
+					<a href="${contextPath}/userJoin" id="agreeBtn"
+						class="agreeBtn" role="button" onclick="return agreeBtn()">확인
+					</a>
 				</span>
 			</div>
 		</form>
@@ -86,19 +89,6 @@
 	<%-- 공통 footer --%>
 	<jsp:include page="/WEB-INF/views/user/common/footer.jsp"></jsp:include>
 
-	<!-- 팝업영역 -->
-	<!-- 필수 약관 동의 팝업 -->
-	<div class="popup_wrap" style="display: none;">
-		<div class="dim"></div>
-		<div class="item">
-			<h3 class="tit">회원가입 약관동의 :</h3>
-			<p class="txt">필수 약관에 동의해주세요.</p>
-			<div class="btn_box">
-				<a href="javascript:;" class="ok">확인</a>
-			</div>
-		</div>
-	</div>
-	<!-- footer -->
 	<!-- 메뉴 슬라이드 스크립트 -->
 	<script>
 		$(function() {

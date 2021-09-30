@@ -25,13 +25,13 @@
                 <div class="content">
                     <div class="list_wrap">
                         <h2 class="sub_tit">부대시설 예약관리</h2>
-                        <form action="${contextPath}/admin/facil/list">
+                        <form action="${contextPath}/admin/facil/list" onsubmit="return regFunc()">
 	                        <div class="search_box">
 	                            <div class="search_top clearfix">
 	                                <div class="items clearfix">
-	                                    <label for="reser_fac">예약시설</label>
+	                                    <label for="reser_fac1">예약시설</label>
 	                                    <div class="select">
-	                                        <select name="facilName" id="reser_fac">
+	                                        <select name="facilName" id="reser_fac1">
 	                                            <option value="all">전체</option>
 	                                            <option value="독서실" <c:if test="${param.facilName eq '독서실'}">selected</c:if>>독서실</option>
 	                                            <option value="멀티코트장" <c:if test="${param.facilName eq '멀티코트장'}">selected</c:if>>멀티코트장</option>
@@ -39,9 +39,9 @@
 	                                    </div>
 	                                </div>
 	                                <div class="items clearfix">
-	                                    <label for="reser_fac">예약타입</label>
+	                                    <label for="reser_fac2">예약타입</label>
 	                                    <div class="select">
-	                                        <select name="facilType" id="reser_fac">
+	                                        <select name="facilType" id="reser_fac2">
 	                                            <option value="all">전체</option>
 	                                            <option value="일일권" <c:if test="${param.facilType eq '일일권'}">selected</c:if>>일일권</option>
 	                                            <option value="A" <c:if test="${param.facilType eq 'A'}">selected</c:if>>A</option>  
@@ -51,9 +51,9 @@
 	                                    </div>
 	                                </div>
 	                                <div class="items clearfix">
-	                                    <label for="reser_fac">예약상태</label>
+	                                    <label for="reser_fac3">예약상태</label>
 	                                    <div class="select">
-	                                        <select name="facilStatus" id="reser_fac">
+	                                        <select name="facilStatus" id="reser_fac3">
 	                                            <option value="all">전체</option>
 	                                            <option value="예약취소" <c:if test="${param.facilStatus eq '예약취소'}">selected</c:if>>예약취소</option>
 	                                            <option value="사용전">사용전</option>
@@ -63,11 +63,18 @@
 	                                    </div>
 	                                </div>
 	                                <div class="items clearfix">
-	                                    <label for="">예약일자</label>
+	                                    <label for="">예약 시작 일자</label>
 	                                    <div class="calendar clearfix">
-		                                    <c:set var="now" value="<%=new java.util.Date()%>" />
-											<c:set var="sysDate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set>
-	                                        <input type="text" name="facilDay" id="facilDay" class="cal" value="${sysDate}" readonly>
+	                                    	<c:choose>
+	                                    		<c:when test="${!empty param.facilDay}">
+	                                    			<input type="text" name="facilDay" id="facilDay" class="cal" value="${param.facilDay}" readonly>	
+	                                    		</c:when>
+	                                    		<c:otherwise>
+	                                    			<c:set var="now" value="<%=new java.util.Date()%>" />
+													<c:set var="sysDate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set>
+	                                    			<input type="text" name="facilDay" id="facilDay" class="cal" value="${sysDate}" readonly>
+	                                    		</c:otherwise>
+	                                    	</c:choose>
 	                                        <div class="checkbox">
 												<input type="checkbox" name="allDay" id="allDay" <c:if test="${param.allDay eq 'on'}">checked</c:if>>
 												<label for="allDay">전체조회</label>
@@ -77,15 +84,15 @@
 	                            </div>
 	                            <div class="search_bot clearfix">
 	                                <div class="items clearfix">
-	                                    <label for="">검색조건</label>
+	                                    <label for="searchName">검색조건</label>
 	                                    <div class="select">
-	                                        <select name="searchName" id="reser_fac">
+	                                        <select name="searchName" id="searchName">
 	                                            <option value="id" <c:if test="${param.searchName eq 'id'}">selected</c:if>>아이디</option>
 	                                            <option value="name" <c:if test="${param.searchName eq 'name'}">selected</c:if>>이름</option>
 	                                            <option value="phone" <c:if test="${param.searchName eq 'phone'}">selected</c:if>>핸드폰번호</option>
 	                                        </select>
 	                                    </div>
-	                                    <input type="text" class="input" name="searchValue" value="${param.searchValue}">
+	                                    <input type="text" id="searchValue" class="input" name="searchValue" value="${param.searchValue}">
 	                                    <button type="submit" class="btn">검색</button>
 	                                </div>
 	                            </div>
@@ -213,8 +220,6 @@
 									value="${pageContext.request.requestURL}" />
 								<jsp:param name="search" value="${searchParam}" />
 							</jsp:include>
-                            
-                            
                         </div>
                     </div>
                 </div>
@@ -359,7 +364,45 @@
 	    function facilLast(){
 	    	 location.href = "${contextPath}/admin/facil/list?allDay=on"
 	     }
-    </script>
+	    </script>
+	    <!-- 검색 유효성 검사 -->
+		<script>
+			function regFunc(){	
+				
+				const search_reg = /^[가-힣]{1,4}$/;
+				const search_reg2 = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+				const search_reg3 = /^[a-zA-Z0-9]$/;
+				
+				// 검색조건 검사
+				if($('#searchValue').val().length != 0){
+					// 이름 검색 일시
+					if($('#searchName').val() == 'name'){
+						if(!search_reg.test($('#searchValue').val())){
+							alert("1~4자리의 한글로 입력해주세요!");
+							$('#searchValue').select();
+							return false;
+						}
+						
+					}else if($('#searchName').val() == 'phone'){
+						// 이메일 검색 일시
+						if(!search_reg2.test($('#searchValue').val())){
+							alert("예) 010-1234-5678 양식으로 입력해주세요!");
+							$('#searchValue').select();
+							return false;
+						}
+					}else if($('#searchName').val() == 'id'){
+						// 아이디 검색일시
+						if(!search_reg3.test($('#searchValue').val())){
+							alert("영문과 숫자로 입력해주세요!");
+							$('#searchValue').select();
+							return false;
+						}
+					}
+					
+				}
+			}
+		</script>
+    
 
 </body>
 

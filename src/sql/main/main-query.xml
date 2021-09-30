@@ -16,10 +16,6 @@
 		     , N_TITLE
 		     , ENROLL_DATE
 		     , M_NICK
-		     , (SELECT
-		              COUNT(*)
-		              FROM NOTICE_ATTACHMENT
-		              WHERE N_NO = N_NO) AS FILECOUNT
 		     FROM NOTICE
 		     JOIN INFO_MANAGER USING(M_NO)
 		     WHERE STATUS = 'Y'

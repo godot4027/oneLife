@@ -79,7 +79,6 @@ public class MainDao {
 				n.setN_title(rset.getString("N_TITLE"));
 				n.setEnroll_date(rset.getDate("ENROLL_DATE"));
 				n.setM_nick(rset.getString("M_NICK"));
-				n.setFileCount(rset.getInt("FILECOUNT"));
 				
 				noticeList.add(n);
 			}

@@ -8,6 +8,7 @@
 	<%-- 공통css/js --%>
 	<jsp:include page="/WEB-INF/views/user/common/link.jsp"></jsp:include>
 
+	<!-- summernote api -->
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
