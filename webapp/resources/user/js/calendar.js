@@ -12,8 +12,6 @@ $.datepicker.setDefaults({
    
 });
 
-
-
 //특정일 선택막기
 function disableAllTheseDays(date) {
     var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();

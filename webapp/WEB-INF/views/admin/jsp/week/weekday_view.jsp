@@ -95,11 +95,11 @@
 	                                   	<c:choose>
 				                    		<c:when test="${param.type == 'insert'}">
 				                    		   <option value="SC_CODE1">공동생활</option>
-	                                           <option value="SC_CODE2">도란도란</option>
+	                                           <option value="SC_CODE2">주민투표</option>
 				                    		</c:when>
 				                    		<c:otherwise>
 				                    		   <option value="SC_CODE1" <c:if test="${weekOne.scCateCode eq 'SC_CODE1'}">selected</c:if>>공동생활</option>
-	                                           <option value="SC_CODE2" <c:if test="${weekOne.scCateCode eq 'SC_CODE2'}">selected</c:if>>도란도란</option>
+	                                           <option value="SC_CODE2" <c:if test="${weekOne.scCateCode eq 'SC_CODE2'}">selected</c:if>>주민투표</option>
 				                    		</c:otherwise>
 				                    	</c:choose>
 				                    	</select>
@@ -150,7 +150,7 @@
 	                    			<a href="javascript:insertWeek();" class="ok">변경하기</a>
 	                    		</c:otherwise>
 	                    	</c:choose>
-                            <a href="javascript:;">등록취소</a>
+                            <a href="javascript:cancleWeek();">등록취소</a>
                         </div>
                     </div>
                 </div>
@@ -164,6 +164,14 @@
     		frm.method = "post";
     		frm.submit();
     	}
+    	
+    	function cancleWeek(){
+    		if(confirm("목록 페이지로 이동하시겠습니까?")){
+    			location.href = "${contextPath}/admin/week/list";
+    		}
+    	}
+    	
+    	
     </script>
 
 </body>

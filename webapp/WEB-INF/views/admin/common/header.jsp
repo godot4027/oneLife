@@ -130,6 +130,7 @@
  		let passwordOld = $('#m_Password');
  		let passwordNew = $('#m_Password2');
  		let phone = $('#m_Phone');
+ 		
  		// 입력했는지
  		if(passwordOld.val().length <= 0){
  			alert('현재 비밀번호를 입력해주세요!');
@@ -155,6 +156,14 @@
  			phone.select();
  			return;
  		}
+ 		
+ 		// 휴대폰번호 유효성 검사
+ 		let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+        if (regPhone.test($('#m_Phone').val()) === false) {
+            alert("예) 010-1234-5678 양식으로 입력해주세요!");
+            phone.select();
+ 			return;
+        }
  		
  		// 폼 전송
  		userInfoFrm.method = 'post';
