@@ -31,9 +31,9 @@
 							<div class="search_box">
 								<div class="search_top clearfix">
 									<div class="items clearfix">
-										<label for="reser_fac">일정 타입</label>
+										<label for="reser_fac1">일정 타입</label>
 										<div class="select">
-											<select name="sType" id="reser_fac">
+											<select name="sType" id="reser_fac1">
 												<option value="all">전체</option>
 												<option value="SC_CODE1"
 													<c:if test="${param.sType eq 'SC_CODE1'}">selected</c:if>>공동생활</option>
@@ -43,9 +43,9 @@
 										</div>
 									</div>
 									<div class="items clearfix">
-										<label for="reser_fac">공개 여부</label>
+										<label for="reser_fac2">공개 여부</label>
 										<div class="select">
-											<select name="sReveal" id="reser_fac">
+											<select name="sReveal" id="reser_fac2">
 												<option value="all">전체</option>
 												<option value="Y"
 													<c:if test="${param.sReveal eq 'Y'}">selected</c:if>>공개</option>
@@ -82,11 +82,11 @@
 									<div class="items clearfix">
 										<label for="searchName">검색 조건</label>
 										<div class="select">
-											<select name="searchName" id="reser_fac">
+											<select name="searchName" id="searchName">
 												<option value="content">일정 내용</option>
 											</select>
 										</div>
-										<input type="text" class="input" name="searchValue"
+										<input type="text" class="input" name="searchValue" id="searchValue"
 											value="${param.searchValue}">
 										<button type="submit" class="btn">검색</button>
 									</div>
@@ -242,6 +242,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- 팝업영역 -->
 	<script>
 		let check = false;

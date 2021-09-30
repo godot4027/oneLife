@@ -24,7 +24,7 @@
                 <a href="javascript:;">부대시설</a>
                 <ul class="inner">
                     <li class="<c:if test="${fn:contains(menuUrl, '/admin/facil/')}">on</c:if>" >
-                        <a href="${contextPath}/admin/facil/list?allDay=on">부대시설 예약 관리</a>
+                        <a href="${contextPath}/admin/facil/list?allDay=on&facilDay=${sysDate}">부대시설 예약 관리</a>
                     </li>
                     <%--독서실, 멀티코트장 예약현황 윈도우팝업으로 --%>
                     <li>

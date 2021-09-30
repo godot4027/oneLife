@@ -23,7 +23,7 @@
 				<div class="content">
 					<div class="list_wrap">
 						<h2 class="sub_tit">입주자 명부</h2>
-						<form action="${contextPath}/admin/member/list" name="residentFrm">
+						<form action="${contextPath}/admin/member/list" name="residentFrm" onsubmit="return regFunc()">
 							<div class="search_box">
 								<div class="search_top resident clearfix">
 									<div class="items clearfix">
@@ -31,7 +31,7 @@
 										<div class="select">
 											<select name="rDong" id="rDong">
 												<option value="all">전체</option>
-												<c:forEach var="index" begin="${1}" end="${6}">
+												<c:forEach var="index" begin="${101}" end="${106}">
 													<option value="${index}"
 														<c:if test="${param.rDong != 'all' && param.rDong == index }">selected</c:if>>${index}</option>
 												</c:forEach>
@@ -71,14 +71,14 @@
 									<div class="items clearfix">
 										<label for="sarchName">검색조건</label>
 										<div class="select">
-											<select name="searchName" id="sarchName">
+											<select name="searchName" id="searchName">
 												<option value="name"
 													<c:if test="${param.searchName == 'name'}">selected</c:if>>이름</option>
 												<option value="email"
 													<c:if test="${param.searchName == 'email'}">selected</c:if>>이메일</option>
 											</select>
 										</div>
-										<input type="text" name="searchValue" class="input"
+										<input type="text" name="searchValue" id="searchValue" class="input"
 											value="${param.searchValue}">
 										<button type="submit" class="btn">검색</button>
 									</div>
@@ -206,6 +206,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- 유저 회원가입 여부 -->
 	<div class="popup_wrap" id="userInfoSelect">
         <div class="dim"></div>
@@ -243,9 +244,46 @@
         </div>
     </div>
 	
+	<!-- 검색 유효성 검사 -->
+	<script>
+		function regFunc(){
+			const ho_reg = /^[0123][0][12345]$/;
+			
+			// 호 101~305호 검사
+			if($('#rHo').val().length != 0 && !ho_reg.test($('#rHo').val())){
+				alert("101 ~ 305 사이의 숫자로 입력해주세요!");
+				$('#rHo').select();
+				return false;
+			}	
+			
+			const search_reg = /^[가-힣]{1,4}$/;
+			const search_reg2 = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			
+			// 검색조건 검사
+			if($('#searchValue').val().length != 0){
+				// 이름 검색 일시
+				if($('#searchName').val() == 'name'){
+					if(!search_reg.test($('#searchValue').val())){
+						alert("1~4자리의 한글로 입력해주세요!");
+						$('#searchValue').select();
+						return false;
+					}
+					
+				}else if($('#searchName').val() == 'email'){
+					// 이메일 검색 일시
+					if(!search_reg2.test($('#searchValue').val())){
+						alert("이메일형식으로 입력해주세요!");
+						$('#searchValue').select();
+						return false;
+					}
+				}
+				
+			}
+		}
+	</script>
 	
 
-	<%-- 목록 계산 --%>
+	<!-- 홈페이지 회원가입 유저정보 -->
 	<script>
 		function userInfo(rNo){
 			$.ajax({
@@ -271,87 +309,84 @@
 			
 		}
 	
-	
-	
-	
-    		// 동계산
-    		let index = 0;
-    		let firstDong = $('.table_wrap .table tbody tr:eq(0) td.dong').text();
-    		let dong = [0];
-    		for(let i = 0; i < ${rList.size()}; i++){
-    			if(firstDong == $('.table_wrap .table tbody tr:eq('+i+') td.dong').text()){
-    				dong[index] = dong[index] + 1;
-    			}else{
-    				firstDong = $('.table_wrap .table tbody tr:eq('+i+') td.dong').text();
-    				dong.push(0);
-    				++index;
-    				dong[index] = dong[index] + 1;
-    			}
-    			
-    		}
+  		// 동계산
+  		let index = 0;
+  		let firstDong = $('.table_wrap .table tbody tr:eq(0) td.dong').text();
+  		let dong = [0];
+  		for(let i = 0; i < ${rList.size()}; i++){
+  			if(firstDong == $('.table_wrap .table tbody tr:eq('+i+') td.dong').text()){
+  				dong[index] = dong[index] + 1;
+  			}else{
+  				firstDong = $('.table_wrap .table tbody tr:eq('+i+') td.dong').text();
+  				dong.push(0);
+  				++index;
+  				dong[index] = dong[index] + 1;
+  			}
+  			
+  		}
+  		
+  		// 호 계산
+  		index = 0;
+  		firstDong = $('.table_wrap .table tbody tr:eq(0) td.dong').text();
+  		let firstHo = $('.table_wrap .table tbody tr:eq(0) td.ho').text();
+  		let ho = [0];
+  		for(let i = 0; i < ${rList.size()}; i++){
+  			if(firstDong == $('.table_wrap .table tbody tr:eq('+i+') td.dong').text() && firstHo == $('.table_wrap .table tbody tr:eq('+i+') td.ho').text()){
+  				ho[index] = ho[index] + 1;
+  			}else{
+  				ho.push(1);
+  				index++;
+  				firstDong = $('.table_wrap .table tbody tr:eq('+i+') td.dong').text();
+  				firstHo = $('.table_wrap .table tbody tr:eq('+i+') td.ho').text();
+  			}
+  			
+  		}
+  		
+  		// 동 적용
+  		index = 0;
+  		let current = 0;
+  		let result = true;
+  		for(let i = 0; i < dong.length; i++){
+  			for(let j = 0; j < dong[i]; j++){
+  				if(result){
+  					$('.table_wrap .table tbody tr:eq('+ index++ +') td.dong').attr('rowspan', dong[i]);
+  					result = false;
+  				}else{
+  					$('.table_wrap .table tbody tr:eq('+ index++ +') td.dong').remove();
+  				}
+  			}
+  			result = true;
+  			
+  		}
+  		
+  		// 호 적용
+  		index = 0;
+  		result = true;
+  		let number = 0;
+  		for(let i = 0; i < ho.length; i++){
+  			for(let j = 0; j < ho[i]; j++){
+  				if(result){
+  					if(i == 0){
+      					$('.table_wrap .table tbody tr:eq('+ index +') td.modify').attr('rowspan', ho[i]);
+      					$('.table_wrap .table tbody tr:eq('+ index++ +') td.ho').attr('rowspan', ho[i]);
+  					}else{
+  						$('.table_wrap .table tbody tr:eq('+ index +') td.modify').attr('rowspan', ho[i]);
+   						$('.table_wrap .table tbody tr:eq('+ index++ +') td.ho').attr('rowspan', ho[i]);
+  					}
+  					
+  					result = false;
+  				}else{
+  					$('.table_wrap .table tbody tr:eq('+ index +') td.modify').remove();
+  					$('.table_wrap .table tbody tr:eq('+ index++ +') td:eq(0)').remove();
+  				}
+  			}
+  			result = true;
+  		}   
     		
-    		// 호 계산
-    		index = 0;
-    		firstDong = $('.table_wrap .table tbody tr:eq(0) td.dong').text();
-    		let firstHo = $('.table_wrap .table tbody tr:eq(0) td.ho').text();
-    		let ho = [0];
-    		for(let i = 0; i < ${rList.size()}; i++){
-    			if(firstDong == $('.table_wrap .table tbody tr:eq('+i+') td.dong').text() && firstHo == $('.table_wrap .table tbody tr:eq('+i+') td.ho').text()){
-    				ho[index] = ho[index] + 1;
-    			}else{
-    				ho.push(1);
-    				index++;
-    				firstDong = $('.table_wrap .table tbody tr:eq('+i+') td.dong').text();
-    				firstHo = $('.table_wrap .table tbody tr:eq('+i+') td.ho').text();
-    			}
-    			
-    		}
-    		
-    		// 동 적용
-    		index = 0;
-    		let current = 0;
-    		let result = true;
-    		for(let i = 0; i < dong.length; i++){
-    			for(let j = 0; j < dong[i]; j++){
-    				if(result){
-    					$('.table_wrap .table tbody tr:eq('+ index++ +') td.dong').attr('rowspan', dong[i]);
-    					result = false;
-    				}else{
-    					$('.table_wrap .table tbody tr:eq('+ index++ +') td.dong').remove();
-    				}
-    			}
-    			result = true;
-    			
-    		}
-    		
-    		// 호 적용
-    		index = 0;
-    		result = true;
-    		let number = 0;
-    		for(let i = 0; i < ho.length; i++){
-    			for(let j = 0; j < ho[i]; j++){
-    				if(result){
-    					if(i == 0){
-        					$('.table_wrap .table tbody tr:eq('+ index +') td.modify').attr('rowspan', ho[i]);
-        					$('.table_wrap .table tbody tr:eq('+ index++ +') td.ho').attr('rowspan', ho[i]);
-    					}else{
-    						$('.table_wrap .table tbody tr:eq('+ index +') td.modify').attr('rowspan', ho[i]);
-     						$('.table_wrap .table tbody tr:eq('+ index++ +') td.ho').attr('rowspan', ho[i]);
-    					}
-    					
-    					result = false;
-    				}else{
-    					$('.table_wrap .table tbody tr:eq('+ index +') td.modify').remove();
-    					$('.table_wrap .table tbody tr:eq('+ index++ +') td:eq(0)').remove();
-    				}
-    			}
-    			result = true;
-    		}   
-    		
-    		// nodate 수정
-    		let thSize = $('.table_wrap .table thead tr th').length;
-    		//console.log(thSize);
-    		$('.content .list_nodate').parent('td').attr('colspan', thSize);
+   		// nodate 수정
+   		let thSize = $('.table_wrap .table thead tr th').length;
+   		//console.log(thSize);
+   		$('.content .list_nodate').parent('td').attr('colspan', thSize);
     		
     	</script>
    		<%-- 세대명부 수정 여부 --%>

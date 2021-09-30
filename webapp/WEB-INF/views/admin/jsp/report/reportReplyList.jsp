@@ -152,7 +152,7 @@
 			                                            <td></td>
 			                                            <td colspan="5">
 			                                                <div class="table_view report">
-			                                                    <a href="${contextPath}/board/detail?b_no=${r.bNo}">
+			                                                    <a href="${contextPath}/board/Mandetail?b_no=${r.bNo}">
 			                                                        <dl>
 			                                                            <dt>${r.bTitle}<span>${r.uNickname}님의 게시물</span></dt>
 			                                                            <dd>

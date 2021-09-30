@@ -51,8 +51,10 @@ public class ResidentViewServlet extends HttpServlet {
 		// 세대주 저장
 		rList.add(new Resident(rDong, rHo, holderName, holderEmail, "세대주"));
 		// 세대원 저장
-		for(int i = 0; i < memberNames.length; i++) {
-			rList.add(new Resident(rDong, rHo, memberNames[i], memberEmails[i], "세대원"));
+		if(request.getParameterValues("memberName") != null && request.getParameterValues("memberEmail") != null) {
+			for(int i = 0; i < memberNames.length; i++) {
+				rList.add(new Resident(rDong, rHo, memberNames[i], memberEmails[i], "세대원"));
+			}
 		}
 		
 		// System.out.println(rList);

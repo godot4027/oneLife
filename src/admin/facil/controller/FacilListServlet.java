@@ -18,7 +18,7 @@ public class FacilListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int page = 1;
-		if(request.getParameter("pag") != null) {
+		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		

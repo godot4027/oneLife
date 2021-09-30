@@ -71,9 +71,9 @@ private Properties query = new Properties();
 			
 			// 예약일자
 			if(sc.getAllDay() != null && sc.getAllDay().equals("on")) {
-				sql += " AND FC_DATE IS NOT NULL ";
+				sql += " AND FC_START IS NOT NULL ";
 			}else {
-				sql += " AND TO_CHAR(FC_DATE, 'YYYY-MM-DD') = ? ";
+				sql += " AND TO_CHAR(FC_START, 'YYYY-MM-DD') = ? ";
 			}
 			
 			// 검색조건
@@ -191,9 +191,9 @@ private Properties query = new Properties();
 			
 			// 예약일자
 			if(sc.getAllDay() != null && sc.getAllDay().equals("on")) {
-				sql += " AND FC_DATE IS NOT NULL ";
+				sql += " AND FC_START IS NOT NULL ";
 			}else {
-				sql += " AND TO_CHAR(FC_DATE, 'YYYY-MM-DD') = ? ";
+				sql += " AND TO_CHAR(FC_START, 'YYYY-MM-DD') = ? ";
 			}
 			
 			// 검색조건
