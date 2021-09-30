@@ -169,7 +169,117 @@ public class AmentiesDao {
 		return studyRoomList;
 	}
 
+	// 멀티코트 예약신청
+	public int mcResInsert(Connection conn, String timeInput, String dayInput, int courtNumber, int uNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = query.getProperty("mcResInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, courtNumber); // 코트번호
+			pstmt.setString(2, dayInput); // 예약 날짜
+			pstmt.setString(3, timeInput); // 시작 시간
+			pstmt.setString(4, timeInput); // 끝 시간
+			pstmt.setInt(5, uNo); // 유저번호
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	// 멀티코트 예약된 날짜 가져오기
+		public List<String> mcDateList(Connection conn, int uNo) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = query.getProperty("mcDateList");
+			List<String> mList = new ArrayList<>();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, uNo);
+				
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					mList.add(rset.getString("FC_START"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return mList;
+		}
+		
+		// 페이징 처리 된 multiCourtList 조회
+		public List<Facility> selectMultiList(Connection conn, PageInfo pi, Search s) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			List<Facility> multiCourtList = new ArrayList<>();
+			String sql = query.getProperty("selectsearchMultiList");
+				
+			if (s.getMydate() != null) {
+				sql = query.getProperty("selecWriterMultiList");
+				
+			}
+			
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				int paramIndex = 1;
+				
+				
+				
+				if (s.getMydate() != null) {
+					pstmt.setString(paramIndex++, s.getMydate());
+					pstmt.setInt(paramIndex++, s.getU_no());
+				} else {
+					pstmt.setInt(paramIndex++, s.getU_no());
+				}
+				
+				
+				pstmt.setInt(paramIndex++, startRow);
+				pstmt.setInt(paramIndex++, endRow);
+				
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					multiCourtList.add(new Facility(rset.getInt("fc_no"),
+												  rset.getString("fc_name"),
+												  rset.getInt("fc_seat_no"),
+												  rset.getDate("fc_date"),
+												  rset.getDate("fc_start"),
+												  rset.getDate("fc_end"),
+												  rset.getInt("u_no"),
+												  rset.getString("fc_status")));
+													  
+													  
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			System.out.println(multiCourtList);
+			return multiCourtList;
+		}
+		
+		
 
 	
 	

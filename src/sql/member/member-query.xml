@@ -199,9 +199,9 @@
    </entry>
    
    <entry key="checkJoin">
-   	select count(*)
-		from info_resident
-		where r_no = ? and r_status = 'Y'
+      select count(*)
+      from info_resident
+      where r_no = ? and r_status = 'Y'
    </entry>
     <entry key="findInfoResident">
       SELECT

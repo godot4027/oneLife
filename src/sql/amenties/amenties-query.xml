@@ -72,6 +72,69 @@
                      AND U_NO = ?
                      ORDER BY FC_NO DESC) FLIST)
 	    WHERE RNUM BETWEEN ? AND ?
-	</entry>        
+	</entry>    
+	
+	
+	
+	<entry key="mcResInsert">
+		INSERT INTO FACILITY
+		VALUES(FAC_SEQ.NEXTVAL, '멀티코트장', ?, SYSDATE, TO_DATE( ? || '/00:00:00', 'RRRR/MM/DD/HH24:MI:SS'), TO_DATE(? || '/23:59:59', 'RRRR/MM/DD/HH24:MI:SS'), ?, DEFAULT)	
+	</entry>
+	
+	<entry key="mcDateList">
+		SELECT
+			     TO_CHAR(FC_START, 'YYYY-fmMM-DD') AS FC_START
+	       FROM FACILITY
+	       WHERE U_NO = ?
+	         AND FC_NAME = '독서실'
+	         GROUP BY FC_START
+	         ORDER BY FC_START
+	</entry>
+	 
+	
+	<entry key="selectsearchMultiList">
+		SELECT
+		     FC_NO
+			, FC_NAME
+			, FC_SEAT_NO
+			, FC_DATE
+			, FC_START
+			, FC_END
+			, U_NO
+			, FC_STATUS
+		FROM(SELECT ROWNUM RNUM
+				  , FLIST.*
+		    FROM(SELECT
+                    *
+                     FROM FACILITY 
+                     JOIN MEMBER USING (U_NO)
+                     WHERE FC_NAME = '멀티코트장'
+                     AND U_NO = ?
+                     ORDER BY FC_NO DESC) FLIST)
+	    WHERE RNUM BETWEEN ? AND ?
+	</entry>   
+	
+	<entry key="selecWriterMultiList">
+		 SELECT
+		     FC_NO
+			, FC_NAME
+			, FC_SEAT_NO
+			, FC_DATE
+			, FC_START
+			, FC_END
+			, U_NO
+			, FC_STATUS
+		FROM(SELECT ROWNUM RNUM
+				  , FLIST.*
+		    FROM(SELECT
+                         *
+                     FROM FACILITY 
+                     JOIN MEMBER USING (U_NO)
+                     WHERE FC_NAME = '멀티코트장'
+                     AND EXTRACT(MONTH FROM FC_START) = SUBSTR( ?, 6, 2)
+                     AND U_NO = ?
+                     ORDER BY FC_NO DESC) FLIST)
+	    WHERE RNUM BETWEEN ? AND ?
+	</entry>   
 	
 </properties>
