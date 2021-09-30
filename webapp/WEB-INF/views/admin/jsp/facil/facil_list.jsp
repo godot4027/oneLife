@@ -143,7 +143,7 @@
 			                                    	<tr>
 			                                            <td>
 			                                                <div class="checkbox">
-			                                                    <input type="checkbox" name="facilCheck" id="facil${f.fcNo}" value="${f.fcNo}" <c:if test="${f.fcStatus eq 'Y'}">disabled</c:if>>
+			                                                    <input type="checkbox" name="facilCheck" id="facil${f.fcNo}" value="${f.fcNo}" <c:if test="${f.fcStatus eq '예약취소' || f.fcStatus eq '사용완료'}">disabled</c:if>>
 			                                                    <label for="facil${f.fcNo}"></label>
 			                                                </div>
 			                                            </td>

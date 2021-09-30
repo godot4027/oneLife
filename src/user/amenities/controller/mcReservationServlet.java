@@ -69,7 +69,7 @@ public class mcReservationServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "신청이 실패 하였습니다.");
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/main");		
+		response.sendRedirect(request.getContextPath() + "/mcHistory");		
 		
 	}
 

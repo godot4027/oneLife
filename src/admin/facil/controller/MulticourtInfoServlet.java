@@ -29,12 +29,12 @@ public class MulticourtInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int fcNo = Integer.parseInt(request.getParameter("fcNo"));
 		String dayInput = request.getParameter("dayInput");
-		String time = request.getParameter("time");
+		// String time = request.getParameter("time");
 		
-		Facil facil = new FacilService().multiInfo(fcNo, dayInput, time);
+		Facil facil = new FacilService().multiInfo(fcNo, dayInput);
 		
 		response.setContentType("application/json; charset=utf-8");
-		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH시 mm분").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create();
 		gson.toJson(facil, response.getWriter());
 		
 		

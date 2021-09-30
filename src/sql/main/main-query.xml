@@ -9,6 +9,7 @@
 		      FROM SC_SCHEDULE
 		      JOIN SC_CATEGORY USING(SC_CATE_CODE)
 		     WHERE TO_CHAR(SC_OPEN_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		     AND SC_STATUS = 'Y'
 	</entry>
 	<entry key="noticeList">
 		SELECT

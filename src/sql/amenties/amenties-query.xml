@@ -3,7 +3,7 @@
 <properties>
 	<entry key="srResInsert">
 		INSERT INTO FACILITY
-		VALUES(FAC_SEQ.NEXTVAL, '독서실', ?, SYSDATE, TO_DATE( ? || '/00:00:00', 'RRRR/MM/DD/HH24:MI:SS'), TO_DATE(? || '/23:59:59', 'RRRR/MM/DD/HH24:MI:SS'), ?, DEFAULT)	
+		VALUES(FAC_SEQ.NEXTVAL, '독서실', ?, SYSDATE, TO_DATE( ? || '/09:00:00', 'RRRR/MM/DD/HH24:MI:SS'), TO_DATE(? || '/21:00:00', 'RRRR/MM/DD/HH24:MI:SS'), ?, DEFAULT)	
 	</entry>
 	<entry key="srDateList">
 		SELECT
@@ -101,7 +101,7 @@
 	
 	<entry key="mcResInsert">
 		INSERT INTO FACILITY
-		VALUES(FAC_SEQ.NEXTVAL, '멀티코트장', ?, SYSDATE, TO_DATE( ? || '/00:00:00', 'RRRR/MM/DD/HH24:MI:SS'), TO_DATE(? || '/23:59:59', 'RRRR/MM/DD/HH24:MI:SS'), ?, DEFAULT)	
+		VALUES(FAC_SEQ.NEXTVAL, '멀티코트장', ?, SYSDATE, TO_DATE( ? || '/09:00:00', 'RRRR/MM/DD/HH24:MI:SS'), TO_DATE(? || '/21:00:00', 'RRRR/MM/DD/HH24:MI:SS'), ?, DEFAULT)	
 	</entry>
 	
 	<entry key="mcDateList">
