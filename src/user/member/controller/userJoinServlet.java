@@ -73,9 +73,6 @@ public class userJoinServlet extends HttpServlet {
 		} else {
 			request.getSession().setAttribute("msg", "아파트 주민이 아닙니다.");
 			response.sendRedirect(request.getContextPath());
-			// request.setAttribute("msg", "아파트 주민이 아닙니다.");
-			// RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/user/common/errorpage.jsp");
-			// view.forward(request, response);
 		}
 
 	}
