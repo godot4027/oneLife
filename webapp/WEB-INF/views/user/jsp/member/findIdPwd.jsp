@@ -20,7 +20,6 @@
 
 </head>
 <body>
-	<%-- 공통 menuBar.jsp --%>
 	
 	<div class="bottom_wrap1">
 		<p></p>
