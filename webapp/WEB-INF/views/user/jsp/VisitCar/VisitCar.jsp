@@ -20,8 +20,8 @@
 	
 	<div class="bottom_wrap1">
 		<p></p>
-		<span>> 아파트소식 > 공지사항</span>
-		<h1>공지사항</h1>
+		<span>> 방문차량</span>
+		<h1>방문차량</h1>
 		<div class="bottom_wrap2"></div>
 	</div>
 	

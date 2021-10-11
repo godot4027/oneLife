@@ -19,8 +19,10 @@
 	width: 1200px;
 	display: flex;
 	flex-direction: column;
+	justify-content : center;
 	align-items: center;
 	margin: 0 auto;
+	min-height: calc(100vh - 284px);
 }
 
 .cofirm_notice {

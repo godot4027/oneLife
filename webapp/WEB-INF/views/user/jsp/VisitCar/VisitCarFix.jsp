@@ -15,6 +15,8 @@
 <style>
 .fix_wrap {
 	margin: 0 auto;
+	justify-content : center;
+	min-height: calc(100vh - 382px);
 }
 
 	/* The Modal (background) */

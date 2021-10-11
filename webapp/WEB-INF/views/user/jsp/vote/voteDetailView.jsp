@@ -420,6 +420,13 @@
 
 				}
 				
+				if (rtype == rty) {
+		               document.forms.voteForm.action = "${contextPath}/vote/votefinish";
+		               document.forms.voteForm.submit();
+		            } else {
+		               alert('세대주가 아니므로 투표 불가합니다.\n※ 세대주만 투표 가능합니다.');
+		            } 
+				
 			}	
 
 			
